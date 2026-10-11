@@ -722,31 +722,26 @@ class expLayoutsUIApplicationApi
                     }
                 }
 
-                $newBlock = expLayoutsBlock::create(
-                    $newZoneId,
-                    $newLayoutId,
-                    (string)$block->attribute( 'definition_identifier' ),
-                    (string)$block->attribute( 'name' )
-                );
                 $requestedPosition = isset( $data['parent_position'] )
                     ? (int)$data['parent_position']
                     : (int)$block->attribute( 'position' ) + 1;
-                $newBlock->setAttribute( 'view_type', (string)$block->attribute( 'view_type' ) );
-                $newBlock->setAttribute( 'position', $requestedPosition );
-                $newBlock->setAttribute( 'status', (int)$block->attribute( 'status' ) );
-                if ( $parentBlockId > 0 )
-                {
-                    $newBlock->setAttribute( 'parent_id', $parentBlockId );
-                    $newBlock->setAttribute( 'placeholder', $parentPlaceholder );
-                }
-                $newBlock->store();
+
+                // The whole block: parameters, collections with their items
+                // and query, child blocks with theirs. Copying only the block
+                // row left the copy with an empty collection.
+                $blockService = new expLayoutsCoreBlockService();
+                $newBlock = $blockService->copy( $block, array(
+                    'zone_id' => $newZoneId,
+                    'layout_id' => $newLayoutId,
+                    'parent_id' => $parentBlockId,
+                    'placeholder' => $parentPlaceholder,
+                    'position' => $requestedPosition,
+                    'status' => (int)$block->attribute( 'status' ),
+                ) );
+                if ( !$newBlock )
+                    return self::response( array( 'error' => 'A block cannot be copied into itself.' ), 422 );
 
                 self::placeBlockAt( $newBlock, $requestedPosition );
-
-                foreach ( expLayoutsBlockParameter::fetchByBlock( (int)$block->attribute( 'id' ) ) as $param )
-                {
-                    expLayoutsBlockParameter::set( (int)$newBlock->attribute( 'id' ), (string)$param->attribute( 'name' ), (string)$param->attribute( 'value' ) );
-                }
 
                 return self::response( self::blockToArray( $newBlock ), 201 );
             }
@@ -1734,13 +1729,9 @@ class expLayoutsUIApplicationApi
         foreach ( expLayoutsBlockParameter::fetchByBlock( $blockId ) as $param )
             $param->remove();
 
-        $collection = expLayoutsCollection::fetchByBlock( $blockId );
-        if ( $collection )
-        {
-            foreach ( expLayoutsCollectionItem::fetchByCollection( (int)$collection->attribute( 'id' ) ) as $item )
-                $item->remove();
-            $collection->remove();
-        }
+        // Every collection with its items and its query.
+        $blockService = new expLayoutsCoreBlockService();
+        $blockService->deleteCollections( $blockId );
 
         foreach ( expLayoutsBlock::fetchChildren( $blockId, null ) as $child )
             self::deleteBlock( $child );
