@@ -7,28 +7,28 @@ $ViewList = array();
 $ViewList['layouts'] = array(
     'script' => 'layouts.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'ezsetupnavigationpart',
+    'default_navigation_part' => 'ezexplayoutsuinavigationpart',
     'params' => array( 'LayoutID' )
 );
 
 $ViewList['rules'] = array(
     'script' => 'rules.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'ezsetupnavigationpart',
+    'default_navigation_part' => 'ezexplayoutsuinavigationpart',
     'params' => array( 'RuleID' )
 );
 
 $ViewList['blocks'] = array(
     'script' => 'blocks.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'ezsetupnavigationpart',
+    'default_navigation_part' => 'ezexplayoutsuinavigationpart',
     'params' => array( 'ZoneID' )
 );
 
 $ViewList['app'] = array(
     'script' => 'app.php',
     'functions' => array( 'read' ),
-    'default_navigation_part' => 'ezsetupnavigationpart',
+    'default_navigation_part' => 'ezexplayoutsuinavigationpart',
     'params' => array( )
 );
 
