@@ -31,6 +31,20 @@
     {* Last of the three so it wins. The editor has no mobile layout of its own
        - upstream refuses below 800px instead - so this file is that layout. *}
     <link rel="stylesheet" href="{'stylesheets/explayouts-mobile.css'|ezdesign('no')}">
+    {* Opened from admin4: admin4's tokens (components.css) and their use in the editor; the light or dark mode
+       admin4 remembers in this browser (localStorage exp-admin4-theme), set before anything is drawn. *}
+    {if ezini( 'DesignSettings', 'SiteDesign' )|begins_with( 'admin4' )}
+    <link rel="stylesheet" href="{'stylesheets/components.css'|ezdesign('no')}">
+    <link rel="stylesheet" href="{'stylesheets/explayouts_ui_api_admin4.css'|ezdesign('no')}">
+    {literal}<script>
+    (function () {
+        var root = document.documentElement, theme = null;
+        root.setAttribute('data-explayouts-admin4', '');
+        try { theme = window.localStorage.getItem('exp-admin4-theme'); } catch (e) {}
+        root.setAttribute('data-a4-theme', theme === 'dark' ? 'dark' : 'light');
+    })();
+    </script>{/literal}
+    {/if}
     {literal}<style>
         #ngc-size-warning { display: none !important; }
         .left-toolbar .button.js-open.active + .left-toolbar-panels .left-panel { display: block !important; }

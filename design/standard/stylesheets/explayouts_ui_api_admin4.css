@@ -1,0 +1,58 @@
+/* The layouts editor (explayouts_ui_api/app) opened from admin4: the editor keeps its own canvas and layout, but
+   takes admin4's accent, focus ring, font and radius from the --a4-* tokens (admin4's components.css is loaded
+   before this file, app.tpl). html[data-explayouts-admin4] is set by app.tpl only then. */
+html[data-explayouts-admin4] body,
+html[data-explayouts-admin4] .ngc {
+    font-family: var(--a4-font);
+}
+html[data-explayouts-admin4] .ngc a,
+html[data-explayouts-admin4] .ngc .btn-link,
+html[data-explayouts-admin4] .Button_link__1EdEA,
+html[data-explayouts-admin4] .Preview_preview__11IQq a {
+    color: var(--a4-accent-text);
+}
+html[data-explayouts-admin4] .ngc .btn-primary,
+html[data-explayouts-admin4] .Button_primary__2rvzA {
+    background-color: var(--a4-accent-strong);
+    border-color: var(--a4-accent-strong);
+    color: var(--a4-on-accent);
+    border-radius: var(--a4-radius-s);
+}
+html[data-explayouts-admin4] .ngc .btn-primary:hover,
+html[data-explayouts-admin4] .ngc .btn-primary:focus,
+html[data-explayouts-admin4] .Button_primary__2rvzA:hover {
+    background-color: var(--a4-accent-press);
+    border-color: var(--a4-accent-press);
+}
+html[data-explayouts-admin4] .ngc .text-primary,
+html[data-explayouts-admin4] .Tree_active__1oqj2,
+html[data-explayouts-admin4] .Tabs_active__FvpRL {
+    color: var(--a4-accent-text);
+}
+html[data-explayouts-admin4] .ngc .bg-primary,
+html[data-explayouts-admin4] .ngc .nav-pills > li.active > a {
+    background-color: var(--a4-accent-strong);
+    color: var(--a4-on-accent);
+}
+html[data-explayouts-admin4] [data-block]:hover,
+html[data-explayouts-admin4] [data-block].editing,
+html[data-explayouts-admin4] [data-block].ui-sortable-helper {
+    outline-color: var(--a4-accent);
+    border-color: var(--a4-accent);
+}
+html[data-explayouts-admin4] [data-block].editing > .block-header,
+html[data-explayouts-admin4] [data-block]:hover > .block-header {
+    background-color: var(--a4-accent-strong);
+    color: var(--a4-on-accent);
+}
+html[data-explayouts-admin4] .ngc .layout-type .layout-type-item input[type='radio']:checked + label {
+    border-color: var(--a4-accent);
+}
+html[data-explayouts-admin4] :focus-visible {
+    outline: 2px solid var(--a4-ring);
+    outline-offset: 2px;
+}
+html[data-explayouts-admin4] .block-empty {
+    color: var(--a4-muted);
+    font-style: italic;
+}
