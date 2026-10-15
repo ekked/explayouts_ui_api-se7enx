@@ -59,6 +59,34 @@
         <source>Failed to load content.</source>
         <translation>Der Inhalt konnte nicht geladen werden.</translation>
     </message>
+    <message>
+        <source>Move block</source>
+        <translation>Block verschieben</translation>
+    </message>
+    <message>
+        <source>Edit in modal</source>
+        <translation>Im Dialog bearbeiten</translation>
+    </message>
+    <message>
+        <source>Revert block</source>
+        <translation>Block zurücksetzen</translation>
+    </message>
+    <message>
+        <source>Duplicate block</source>
+        <translation>Block duplizieren</translation>
+    </message>
+    <message>
+        <source>Delete block</source>
+        <translation>Block löschen</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>No content</source>
+        <translation>Kein Inhalt</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>

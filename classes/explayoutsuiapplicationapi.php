@@ -805,7 +805,6 @@ class expLayoutsUIApplicationApi
                     $block->setAttribute( 'placeholder', '' );
                 }
 
-                $block->setAttribute( 'modified', time() );
                 $block->store();
 
                 self::placeBlockAt( $block, $requestedPosition === null ? PHP_INT_MAX : $requestedPosition );
@@ -831,7 +830,6 @@ class expLayoutsUIApplicationApi
                 $requestedPosition = isset( $data['position'] ) ? (int)$data['position'] : null;
                 if ( $requestedPosition !== null )
                     $block->setAttribute( 'position', $requestedPosition );
-                $block->setAttribute( 'modified', time() );
                 $block->store();
 
                 if ( $requestedPosition !== null )
@@ -1107,7 +1105,7 @@ class expLayoutsUIApplicationApi
 
             return
                 '<div class="block-header">' .
-                    '<div class="handle" title="Move block"><i class="material-icons">drag_handle</i></div>' .
+                    '<div class="handle" title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Move block' ) ) . '"><i class="material-icons">drag_handle</i></div>' .
                     '<div class="template_name">' . htmlspecialchars( $viewType ) . '</div>' .
                     '<div class="name">' . htmlspecialchars( $name ) . '</div>' .
                     '<div class="dropdown">' .
@@ -1115,11 +1113,11 @@ class expLayoutsUIApplicationApi
                             '<i class="material-icons">more_horiz</i>' .
                         '</button>' .
                         '<ul class="dropdown-menu dropdown-menu-right">' .
-                            '<li class="js-modal-mode"><a title="Edit in modal">Edit in modal</a></li>' .
+                            '<li class="js-modal-mode"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Edit in modal' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Edit in modal' ) ) . '</a></li>' .
                             '<li class="divider"></li>' .
-                            '<li class="js-revert"><a title="Revert block">Revert block</a></li>' .
-                            '<li class="js-copy"><a title="Duplicate block">Duplicate block</a></li>' .
-                            '<li class="js-destroy"><a title="Delete block">Delete block</a></li>' .
+                            '<li class="js-revert"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Revert block' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Revert block' ) ) . '</a></li>' .
+                            '<li class="js-copy"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Duplicate block' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Duplicate block' ) ) . '</a></li>' .
+                            '<li class="js-destroy"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Delete block' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Delete block' ) ) . '</a></li>' .
                         '</ul>' .
                     '</div>' .
                 '</div>' . $content;
@@ -1132,7 +1130,7 @@ class expLayoutsUIApplicationApi
         {
             $level = isset( $values['level'] ) ? max( 1, min( 6, (int)$values['level'] ) ) : 2;
             $titleContent = !empty( $values['title'] ) ? (string)$values['title'] : '';
-            $titleHint = !empty( $values['title'] ) ? '' : ' data-hint="Title"';
+            $titleHint = !empty( $values['title'] ) ? '' : ' data-hint="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Title' ) ) . '"';
             $content .= '<h' . $level . ' data-inline-child data-attr="title"' . $titleHint . '>' . $titleContent . '</h' . $level . '>';
         }
         elseif ( $definition === 'rich_text' )
@@ -1166,7 +1164,7 @@ class expLayoutsUIApplicationApi
         elseif ( $definition === 'text' )
         {
             $textContent = isset( $values['content'] ) ? (string)$values['content'] : '';
-            $textHint = $textContent === '' ? ' data-hint="No content"' : '';
+            $textHint = $textContent === '' ? ' data-hint="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'No content' ) ) . '"' : '';
             $content .= '<span data-inline-child data-attr="content"' . $textHint . '>' . ( $textContent === '' ? '' : nl2br( htmlspecialchars( $textContent ) ) ) . '</span>';
         }
         elseif ( strpos( $definition, 'exp_component' ) === 0 || strpos( $definition, 'ibexa_component_' ) === 0 )
@@ -1266,7 +1264,7 @@ class expLayoutsUIApplicationApi
 
         if ( $content === '' || ( trim( strip_tags( $content ) ) === '' && !$isInlineDefinition && !$isCodeDefinition ) )
         {
-            $content = '<p class="block-empty" style="color:#888; font-style:italic;">No content</p>';
+            $content = '<p class="block-empty">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'No content' ) ) . '</p>';
         }
 
         $viewType = (string)$block->attribute( 'view_type' );
@@ -1274,7 +1272,7 @@ class expLayoutsUIApplicationApi
 
         $header =
             '<div class="block-header">' .
-                '<div class="handle" title="Move block"><i class="material-icons">drag_handle</i></div>' .
+                '<div class="handle" title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Move block' ) ) . '"><i class="material-icons">drag_handle</i></div>' .
                 '<div class="template_name">' . $viewTypeName . '</div>' .
                 '<div class="name">' . htmlspecialchars( $name ) . '</div>' .
                 '<div class="dropdown">' .
@@ -1282,16 +1280,18 @@ class expLayoutsUIApplicationApi
                         '<i class="material-icons">more_horiz</i>' .
                     '</button>' .
                     '<ul class="dropdown-menu dropdown-menu-right">' .
-                        '<li class="js-modal-mode"><a title="Edit in modal">Edit in modal</a></li>' .
+                        '<li class="js-modal-mode"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Edit in modal' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Edit in modal' ) ) . '</a></li>' .
                         '<li class="divider"></li>' .
-                        '<li class="js-revert"><a title="Revert block">Revert block</a></li>' .
-                        '<li class="js-copy"><a title="Duplicate block">Duplicate block</a></li>' .
-                        '<li class="js-destroy"><a title="Delete block">Delete block</a></li>' .
+                        '<li class="js-revert"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Revert block' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Revert block' ) ) . '</a></li>' .
+                        '<li class="js-copy"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Duplicate block' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Duplicate block' ) ) . '</a></li>' .
+                        '<li class="js-destroy"><a title="' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Delete block' ) ) . '">' . htmlspecialchars( ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Delete block' ) ) . '</a></li>' .
                     '</ul>' .
                 '</div>' .
             '</div>';
 
-        return $header . '<div class="block-content">' . $content . '</div>';
+        // data-inline: the positioning frame of the inline editor's placeholder (netgen-layouts.css places the hint
+        // span absolutely; without a frame on the block it was drawn over the block's header).
+        return $header . '<div class="block-content"' . ( $isInlineDefinition ? ' data-inline' : '' ) . '>' . $content . '</div>';
     }
 
     /**

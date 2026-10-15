@@ -59,6 +59,34 @@
         <source>Failed to load content.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Move block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit in modal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revert block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No content</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
