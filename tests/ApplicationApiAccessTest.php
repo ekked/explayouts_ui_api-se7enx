@@ -21,8 +21,12 @@ class ApplicationApiAccessTest extends TestCase
         eZUser::$asked = array();
         eZDebug::$enabled = false;
         eZLog::$lines = array();
-        expLayoutsLayout::$calls = array();
+        foreach ( array( 'expLayoutsLayout', 'expLayoutsZone', 'expLayoutsLayoutType', 'expLayoutsCollection', 'expLayoutsBlock' ) as $standIn )
+            $standIn::reset();
+        eZDB::$tables = array();
+        eZDB::$statements = array();
         $_POST = array();
+        $_SERVER['REQUEST_URI'] = '/explayouts_ui_api/app/api/layouts';
     }
 
     /** A layout export, as transfer/import takes it. In a test it arrives in $_POST: php://input is empty here. */
@@ -48,6 +52,7 @@ class ApplicationApiAccessTest extends TestCase
 
         $this->assertSame( 405, http_response_code() );
         $this->assertSame( 'method_not_allowed', $body['error']['reason'] );
+        $this->assertSame( 'This action needs POST.', $body['message'] );
         $this->assertSame( array(), expLayoutsLayout::$calls, 'nothing was imported' );
     }
 
@@ -100,6 +105,7 @@ class ApplicationApiAccessTest extends TestCase
         $this->assertSame( 403, http_response_code() );
         $this->assertSame( 403, $body['error']['code'] );
         $this->assertSame( 'access_denied', $body['error']['reason'] );
+        $this->assertSame( 'You are not allowed to change layouts.', $body['message'], 'a top-level message for the editor\'s error dialog' );
         $this->assertSame( array( 'explayouts_ui_api/edit' ), eZUser::$asked );
         $this->assertSame( array(), eZLog::$lines, 'nothing failed behind the refusal' );
     }
@@ -162,5 +168,31 @@ class ApplicationApiAccessTest extends TestCase
         $this->assertSame( 'Internal error', $body['error'] );
         $this->assertStringContainsString( 'Lost connection to the database server', $body['details'] );
         $this->assertStringContainsString( 'bootstrap.php:', $body['details'] );
+    }
+
+    public function testTheViewPassesTheDebugStateItHadBeforeSwitchingItOff()
+    {
+        // Run as the module runs app/api/...: the view switches debug output off before it calls handle().
+        eZDebug::$enabled = true;
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/index.php/some_admin/explayouts_ui_api/app/api/layouts';
+        $view = new \Exponential\View\Extension\ExplayoutsUiApi\ExplayoutsUiApi\App();
+        $result = $view->run( array( 'Params' => array() ) );
+        $body = json_decode( $result['content'], true );
+
+        $this->assertSame( 500, http_response_code() );
+        $this->assertArrayHasKey( 'details', $body, 'debug output was on for the request' );
+        $this->assertStringContainsString( 'Lost connection to the database server', $body['details'] );
+        $this->assertFalse( eZDebug::$enabled, 'and is off for the JSON answer' );
+    }
+
+    public function testTheViewSendsNoDetailsWithoutDebugOutput()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $view = new \Exponential\View\Extension\ExplayoutsUiApi\ExplayoutsUiApi\App();
+        $result = $view->run( array( 'Params' => array() ) );
+
+        $this->assertSame( 500, http_response_code() );
+        $this->assertSame( array( 'error' => 'Internal error' ), json_decode( $result['content'], true ) );
     }
 }

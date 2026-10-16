@@ -1,11 +1,18 @@
 <?php
 class expLayoutsUIApplicationApi
 {
-    public static function handle( $parts )
+    /**
+     * @param array     $parts            the path below app/api/
+     * @param bool|null $showErrorDetails whether a 500 answer may carry the error's message, file and line: true
+     *                                    only when debug output is on for the request. The view switches debug
+     *                                    output off before it calls handle(), so it asks first and passes the
+     *                                    answer; null asks eZDebug here.
+     */
+    public static function handle( $parts, $showErrorDetails = null )
     {
-        // Asked before debug output is switched off for the JSON answer: only a
-        // request that would have shown debug output gets the details of an error.
-        $showErrorDetails = eZDebug::isDebugEnabled();
+        if ( $showErrorDetails === null )
+            $showErrorDetails = eZDebug::isDebugEnabled();
+        $showErrorDetails = (bool)$showErrorDetails;
         eZDebug::updateSettings( array( 'debug-enabled' => false ) );
         eZDebug::setHandleType( eZDebug::HANDLE_NONE );
         header( 'Content-Type: application/json' );
@@ -1787,6 +1794,30 @@ class expLayoutsUIApplicationApi
         return is_array( $data ) ? $data : array();
     }
 
+    /**
+     * The collections of a block, as blockToArray() answers them. The default
+     * collection of a block type that has one is created on first read, which
+     * writes to the database: only for a user who may change layouts. For the
+     * others the block is answered without a collection.
+     */
+    protected static function blockCollections( $block, $blockInfo )
+    {
+        $blockId = (int)$block->attribute( 'id' );
+        $collections = array();
+        $collection = expLayoutsCollection::fetchByBlock( $blockId );
+        if ( $collection instanceof expLayoutsCollection )
+        {
+            $collections[] = self::collectionToArray( $collection, $block );
+        }
+        elseif ( is_array( $blockInfo ) && !empty( $blockInfo['has_collection'] ) && self::hasEditAccess() )
+        {
+            $collection = expLayoutsCollection::create( $blockId, 'manual' );
+            $collection->store();
+            $collections[] = self::collectionToArray( $collection, $block );
+        }
+        return $collections;
+    }
+
     public static function blockToArray( $block )
     {
         if ( !$block )
@@ -1809,18 +1840,7 @@ class expLayoutsUIApplicationApi
             $parameters[(string)$param->attribute( 'name' )] = json_decode( (string)$param->attribute( 'value' ), true ) !== null ? json_decode( (string)$param->attribute( 'value' ), true ) : (string)$param->attribute( 'value' );
         }
 
-        $collections = array();
-        $collection = expLayoutsCollection::fetchByBlock( $blockId );
-        if ( $collection instanceof expLayoutsCollection )
-        {
-            $collections[] = self::collectionToArray( $collection, $block );
-        }
-        elseif ( is_array( $blockInfo ) && !empty( $blockInfo['has_collection'] ) )
-        {
-            $collection = expLayoutsCollection::create( $blockId, 'manual' );
-            $collection->store();
-            $collections[] = self::collectionToArray( $collection, $block );
-        }
+        $collections = self::blockCollections( $block, $blockInfo );
 
         $placeholders = array();
         if ( $isContainer )
@@ -2464,10 +2484,14 @@ class expLayoutsUIApplicationApi
             $existingZones[(string)$zone->attribute( 'identifier' )] = $zone;
         }
 
+        // A zone the layout type defines but the layout lacks is added here, which
+        // writes to the database: only for a user who may change layouts. For the
+        // others the zone is left out of the answer below.
         $position = 1;
+        $mayRepair = self::hasEditAccess();
         foreach ( expLayoutsLayoutType::getZones( $layoutType ) as $zoneIdentifier )
         {
-            if ( !isset( $existingZones[$zoneIdentifier] ) )
+            if ( $mayRepair && !isset( $existingZones[$zoneIdentifier] ) )
             {
                 $newZone = expLayoutsZone::create( $layoutId, $zoneIdentifier, $status );
                 $newZone->setAttribute( 'position', $position );
@@ -3085,13 +3109,20 @@ class expLayoutsUIApplicationApi
             return self::response( array( 'error' => 'Layout not found.' ), 404 );
 
         $db = eZDB::instance();
-        if ( !self::ensureShareTable( $db ) )
-            return self::response( array( 'error' => 'Share storage is unavailable.' ), 500 );
+        $method = self::requestMethod();
 
-        $method = isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+        // A share token opens the layout to whoever holds it, so listing them needs
+        // edit like making or removing one (which the dispatcher already checks).
+        if ( !self::hasEditAccess() )
+            return self::refusal( 403, 'access_denied', 'You are not allowed to change layouts.', $method );
 
         if ( $method === 'POST' )
         {
+            // The table is created on first use, and only by the request that stores
+            // the first token: a read never changes the schema.
+            if ( !self::ensureShareTable( $db ) )
+                return self::response( array( 'error' => 'Share storage is unavailable.' ), 500 );
+
             $token = bin2hex( random_bytes( 32 ) );
             $created = time();
             $stored = $db->query( 'INSERT INTO explayouts_share (layout_id, token, created) VALUES ( '
@@ -3110,8 +3141,14 @@ class expLayoutsUIApplicationApi
             ), 201 );
         }
 
+        // Without the table there is no token yet.
+        $tableExists = self::shareTableExists( $db );
+
         if ( $method === 'GET' )
         {
+            if ( !$tableExists )
+                return self::response( array() );
+
             $tokens = $db->arrayQuery( 'SELECT id, token, created FROM explayouts_share WHERE layout_id = ' . $layoutId . ' ORDER BY created DESC' );
             // A failed read returns false, which would be sent as the JSON
             // body in place of the list the client is documented to receive.
@@ -3126,6 +3163,8 @@ class expLayoutsUIApplicationApi
             $token = isset( $parts[1] ) ? $parts[1] : '';
             if ( $token === '' )
                 return self::response( array( 'error' => 'Missing token.' ), 400 );
+            if ( !$tableExists )
+                return self::response( array( 'error' => 'Share token not found.' ), 404 );
 
             $removed = $db->query( 'DELETE FROM explayouts_share WHERE layout_id = ' . $layoutId . ' AND token = \'' . $db->escapeString( $token ) . '\'' );
             if ( $removed === false )
@@ -3162,6 +3201,17 @@ class expLayoutsUIApplicationApi
      * @return bool false when the table is not usable, which the caller must
      *              turn into an error response rather than ignore.
      */
+    /**
+     * Whether explayouts_share exists, without creating it.
+     */
+    protected static function shareTableExists( $db )
+    {
+        $tables = $db->relationList();
+        if ( !is_array( $tables ) )
+            return false;
+        return in_array( 'explayouts_share', array_map( 'strtolower', $tables ), true );
+    }
+
     protected static function ensureShareTable( $db )
     {
         static $ready = array();
@@ -3408,12 +3458,15 @@ END;",
 
         $Result = array();
         $Result['pagelayout'] = false;
+        // 'message' on the top level as well: the editor's error dialog shows the
+        // top-level message of a JSON error answer.
         $Result['content'] = json_encode( array(
             'error' => array(
                 'code' => $status,
                 'reason' => $reason,
                 'message' => $message,
             ),
+            'message' => $message,
         ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
         return $Result;
     }

@@ -129,7 +129,7 @@ Endpoint overview (all under `/explayouts_ui_api`, responses are `application/js
 | `GET /app/api/rules`, `GET /app/api/rules/<id>`, `GET /app/api/mappings` | Mapping rules and per-layout rule counts |
 | `/app/api/collections/...` | Collection and collection item management |
 | `/app/api/transfer/...`, `/app/api/forms/...`, `/app/api/parameters/...` | Import/export and block edit form metadata |
-| `GET /app/api/versions/<layout_id>`, `GET|POST /app/api/share/<layout_id>` | Layout versions and share tokens |
+| `GET /app/api/versions/<layout_id>`, `GET|POST /app/api/share/<layout_id>` | Layout versions and share tokens (share tokens need `edit`) |
 | `GET /app/<locale>/blocks/<id>/edit`, `GET /app/<locale>/blocks/<id>/form` | HTML block-edit form fragments |
 | `GET /app/preview/<layout_id>` | Layout preview |
 

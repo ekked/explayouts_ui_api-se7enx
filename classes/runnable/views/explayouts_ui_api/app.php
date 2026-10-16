@@ -17,6 +17,9 @@ class App extends \Exponential\Runnable\ModuleView
                 ${$__name} = &$scope[$__name];
         unset( $__name );
 
+        // Whether this request would have shown debug output, asked before it is
+        // switched off for the page: the API adds an error's details only then.
+        $showErrorDetails = \eZDebug::isDebugEnabled();
         \eZDebug::updateSettings( array( 'debug-enabled' => false ) );
 
         $requestUri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/';
@@ -35,7 +38,7 @@ class App extends \Exponential\Runnable\ModuleView
         if ( strpos( $apiPath, 'api/' ) === 0 )
         {
             $parts = explode( '/', substr( $apiPath, 4 ) );
-            return $this->viewResult( isset( $Result ) ? $Result : null,  \expLayoutsUIApplicationApi::handle( $parts ) );
+            return $this->viewResult( isset( $Result ) ? $Result : null,  \expLayoutsUIApplicationApi::handle( $parts, $showErrorDetails ) );
         }
 
         $tpl = \eZTemplate::factory();
