@@ -4,7 +4,8 @@
  * unless the kernel's classes are already loaded (checked without autoloading, so a stand-in is not skipped for
  * the real class). The ezxFormToken stand-in reports the form token as switched off, so the form token check lets
  * every request through and the tests see the policy check alone. expLayoutsCoreLayoutService is a stand-in that
- * fails like a lost database connection, for the error answer.
+ * fails like a lost database connection, for the error answer. expLayoutsLayout is a stand-in that records every
+ * call and then fails, so a test can tell whether an import got as far as the layouts.
  *
  * Run with:
  *   vendor/bin/phpunit --bootstrap extension/explayouts_ui_api/tests/bootstrap.php extension/explayouts_ui_api/tests/
@@ -63,6 +64,18 @@ if ( !class_exists( 'expLayoutsCoreLayoutService', false ) )
     class expLayoutsCoreLayoutService
     {
         public function __call( $name, $arguments ) { throw new RuntimeException( 'Lost connection to the database server' ); }
+    }
+}
+if ( !class_exists( 'expLayoutsLayout', false ) )
+{
+    class expLayoutsLayout
+    {
+        public static $calls = array();
+        public static function __callStatic( $name, $arguments )
+        {
+            self::$calls[] = $name;
+            throw new RuntimeException( 'expLayoutsLayout stand-in: ' . $name );
+        }
     }
 }
 require_once dirname( __DIR__ ) . '/classes/explayoutsuiapplicationapi.php';

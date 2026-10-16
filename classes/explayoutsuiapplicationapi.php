@@ -2554,6 +2554,13 @@ class expLayoutsUIApplicationApi
 
         if ( $action === 'import' )
         {
+            // The one writer not behind a method check of its own: requestData() reads
+            // php://input for any method, so a GET with a body imported a layout past
+            // the dispatcher's edit check. It needs POST and edit here, at the action.
+            $refusal = self::checkChangeRequest( array( 'POST' ) );
+            if ( $refusal !== null )
+                return $refusal;
+
             $data = self::requestData();
             if ( empty( $data ) )
                 return self::response( array( 'error' => 'Missing import payload.' ), 400 );
@@ -3354,17 +3361,48 @@ END;",
      */
     protected static function checkEditAccess()
     {
-        $method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( (string)$_SERVER['REQUEST_METHOD'] ) : 'GET';
+        $method = self::requestMethod();
         if ( $method === 'GET' || $method === 'HEAD' || $method === 'OPTIONS' )
             return null;
 
+        return self::hasEditAccess() ? null : self::refusal( 403, 'access_denied', 'You are not allowed to change layouts.', $method );
+    }
+
+    /**
+     * The check of an action that changes something, inside its own branch: the
+     * request must use one of $methods (405 with an Allow header otherwise) and
+     * the user needs explayouts_ui_api/edit (403 otherwise). Does not depend on
+     * the dispatcher's check having run.
+     *
+     * @return array|null null when the action may go on, else the refusal.
+     */
+    protected static function checkChangeRequest( array $methods )
+    {
+        $method = self::requestMethod();
+        if ( !in_array( $method, $methods, true ) )
+        {
+            header( 'Allow: ' . implode( ', ', $methods ) );
+            return self::refusal( 405, 'method_not_allowed', 'This action needs ' . implode( ' or ', $methods ) . '.', $method );
+        }
+        return self::hasEditAccess() ? null : self::refusal( 403, 'access_denied', 'You are not allowed to change layouts.', $method );
+    }
+
+    protected static function requestMethod()
+    {
+        return isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( (string)$_SERVER['REQUEST_METHOD'] ) : 'GET';
+    }
+
+    protected static function hasEditAccess()
+    {
         $user = eZUser::currentUser();
         $access = $user ? $user->hasAccessTo( 'explayouts_ui_api', 'edit' ) : array( 'accessWord' => 'no' );
-        if ( isset( $access['accessWord'] ) && $access['accessWord'] !== 'no' )
-            return null;
+        return isset( $access['accessWord'] ) && $access['accessWord'] !== 'no';
+    }
 
-        eZDebug::writeWarning( $method . ' refused: the current user has no access to explayouts_ui_api/edit', __METHOD__ );
-        http_response_code( 403 );
+    protected static function refusal( $status, $reason, $message, $method )
+    {
+        eZDebug::writeWarning( $method . ' refused (' . $reason . '): ' . $message, __METHOD__ );
+        http_response_code( $status );
         header( 'Cache-Control: no-store, max-age=0' );
         header( 'Content-Type: application/json; charset=utf-8' );
 
@@ -3372,9 +3410,9 @@ END;",
         $Result['pagelayout'] = false;
         $Result['content'] = json_encode( array(
             'error' => array(
-                'code' => 403,
-                'reason' => 'access_denied',
-                'message' => 'You are not allowed to change layouts.',
+                'code' => $status,
+                'reason' => $reason,
+                'message' => $message,
             ),
         ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
         return $Result;

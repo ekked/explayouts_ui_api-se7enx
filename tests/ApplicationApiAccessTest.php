@@ -21,6 +21,66 @@ class ApplicationApiAccessTest extends TestCase
         eZUser::$asked = array();
         eZDebug::$enabled = false;
         eZLog::$lines = array();
+        expLayoutsLayout::$calls = array();
+        $_POST = array();
+    }
+
+    /** A layout export, as transfer/import takes it. In a test it arrives in $_POST: php://input is empty here. */
+    protected static function importPayload(): array
+    {
+        return array( 'identifier' => 'imported', 'name' => 'Imported', 'layout_type' => '1_column', 'zones' => array() );
+    }
+
+    public static function importMethodsOtherThanPost(): array
+    {
+        return array( 'GET' => array( 'GET' ), 'HEAD' => array( 'HEAD' ), 'OPTIONS' => array( 'OPTIONS' ), 'PUT' => array( 'PUT' ), 'DELETE' => array( 'DELETE' ) );
+    }
+
+    #[DataProvider( 'importMethodsOtherThanPost' )]
+    public function testAnImportNeedsPostAndImportsNothingOtherwise( string $method )
+    {
+        // edit is given, so only the method can stop it
+        eZUser::$functions[] = 'explayouts_ui_api/edit';
+        $_SERVER['REQUEST_METHOD'] = $method;
+        $_POST = self::importPayload();
+        $result = expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
+        $body = json_decode( $result['content'], true );
+
+        $this->assertSame( 405, http_response_code() );
+        $this->assertSame( 'method_not_allowed', $body['error']['reason'] );
+        $this->assertSame( array(), expLayoutsLayout::$calls, 'nothing was imported' );
+    }
+
+    public function testAGetImportOfAReadOnlyUserIsRefusedAndImportsNothing()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_POST = self::importPayload();
+        $result = expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
+
+        $this->assertSame( 405, http_response_code() );
+        $this->assertSame( 405, json_decode( $result['content'], true )['error']['code'] );
+        $this->assertSame( array(), expLayoutsLayout::$calls, 'nothing was imported' );
+    }
+
+    public function testAPostImportOfAReadOnlyUserIsRefusedAndImportsNothing()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST = self::importPayload();
+        $result = expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
+
+        $this->assertSame( 403, http_response_code() );
+        $this->assertSame( 'access_denied', json_decode( $result['content'], true )['error']['reason'] );
+        $this->assertSame( array(), expLayoutsLayout::$calls, 'nothing was imported' );
+    }
+
+    public function testAPostImportWithEditReachesTheLayouts()
+    {
+        eZUser::$functions[] = 'explayouts_ui_api/edit';
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST = self::importPayload();
+        expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
+
+        $this->assertSame( array( 'fetchByIdentifier' ), expLayoutsLayout::$calls );
     }
 
     public static function changingMethods(): array

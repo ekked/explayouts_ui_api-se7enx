@@ -120,7 +120,7 @@ Collection and collection item management for blocks with collections (backed by
 
 ### Transfer, forms, parameters, versions, share
 
-- `/app/api/transfer/...` — import/export of layouts and rules (works with `expLayoutsImporter` / `expLayoutsExporter`).
+- `/app/api/transfer/...` — import/export of layouts and rules (works with `expLayoutsImporter` / `expLayoutsExporter`). `GET /app/api/transfer/export/<id>` needs `read`; `POST /app/api/transfer/import` needs `edit`, and any other method is answered with `405` (`reason` `method_not_allowed`, an `Allow: POST` header) before the payload is read.
 - `/app/api/forms/...` and `/app/api/parameters/...` — form/parameter metadata for the block edit UI.
 - `GET /app/api/versions/<layout_id>` — the draft and published versions of a layout (status, id, created, modified).
 - `GET|POST /app/api/share/<layout_id>` — list or create share tokens for a layout (stored in the `explayouts_share` table, created on demand).
