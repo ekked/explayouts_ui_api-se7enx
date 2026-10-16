@@ -3,11 +3,18 @@ class expLayoutsUIApplicationApi
 {
     public static function handle( $parts )
     {
+        // Asked before debug output is switched off for the JSON answer: only a
+        // request that would have shown debug output gets the details of an error.
+        $showErrorDetails = eZDebug::isDebugEnabled();
         eZDebug::updateSettings( array( 'debug-enabled' => false ) );
         eZDebug::setHandleType( eZDebug::HANDLE_NONE );
         header( 'Content-Type: application/json' );
 
         $refusal = self::checkFormToken();
+        if ( $refusal !== null )
+            return $refusal;
+
+        $refusal = self::checkEditAccess();
         if ( $refusal !== null )
             return $refusal;
 
@@ -75,10 +82,12 @@ class expLayoutsUIApplicationApi
             $server = isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : '?';
             $uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
             eZLog::write( 'expLayoutsUIApplicationApi fatal (' . $server . ' ' . $uri . '): ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . "\n" . $e->getTraceAsString(), 'error.log' );
-            return self::response( array(
-                'error' => 'Internal error',
-                'details' => $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(),
-            ), 500 );
+            // Message, file and line are in the log above. The client gets them only
+            // with debug output on: they carry server paths and database errors.
+            $body = array( 'error' => 'Internal error' );
+            if ( $showErrorDetails )
+                $body['details'] = $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
+            return self::response( $body, 500 );
         }
     }
 
@@ -3331,6 +3340,43 @@ END;",
         $Result = array();
         $Result['pagelayout'] = false;
         $Result['content'] = $body;
+        return $Result;
+    }
+
+    /**
+     * Every request that changes something (any method but GET, HEAD and OPTIONS)
+     * needs the policy function explayouts_ui_api/edit; the views themselves only
+     * ask for read, which is enough to open the editor and to load its data.
+     * Without edit the request is refused with 403 and a JSON body before any
+     * layout, block, rule, zone, share token or import is touched.
+     *
+     * @return array|null null when the request may go on, else the refusal.
+     */
+    protected static function checkEditAccess()
+    {
+        $method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( (string)$_SERVER['REQUEST_METHOD'] ) : 'GET';
+        if ( $method === 'GET' || $method === 'HEAD' || $method === 'OPTIONS' )
+            return null;
+
+        $user = eZUser::currentUser();
+        $access = $user ? $user->hasAccessTo( 'explayouts_ui_api', 'edit' ) : array( 'accessWord' => 'no' );
+        if ( isset( $access['accessWord'] ) && $access['accessWord'] !== 'no' )
+            return null;
+
+        eZDebug::writeWarning( $method . ' refused: the current user has no access to explayouts_ui_api/edit', __METHOD__ );
+        http_response_code( 403 );
+        header( 'Cache-Control: no-store, max-age=0' );
+        header( 'Content-Type: application/json; charset=utf-8' );
+
+        $Result = array();
+        $Result['pagelayout'] = false;
+        $Result['content'] = json_encode( array(
+            'error' => array(
+                'code' => 403,
+                'reason' => 'access_denied',
+                'message' => 'You are not allowed to change layouts.',
+            ),
+        ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
         return $Result;
     }
 

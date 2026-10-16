@@ -24,6 +24,7 @@ Features
 The following features are provided by the Exponential Layouts UI API extension:
 
 - Central dispatcher - `expLayoutsUIApplicationApi` (`classes/explayoutsuiapplicationapi.php`) routes every `/app/api/<resource>` request via `handle( $parts )`; all responses are `application/json`, debug output is disabled in the dispatcher so responses stay clean, and list responses use the `values` / `total` shape the app expects.
+- Policies - every view needs `explayouts_ui_api/read`; every changing request (any method but `GET`, `HEAD` and `OPTIONS`) also needs `explayouts_ui_api/edit` and is refused with a `403` JSON answer without it. An error's message, file and line reach the client only with debug output on; the log always has them.
 - App shell module - `modules/explayouts_ui_api/app.php` serves the SPA shell, the API entry, the layout preview (`/explayouts_ui_api/app/preview/<layout_id>`) and the HTML block-edit form fragments.
 - Bootstrap template - `design/standard/templates/explayouts_ui_api/app.tpl` renders the meta tags the JavaScript reads: `explayouts-route-prefix` (set to `/explayouts_ui_api`), `explayouts-base-path`, `ngcb-base-path` and `ezxform-token`.
 - Configuration endpoints - `GET /app/api/config` (including the current CSRF token), `GET /app/api/config/layout_types` (layout types and their zones from `explayouts.ini`) and `GET /app/api/config/block_types` (block types grouped as `block_types` and `block_type_groups`).

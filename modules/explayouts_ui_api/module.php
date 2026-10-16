@@ -34,3 +34,6 @@ $ViewList['app'] = array(
 
 $FunctionList = array();
 $FunctionList['read'] = array();
+// Every request that changes something (any method but GET, HEAD and OPTIONS)
+// also needs edit; expLayoutsUIApplicationApi::checkEditAccess() asks for it.
+$FunctionList['edit'] = array();

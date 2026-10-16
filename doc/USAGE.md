@@ -184,6 +184,7 @@ curl -s -b "$COOKIES" -H "X-CSRF-Token: $TOKEN" -X POST \
 - `expLayoutsZone::fetchByLayout()` and `expLayoutsBlock::fetchByZone()` accept `null` for `$status` so the UI can read zones/blocks regardless of draft/published state.
 - `expLayoutsCoreLayoutService::load()` loads by id only unless a status is passed.
 - The dispatcher disables `eZDebug` output so JSON responses are never contaminated with HTML.
+- An exception inside a handler is logged to `error.log` with message, file, line and trace, and answered with `500 {"error":"Internal error"}`. The `details` field (message, file and line) is added only when debug output is on for the request (`site.ini` `[DebugSettings] DebugOutput`, with `DebugByIP`/`DebugByUser`): it carries server paths and database errors.
 
 ## Customization
 
@@ -191,7 +192,7 @@ curl -s -b "$COOKIES" -H "X-CSRF-Token: $TOKEN" -X POST \
 
 This extension only ships `module.ini` and `design.ini` registrations. Everything the API exposes — layout types, zones, block definitions, view types, query types — is defined in `explayouts.ini` (owned by `explayouts`) and overridden through the normal INI cascade: extension defaults, `settings/siteaccess/<siteaccess>/`, siteaccess settings in active extensions, `settings/override/`. For example, adding a `[LayoutType_landing]` section in `settings/override/explayouts.ini.append.php` makes it appear in `GET /app/api/config/layout_types` with no code change.
 
-Access control is via module policies: all views declare the `read` function on the `explayouts_ui_api` module — limit access with role policies rather than editing the module.
+Access control is via module policies. All views declare the `read` function on the `explayouts_ui_api` module, which is enough to open the editor and load its data. Every request that changes something — any method other than `GET`, `HEAD` and `OPTIONS` — also needs the `edit` function; without it the dispatcher answers `403` with `{"error":{"code":403,"reason":"access_denied",...}}` before any layout, block, rule, zone, share token or import is touched. Give editors `explayouts_ui_api/read` and `explayouts_ui_api/edit`, viewers `read` only — limit access with role policies rather than editing the module.
 
 ### Template layer (design override cascade)
 

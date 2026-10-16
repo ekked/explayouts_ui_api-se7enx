@@ -35,7 +35,7 @@ php bin/php/ezcache.php --clear-all --purge --allow-root-user
 
 ## 4. Settings shipped with the extension
 
-- `settings/module.ini.append.php` — registers the `explayouts_ui_api` module with views `app`, `layouts`, `rules`, `blocks` (all `read` function).
+- `settings/module.ini.append.php` — registers the `explayouts_ui_api` module with views `app`, `layouts`, `rules`, `blocks` (all `read` function); the module also defines `edit`, which every changing request (any method but `GET`, `HEAD` and `OPTIONS`) needs in addition. Give the editors' role `explayouts_ui_api/read` and `explayouts_ui_api/edit`.
 - `settings/design.ini.append.php` — registers the design extension so the SPA assets under `design/standard/` (javascript, stylesheets, fonts, images, vendor) are served.
 
 ## 5. Verify
