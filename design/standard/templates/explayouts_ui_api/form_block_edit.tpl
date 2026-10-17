@@ -1,10 +1,12 @@
 <div id="aside-tabs">
-    <ul class="aside-tab-control" role="tablist">
-        <li><a href="#" id="tab-content" role="tab" aria-controls="tab-content-tab">{'Content'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
-        <li class="active"><a href="#" id="tab-design" role="tab" aria-controls="tab-design-tab">{'Design'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
+    {* A tab list (WAI-ARIA tabs): the bundle's browser_tabs keeps aria-selected, tabindex and the shown panel in
+       step, and moves between the tabs with the arrow keys, Home and End. *}
+    <ul class="aside-tab-control" role="tablist" aria-label="{'Block settings'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )|wash()}">
+        <li role="presentation" class="active"><a href="#" id="tab-content" role="tab" aria-selected="true" aria-controls="tab-content-tab">{'Content'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
+        <li role="presentation"><a href="#" id="tab-design" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-design-tab">{'Design'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
     </ul>
 
-    <div class="tab-pane" id="tab-content-tab">
+    <div class="tab-pane active" id="tab-content-tab" role="tabpanel" aria-labelledby="tab-content">
         <div class="sidebar-panel">
             <a class="toggle-link" role="button" data-toggle="collapse" href="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">{'Options'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a>
             <div class="collapse in" id="collapseSettings">
@@ -73,7 +75,7 @@
         {/if}
     </div>
 
-    <div class="tab-pane active" id="tab-design-tab">
+    <div class="tab-pane" id="tab-design-tab" role="tabpanel" aria-labelledby="tab-design">
         <div data-form="{$form_url}"></div>
     </div>
 </div>

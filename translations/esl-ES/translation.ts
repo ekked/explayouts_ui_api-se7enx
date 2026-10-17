@@ -125,6 +125,10 @@
         <source>eZ location</source>
         <translation>Ubicación eZ</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>Ajustes del bloque</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -768,6 +772,14 @@
     <message>
         <source>Close the properties panel</source>
         <translation>Cerrar el panel de propiedades</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>Añadir un bloque</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>Tipos de bloque</translation>
     </message>
 </context>
 </TS>

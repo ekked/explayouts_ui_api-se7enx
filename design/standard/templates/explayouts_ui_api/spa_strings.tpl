@@ -163,6 +163,8 @@ window.explayoutsSpaI18n = {ldelim}
     'URL': '{"URL"|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}',
     'Open in a new window': '{"Open in a new window"|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}',
     'Code': '{"Code"|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}',
-    'This address cannot be used as a link.': '{"This address cannot be used as a link."|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}'
+    'This address cannot be used as a link.': '{"This address cannot be used as a link."|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}',
+    'Add a block': '{"Add a block"|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}',
+    'Block types': '{"Block types"|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}'
 {rdelim};
 </script>

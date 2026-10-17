@@ -128,6 +128,10 @@
         <source>eZ location</source>
         <translation>eZ Daq</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>ngogh SeH</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -771,6 +775,14 @@
     <message>
         <source>Close the properties panel</source>
         <translation>DuHmey &apos;aplo&apos; yISoQmoH</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>ngogh yIchel</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>ngogh Segh</translation>
     </message>
 </context>
 </TS>

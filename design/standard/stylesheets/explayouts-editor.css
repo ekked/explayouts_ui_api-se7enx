@@ -1,0 +1,576 @@
+/* The layout editor's own rules (explayouts_ui_api/app), loaded after netgen-layouts.css, netgen-layouts-admin.css,
+   explayouts-mobile.css and explayouts-tiptap.css, so it wins over them. Until 1.3.21 these rules were an inline
+   <style> block in app.tpl.
+
+   Tokens: the editor has one colour scheme of its own (a dark toolbar, palette and sidebar around a light canvas); it
+   does not follow the browser's light or dark preference, so every token has one value, and the dark scheme of the
+   browser shows the same, checked colours. Every text pair below reaches at least 4.5:1 (WCAG 2 AA). */
+:root {
+    --exp-le-accent: #1f63d6;          /* links, the primary button, the selected block: 5.5:1 on white, 5.1:1 on #f6f6f6 */
+    --exp-le-accent-hover: #1a54b8;
+    --exp-le-on-accent: #fff;          /* text on the accent: 5.5:1 */
+    --exp-le-muted: #6b6b6b;           /* secondary text on the canvas: 5.3:1 on white, 4.9:1 on #f6f6f6 */
+    --exp-le-on-dark-muted: #c8c8c8;   /* secondary text on the dark panels: 5.3:1 on #4a4a4a, 6.2:1 on #404040 */
+    --exp-le-focus: #8ab4ff;           /* the focus ring around a control on the dark panels */
+}
+
+#ngc-size-warning { display: none !important; }
+.left-toolbar .button.js-open.active + .left-toolbar-panels .left-panel { display: block !important; }
+.add-block-btn .font-icon::before { content: "\e900"; }
+.is-dragging [data-block] { pointer-events: none; }
+.is-dragging [data-zone] { box-shadow: inset 0 0 0 2px #4a90e2; }
+.zone { min-height: 80px; position: relative; }
+.zone::before { content: attr(data-zone); display: block; color: var(--exp-le-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; pointer-events: none; }
+.zone-body { min-height: 60px; }
+.block-content { background: #fff; color: #333; padding: 8px; }
+.block-items { margin: 0; padding-left: 1.2em; }
+.block-items li { background: #fff; color: #333; padding: 2px 0; }
+#ng-cancel-link:not(.btn) { position: fixed; top: 10px; right: 10px; z-index: 10000; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.6rem 1rem; border-radius: 4px; background: #2563eb; color: #fff; font-family: Roboto, Helvetica Neue, sans-serif; font-size: 0.875rem; font-weight: 500; text-decoration: none; line-height: 1; cursor: pointer; border: 0; }
+#ng-cancel-link:not(.btn):hover { background: #1d4ed8; }
+/* placed next to the modal's primary button by app.tpl's script */
+#ng-cancel-link.btn { margin-right: 8px; }
+
+/* Collection preview inside a block, ported from the reference editor
+   (netgen/layouts-ui app/styles/_blocks.scss). A grid view lays its
+   items out `number_of_columns` across via .cols-N, so changing that
+   setting is visible in the editor at a glance; everything else stacks
+   as a list. The markup comes from renderBlockHtml(). */
+[data-block] .grid-row { display: flex; flex-wrap: wrap; margin: -1px; }
+[data-block] .grid-row .grid-item {
+    padding: .5rem .5rem 0;
+    background: rgba(0,0,0,.035);
+    border: 1px solid #fff;
+    font-size: .75em;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+[data-block] .grid-row .grid-item.cols-1  { flex-basis: 100%; }
+[data-block] .grid-row .grid-item.cols-2  { flex-basis: 50%; }
+[data-block] .grid-row .grid-item.cols-3  { flex-basis: 33.3333%; }
+[data-block] .grid-row .grid-item.cols-4  { flex-basis: 25%; }
+[data-block] .grid-row .grid-item.cols-5  { flex-basis: 20%; }
+[data-block] .grid-row .grid-item.cols-6  { flex-basis: 16.6667%; }
+[data-block] .grid-row .grid-item.cols-7  { flex-basis: 14.2857%; }
+[data-block] .grid-row .grid-item.cols-8  { flex-basis: 12.5%; }
+[data-block] .grid-row .grid-item.cols-9  { flex-basis: 11.1111%; }
+[data-block] .grid-row .grid-item.cols-10 { flex-basis: 10%; }
+[data-block] .grid-row .grid-item.cols-11 { flex-basis: 9.0909%; }
+[data-block] .grid-row .grid-item.cols-12 { flex-basis: 8.3333%; }
+[data-block] .list-row .list-item {
+    background: rgba(0,0,0,.035);
+    padding: .5rem;
+    margin: .125rem 0;
+    font-size: .75em;
+    word-break: break-word;
+}
+/* Item internals: thumbnail floated left of the linked name, with the
+   value type beneath - app/item/nglayouts_app_preview.html.twig. */
+[data-block] .grid-row .list-item::after,
+[data-block] .list-row .list-item::after { content: ""; display: table; clear: both; }
+[data-block] .grid-row .image,
+[data-block] .list-row .image { float: left; margin-right: .75rem; max-width: 5rem; }
+[data-block] .grid-row img,
+[data-block] .list-row img { width: 100%; display: block; }
+[data-block] .grid-row .name,
+[data-block] .list-row .name { overflow: hidden; min-width: 5rem; }
+[data-block] .grid-row .image, [data-block] .grid-row .name,
+[data-block] .list-row .image, [data-block] .list-row .name { margin-bottom: .5rem; }
+[data-block] .grid-row .name p,
+[data-block] .list-row .name p { margin: 0; }
+[data-block] .grid-row .name a,
+[data-block] .list-row .name a { color: var(--exp-le-accent); text-decoration: none; }
+[data-block] .grid-row .name a:hover,
+[data-block] .list-row .name a:hover { text-decoration: underline; }
+[data-block] .grid-row .value-type,
+[data-block] .list-row .value-type {
+    color: var(--exp-le-muted);
+    font-style: italic;
+    margin-bottom: .5em;
+    clear: both;
+    font-size: 1rem;
+}
+[data-block] .grid-row .value-type p,
+[data-block] .list-row .value-type p { margin: 0; font-size: .75em; }
+
+/* Selected-block highlight.
+   The editor marks the block being edited by adding .editing to its
+   [data-block] wrapper (block view editing_mark / editing_unmark).
+   The bundled stylesheet only recolours a 1px border and the header
+   strip, which is easy to lose on a busy canvas - and for container
+   blocks it recolours the border to the same #383838 as their own
+   background, so a selected container showed no change at all.
+   These rules add a subtle tint, a clear 2px ring and a left accent
+   bar, and give containers the same accent. */
+[data-block] { transition: box-shadow .12s ease, background-color .12s ease; }
+
+/* Hover affordance, deliberately weaker than the selected state. */
+[data-block]:not(.editing):hover { box-shadow: 0 0 0 1px rgba(42,114,239,.35); }
+
+[data-block].editing {
+    background-color: #f2f7ff;
+    box-shadow: 0 0 0 2px var(--exp-le-accent), 0 3px 12px rgba(42,114,239,.16);
+}
+/* .block-content is given a hard white background above; let the tint show. */
+[data-block].editing > .block-content { background: transparent; }
+[data-block].editing > .block-header { font-weight: 600; }
+/* An unmistakable anchor down the left edge of the selected block. */
+[data-block].editing::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--exp-le-accent);
+    pointer-events: none;
+}
+
+/* Containers keep their dark body - that is what distinguishes a
+   container from a leaf block - so only the ring, the accent bar and
+   the header carry the selection here. */
+[data-block][data-container].editing {
+    background-color: #383838;
+    box-shadow: 0 0 0 2px var(--exp-le-accent), 0 3px 12px rgba(42,114,239,.22);
+}
+[data-block][data-container].editing > .block-header { background: var(--exp-le-accent); color: var(--exp-le-on-accent); }
+
+/* A nested block that is not itself selected keeps its own background. */
+[data-block].editing [data-block]:not(.editing) { background-color: #fff; }
+[data-block].editing [data-block]:not(.editing) > .block-content { background: #fff; }
+
+/* Right sidebar / query browser styles to match Nexus */
+#aside-tabs {
+    background: #404040;
+    color: #fff;
+    padding: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+#aside-tabs h4 {
+    font-size: 11px;
+    font-weight: 400;
+    margin: 16px 0 12px;
+    text-transform: uppercase;
+    color: var(--exp-le-on-dark-muted);
+}
+#aside-tabs .aside-tab-control {
+    list-style-type: none;
+    display: flex;
+    margin: 0 0 16px;
+    padding: 0;
+}
+#aside-tabs .aside-tab-control li {
+    flex: 1;
+    display: flex;
+}
+#aside-tabs .aside-tab-control li a {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 100%;
+    padding: 9px 4px;
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+}
+#aside-tabs .aside-tab-control li:first-child a {
+    border-radius: 2px 0 0 2px;
+}
+#aside-tabs .aside-tab-control li:last-child a {
+    border-radius: 0 2px 2px 0;
+}
+#aside-tabs .aside-tab-control li.active a {
+    background: #fff;
+    border: 0;
+    color: #404040;
+}
+
+#aside-tabs .tab-pane {
+    display: none;
+    box-sizing: border-box;
+}
+#aside-tabs .tab-pane.active {
+    display: block;
+}
+#aside-tabs .sidebar-panel + .sidebar-panel {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid hsla(0, 0%, 100%, .2);
+}
+
+#aside-tabs .layouts-form,
+#aside-tabs .query-form,
+#aside-tabs .content-form {
+    color: #fff;
+}
+
+#aside-tabs .row-input,
+#aside-tabs .checkbox {
+    margin-bottom: 16px;
+}
+#aside-tabs .row-input > label,
+#aside-tabs .xeditable .current > label {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--exp-le-on-dark-muted);
+    margin: 0 0 4px;
+}
+
+#aside-tabs .row-input input[type="text"],
+#aside-tabs .row-input input[type="number"],
+#aside-tabs .row-input input[type="url"],
+#aside-tabs .row-input input[type="email"],
+#aside-tabs .row-input textarea,
+#aside-tabs select,
+#aside-tabs .xeditable .js-edit {
+    border: 0;
+    box-shadow: none;
+    border-radius: 2px;
+    padding: 0 12px;
+    width: 100%;
+    height: 36px;
+    font-size: 12px;
+    margin: 0 0 16px;
+    background: #666;
+    color: #fff;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+}
+#aside-tabs select {
+    background: #666 url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEuNDEiPjxwYXRoIGQ9Ik01LjUzIDcuNDlMLjIgMi4xNWEuNjYuNjYgMCAwIDEgMC0uOTNMLjgyLjU5YS42Ni42NiAwIDAgMS45MyAwTDYgNC44MiAxMC4yNS42YS42Ni42NiAwIDAxLjkzIDBsLjYzLjYzYy4yNS4yNS4yNS42NyAwIC45M0w2LjQ3IDcuNDlhLjY2LjY2IDAgMDEtLjk0IDB6IiBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48L3N2Zz4=') no-repeat;
+    background-position: right 8px center;
+    background-size: 13px auto;
+    padding-right: 36px;
+    cursor: pointer;
+}
+#aside-tabs select[multiple] {
+    height: auto;
+    min-height: 140px;
+    padding: 4px 0;
+    background-image: none;
+}
+#aside-tabs select option,
+#aside-tabs select optgroup,
+#aside-tabs select[multiple] option,
+#aside-tabs select[multiple] optgroup {
+    color: #fff;
+    background: #666;
+}
+#aside-tabs select[multiple] option {
+    padding: 2px 12px;
+}
+#aside-tabs select[multiple] optgroup[label] {
+    padding: 2px 12px;
+}
+#aside-tabs select[multiple] optgroup[label] option {
+    margin: 0 -12px;
+}
+#aside-tabs select option:checked,
+#aside-tabs select option:hover,
+#aside-tabs select[multiple] option:checked,
+#aside-tabs select[multiple] option:hover {
+    background: #4a90e2;
+}
+#aside-tabs select option.hidden,
+#aside-tabs select[multiple] option.hidden {
+    display: none;
+}
+#aside-tabs .row-input textarea {
+    height: auto;
+    min-height: 120px;
+    padding-top: 6px;
+    resize: vertical;
+}
+#aside-tabs .input-note {
+    font-size: 10px;
+    font-style: italic;
+    margin: -12px 0 19px;
+    color: var(--exp-le-on-dark-muted);
+}
+
+/* Checkboxes */
+#aside-tabs input[type="checkbox"] {
+    position: absolute;
+    left: -9999em;
+}
+#aside-tabs input[type="checkbox"] + label {
+    display: block;
+    position: relative;
+    padding: 6px 6px 6px 32px;
+    margin: 0 0 8px;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--exp-le-on-dark-muted);
+    line-height: 1.4;
+}
+#aside-tabs input[type="checkbox"] + label::before {
+    content: 'check_box_outline_blank';
+    font-family: 'Material Icons';
+    font-size: 24px;
+    position: absolute;
+    color: #fff;
+    left: 0;
+    top: .2em;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+#aside-tabs input[type="checkbox"]:checked + label::before {
+    content: 'check_box';
+}
+
+#aside-tabs [data-compound-checkbox] .children { display: none; padding-left: 1.625em; margin-bottom: 16px; }
+#aside-tabs [data-compound-checkbox] .children > .row-input,
+#aside-tabs [data-compound-checkbox] .children > .checkbox {
+    margin-bottom: 16px;
+}
+#aside-tabs [data-compound-checkbox] input[type="checkbox"]:checked ~ .children { display: block; }
+#aside-tabs [data-compound-reverse] .children { display: block; padding-left: 0; }
+#aside-tabs [data-compound-reverse] input[type="checkbox"]:checked ~ .children { display: none; }
+
+/* Toggle links / headings */
+#aside-tabs .toggle-link {
+    font-size: 12px;
+    display: block;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+}
+#aside-tabs .toggle-link::after {
+    content: 'arrow_drop_down';
+    font-family: 'Material Icons';
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    transform: rotate(-90deg);
+    font-size: 20px;
+}
+#aside-tabs .toggle-link[aria-expanded="true"]::after {
+    transform: none;
+}
+#aside-tabs .sub-toggle {
+    display: inline-block;
+    text-transform: none;
+}
+#aside-tabs .sub-toggle::after {
+    float: none;
+}
+
+/* Browse input */
+#aside-tabs .input-browse {
+    display: flex;
+    align-items: center;
+    background: #666;
+    border-radius: 2px;
+    height: 36px;
+    margin: 0 0 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#aside-tabs .input-browse .js-clear {
+    order: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 36px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    background: #666;
+    border-right: 1px solid #404040;
+    border-radius: 2px 0 0 2px;
+}
+#aside-tabs .input-browse .js-clear:hover {
+    background: #595959;
+}
+#aside-tabs .input-browse .js-trigger {
+    order: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    height: 36px;
+    font-size: 12px;
+    background: #666;
+    border-radius: 0 2px 2px 0;
+}
+#aside-tabs .input-browse .js-trigger:hover {
+    background: #595959;
+}
+#aside-tabs .input-browse .js-name {
+    flex: 1;
+    padding: 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#aside-tabs .input-browse .material-icons {
+    font-size: 20px;
+    color: #fff;
+    pointer-events: none;
+    padding: 0 8px;
+}
+#aside-tabs .input-browse.item-empty .js-trigger {
+    color: #bbb;
+}
+#aside-tabs .input-browse.item-empty .js-clear {
+    display: none;
+}
+
+/* View in CMS */
+.js-view-cms {
+    display: block;
+    margin: -12px 0 16px;
+    padding: 8px 12px;
+    border: 1px dashed #9b9b9b;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+.js-view-cms:hover {
+    background: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+}
+
+/* Xeditable current value display */
+#aside-tabs .xeditable .js-edit {
+    margin: 0 0 16px;
+    background: #666;
+    height: 36px;
+    font-size: 12px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 2px;
+    padding: 0;
+}
+#aside-tabs .xeditable .js-edit:hover {
+    background: #595959;
+}
+#aside-tabs .xeditable .js-edit .text {
+    flex: 1;
+    padding: 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#aside-tabs .xeditable .js-edit .icon {
+    background: #595959;
+    padding: 0 24px;
+    border-radius: 0 2px 2px 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+#aside-tabs .xeditable .actions {
+    text-align: right;
+    margin: 0 0 8px;
+}
+
+/* Add items button */
+#aside-tabs .add-items {
+    margin: 0 0 24px;
+    border: 1px dashed #9b9b9b;
+    text-align: center;
+    font-size: 10px;
+    line-height: 36px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #fff;
+    display: block;
+}
+#aside-tabs .add-items:hover {
+    background: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+}
+
+/* Value type select wrapper inside collection items */
+#aside-tabs .value-type-wrapper select {
+    margin-bottom: 8px;
+}
+
+/* ---------- Accessibility (1.3.21) ----------
+   Contrast for what netgen-layouts.css draws below 4.5:1, and the focus of the sidebar's tabs. */
+.ngc a,
+.ngc .btn-link,
+.ngc .layout-type .layout-type-item input[type='radio']:checked + label,
+.ngc .modal-content input[type='checkbox']:checked + label::before,
+.ngc .modal-content input[type='radio']:checked + label::before {
+    color: var(--exp-le-accent);
+}
+.ngc .btn-primary {
+    background: var(--exp-le-accent);
+    border-color: var(--exp-le-accent);
+    color: var(--exp-le-on-accent);
+}
+.ngc .btn-primary:hover,
+.ngc .btn-primary:focus {
+    background: var(--exp-le-accent-hover);
+    border-color: var(--exp-le-accent-hover);
+    color: var(--exp-le-on-accent);
+}
+[data-block].editing,
+[data-block].editing:hover,
+[data-block].ui-sortable-helper,
+[data-block]:hover {
+    border-color: var(--exp-le-accent);
+}
+[data-block].editing > .block-header,
+[data-block].editing:hover > .block-header,
+[data-block].ui-sortable-helper > .block-header {
+    background: var(--exp-le-accent);
+    color: var(--exp-le-on-accent);
+}
+/* the block's type and template name in its header, on the canvas */
+[data-block] .block-header,
+.grid-row .value-type,
+.list-row .value-type,
+.item-panel .controls,
+.item-panel .status-icon {
+    color: var(--exp-le-muted);
+}
+/* the block palette, the left toolbar and the sidebar's labels, on the dark panels */
+.left-toolbar,
+.add-block-btn,
+.left-toolbar-panels .left-panel .close-panel,
+.app-header .layout-name .show-form i,
+#sidebar section label {
+    color: var(--exp-le-on-dark-muted);
+}
+.add-block-btn:hover {
+    color: var(--exp-le-on-accent);
+}
+/* the sidebar's tabs (role tablist/tab): a visible focus, the selected tab keeps its look */
+#aside-tabs .aside-tab-control li a:focus-visible,
+.left-toolbar .button:focus-visible,
+.left-toolbar-panels .left-panel .panel-content:focus-visible {
+    outline: 2px solid var(--exp-le-focus);
+    outline-offset: 2px;
+}
+
+/* The content browser modal app.tpl's script builds (until 1.3.21 with style attributes) */
+#exp-content-browser-modal .exp-cb-dialog { width: 700px; max-width: 90vw; }
+#exp-content-browser-modal .exp-cb-breadcrumbs { margin: 0 0 10px; }
+#exp-content-browser-modal .exp-cb-list { max-height: 400px; overflow: auto; }
+#exp-content-browser-modal .exp-cb-actions { width: 100px; }

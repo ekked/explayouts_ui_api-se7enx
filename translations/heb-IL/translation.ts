@@ -127,6 +127,10 @@
         <source>eZ location</source>
         <translation>מיקום eZ</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>הגדרות בלוק</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -770,6 +774,14 @@
     <message>
         <source>Close the properties panel</source>
         <translation>סגירת לוח המאפיינים</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>הוספת בלוק</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>סוגי בלוקים</translation>
     </message>
 </context>
 </TS>

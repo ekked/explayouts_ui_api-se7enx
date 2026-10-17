@@ -125,6 +125,10 @@
         <source>eZ location</source>
         <translation>eZ-Ort</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>Blockeinstellungen</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -916,6 +920,14 @@
     <message>
         <source>This address cannot be used as a link.</source>
         <translation>Diese Adresse kann nicht als Link verwendet werden.</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>Block hinzufügen</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>Blocktypen</translation>
     </message>
 </context>
 </TS>

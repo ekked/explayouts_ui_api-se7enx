@@ -128,6 +128,10 @@
         <source>eZ location</source>
         <translation>Locus eZ</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>Optiones segmenti</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -771,6 +775,14 @@
     <message>
         <source>Close the properties panel</source>
         <translation>Panellum proprietatum claudere</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>Segmentum addere</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>Genera segmentorum</translation>
     </message>
 </context>
 </TS>
