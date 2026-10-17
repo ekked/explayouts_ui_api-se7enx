@@ -120,10 +120,10 @@ Collection and collection item management for blocks with collections (backed by
 
 ### Transfer, forms, parameters, versions, share
 
-- `/app/api/transfer/...` — import/export of layouts and rules (works with `expLayoutsImporter` / `expLayoutsExporter`).
+- `/app/api/transfer/...` — import/export of layouts and rules (works with `expLayoutsImporter` / `expLayoutsExporter`). `GET /app/api/transfer/export/<id>` needs `read`; `POST /app/api/transfer/import` needs `edit`, and any other method is answered with `405` (`reason` `method_not_allowed`, an `Allow: POST` header) before the payload is read.
 - `/app/api/forms/...` and `/app/api/parameters/...` — form/parameter metadata for the block edit UI.
 - `GET /app/api/versions/<layout_id>` — the draft and published versions of a layout (status, id, created, modified).
-- `GET|POST /app/api/share/<layout_id>` — list or create share tokens for a layout (stored in the `explayouts_share` table, created on demand).
+- `GET|POST /app/api/share/<layout_id>` — list or create share tokens for a layout; both need `edit`, since a token opens the layout to whoever holds it. Tokens are stored in the `explayouts_share` table, which the first `POST` creates when it is missing; a `GET` without the table answers `[]` and creates nothing.
 
 ## HTML form fragments
 
@@ -184,6 +184,7 @@ curl -s -b "$COOKIES" -H "X-CSRF-Token: $TOKEN" -X POST \
 - `expLayoutsZone::fetchByLayout()` and `expLayoutsBlock::fetchByZone()` accept `null` for `$status` so the UI can read zones/blocks regardless of draft/published state.
 - `expLayoutsCoreLayoutService::load()` loads by id only unless a status is passed.
 - The dispatcher disables `eZDebug` output so JSON responses are never contaminated with HTML.
+- An exception inside a handler is logged to `error.log` with message, file, line and trace, and answered with `500 {"error":"Internal error"}`. The `details` field (message, file and line) is added only when debug output is on for the request (the `app` view asks before it switches debug output off and passes the answer to `handle()`) (`site.ini` `[DebugSettings] DebugOutput`, with `DebugByIP`/`DebugByUser`): it carries server paths and database errors.
 
 ## Customization
 
@@ -191,7 +192,7 @@ curl -s -b "$COOKIES" -H "X-CSRF-Token: $TOKEN" -X POST \
 
 This extension only ships `module.ini` and `design.ini` registrations. Everything the API exposes — layout types, zones, block definitions, view types, query types — is defined in `explayouts.ini` (owned by `explayouts`) and overridden through the normal INI cascade: extension defaults, `settings/siteaccess/<siteaccess>/`, siteaccess settings in active extensions, `settings/override/`. For example, adding a `[LayoutType_landing]` section in `settings/override/explayouts.ini.append.php` makes it appear in `GET /app/api/config/layout_types` with no code change.
 
-Access control is via module policies: all views declare the `read` function on the `explayouts_ui_api` module — limit access with role policies rather than editing the module.
+Access control is via module policies. All views declare the `read` function on the `explayouts_ui_api` module, which is enough to open the editor and load its data. Every request that changes something — any method other than `GET`, `HEAD` and `OPTIONS` — also needs the `edit` function; without it the dispatcher answers `403` with `{"error":{"code":403,"reason":"access_denied",...}}` before any layout, block, rule, zone, share token or import is touched. Give editors `explayouts_ui_api/read` and `explayouts_ui_api/edit`, viewers `read` only — limit access with role policies rather than editing the module. Reading never writes for a user without `edit`: the zones a layout's type defines but the layout lacks, and the default collection of a block type that has one, are created on read only with `edit`; without it they are left out of the answer. The `403` and `405` answers carry the text on the top level as well (`"message"`), and the editor shows "You don't have permission to edit this layout." for a `403` with reason `access_denied` instead of its session timeout dialog.
 
 ### Template layer (design override cascade)
 

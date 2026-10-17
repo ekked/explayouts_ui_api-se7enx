@@ -1,13 +1,27 @@
 <?php
 class expLayoutsUIApplicationApi
 {
-    public static function handle( $parts )
+    /**
+     * @param array     $parts            the path below app/api/
+     * @param bool|null $showErrorDetails whether a 500 answer may carry the error's message, file and line: true
+     *                                    only when debug output is on for the request. The view switches debug
+     *                                    output off before it calls handle(), so it asks first and passes the
+     *                                    answer; null asks eZDebug here.
+     */
+    public static function handle( $parts, $showErrorDetails = null )
     {
+        if ( $showErrorDetails === null )
+            $showErrorDetails = eZDebug::isDebugEnabled();
+        $showErrorDetails = (bool)$showErrorDetails;
         eZDebug::updateSettings( array( 'debug-enabled' => false ) );
         eZDebug::setHandleType( eZDebug::HANDLE_NONE );
         header( 'Content-Type: application/json' );
 
         $refusal = self::checkFormToken();
+        if ( $refusal !== null )
+            return $refusal;
+
+        $refusal = self::checkEditAccess();
         if ( $refusal !== null )
             return $refusal;
 
@@ -75,10 +89,12 @@ class expLayoutsUIApplicationApi
             $server = isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : '?';
             $uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
             eZLog::write( 'expLayoutsUIApplicationApi fatal (' . $server . ' ' . $uri . '): ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() . "\n" . $e->getTraceAsString(), 'error.log' );
-            return self::response( array(
-                'error' => 'Internal error',
-                'details' => $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(),
-            ), 500 );
+            // Message, file and line are in the log above. The client gets them only
+            // with debug output on: they carry server paths and database errors.
+            $body = array( 'error' => 'Internal error' );
+            if ( $showErrorDetails )
+                $body['details'] = $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine();
+            return self::response( $body, 500 );
         }
     }
 
@@ -1778,6 +1794,30 @@ class expLayoutsUIApplicationApi
         return is_array( $data ) ? $data : array();
     }
 
+    /**
+     * The collections of a block, as blockToArray() answers them. The default
+     * collection of a block type that has one is created on first read, which
+     * writes to the database: only for a user who may change layouts. For the
+     * others the block is answered without a collection.
+     */
+    protected static function blockCollections( $block, $blockInfo )
+    {
+        $blockId = (int)$block->attribute( 'id' );
+        $collections = array();
+        $collection = expLayoutsCollection::fetchByBlock( $blockId );
+        if ( $collection instanceof expLayoutsCollection )
+        {
+            $collections[] = self::collectionToArray( $collection, $block );
+        }
+        elseif ( is_array( $blockInfo ) && !empty( $blockInfo['has_collection'] ) && self::hasEditAccess() )
+        {
+            $collection = expLayoutsCollection::create( $blockId, 'manual' );
+            $collection->store();
+            $collections[] = self::collectionToArray( $collection, $block );
+        }
+        return $collections;
+    }
+
     public static function blockToArray( $block )
     {
         if ( !$block )
@@ -1800,18 +1840,7 @@ class expLayoutsUIApplicationApi
             $parameters[(string)$param->attribute( 'name' )] = json_decode( (string)$param->attribute( 'value' ), true ) !== null ? json_decode( (string)$param->attribute( 'value' ), true ) : (string)$param->attribute( 'value' );
         }
 
-        $collections = array();
-        $collection = expLayoutsCollection::fetchByBlock( $blockId );
-        if ( $collection instanceof expLayoutsCollection )
-        {
-            $collections[] = self::collectionToArray( $collection, $block );
-        }
-        elseif ( is_array( $blockInfo ) && !empty( $blockInfo['has_collection'] ) )
-        {
-            $collection = expLayoutsCollection::create( $blockId, 'manual' );
-            $collection->store();
-            $collections[] = self::collectionToArray( $collection, $block );
-        }
+        $collections = self::blockCollections( $block, $blockInfo );
 
         $placeholders = array();
         if ( $isContainer )
@@ -2455,10 +2484,14 @@ class expLayoutsUIApplicationApi
             $existingZones[(string)$zone->attribute( 'identifier' )] = $zone;
         }
 
+        // A zone the layout type defines but the layout lacks is added here, which
+        // writes to the database: only for a user who may change layouts. For the
+        // others the zone is left out of the answer below.
         $position = 1;
+        $mayRepair = self::hasEditAccess();
         foreach ( expLayoutsLayoutType::getZones( $layoutType ) as $zoneIdentifier )
         {
-            if ( !isset( $existingZones[$zoneIdentifier] ) )
+            if ( $mayRepair && !isset( $existingZones[$zoneIdentifier] ) )
             {
                 $newZone = expLayoutsZone::create( $layoutId, $zoneIdentifier, $status );
                 $newZone->setAttribute( 'position', $position );
@@ -2545,6 +2578,13 @@ class expLayoutsUIApplicationApi
 
         if ( $action === 'import' )
         {
+            // The one writer not behind a method check of its own: requestData() reads
+            // php://input for any method, so a GET with a body imported a layout past
+            // the dispatcher's edit check. It needs POST and edit here, at the action.
+            $refusal = self::checkChangeRequest( array( 'POST' ) );
+            if ( $refusal !== null )
+                return $refusal;
+
             $data = self::requestData();
             if ( empty( $data ) )
                 return self::response( array( 'error' => 'Missing import payload.' ), 400 );
@@ -3069,13 +3109,20 @@ class expLayoutsUIApplicationApi
             return self::response( array( 'error' => 'Layout not found.' ), 404 );
 
         $db = eZDB::instance();
-        if ( !self::ensureShareTable( $db ) )
-            return self::response( array( 'error' => 'Share storage is unavailable.' ), 500 );
+        $method = self::requestMethod();
 
-        $method = isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+        // A share token opens the layout to whoever holds it, so listing them needs
+        // edit like making or removing one (which the dispatcher already checks).
+        if ( !self::hasEditAccess() )
+            return self::refusal( 403, 'access_denied', 'You are not allowed to change layouts.', $method );
 
         if ( $method === 'POST' )
         {
+            // The table is created on first use, and only by the request that stores
+            // the first token: a read never changes the schema.
+            if ( !self::ensureShareTable( $db ) )
+                return self::response( array( 'error' => 'Share storage is unavailable.' ), 500 );
+
             $token = bin2hex( random_bytes( 32 ) );
             $created = time();
             $stored = $db->query( 'INSERT INTO explayouts_share (layout_id, token, created) VALUES ( '
@@ -3094,8 +3141,14 @@ class expLayoutsUIApplicationApi
             ), 201 );
         }
 
+        // Without the table there is no token yet.
+        $tableExists = self::shareTableExists( $db );
+
         if ( $method === 'GET' )
         {
+            if ( !$tableExists )
+                return self::response( array() );
+
             $tokens = $db->arrayQuery( 'SELECT id, token, created FROM explayouts_share WHERE layout_id = ' . $layoutId . ' ORDER BY created DESC' );
             // A failed read returns false, which would be sent as the JSON
             // body in place of the list the client is documented to receive.
@@ -3110,6 +3163,8 @@ class expLayoutsUIApplicationApi
             $token = isset( $parts[1] ) ? $parts[1] : '';
             if ( $token === '' )
                 return self::response( array( 'error' => 'Missing token.' ), 400 );
+            if ( !$tableExists )
+                return self::response( array( 'error' => 'Share token not found.' ), 404 );
 
             $removed = $db->query( 'DELETE FROM explayouts_share WHERE layout_id = ' . $layoutId . ' AND token = \'' . $db->escapeString( $token ) . '\'' );
             if ( $removed === false )
@@ -3146,6 +3201,17 @@ class expLayoutsUIApplicationApi
      * @return bool false when the table is not usable, which the caller must
      *              turn into an error response rather than ignore.
      */
+    /**
+     * Whether explayouts_share exists, without creating it.
+     */
+    protected static function shareTableExists( $db )
+    {
+        $tables = $db->relationList();
+        if ( !is_array( $tables ) )
+            return false;
+        return in_array( 'explayouts_share', array_map( 'strtolower', $tables ), true );
+    }
+
     protected static function ensureShareTable( $db )
     {
         static $ready = array();
@@ -3331,6 +3397,77 @@ END;",
         $Result = array();
         $Result['pagelayout'] = false;
         $Result['content'] = $body;
+        return $Result;
+    }
+
+    /**
+     * Every request that changes something (any method but GET, HEAD and OPTIONS)
+     * needs the policy function explayouts_ui_api/edit; the views themselves only
+     * ask for read, which is enough to open the editor and to load its data.
+     * Without edit the request is refused with 403 and a JSON body before any
+     * layout, block, rule, zone, share token or import is touched.
+     *
+     * @return array|null null when the request may go on, else the refusal.
+     */
+    protected static function checkEditAccess()
+    {
+        $method = self::requestMethod();
+        if ( $method === 'GET' || $method === 'HEAD' || $method === 'OPTIONS' )
+            return null;
+
+        return self::hasEditAccess() ? null : self::refusal( 403, 'access_denied', 'You are not allowed to change layouts.', $method );
+    }
+
+    /**
+     * The check of an action that changes something, inside its own branch: the
+     * request must use one of $methods (405 with an Allow header otherwise) and
+     * the user needs explayouts_ui_api/edit (403 otherwise). Does not depend on
+     * the dispatcher's check having run.
+     *
+     * @return array|null null when the action may go on, else the refusal.
+     */
+    protected static function checkChangeRequest( array $methods )
+    {
+        $method = self::requestMethod();
+        if ( !in_array( $method, $methods, true ) )
+        {
+            header( 'Allow: ' . implode( ', ', $methods ) );
+            return self::refusal( 405, 'method_not_allowed', 'This action needs ' . implode( ' or ', $methods ) . '.', $method );
+        }
+        return self::hasEditAccess() ? null : self::refusal( 403, 'access_denied', 'You are not allowed to change layouts.', $method );
+    }
+
+    protected static function requestMethod()
+    {
+        return isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( (string)$_SERVER['REQUEST_METHOD'] ) : 'GET';
+    }
+
+    protected static function hasEditAccess()
+    {
+        $user = eZUser::currentUser();
+        $access = $user ? $user->hasAccessTo( 'explayouts_ui_api', 'edit' ) : array( 'accessWord' => 'no' );
+        return isset( $access['accessWord'] ) && $access['accessWord'] !== 'no';
+    }
+
+    protected static function refusal( $status, $reason, $message, $method )
+    {
+        eZDebug::writeWarning( $method . ' refused (' . $reason . '): ' . $message, __METHOD__ );
+        http_response_code( $status );
+        header( 'Cache-Control: no-store, max-age=0' );
+        header( 'Content-Type: application/json; charset=utf-8' );
+
+        $Result = array();
+        $Result['pagelayout'] = false;
+        // 'message' on the top level as well: the editor's error dialog shows the
+        // top-level message of a JSON error answer.
+        $Result['content'] = json_encode( array(
+            'error' => array(
+                'code' => $status,
+                'reason' => $reason,
+                'message' => $message,
+            ),
+            'message' => $message,
+        ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
         return $Result;
     }
 
