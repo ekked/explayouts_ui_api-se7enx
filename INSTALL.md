@@ -36,6 +36,15 @@ php bin/php/ezcache.php --clear-all --purge --allow-root-user
 ## 4. Settings shipped with the extension
 
 - `settings/module.ini.append.php` — registers the `explayouts_ui_api` module with views `app`, `layouts`, `rules`, `blocks` (all `read` function); the module also defines `edit`, which every changing request (any method but `GET`, `HEAD` and `OPTIONS`) needs in addition. Give the editors' role `explayouts_ui_api/read` and `explayouts_ui_api/edit`.
+
+  **Upgrading from 1.3.17 or older:** until then `read` was enough to change layouts. A role that has `explayouts_ui_api/read` but not `edit` can still open the editor, but every change is refused with `403`. To keep the old behavior for those roles, run once from the installation root (add `-s <siteaccess>` where the database is set per siteaccess):
+
+  ```bash
+  php extension/explayouts_ui_api/bin/php/addeditpolicy.php --dry-run
+  php extension/explayouts_ui_api/bin/php/addeditpolicy.php
+  ```
+
+  It adds `explayouts_ui_api/edit` to every role that has `read` without it, and changes nothing on a second run. Take `edit` away again from roles that should only look.
 - `settings/design.ini.append.php` — registers the design extension so the SPA assets under `design/standard/` (javascript, stylesheets, fonts, images, vendor) are served.
 
 ## 5. Verify
