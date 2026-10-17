@@ -91,9 +91,9 @@ class EditorsWiringTest extends TestCase
         $xpath = new DOMXPath( $german );
         foreach ( $texts as $text )
         {
-            $key = str_replace( "'", "\\'", $text );
-            $this->assertStringContainsString( "'" . $key . "': '{\"" . $text . "\"|i18n( 'design/standard/explayouts_ui_api/spa' )|wash( javascript )}'", $strings, $text );
             $literal = strpos( $text, '"' ) === false ? '"' . $text . '"' : "'" . $text . "'";
+            // spa_strings.tpl: a hash entry, the English text as key and its translation as value (1.3.24)
+            $this->assertStringContainsString( $literal . ', ' . $literal . "|i18n( 'design/standard/explayouts_ui_api/spa' )", $strings, $text );
             $translation = $xpath->query( '//context[name="design/standard/explayouts_ui_api/spa"]/message[source=' . $literal . ']/translation' );
             $this->assertSame( 1, $translation->length, $text );
             $this->assertNotSame( '', trim( $translation->item( 0 )->textContent ), $text );

@@ -87,7 +87,7 @@ class EditorAccessibilityTest extends TestCase
         $ts = self::read( 'translations/ger-DE/translation.ts' );
         foreach ( array( 'Add a block', 'Block types' ) as $text )
         {
-            $this->assertStringContainsString( "'" . $text . "': '{\"" . $text . "\"|i18n( 'design/standard/explayouts_ui_api/spa' )", $strings );
+            $this->assertStringContainsString( '"' . $text . '", "' . $text . "\"|i18n( 'design/standard/explayouts_ui_api/spa' )", $strings );
             $this->assertMatchesRegularExpression( '~<source>' . preg_quote( $text, '~' ) . '</source>\s*<translation>[^<]+</translation>~', $ts );
         }
         $this->assertMatchesRegularExpression( '~<source>Block settings</source>\s*<translation>[^<]+</translation>~', $ts );
