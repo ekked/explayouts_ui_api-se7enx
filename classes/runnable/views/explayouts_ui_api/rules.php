@@ -6,8 +6,8 @@
 
 namespace
 {
-if ( !function_exists( 'ruleToArray' ) ) {
-function ruleToArray( $rule )
+if ( !function_exists( 'expModuleViewExplayoutsUiApiRulesRuleToArray' ) ) {
+function expModuleViewExplayoutsUiApiRulesRuleToArray( $rule )
 {
     if ( !$rule )
         return null;
@@ -69,12 +69,12 @@ class Rules extends \Exponential\Runnable\ModuleView
         if ( $ruleId > 0 )
         {
             $rule = $service->load( $ruleId );
-            $response = $rule ? ruleToArray( $rule ) : array( 'error' => 'Rule not found.' );
+            $response = $rule ? expModuleViewExplayoutsUiApiRulesRuleToArray( $rule ) : array( 'error' => 'Rule not found.' );
         }
         else
         {
             $rules = $service->listAll();
-            $response = array( 'rules' => array_map( 'ruleToArray', $rules ) );
+            $response = array( 'rules' => array_map( 'expModuleViewExplayoutsUiApiRulesRuleToArray', $rules ) );
         }
 
         header( 'Content-Type: application/json' );

@@ -6,8 +6,8 @@
 
 namespace
 {
-if ( !function_exists( 'layoutToArray' ) ) {
-function layoutToArray( $layout )
+if ( !function_exists( 'expModuleViewExplayoutsUiApiLayoutsLayoutToArray' ) ) {
+function expModuleViewExplayoutsUiApiLayoutsLayoutToArray( $layout )
 {
     if ( !$layout )
         return null;
@@ -48,12 +48,12 @@ class Layouts extends \Exponential\Runnable\ModuleView
         if ( $layoutId > 0 )
         {
             $layout = $service->load( $layoutId );
-            $response = $layout ? layoutToArray( $layout ) : array( 'error' => 'Layout not found.' );
+            $response = $layout ? expModuleViewExplayoutsUiApiLayoutsLayoutToArray( $layout ) : array( 'error' => 'Layout not found.' );
         }
         else
         {
             $layouts = $service->listAll();
-            $response = array( 'layouts' => array_map( 'layoutToArray', $layouts ) );
+            $response = array( 'layouts' => array_map( 'expModuleViewExplayoutsUiApiLayoutsLayoutToArray', $layouts ) );
         }
 
         header( 'Content-Type: application/json' );

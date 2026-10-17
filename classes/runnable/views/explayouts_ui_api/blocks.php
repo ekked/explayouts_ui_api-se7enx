@@ -6,8 +6,8 @@
 
 namespace
 {
-if ( !function_exists( 'blockToArray' ) ) {
-function blockToArray( $block )
+if ( !function_exists( 'expModuleViewExplayoutsUiApiBlocksBlockToArray' ) ) {
+function expModuleViewExplayoutsUiApiBlocksBlockToArray( $block )
 {
     if ( !$block )
         return null;
@@ -60,7 +60,7 @@ class Blocks extends \Exponential\Runnable\ModuleView
         {
             $service = new \expLayoutsCoreBlockService();
             $blocks = $service->loadByZone( $zoneId );
-            $response = array( 'blocks' => array_map( 'blockToArray', $blocks ) );
+            $response = array( 'blocks' => array_map( 'expModuleViewExplayoutsUiApiBlocksBlockToArray', $blocks ) );
         }
 
         header( 'Content-Type: application/json' );
