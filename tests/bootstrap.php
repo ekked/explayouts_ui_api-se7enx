@@ -56,8 +56,34 @@ if ( !class_exists( 'ezxFormToken', false ) )
     class ezxFormToken
     {
         const FORM_FIELD = 'ezxform_token';
-        public static function isEnabled() { return false; }
-        public static function getToken() { return ''; }
+        // Off unless a test switches it on (FormTokenTest), so the other tests see the policy check alone.
+        public static $enabled = false;
+        public static $token = '';
+        public static function isEnabled() { return self::$enabled; }
+        public static function getToken() { return self::$token; }
+    }
+}
+// The kernel's refusal reads site.ini for its texts and retry address; the stand-ins answer the same status and shape.
+if ( !class_exists( 'ezpFormTokenException', false ) )
+{
+    class ezpFormTokenException extends Exception
+    {
+        protected $reason;
+        public function __construct( $reason = 'missing' ) { $this->reason = $reason; parent::__construct( 'Form token ' . $reason ); }
+        public function getReason() { return $this->reason; }
+        public function getReasonCode() { return 'form_token_' . $this->reason; }
+    }
+}
+if ( !class_exists( 'ezpFormTokenRefusal', false ) )
+{
+    class ezpFormTokenRefusal
+    {
+        public static function log( ezpFormTokenException $e ) {}
+        public static function sendHeaders( $contentType = null, $withSecurityHeaders = false ) { http_response_code( 403 ); }
+        public static function jsonBody( ezpFormTokenException $e )
+        {
+            return json_encode( array( 'error' => array( 'code' => 403, 'reason' => $e->getReasonCode(), 'message' => 'Refused.' ) ) );
+        }
     }
 }
 if ( !class_exists( 'expLayoutsCoreLayoutService', false ) )
