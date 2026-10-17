@@ -769,5 +769,153 @@
         <source>Close the properties panel</source>
         <translation>Eigenschaftenbereich schließen</translation>
     </message>
+    <message>
+        <source>Rich text</source>
+        <translation>Formatierter Text</translation>
+    </message>
+    <message>
+        <source>Text formatting</source>
+        <translation>Textformatierung</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation>Rückgängig</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>Wiederholen</translation>
+    </message>
+    <message>
+        <source>Paragraph format</source>
+        <translation>Absatzformat</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Absatz</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Überschrift 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Überschrift 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Überschrift 3</translation>
+    </message>
+    <message>
+        <source>Preformatted</source>
+        <translation>Vorformatiert</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation>Fett</translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation>Kursiv</translation>
+    </message>
+    <message>
+        <source>Underline</source>
+        <translation>Unterstrichen</translation>
+    </message>
+    <message>
+        <source>Strikethrough</source>
+        <translation>Durchgestrichen</translation>
+    </message>
+    <message>
+        <source>Remove formatting</source>
+        <translation>Formatierung entfernen</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Link</translation>
+    </message>
+    <message>
+        <source>Remove link</source>
+        <translation>Link entfernen</translation>
+    </message>
+    <message>
+        <source>Bulleted list</source>
+        <translation>Aufzählung</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Nummerierte Liste</translation>
+    </message>
+    <message>
+        <source>Decrease indent</source>
+        <translation>Einzug verkleinern</translation>
+    </message>
+    <message>
+        <source>Increase indent</source>
+        <translation>Einzug vergrößern</translation>
+    </message>
+    <message>
+        <source>Block quote</source>
+        <translation>Zitat</translation>
+    </message>
+    <message>
+        <source>Align left</source>
+        <translation>Linksbündig</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation>Zentriert</translation>
+    </message>
+    <message>
+        <source>Align right</source>
+        <translation>Rechtsbündig</translation>
+    </message>
+    <message>
+        <source>Justify</source>
+        <translation>Blocksatz</translation>
+    </message>
+    <message>
+        <source>Horizontal line</source>
+        <translation>Horizontale Linie</translation>
+    </message>
+    <message>
+        <source>Insert table</source>
+        <translation>Tabelle einfügen</translation>
+    </message>
+    <message>
+        <source>Insert row below</source>
+        <translation>Zeile darunter einfügen</translation>
+    </message>
+    <message>
+        <source>Insert column right</source>
+        <translation>Spalte rechts einfügen</translation>
+    </message>
+    <message>
+        <source>Delete row</source>
+        <translation>Zeile löschen</translation>
+    </message>
+    <message>
+        <source>Delete column</source>
+        <translation>Spalte löschen</translation>
+    </message>
+    <message>
+        <source>Delete table</source>
+        <translation>Tabelle löschen</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Open in a new window</source>
+        <translation>In neuem Fenster öffnen</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation>Code</translation>
+    </message>
+    <message>
+        <source>This address cannot be used as a link.</source>
+        <translation>Diese Adresse kann nicht als Link verwendet werden.</translation>
+    </message>
 </context>
 </TS>
