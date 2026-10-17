@@ -2,7 +2,7 @@
 /**
  * Gives explayouts_ui_api/edit to every role that has explayouts_ui_api/read, so the editors
  * of an installation keep working after the upgrade that made every changing request of the
- * layouts API ask for edit (explayouts_ui_api 1.3.17). A role with explayouts_ui_api/* already
+ * layouts API ask for edit (explayouts_ui_api 1.3.18). A role with explayouts_ui_api/* already
  * has edit and is left alone; so is a role that has edit already. Running it again changes
  * nothing.
  *
