@@ -776,6 +776,154 @@
         <translation>סגירת לוח המאפיינים</translation>
     </message>
     <message>
+        <source>Rich text</source>
+        <translation>טקסט עשיר</translation>
+    </message>
+    <message>
+        <source>Text formatting</source>
+        <translation>עיצוב טקסט</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation>ביטול פעולה</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>ביצוע מחדש</translation>
+    </message>
+    <message>
+        <source>Paragraph format</source>
+        <translation>עיצוב פסקה</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>פסקה</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>כותרת 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>כותרת 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>כותרת 3</translation>
+    </message>
+    <message>
+        <source>Preformatted</source>
+        <translation>מעוצב מראש</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation>מודגש</translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation>נטוי</translation>
+    </message>
+    <message>
+        <source>Underline</source>
+        <translation>קו תחתון</translation>
+    </message>
+    <message>
+        <source>Strikethrough</source>
+        <translation>קו חוצה</translation>
+    </message>
+    <message>
+        <source>Remove formatting</source>
+        <translation>הסרת עיצוב</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>קישור</translation>
+    </message>
+    <message>
+        <source>Remove link</source>
+        <translation>הסרת קישור</translation>
+    </message>
+    <message>
+        <source>Bulleted list</source>
+        <translation>רשימת תבליטים</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>רשימה ממוספרת</translation>
+    </message>
+    <message>
+        <source>Decrease indent</source>
+        <translation>הקטנת הזחה</translation>
+    </message>
+    <message>
+        <source>Increase indent</source>
+        <translation>הגדלת הזחה</translation>
+    </message>
+    <message>
+        <source>Block quote</source>
+        <translation>ציטוט</translation>
+    </message>
+    <message>
+        <source>Align left</source>
+        <translation>יישור לשמאל</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation>מרכוז</translation>
+    </message>
+    <message>
+        <source>Align right</source>
+        <translation>יישור לימין</translation>
+    </message>
+    <message>
+        <source>Justify</source>
+        <translation>יישור לשני הצדדים</translation>
+    </message>
+    <message>
+        <source>Horizontal line</source>
+        <translation>קו אופקי</translation>
+    </message>
+    <message>
+        <source>Insert table</source>
+        <translation>הוספת טבלה</translation>
+    </message>
+    <message>
+        <source>Insert row below</source>
+        <translation>הוספת שורה מתחת</translation>
+    </message>
+    <message>
+        <source>Insert column right</source>
+        <translation>הוספת עמודה מימין</translation>
+    </message>
+    <message>
+        <source>Delete row</source>
+        <translation>מחיקת שורה</translation>
+    </message>
+    <message>
+        <source>Delete column</source>
+        <translation>מחיקת עמודה</translation>
+    </message>
+    <message>
+        <source>Delete table</source>
+        <translation>מחיקת טבלה</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>כתובת URL</translation>
+    </message>
+    <message>
+        <source>Open in a new window</source>
+        <translation>פתיחה בחלון חדש</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation>קוד</translation>
+    </message>
+    <message>
+        <source>This address cannot be used as a link.</source>
+        <translation>לא ניתן להשתמש בכתובת זו כקישור.</translation>
+    </message>
+    <message>
         <source>Add a block</source>
         <translation>הוספת בלוק</translation>
     </message>

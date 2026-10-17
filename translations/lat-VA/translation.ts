@@ -777,6 +777,154 @@
         <translation>Panellum proprietatum claudere</translation>
     </message>
     <message>
+        <source>Rich text</source>
+        <translation>Textus ornatus</translation>
+    </message>
+    <message>
+        <source>Text formatting</source>
+        <translation>Formatio textus</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation>Rescindere</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>Iterare</translation>
+    </message>
+    <message>
+        <source>Paragraph format</source>
+        <translation>Formatio paragraphi</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Paragraphus</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Titulus 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Titulus 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Titulus 3</translation>
+    </message>
+    <message>
+        <source>Preformatted</source>
+        <translation>Praeformatum</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation>Litterae crassae</translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation>Litterae obliquae</translation>
+    </message>
+    <message>
+        <source>Underline</source>
+        <translation>Sublineare</translation>
+    </message>
+    <message>
+        <source>Strikethrough</source>
+        <translation>Linea transversa</translation>
+    </message>
+    <message>
+        <source>Remove formatting</source>
+        <translation>Formationem removere</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Nexus</translation>
+    </message>
+    <message>
+        <source>Remove link</source>
+        <translation>Nexum removere</translation>
+    </message>
+    <message>
+        <source>Bulleted list</source>
+        <translation>Index punctatus</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Index numeratus</translation>
+    </message>
+    <message>
+        <source>Decrease indent</source>
+        <translation>Incisum minuere</translation>
+    </message>
+    <message>
+        <source>Increase indent</source>
+        <translation>Incisum augere</translation>
+    </message>
+    <message>
+        <source>Block quote</source>
+        <translation>Citatio</translation>
+    </message>
+    <message>
+        <source>Align left</source>
+        <translation>Ad sinistram collocare</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation>In medio collocare</translation>
+    </message>
+    <message>
+        <source>Align right</source>
+        <translation>Ad dextram collocare</translation>
+    </message>
+    <message>
+        <source>Justify</source>
+        <translation>Utrimque aequare</translation>
+    </message>
+    <message>
+        <source>Horizontal line</source>
+        <translation>Linea horizontalis</translation>
+    </message>
+    <message>
+        <source>Insert table</source>
+        <translation>Tabulam inserere</translation>
+    </message>
+    <message>
+        <source>Insert row below</source>
+        <translation>Versum infra inserere</translation>
+    </message>
+    <message>
+        <source>Insert column right</source>
+        <translation>Columnam ad dextram inserere</translation>
+    </message>
+    <message>
+        <source>Delete row</source>
+        <translation>Versum delere</translation>
+    </message>
+    <message>
+        <source>Delete column</source>
+        <translation>Columnam delere</translation>
+    </message>
+    <message>
+        <source>Delete table</source>
+        <translation>Tabulam delere</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Open in a new window</source>
+        <translation>In fenestra nova aperire</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation>Codex</translation>
+    </message>
+    <message>
+        <source>This address cannot be used as a link.</source>
+        <translation>Haec inscriptio ut nexus adhiberi non potest.</translation>
+    </message>
+    <message>
         <source>Add a block</source>
         <translation>Segmentum addere</translation>
     </message>

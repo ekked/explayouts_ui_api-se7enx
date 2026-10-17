@@ -777,6 +777,154 @@
         <translation>DuHmey &apos;aplo&apos; yISoQmoH</translation>
     </message>
     <message>
+        <source>Rich text</source>
+        <translation>ghItlh naQ</translation>
+    </message>
+    <message>
+        <source>Text formatting</source>
+        <translation>ghItlh mIw</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation>yIvangHa&apos;</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>yIchoHqa&apos;</translation>
+    </message>
+    <message>
+        <source>Paragraph format</source>
+        <translation>mu&apos;tlhegh ghom mIw</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>mu&apos;tlhegh ghom</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>nach mu&apos;tlhegh 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>nach mu&apos;tlhegh 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>nach mu&apos;tlhegh 3</translation>
+    </message>
+    <message>
+        <source>Preformatted</source>
+        <translation>mIw nung ghItlh</translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation>ngutlh HoS</translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation>ngutlh tor</translation>
+    </message>
+    <message>
+        <source>Underline</source>
+        <translation>bIng tlhegh</translation>
+    </message>
+    <message>
+        <source>Strikethrough</source>
+        <translation>tlhegh pe&apos;bogh</translation>
+    </message>
+    <message>
+        <source>Remove formatting</source>
+        <translation>ngutlh mIw yIteq</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>rarwI&apos;</translation>
+    </message>
+    <message>
+        <source>Remove link</source>
+        <translation>rarwI&apos; yIteq</translation>
+    </message>
+    <message>
+        <source>Bulleted list</source>
+        <translation>per ghajbogh tetlh</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>mI&apos; ghajbogh tetlh</translation>
+    </message>
+    <message>
+        <source>Decrease indent</source>
+        <translation>Hop tamHa&apos;moH</translation>
+    </message>
+    <message>
+        <source>Increase indent</source>
+        <translation>Hop yIghurmoH</translation>
+    </message>
+    <message>
+        <source>Block quote</source>
+        <translation>jatlhlu&apos;pu&apos;bogh mu&apos;mey</translation>
+    </message>
+    <message>
+        <source>Align left</source>
+        <translation>poSDaq yIlan</translation>
+    </message>
+    <message>
+        <source>Center</source>
+        <translation>botlhDaq yIlan</translation>
+    </message>
+    <message>
+        <source>Align right</source>
+        <translation>nIHDaq yIlan</translation>
+    </message>
+    <message>
+        <source>Justify</source>
+        <translation>yInaQmoH</translation>
+    </message>
+    <message>
+        <source>Horizontal line</source>
+        <translation>tlhegh SIch</translation>
+    </message>
+    <message>
+        <source>Insert table</source>
+        <translation>tetlh&apos;a&apos; yIlan</translation>
+    </message>
+    <message>
+        <source>Insert row below</source>
+        <translation>bIngDaq tlhegh yIlan</translation>
+    </message>
+    <message>
+        <source>Insert column right</source>
+        <translation>nIHDaq tut yIlan</translation>
+    </message>
+    <message>
+        <source>Delete row</source>
+        <translation>tlhegh yIQaw&apos;</translation>
+    </message>
+    <message>
+        <source>Delete column</source>
+        <translation>tut yIQaw&apos;</translation>
+    </message>
+    <message>
+        <source>Delete table</source>
+        <translation>tetlh&apos;a&apos; yIQaw&apos;</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Open in a new window</source>
+        <translation>Qorwagh chu&apos;Daq yIpoSmoH</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation>ngoq</translation>
+    </message>
+    <message>
+        <source>This address cannot be used as a link.</source>
+        <translation>rarwI&apos; rur Daqvam lo&apos;laHlu&apos;be&apos;.</translation>
+    </message>
+    <message>
         <source>Add a block</source>
         <translation>ngogh yIchel</translation>
     </message>
