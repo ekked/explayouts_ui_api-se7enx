@@ -1280,7 +1280,7 @@ class expLayoutsUIApplicationApi
 
         if ( $content === '' || ( trim( strip_tags( $content ) ) === '' && !$isInlineDefinition && !$isCodeDefinition ) )
         {
-            $content = '<p class="block-empty" style="color:#888; font-style:italic;">No content</p>';
+            $content = '<p class="block-empty">No content</p>';
         }
 
         $viewType = (string)$block->attribute( 'view_type' );

@@ -65,6 +65,22 @@ class EditorAccessibilityTest extends TestCase
         $this->assertDoesNotMatchRegularExpression( '~(?<![-\w])color:\s*#(2a72ef|8c8c8c|9c9c9c|9b9b9b|a6a6a6)\b~i', $css );
     }
 
+    /**
+     * 1.3.23: the page can be zoomed (WCAG 1.4.4; axe meta-viewport), and the placeholder of an empty block takes its
+     * colour from the muted token instead of an inline #888, which was 3.3:1 on the selected block.
+     */
+    public function testThePageCanBeZoomedAndTheEmptyBlockUsesTheMutedToken()
+    {
+        $tpl = self::read( 'design/standard/templates/explayouts_ui_api/app.tpl' );
+        $this->assertStringContainsString( '<meta name="viewport" content="width=device-width, initial-scale=1">', $tpl );
+        $this->assertDoesNotMatchRegularExpression( '~user-scalable|maximum-scale~i', $tpl );
+
+        $api = self::read( 'classes/explayoutsuiapplicationapi.php' );
+        $this->assertStringContainsString( '<p class="block-empty">No content</p>', $api );
+        $this->assertStringNotContainsString( 'color:#888', $api );
+        $this->assertStringContainsString( '.block-empty { color: var(--exp-le-muted);', self::read( 'design/standard/stylesheets/explayouts-editor.css' ) );
+    }
+
     public function testTheNewTextsAreHandedOverAndTranslated()
     {
         $strings = self::read( 'design/standard/templates/explayouts_ui_api/spa_strings.tpl' );
