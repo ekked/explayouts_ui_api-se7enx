@@ -3177,6 +3177,17 @@ class expLayoutsUIApplicationApi
     }
 
     /**
+     * Whether explayouts_share exists, without creating it.
+     */
+    protected static function shareTableExists( $db )
+    {
+        $tables = $db->relationList();
+        if ( !is_array( $tables ) )
+            return false;
+        return in_array( 'explayouts_share', array_map( 'strtolower', $tables ), true );
+    }
+
+    /**
      * Create explayouts_share on first use.
      *
      * The table belongs to no schema file, so the endpoint builds it on
@@ -3201,17 +3212,6 @@ class expLayoutsUIApplicationApi
      * @return bool false when the table is not usable, which the caller must
      *              turn into an error response rather than ignore.
      */
-    /**
-     * Whether explayouts_share exists, without creating it.
-     */
-    protected static function shareTableExists( $db )
-    {
-        $tables = $db->relationList();
-        if ( !is_array( $tables ) )
-            return false;
-        return in_array( 'explayouts_share', array_map( 'strtolower', $tables ), true );
-    }
-
     protected static function ensureShareTable( $db )
     {
         static $ready = array();
