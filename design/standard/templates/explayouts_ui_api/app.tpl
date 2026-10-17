@@ -31,6 +31,7 @@
     {* Last of the three so it wins. The editor has no mobile layout of its own
        - upstream refuses below 800px instead - so this file is that layout. *}
     <link rel="stylesheet" href="{'stylesheets/explayouts-mobile.css'|ezdesign('no')}">
+    <link rel="stylesheet" href="{'stylesheets/explayouts-tiptap.css'|ezdesign('no')}?v=20261017d">
     {literal}<style>
         #ngc-size-warning { display: none !important; }
         .left-toolbar .button.js-open.active + .left-toolbar-panels .left-panel { display: block !important; }
@@ -637,8 +638,9 @@
     {* The app bundle uses the page's jQuery and jQuery UI (ezjscore's), so they
        load first: these run before the deferred scripts below. *}
     {ezscript( array( 'ezjsc::jquery', 'ezjsc::jqueryUI' ) )}
-    <script src="{'vendor/ckeditor/ckeditor.js'|ezdesign('no')}" defer></script>
-    <script src="{'vendor/ace-editor/ace.js'|ezdesign('no')}" defer></script>
+    {* The rich text and code editors (Tiptap, built from src/editors/): window.CKEDITOR and window.ace with
+       the calls the app bundle makes of them. Before the bundle: it registers CKEDITOR listeners on load. *}
+    <script src="{'javascript/explayouts-tiptap.js'|ezdesign('no')}?v=20261017d" defer></script>
     <script src="{'javascript/netgen-layouts.js'|ezdesign('no')}?v=20261016" defer></script>
     {* After the app bundle: it waits for the app to draw itself before it
        touches anything. *}

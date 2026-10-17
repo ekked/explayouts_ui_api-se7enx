@@ -144,6 +144,58 @@ Modifying requests must carry the eZ form token, either as an `X-CSRF-Token` HTT
 
 See [doc/USAGE.md](doc/USAGE.md) for exhaustive scenarios: every endpoint with request/response bodies, a complete curl session, the HTML form fragment flow, implementation notes, and the full customization guide covering the settings layer (INI cascade — everything the API exposes is defined in `explayouts.ini` and overridable without code changes; access control via module policies), the template layer (design override cascade for `app.tpl` and the form templates — the supported way to swap CSS/JS bundles) and the PHP layer (building against the JSON contract, adding block parameters via handlers, custom read-only JSON views).
 
+Rich text and code editors
+--------------------------
+
+The app bundle (`design/standard/javascript/netgen-layouts.js`) was written against CKEditor 4 (rich text blocks) and the
+Ace editor (HTML snippet and Markdown blocks). Neither is shipped any more: CKEditor 4 is end of life without free
+security updates. `design/standard/javascript/explayouts-tiptap.js`, loaded by `app.tpl` before the app bundle, provides
+`window.CKEDITOR` and `window.ace` with exactly the calls the bundle makes of them, backed by [Tiptap](https://tiptap.dev):
+
+- Rich text: Tiptap with the toolbar CKEditor had there (undo/redo, paragraph format with heading 1-3 and
+  preformatted, bold, italic, underline, strikethrough, remove formatting, link with "open in a new window", bulleted
+  and numbered list with indent, block quote, alignment, horizontal line, table). Reads and writes HTML. While the
+  content is unchanged (also after undoing every change) the stored HTML is returned exactly as it was. Once it
+  changed, it is written as CKEditor wrote it (`src/editors/ckeditor-html.js`): `<li>a</li>` and `<td>x</td>` without
+  an inner `<p>`, `<pre>` without `<code>`, tables without a `<colgroup>` or min-width, alignment as
+  `style="text-align:center"` (the justify plugin's default; no `justifyClasses` were configured), `class` and
+  `style` on paragraphs, headings, lists, list items and table parts and `border`/`cellpadding`/`cellspacing` on
+  tables kept. An empty editor gives an empty string. The link form completes `example.com/x` to
+  `https://example.com/x` (only when the start looks like a host: `www.…`, `localhost`, `host:port` or a name whose
+  last label is not a file extension, so `page.html` stays relative) and `x@y.de` to `mailto:x@y.de`, keeps `/…`,
+  `#…`, `mailto:` and `tel:` as typed, and refuses addresses such as `javascript:` or `data:` with a message. Kept
+  `style` attributes are limited to text-align, width, height, border, padding, vertical-align, color,
+  background-color, font-weight, font-style, text-decoration, list-style-type and margin-left, without values
+  containing `url(`, `expression`, `javascript:`, `behavior`, `-moz-binding` or `@import`.
+- Code: one Tiptap code block with syntax highlighting (lowlight/highlight.js: HTML, Markdown). The value is the plain
+  text, byte for byte. Tab and Shift+Tab indent and outdent with spaces, Enter keeps the indentation, Ctrl+S / Cmd+S
+  saves as before, Escape moves the focus from the text to the editor element.
+
+Both run with Tiptap's `injectCSS: false`: its base rules are in the stylesheet, so no `<style>` element is added
+(`style-src` without `'unsafe-inline'`). The `style` attributes of the content itself (alignment, table widths) are
+still written into the editor's DOM; under an enforced `style-src` without `'unsafe-inline'` the browser would not
+show them while editing, though they are kept in the value.
+
+Still normalised once the content changes: `<div>` and `<span>` are not in the schema, so their text is kept but the
+elements (and their class or style) are not (`<div class="box"><span style="color:red">x</span></div>` becomes
+`<p>x</p>`); `<b>`, `<i>`, `<del>`, `<strike>` become `<strong>`, `<em>`, `<s>`; attributes other than those listed
+above (for example `id`, `title` on blocks, `scope` on table headers), the `<thead>` element (its rows stay, in `<tbody>`) and images are dropped, and a `<caption>` becomes a first table row.
+Not carried over from CKEditor: anchors, bidi buttons, indentation of paragraphs outside lists, paste-from-Word
+cleanup. From Ace: syntax checking (the bundle only filtered its DOCTYPE warning), themes, search box, code folding.
+
+Sources are in `src/editors/`, styles in `design/standard/stylesheets/explayouts-tiptap.css` (admin4's `--a4-*`
+tokens, light and dark mode, when admin4's stylesheet is on the page; fallbacks otherwise), interface texts in `spa_strings.tpl` (context `design/standard/explayouts_ui_api/spa`). Build
+(Node 24, exact versions from `package-lock.json`; the result is byte-identical for the same lock file):
+
+```bash
+cd extension/explayouts_ui_api
+npm ci
+npm run build     # writes design/standard/javascript/explayouts-tiptap.js
+npm test          # node --test tests/js/*.test.mjs (happy-dom)
+```
+
+`node_modules/` is not committed. Bump the `?v=` of the bundle in `app.tpl` after a rebuild.
+
 Documentation
 -------------
 

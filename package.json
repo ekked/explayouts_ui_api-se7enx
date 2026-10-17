@@ -1,0 +1,32 @@
+{
+  "name": "explayouts-ui-api-editors",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rich text and code editors of the layout editor (Tiptap in place of CKEditor 4 and Ace)",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:dev": "node build.mjs --dev",
+    "test": "node --test --test-concurrency=1 \"tests/js/*.test.mjs\""
+  },
+  "dependencies": {
+    "@tiptap/core": "3.31.4",
+    "@tiptap/extension-code-block": "3.31.4",
+    "@tiptap/extension-code-block-lowlight": "3.31.4",
+    "@tiptap/extension-link": "3.31.4",
+    "@tiptap/extension-table": "3.31.4",
+    "@tiptap/extension-text": "3.31.4",
+    "@tiptap/extension-text-align": "3.31.4",
+    "@tiptap/extensions": "3.31.4",
+    "@tiptap/pm": "3.31.4",
+    "@tiptap/starter-kit": "3.31.4",
+    "highlight.js": "11.12.0",
+    "lowlight": "3.3.0"
+  },
+  "devDependencies": {
+    "@happy-dom/global-registrator": "20.14.6",
+    "esbuild": "0.28.2",
+    "happy-dom": "20.14.6"
+  }
+}

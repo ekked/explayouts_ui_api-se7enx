@@ -1,0 +1,394 @@
+/* The editors of the layout editor (javascript/explayouts-tiptap.js, built from src/editors/): the rich text
+   toolbar and content (.exp-tt-rich on a block's .rich-text-editor) and the code editor (.exp-tt-code on a
+   block's .ace-editor). Colours and sizes from admin4's --a4-* tokens when admin4's components.css is loaded
+   (app.tpl, opened from admin4, light and dark), otherwise the fallbacks. */
+
+/* ---------- Tiptap's base rules ----------
+   Both editors run with injectCSS: false (Tiptap would otherwise add a <style> element, which a
+   style-src without 'unsafe-inline' refuses); these are the rules it injects, from @tiptap/core 3.31.4. */
+.ProseMirror {
+    position: relative;
+}
+.ProseMirror {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: break-spaces;
+    -webkit-font-variant-ligatures: none;
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0;
+}
+.ProseMirror [contenteditable="false"] {
+    white-space: normal;
+}
+.ProseMirror [contenteditable="false"] [contenteditable="true"] {
+    white-space: pre-wrap;
+}
+.ProseMirror pre {
+    white-space: pre-wrap;
+}
+img.ProseMirror-separator {
+    display: inline !important;
+    border: none !important;
+    margin: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+.ProseMirror-gapcursor {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    margin: 0;
+}
+.ProseMirror-gapcursor:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    width: 20px;
+    border-top: 1px solid black;
+    animation: ProseMirror-cursor-blink 1.1s steps(2, start) infinite;
+}
+@keyframes ProseMirror-cursor-blink {
+    to {
+        visibility: hidden;
+    }
+}
+.ProseMirror-hideselection *::selection {
+    background: transparent;
+}
+.ProseMirror-hideselection *::-moz-selection {
+    background: transparent;
+}
+.ProseMirror-hideselection * {
+    caret-color: transparent;
+}
+.ProseMirror-focused .ProseMirror-gapcursor {
+    display: block;
+}
+/* the selected node (horizontal line, table) and the selected table cells */
+.ProseMirror-selectednode {
+    outline: 2px solid var(--a4-ring, #2563eb);
+}
+
+/* ---------- rich text: toolbar ---------- */
+.exp-tt-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 6px;
+    margin: 0 0 6px;
+    padding: 4px;
+    background: var(--a4-surface, #fff);
+    color: var(--a4-ink, #333);
+    border: 1px solid var(--a4-line, #d0d0d0);
+    border-radius: var(--a4-radius-s, 4px);
+    font-family: var(--a4-font, inherit);
+    font-size: var(--a4-text-s, 0.8125rem);
+    line-height: 1;
+}
+.exp-tt-toolbar[hidden],
+.exp-tt-toolbar [hidden] {
+    display: none !important;
+}
+.exp-tt-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+.exp-tt-group + .exp-tt-group {
+    padding-left: 6px;
+    border-left: 1px solid var(--a4-line, #e0e0e0);
+}
+.exp-tt-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    border-radius: var(--a4-radius-s, 4px);
+    cursor: pointer;
+}
+.exp-tt-button:hover:not(:disabled) {
+    background: var(--a4-soft, #f0f0f0);
+}
+.exp-tt-button[aria-pressed="true"] {
+    background: var(--a4-accent-soft, #e3ebfd);
+    color: var(--a4-accent-text, #1d4ed8);
+}
+.exp-tt-button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+.exp-tt-button:focus-visible,
+.exp-tt-format:focus-visible,
+.exp-tt-textbutton:focus-visible,
+.exp-tt-linkurl:focus-visible {
+    outline: 2px solid var(--a4-ring, #2563eb);
+    outline-offset: 1px;
+}
+.exp-tt-button svg {
+    display: block;
+    pointer-events: none;
+}
+.exp-tt-format {
+    height: 28px;
+    max-width: 11rem;
+    padding: 0 4px;
+    background: var(--a4-field, #fff);
+    color: var(--a4-ink, #333);
+    border: 1px solid var(--a4-field-line, #c8c8c8);
+    border-radius: var(--a4-radius-s, 4px);
+    font: inherit;
+}
+
+/* the link form, a row of the toolbar */
+.exp-tt-linkform {
+    display: flex;
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+    border-top: 1px solid var(--a4-line, #e0e0e0);
+}
+.exp-tt-linkurl {
+    flex: 1 1 12rem;
+    min-width: 0;
+    height: 28px;
+    padding: 0 6px;
+    background: var(--a4-field, #fff);
+    color: var(--a4-ink, #333);
+    border: 1px solid var(--a4-field-line, #c8c8c8);
+    border-radius: var(--a4-radius-s, 4px);
+    font: inherit;
+}
+.exp-tt-linkblank {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.exp-tt-linkmessage {
+    flex: 1 0 100%;
+    color: var(--a4-bad, #b42318);
+}
+.exp-tt-linkmessage[hidden] {
+    display: none;
+}
+.exp-tt-textbutton {
+    height: 28px;
+    padding: 0 10px;
+    background: transparent;
+    color: inherit;
+    border: 1px solid var(--a4-line-strong, #b0b0b0);
+    border-radius: var(--a4-radius-s, 4px);
+    font: inherit;
+    cursor: pointer;
+}
+.exp-tt-textbutton.exp-tt-primary {
+    background: var(--a4-accent-strong, #2563eb);
+    border-color: var(--a4-accent-strong, #2563eb);
+    color: var(--a4-on-accent, #fff);
+}
+
+/* ---------- rich text: content ---------- */
+.exp-tt-rich .exp-tt-content {
+    min-height: 2.5em;
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+.exp-tt-rich:not(.exp-tt-readonly) .exp-tt-content {
+    cursor: text;
+}
+.exp-tt-rich .exp-tt-content:focus-visible {
+    box-shadow: 0 0 0 2px var(--a4-ring, #2563eb);
+}
+.exp-tt-rich .exp-tt-content > :first-child {
+    margin-top: 0;
+}
+.exp-tt-rich .exp-tt-content > :last-child {
+    margin-bottom: 0;
+}
+.exp-tt-rich blockquote {
+    margin: 0.5em 0;
+    padding-left: 1em;
+    border-left: 3px solid var(--a4-line-strong, #c0c0c0);
+}
+.exp-tt-rich pre {
+    padding: 0.5em;
+    background: rgba(0, 0, 0, 0.05);
+    font-family: var(--a4-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+    white-space: pre-wrap;
+}
+.exp-tt-rich pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+}
+.exp-tt-rich table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.exp-tt-rich th,
+.exp-tt-rich td {
+    padding: 4px 6px;
+    border: 1px solid #c8c8c8;
+    vertical-align: top;
+}
+.exp-tt-rich th > p,
+.exp-tt-rich td > p {
+    margin: 0;
+}
+.exp-tt-rich .selectedCell {
+    background: rgba(37, 99, 235, 0.12);
+}
+.exp-tt-rich hr {
+    margin: 0.75em 0;
+}
+.exp-tt-rich hr.ProseMirror-selectednode {
+    outline: 2px solid var(--a4-ring, #2563eb);
+}
+/* the block canvas stays light in admin4's dark mode, where --a4-accent-text is meant for dark surfaces */
+.exp-tt-rich .exp-tt-content a,
+html[data-explayouts-admin4] .ngc .exp-tt-rich .exp-tt-content a {
+    color: var(--a4-accent-strong, #1d4ed8);
+    text-decoration: underline;
+}
+
+/* ---------- code ---------- */
+.exp-tt-code {
+    /* admin4's code colours are dark in the light and the dark mode alike; the syntax colours suit both */
+    --exp-tt-code-bg: var(--a4-code-bg, #1f2430);
+    --exp-tt-code-ink: var(--a4-code-ink, #e8ebf0);
+    --exp-tt-code-tag: #7ee787;
+    --exp-tt-code-attr: #79c0ff;
+    --exp-tt-code-string: #a5d6ff;
+    --exp-tt-code-keyword: #ff7b72;
+    --exp-tt-code-comment: #9198a1;
+    --exp-tt-code-heading: #79c0ff;
+    --exp-tt-code-meta: #d2a8ff;
+    display: flex;
+    flex-direction: column;
+    background: var(--exp-tt-code-bg);
+    color: var(--exp-tt-code-ink);
+    border: 1px solid var(--a4-line, #d0d0d0);
+    border-radius: var(--a4-radius-s, 4px);
+    overflow: auto;
+}
+.exp-tt-code:focus {
+    outline: none;
+}
+.exp-tt-code:focus-visible {
+    outline: 2px solid var(--a4-ring, #2563eb);
+    outline-offset: 1px;
+}
+.exp-tt-code .exp-tt-content {
+    caret-color: var(--exp-tt-code-ink);
+}
+.exp-tt-code .exp-tt-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    outline: none;
+}
+.exp-tt-code .exp-tt-content:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--a4-ring, #2563eb);
+}
+.exp-tt-code pre {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0.75rem;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--a4-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    tab-size: 4;
+}
+.exp-tt-code pre code {
+    display: block;
+    min-height: 1.5em;
+    padding: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    white-space: inherit;
+}
+.exp-tt-code:not(.disabled) pre {
+    cursor: text;
+}
+.exp-tt-code .hljs-tag,
+.exp-tt-code .hljs-name,
+.exp-tt-code .hljs-selector-tag,
+.exp-tt-code .hljs-template-tag {
+    color: var(--exp-tt-code-tag);
+}
+.exp-tt-code .hljs-attr,
+.exp-tt-code .hljs-attribute,
+.exp-tt-code .hljs-variable,
+.exp-tt-code .hljs-template-variable,
+.exp-tt-code .hljs-selector-class,
+.exp-tt-code .hljs-selector-id,
+.exp-tt-code .hljs-property,
+.exp-tt-code .hljs-number,
+.exp-tt-code .hljs-link {
+    color: var(--exp-tt-code-attr);
+}
+.exp-tt-code .hljs-string,
+.exp-tt-code .hljs-regexp,
+.exp-tt-code .hljs-code {
+    color: var(--exp-tt-code-string);
+}
+.exp-tt-code .hljs-keyword,
+.exp-tt-code .hljs-literal,
+.exp-tt-code .hljs-built_in,
+.exp-tt-code .hljs-bullet {
+    color: var(--exp-tt-code-keyword);
+}
+.exp-tt-code .hljs-comment,
+.exp-tt-code .hljs-quote {
+    color: var(--exp-tt-code-comment);
+    font-style: italic;
+}
+.exp-tt-code .hljs-section,
+.exp-tt-code .hljs-title {
+    color: var(--exp-tt-code-heading);
+    font-weight: 600;
+}
+.exp-tt-code .hljs-meta,
+.exp-tt-code .hljs-symbol {
+    color: var(--exp-tt-code-meta);
+}
+.exp-tt-code .hljs-strong {
+    font-weight: 700;
+}
+.exp-tt-code .hljs-emphasis {
+    font-style: italic;
+}
+
+/* "Edit in modal": the code editor takes the height of the dialog (the block content around it does not) */
+.modal.block .block-content:has(> .exp-tt-code) {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+}
+.modal.block .block-content > .exp-tt-code {
+    flex: 1 1 auto;
+    height: auto;
+}
