@@ -33,6 +33,9 @@ class EditorsWiringTest extends TestCase
         $this->assertLessThan( $app, $editors, 'the app bundle registers CKEDITOR listeners when it is evaluated' );
         $this->assertMatchesRegularExpression( '~<script src="\{\'javascript/explayouts-tiptap\.js\'\|ezdesign\(\'no\'\)\}[^"]*" defer></script>~', $tpl );
         $this->assertStringContainsString( "'stylesheets/explayouts-tiptap.css'|ezdesign('no')", $tpl );
+        // no version query on asset links: a changed file reaches the browser with a reload
+        $this->assertStringContainsString( "<script src=\"{'javascript/explayouts-tiptap.js'|ezdesign('no')}\" defer></script>", $tpl );
+        $this->assertStringContainsString( "<link rel=\"stylesheet\" href=\"{'stylesheets/explayouts-tiptap.css'|ezdesign('no')}\">", $tpl );
     }
 
     public function testNothingLoadsTheOldEditors()
