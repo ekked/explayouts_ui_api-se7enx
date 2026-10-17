@@ -821,7 +821,6 @@ class expLayoutsUIApplicationApi
                     $block->setAttribute( 'placeholder', '' );
                 }
 
-                $block->setAttribute( 'modified', time() );
                 $block->store();
 
                 self::placeBlockAt( $block, $requestedPosition === null ? PHP_INT_MAX : $requestedPosition );
@@ -847,7 +846,6 @@ class expLayoutsUIApplicationApi
                 $requestedPosition = isset( $data['position'] ) ? (int)$data['position'] : null;
                 if ( $requestedPosition !== null )
                     $block->setAttribute( 'position', $requestedPosition );
-                $block->setAttribute( 'modified', time() );
                 $block->store();
 
                 if ( $requestedPosition !== null )
