@@ -2643,7 +2643,8 @@ class expLayoutsUIApplicationApi
                                       'module', 'module_view' );
 
     /** Condition types the resolver knows (expLayoutsResolver::CONDITION_TYPES), likewise */
-    const KNOWN_CONDITION_TYPES = array( 'siteaccess', 'class', 'content_type', 'query_parameter', 'route_parameter', 'time' );
+    const KNOWN_CONDITION_TYPES = array( 'siteaccess', 'class', 'content_type', 'ibexa_content_type', 'query_parameter',
+                                         'route_parameter', 'time' );
 
     protected static function knownTypes( $kind )
     {
