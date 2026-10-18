@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>No se pudo cargar el contenido.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Contenido incrustado</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -768,6 +772,393 @@
     <message>
         <source>Close the properties panel</source>
         <translation>Cerrar el panel de propiedades</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Título</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Nivel de encabezado (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>Etiqueta HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Usar enlace</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Tipo de enlace</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Enlace</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Sufijo del enlace</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Abrir en una ventana nueva</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Usar espacio vertical</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Arriba</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Abajo</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>Clase CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>ID CSS</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Envolver en un contenedor</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Tamaño del contenedor</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Contenido</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Texto</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Etiqueta (antigua)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (antigua)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Estilo</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Destino</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL del video o fuente incrustada</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Ancho (px o %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Alto (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Reproducción automática</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL del mapa incrustado</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Ancho</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Contenido Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML sin procesar</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL de la imagen</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Texto alternativo</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL del enlace</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Alto en píxeles</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Margen en píxeles</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Etiqueta del enlace</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Mensaje</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Se puede cerrar</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etiqueta</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Valor (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Color</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Elementos (Título|Contenido por línea)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Abrir el primer elemento</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Pestañas (Título|Contenido por línea)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Pestaña activa (desde 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Texto alternativo de la imagen</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Texto del enlace</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Miniaturas por fila/diapositiva</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Activar lightbox</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Identificador del atributo de imagen</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Tamaño de las miniaturas</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Texto de la cita</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Autor</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Fuente</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Alineación</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Número de columnas</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Definir color de fondo</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Color de fondo</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Definir imagen de fondo</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Imagen de fondo</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Activar paginación</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Tipo de paginación</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Número máximo de páginas</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Cargar la primera página por AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Diapositivas por vista</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Reproducción automática (ms, 0 para desactivar)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Nombre de la plantilla</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Mostrar nombre</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Mostrar introducción</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Sin enlace</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL relativa</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>Correo electrónico</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Número de teléfono</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Ninguno</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Pequeño</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Mediano</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Grande</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Estrecho</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Ancho</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 columnas</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 columnas</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 columnas</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 columnas</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primario (amarillo)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Secundario (gris claro)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Blanco</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Negro</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Paginador</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Cargar más</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galería</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Carrusel</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Galería de miniaturas</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Galería en cuadrícula</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Barra deslizante</translation>
     </message>
 </context>
 </TS>

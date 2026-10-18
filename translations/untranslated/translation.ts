@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -915,6 +919,393 @@
     </message>
     <message>
         <source>This address cannot be used as a link.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -62,6 +62,10 @@
         <source>Failed to load content.</source>
         <translation>Contentum onerari non potuit.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Contenta inserta</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -771,6 +775,393 @@
     <message>
         <source>Close the properties panel</source>
         <translation>Panellum proprietatum claudere</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Titulus</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Gradus tituli (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>Nota HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Nexu uti</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Genus nexus</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Nexus</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Suffixum nexus</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>In nova fenestra aperire</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Spatio verticali uti</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Supra</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Infra</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>Classis CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>ID CSS</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>In receptaculo includere</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Magnitudo receptaculi</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Contenta</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Textus</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Inscriptio (vetus)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (vetus)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Stilus</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Destinatio</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL pelliculae vel fons insertus</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Latitudo (px vel %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Altitudo (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Sponte ludere</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL tabulae geographicae insertae</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Latitudo</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Contenta Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML crudum</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL imaginis</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Textus alternus</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL nexus</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Altitudo in punctis</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Margo in punctis</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Inscriptio nexus</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Nuntius</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Genus</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Claudi potest</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Inscriptio</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Valor (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Color</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Res (Titulus|Contenta per lineam)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Primam rem aperire</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Paginae (Titulus|Contenta per lineam)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Pagina activa (a 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Textus alternus imaginis</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Textus nexus</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Imagunculae per ordinem/tabulam</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Lucernam aperire</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Nomen proprietatis imaginis</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Magnitudo imaguncularum</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Textus citationis</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Auctor</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Fons</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Alineatio</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Numerus columnarum</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Colorem fundi statuere</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Color fundi</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Imaginem fundi statuere</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Imago fundi</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Paginationem aperire</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Genus paginationis</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Numerus maximus paginarum</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Primam paginam per AJAX onerare</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Tabulae per visionem</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Sponte ludere (ms, 0 ad sistendum)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Nomen exemplaris</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Nomen ostendere</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Introductionem ostendere</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Nullus nexus</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL relativa</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>Epistula electronica</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Numerus telephonicus</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Nullus</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Parvus</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Medius</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Magnus</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Communis</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Angustus</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Latus</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 columnae</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 columnae</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 columnae</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 columnae</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primarius (flavus)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Secundarius (cinereus)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Albus</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Niger</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Paginator</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Plura onerare</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Pinacotheca</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Tabulae volubiles</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Pinacotheca imaguncularum</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Pinacotheca cancellata</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Taenia volubilis</translation>
     </message>
 </context>
 </TS>
