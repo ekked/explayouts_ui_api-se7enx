@@ -1162,5 +1162,205 @@
         <source>Sushi bar</source>
         <translation>פס גלילה</translation>
     </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>לפי רמת הכותרת</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>כותרת 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>כותרת 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>כותרת 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>כותרת 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>כותרת 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>כותרת 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>פסקה</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>מקטע (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>כפתור רגיל</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>כפתור מודגש</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>אותו חלון</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>חלון חדש</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>שירות</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>כתובת הווידאו למטה</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>מזהה וידאו</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>כיתוב</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>קו רוחב (-90 עד 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>קו אורך (-180 עד 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>זום (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>סוג מפה</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>מפת דרכים</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>לוויין</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>משולב</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>פני השטח</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>הצגת סמן</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>רמת כותרת</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>ברירת המחדל של העיצוב</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>תכונות (כותרת|טקסט בכל שורה)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>הצגת כפתורי הקודם והבא</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>הצגת עימוד</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>לולאה אינסופית</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>מעבר</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>החלקה</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>דהייה</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>זמן ניגון אוטומטי (שניות, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>תמונות ממוזערות להזזה</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>הצגת פרטים</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>הצגת פרטים במעבר העכבר</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
 </context>
 </TS>

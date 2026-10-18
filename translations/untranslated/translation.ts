@@ -1308,5 +1308,205 @@
         <source>Sushi bar</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>From the heading level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -9,6 +9,9 @@
 - The rule endpoints keep only known target and condition types.
 - The editor returns only to a page of this site (`return_to`, the kept referrer).
 - Cancel of the new layout dialog no longer creates the layout.
+- Design tab: a parameter of the type `boolean` is a checkbox (it was a text field); number fields take `min` and
+  `max` from the parameter. The new parameters, options and view type names of explayouts' blocks (parity with
+  netgen/layouts-standard) are translated in every catalogue.
 
 Open: the import is still a second implementation beside explayouts' `expLayoutsImporter` (shared are the
 validation and the handling of rules).

@@ -1163,5 +1163,205 @@
         <source>Sushi bar</source>
         <translation>Taenia volubilis</translation>
     </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Ex gradu tituli</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Titulus 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Titulus 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Titulus 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Titulus 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Titulus 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Titulus 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Paragraphus</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Divisio (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Globulus solitus</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Globulus insignis</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Eadem fenestra</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Fenestra nova</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Ministerium</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Inscriptio pelliculae infra</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>Signum pelliculae</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Inscriptio</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Latitudo (-90 ad 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Longitudo (-180 ad 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Amplificatio (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Genus tabulae</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Tabula viarum</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelles</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Mixta</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Terrae forma</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Signum ostendere</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Gradus tituli</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Solitum designationis</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Proprietates (Titulus|Textus in singulis versibus)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Globulos priorem et proximum ostendere</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Paginationem ostendere</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Circulus perpetuus</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Transitio</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Lapsus</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Evanescentia</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Tempus sponte ludendi (secundae, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Imagunculae movendae</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Singula ostendere</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Singula ostendere cum muris supervolat</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
 </context>
 </TS>

@@ -4,7 +4,8 @@
 {def $input_id = concat( 'design_edit_parameters_', $name|md5() )}
 {def $view_type_attr = cond( is_set( $param.view_type ), $param.view_type, '' )}
 {def $is_compound = cond( and( is_set( $param.type ), eq( $param.type, 'compound_checkbox' ) ), true(), false() )}
-{def $is_checkbox = cond( and( is_set( $param.type ), or( eq( $param.type, 'checkbox' ), eq( $param.type, 'compound_checkbox' ) ) ), true(), false() )}
+{* 'boolean' is a checkbox too (accordion, tabs ...); it drew a text input *}
+{def $is_checkbox = cond( and( is_set( $param.type ), or( eq( $param.type, 'checkbox' ), eq( $param.type, 'boolean' ), eq( $param.type, 'compound_checkbox' ) ) ), true(), false() )}
 {def $type = cond( is_set( $param.type ), $param.type, 'string' )}
 {def $use_self = cond( and( is_set( $param.no_self ), $param.no_self ), false(), true() )}
 
@@ -24,7 +25,7 @@
 {elseif eq( $type, 'integer' )}
     <div class="row-input" {if $view_type_attr}data-view-type="{$view_type_attr|wash()}"{/if}>
         <label for="{$input_id}">{$param.name|i18n( 'design/standard/explayouts_ui_api/parameters' )|wash()}</label>
-        <input type="number" id="{$input_id}" name="parameters[{$name}]" value="{if is_set( $value )}{$value|wash()}{/if}" />
+        <input type="number" id="{$input_id}" name="parameters[{$name}]" value="{if is_set( $value )}{$value|wash()}{/if}"{if is_set( $param.min )} min="{$param.min|wash()}"{/if}{if is_set( $param.max )} max="{$param.max|wash()}"{/if} />
     </div>
 {elseif $is_checkbox}
     <div {if $view_type_attr}data-view-type="{$view_type_attr|wash()}"{/if}{if $is_compound} data-compound-checkbox="true"{if and( is_set( $param.reverse ), $param.reverse )} data-compound-reverse="true"{/if}{/if}>

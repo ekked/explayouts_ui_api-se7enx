@@ -1308,5 +1308,205 @@
         <source>Sushi bar</source>
         <translation>Sushi-Bar</translation>
     </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Aus der Überschriftenebene</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Überschrift 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Überschrift 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Überschrift 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Überschrift 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Überschrift 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Überschrift 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Absatz</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Bereich (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Standard-Schaltfläche</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Hervorgehobene Schaltfläche</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Gleiches Fenster</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Neues Fenster</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Dienst</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Video-Adresse unten</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>Video-ID</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Bildunterschrift</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Breitengrad (-90 bis 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Längengrad (-180 bis 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Zoom (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Kartentyp</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Straßenkarte</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satellit</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hybrid</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Gelände</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Markierung anzeigen</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Überschriftenebene</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Vorgabe des Designs</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Merkmale (Titel|Text je Zeile)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Schaltflächen Weiter und Zurück anzeigen</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Seitenzahlen anzeigen</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Endlosschleife</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Übergang</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Schieben</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Überblenden</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Zeit je Bild (Sekunden, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Vorschaubilder je Schritt</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Details anzeigen</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Details beim Überfahren anzeigen</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
 </context>
 </TS>

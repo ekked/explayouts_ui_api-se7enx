@@ -1163,5 +1163,205 @@
         <source>Sushi bar</source>
         <translation>Sushi qal</translation>
     </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>nav pong patlh vo'</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>nav pong wa'</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>nav pong cha'</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>nav pong wej</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>nav pong loS</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>nav pong vagh</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>nav pong jav</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>mu'tlhegh ghom</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Dop (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>leQ motlh</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>leQ wovmoHlu'pu'bogh</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>rIn rap</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>rIn chu'</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>QaQ</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>bIng mIllogh vIH Daq</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>mIllogh vIH ngu'meH</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>QIjmeH ghItlh</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>juH Dop (-90 90 je)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>juH tIq (-180 180 je)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Sach (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>pu'jIn Segh</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>He pu'jIn</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Sat</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>DoD</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>yav</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Degh cha'</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>nav pong patlh</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>HaSta mIw motlh</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Daw'mey (Huv|ghItlh tlhegh wa'DIch)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>leQmey veb ret je cha'</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>nav mI' cha'</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>gho Hochlogh</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>choH</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Hagh</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>ngab</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>nIteb Qoy poH (lup, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>mIllogh mach vIHmeH</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>pIn'a' cha'</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>pIn'a' cha' Hech ghItlhwI'</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
 </context>
 </TS>
