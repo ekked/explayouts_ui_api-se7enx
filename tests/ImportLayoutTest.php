@@ -10,6 +10,11 @@
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;
 
+// The block definitions as a recording stand-in (see expLayoutsTestStandIn in the bootstrap); a test of another file
+// may bring its own.
+if ( !class_exists( 'expLayoutsBlockHandlerFactory', false ) )
+    eval( 'class expLayoutsBlockHandlerFactory { use expLayoutsTestStandIn; }' );
+
 /** Opens the protected import to the test. */
 class expLayoutsUIApplicationApiImportProbe extends expLayoutsUIApplicationApi
 {

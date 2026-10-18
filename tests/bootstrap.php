@@ -130,7 +130,7 @@ trait expLayoutsTestStandIn
     public function __call( $name, $arguments ) { return null; }
 }
 foreach ( array( 'expLayoutsLayout', 'expLayoutsZone', 'expLayoutsLayoutType', 'expLayoutsCollection', 'expLayoutsBlock',
-                 'expLayoutsBlockParameter', 'expLayoutsCollectionItem', 'expLayoutsBlockHandlerFactory', 'expLayoutsRule',
+                 'expLayoutsBlockParameter', 'expLayoutsCollectionItem', 'expLayoutsRule',
                  'expLayoutsRuleTarget', 'expLayoutsRuleCondition' ) as $standIn )
 {
     if ( !class_exists( $standIn, false ) )
