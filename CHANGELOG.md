@@ -13,6 +13,8 @@
   2.0.0, `apply.mjs` builds the bundle from them, `tests/js/app-patches.test.mjs` checks it byte for byte.
 - Leaving the layout editor asks only when something can still be lost (a running write, typing in a block within the
   last second, a form of the sidebar or of a dialog that is not saved), no longer right after opening a layout.
+- An inline text in the canvas that is emptied completely is saved (it was skipped); a form without a method attribute
+  is saved as POST.
 
 Open: the import is still a second implementation beside explayouts' `expLayoutsImporter` (shared are the
 validation and the handling of rules).

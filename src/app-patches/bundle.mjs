@@ -3,49 +3,59 @@
  * netgen/layouts-ui 2.0.0 with some of its modules replaced and a header put in front (see apply.mjs).
  *
  * A browserify bundle is   require=(PRELUDE)({1:[function(e,t,n){...},{deps}],2:[...],...},{},[entry]);
- * The module table is evaluated in an empty vm context, only to get the source text of each module function
- * (Function.prototype.toString returns it byte for byte); no module code runs.
+ * It is parsed with acorn and read from the syntax tree; nothing of it is evaluated.
  *
  * @license GPL-2.0-or-later
  */
 import { createHash } from 'node:crypto';
-import { createContext, runInContext } from 'node:vm';
+import { parse } from 'acorn';
 
 const START = 'require=(()=>';
-const PRELUDE_END = 'return o})()';
 
 export const sha256 = ( text ) => createHash( 'sha256' ).update( text, 'utf8' ).digest( 'hex' );
+
+const keyOf = ( node ) => {
+    if ( node.type === 'Identifier' ) return node.name;
+    if ( node.type === 'Literal' ) return String( node.value );
+    throw new Error( 'unexpected key at ' + node.start );
+};
 
 /**
  * @param {string} text  a bundle
  * @return {{header: string, body: string, modules: Map<string, {source: string, start: number, deps: object}>,
- *           skeleton: string}}  header: what stands before "require=" (empty in the original); skeleton: the body with
- *           every module function replaced by the marker {@id}, so that two bundles with the same skeleton differ only
- *           in their module functions.
+ *           skeleton: string}}  header: what stands before "require=" (empty in the original); start: offset in body;
+ *           skeleton: the body with every module function replaced by the marker {@id}, so that two bundles with the
+ *           same skeleton differ only in their module functions.
  */
 export function parseBundle( text ) {
     const at = text.indexOf( START );
     if ( at < 0 ) throw new Error( 'no browserify bundle: "' + START + '" is missing' );
     const header = text.slice( 0, at );
     const body = text.slice( at );
-    const preludeEnd = body.indexOf( PRELUDE_END );
-    if ( preludeEnd < 0 ) throw new Error( 'no browserify prelude' );
-    const context = createContext( { __table: ( table ) => table } );
-    const table = runInContext( '__table' + body.slice( preludeEnd + PRELUDE_END.length ), context );
+    const program = parse( body, { ecmaVersion: 'latest', sourceType: 'script' } );
+    const statement = program.body[ 0 ];
+    // require = (prelude)( table, cache, entries )
+    const call = statement && statement.type === 'ExpressionStatement' && statement.expression.type === 'AssignmentExpression'
+        ? statement.expression.right : null;
+    const table = call && call.type === 'CallExpression' ? call.arguments[ 0 ] : null;
+    if ( !table || table.type !== 'ObjectExpression' ) throw new Error( 'no browserify module table' );
 
-    const found = [];
-    for ( const id of Object.keys( table ) ) {
-        const source = table[ id ][ 0 ].toString();
-        // A numeric id stands bare (12:[), any other quoted ("@netgen/content-browser-ui":[).
-        const key = ( /^\d+$/.test( id ) ? id : JSON.stringify( id ) ) + ':[';
-        const at = body.indexOf( key + source, preludeEnd );
-        if ( at < 0 || !/[{,]/.test( body[ at - 1 ] ) || body.indexOf( key + source, at + 1 ) >= 0 ) {
-            throw new Error( 'module ' + id + ' not found once in place' );
+    const modules = new Map();
+    for ( const property of table.properties ) {
+        const id = keyOf( property.key );
+        const entry = property.value;
+        const [ fn, deps ] = entry.type === 'ArrayExpression' ? entry.elements : [];
+        if ( !fn || fn.type !== 'FunctionExpression' || !deps || deps.type !== 'ObjectExpression' ) {
+            throw new Error( 'module ' + id + ' is not [function, deps]' );
         }
-        found.push( [ id, { source, start: at + key.length, deps: table[ id ][ 1 ] } ] );
+        const map = {};
+        for ( const dep of deps.properties ) {
+            if ( dep.value.type !== 'Literal' ) throw new Error( 'module ' + id + ': dependency ' + keyOf( dep.key ) + ' is no literal' );
+            map[ keyOf( dep.key ) ] = dep.value.value;
+        }
+        if ( modules.has( id ) ) throw new Error( 'module ' + id + ' twice' );
+        modules.set( id, { source: body.slice( fn.start, fn.end ), start: fn.start, deps: map } );
     }
-    // In the order they stand in the bundle.
-    const modules = new Map( found.sort( ( a, b ) => a[ 1 ].start - b[ 1 ].start ) );
 
     let skeleton = '';
     let last = 0;

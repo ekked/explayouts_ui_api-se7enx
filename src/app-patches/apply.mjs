@@ -9,7 +9,7 @@
  *   header.js            what is put in front of the bundle (nglT/nglTh, the interface texts)
  *   modules/NNN-*.js     module NNN's function as it stands in the bundle (one final newline is not part of it)
  *
- * Usage (in extension/explayouts_ui_api):
+ * Usage (in extension/explayouts_ui_api, after npm ci: the bundle is parsed with acorn):
  *
  *   node src/app-patches/apply.mjs                  rebuild the bundle from the bundle in place (its unpatched
  *                                                   modules are the original ones, checked by hash) and the patches
@@ -46,13 +46,13 @@ export function readManifest() {
     return JSON.parse( readFileSync( manifestPath, 'utf8' ) );
 }
 
-/** The bundle the patches give, from the original (from) or from the bundle in place. */
+/** The bundle the patches give, from the original (from: a file, or { text }) or from the bundle in place. */
 export function build( manifest, from ) {
     let source;
     if ( from ) {
-        source = readFileSync( from, 'utf8' );
+        source = typeof from === 'object' ? from.text : readFileSync( from, 'utf8' );
         if ( sha256( source ) !== manifest.base.sha256 ) {
-            throw new Error( from + ' is not the bundle of ' + manifest.base.package + ' ' + manifest.base.version );
+            throw new Error( ( from.text === undefined ? from : 'the download' ) + ' is not the bundle of ' + manifest.base.package + ' ' + manifest.base.version );
         }
     } else {
         source = readFileSync( bundlePath, 'utf8' );

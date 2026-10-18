@@ -198,7 +198,8 @@
       "file": "modules/017-extended-jquery-override.js",
       "original_sha256": "4e3ea4c3470c50a309309fa6d32ed33fb798d169a9f658df147e3c7b11051bae",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "ajax_submit sends a form without a method attribute as POST (the API takes form saves as POST only; jQuery's default GET also hid the save from the warning on leaving)."
       ]
     },
     {
@@ -284,7 +285,8 @@
       "file": "modules/062-inline.js",
       "original_sha256": "1e468e8b8c729841f1c5e126efa2654434c198ed47d6e31d5f846d1cf93a88a4",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "An inline text emptied completely is saved as well (the original skipped an empty value, so deleting a title or text in the canvas was never saved; the layouts API takes empty parameters, as the sidebar field does)."
       ]
     },
     {

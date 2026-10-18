@@ -3,9 +3,10 @@
  * save_via_form of module ./extended/model; patches in src/app-patches/modules/). The editor saves every change to the
  * draft at once, so leaving is only a loss while a save runs, shortly after typing in a block (its save waits 500 ms
  * for the last key), or while a form of the sidebar or of a dialog holds values that were not saved. netgen/layouts-ui
- * warned on every leave that was not publish, discard or close, also right after opening a layout (B17).
+ * warned on every leave that was not publish, discard or close, also right after opening a layout.
  *
- * The two modules run from the bundle itself, with jQuery 4 (as on the page) and stand-ins for the rest of the app.
+ * The modules involved (init, extended/model, extended/jquery_override for ajax_submit, the inline text of blocks) run
+ * from the bundle itself, with jQuery 4 (as on the page) and stand-ins for the rest of the app.
  *
  * Run: npm ci && npm test (in extension/explayouts_ui_api)
  *
@@ -26,6 +27,7 @@ const WARNING = 'There could be unsaved changes. Are you sure you want to leave?
 let jQuery;
 let Core;
 let Model;
+let Inline;
 let onBeforeUnload;
 let requests;
 let now;
@@ -87,19 +89,18 @@ before( async () => {
         }
     };
     const load = loader( {
-        './core': core, '../core_base': core, './environments/default': {},
+        './core': core, '../core_base': core, '../../core': core, './environments/default': {},
         './collections/block_types': Stand, './collections/layout_types': Stand, './collections/layouts': Stand,
         './views/blocks/load': {}, './models/blocks/helper': {}, './router': Stand, './models/config': Stand,
         './models/state': Stand, './models/local_config': Stand, nprogress: { start() {}, done() {} },
         '@netgen/content-browser-ui': { InputBrowse: class {}, MultipleBrowse: class {} },
         backbone: { Model: { extend: ( proto ) => proto }, $: jQuery }, './utils': {}
     } );
+    load( idOf( './extended/jquery_override' ) );
+    assert.equal( typeof jQuery.fn.ajax_submit, 'function', 'ajax_submit from the bundle' );
     for ( const plugin of [ 'xeditable', 'dependable_select', 'master_slave_selects', 'video_thumb_fetcher', 'view_types', 'bm_tooltip' ] ) {
-        jQuery.fn[ plugin ] = function () { return this; };
+        jQuery.fn[ plugin ] = jQuery.fn[ plugin ] || function () { return this; };
     }
-    jQuery.fn.ajax_submit = function () {
-        return jQuery.ajax( { url: this.attr( 'action' ), method: this.attr( 'method' ), data: this.serialize() } );
-    };
 
     const listen = window.addEventListener;
     window.addEventListener = function ( type, fn ) {
@@ -108,7 +109,10 @@ before( async () => {
     };
     Core = load( idOf( './init' ) );
     Model = load( idOf( './extended/model' ) );
+    Inline = load( idOf( './inline' ) );
     Core.init();
+    // The app's error dialogs (failed requests) are not part of this test: as if one were open already.
+    Core.error_displayed = true;
     window.addEventListener = listen;
 
     const realNow = Date.now;
@@ -123,6 +127,7 @@ beforeEach( () => {
     document.body.innerHTML = '<div id="app"><div class="zones"></div><aside id="sidebar"><div class="right-sidebar"></div></aside></div>';
     Core.should_navigate_away = false;
     Core.inline_edit_at = 0;
+    requests.length = 0;
     now = undefined;
 } );
 
@@ -197,7 +202,7 @@ test( 'a saved form no longer warns; a change made while the save ran still does
     assert.equal( leave(), WARNING, 'typed after the save was sent' );
 } );
 
-test( 'a failed save keeps the warning', async () => {
+test( 'a failed save of an inline text or editor keeps the warning (that save leaves the sidebar form in place)', async () => {
     const el = render( sidebarForm );
     const form = el.querySelector( 'form' );
     form.querySelector( '[name="block_update[title]"]' ).value = 'Hello';
@@ -242,7 +247,9 @@ test( 'a dialog with a typed value warns; closed, it does not', () => {
 
 test( 'a form inside a block preview is not the editor\'s', () => {
     const el = render( '<form action="/search"><input name="SearchText" value=""></form>', '.zones' );
-    el.querySelector( 'input' ).value = 'term';
+    const form = el.querySelector( 'form' );
+    assert.notEqual( form.nglSaved, undefined, 'its state was taken like any rendered form: only the selector leaves it out' );
+    form.querySelector( 'input' ).value = 'term';
     assert.equal( leave(), null );
 } );
 
@@ -256,5 +263,68 @@ test( 'publish, discard and close still leave without a warning', () => {
 test( 'the form token is no change', () => {
     const el = render( sidebarForm );
     el.querySelector( '[name="block_update[_token]"]' ).value = 't2';
+    assert.equal( leave(), null );
+} );
+
+/** A block in the canvas with an inline text, and the block view's inline handlers (module ./inline). */
+function inlineBlock( text ) {
+    const block = document.createElement( 'div' );
+    block.setAttribute( 'data-block', '' );
+    block.innerHTML = '<h2 data-inline-child data-attr="title" contenteditable="true"></h2><p class="other" tabindex="0">x</p>';
+    block.querySelector( 'h2' ).textContent = text;
+    document.querySelector( '.zones' ).appendChild( block );
+    const model = { get() {}, set() { return this; }, trigger_events() { return this; }, save_via_form: Model.save_via_form };
+    const view = Object.assign( Object.create( Inline ), { model } );
+    return { block, h2: block.querySelector( 'h2' ), view };
+}
+
+test( 'paste and input in an inline text count as typing; keys elsewhere do not', () => {
+    const { block, h2 } = inlineBlock( 'Welcome' );
+    now = 1000000;
+    for ( const type of [ 'paste', 'input' ] ) {
+        Core.inline_edit_at = 0;
+        h2.dispatchEvent( new window.Event( type, { bubbles: true } ) );
+        assert.equal( leave(), WARNING, type );
+    }
+    Core.inline_edit_at = 0;
+    block.querySelector( '.other' ).dispatchEvent( new window.KeyboardEvent( 'keyup', { bubbles: true, key: 'x' } ) );
+    document.body.dispatchEvent( new window.KeyboardEvent( 'keyup', { bubbles: true, key: 'x' } ) );
+    assert.equal( leave(), null );
+} );
+
+test( 'an inline text emptied completely is saved, and warns until then', async () => {
+    const el = render( sidebarForm );
+    const form = el.querySelector( 'form' );
+    const { h2, view } = inlineBlock( '' );
+    view.$keyup( { target: h2 } );
+    await new Promise( ( done ) => setTimeout( done, 600 ) );
+    assert.equal( requests.length, 1, 'the empty value is sent' );
+    assert.equal( form.querySelector( '[name="block_update[title]"]' ).value, '' );
+    assert.equal( leave(), WARNING, 'while it is saved' );
+    requests.shift()( 200, 'OK', { text: '{}' }, 'Content-Type: application/json' );
+    await tick();
+    assert.equal( leave(), null );
+} );
+
+test( 'an aborted write no longer counts', async () => {
+    const xhr = jQuery.ajax( { url: '/api/blocks/1', method: 'DELETE' } );
+    assert.equal( leave(), WARNING );
+    xhr.abort();
+    await tick();
+    assert.equal( Core.pending_writes, 0 );
+    assert.equal( leave(), null );
+} );
+
+test( 'a form without a method attribute is saved as POST and counts as a write', async () => {
+    let method;
+    jQuery( document ).one( 'ajaxSend', ( e, xhr, settings ) => { method = settings.type; } );
+    const el = render( '<div class="sidebar"><form action="/api/blocks/1"><input name="block_update[title]" value="A"></form></div>' );
+    const form = el.querySelector( 'form' );
+    form.querySelector( 'input' ).value = 'B';
+    Model.save_via_form.call( { get() {}, set() { return this; }, trigger_events() { return this; } }, jQuery( form ), 'save', {} );
+    assert.equal( method, 'POST' );
+    assert.equal( Core.pending_writes, 1 );
+    requests.shift()( 200, 'OK', { text: '{}' }, 'Content-Type: application/json' );
+    await tick();
     assert.equal( leave(), null );
 } );

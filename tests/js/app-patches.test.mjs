@@ -2,8 +2,8 @@
  * The app bundle design/standard/javascript/netgen-layouts.js is the bundle of netgen/layouts-ui 2.0.0 plus the
  * patches in src/app-patches/, byte for byte: nothing in it is changed that is not a patch file, and every patch file
  * is what the bundle carries. The original bundle is not part of this package; its skeleton and the hash of every
- * module are (manifest.json). With LAYOUTS_UI_BUNDLE pointing to the original (manifest.json "base.url"), the bundle
- * is also rebuilt from it and compared.
+ * module are (manifest.json). With LAYOUTS_UI_BUNDLE pointing to the original, or LAYOUTS_UI_BUNDLE=download (manifest.json
+ * "base.url"), the bundle is also rebuilt from it and compared.
  *
  * Run: npm ci && npm test (in extension/explayouts_ui_api)
  *
@@ -52,6 +52,15 @@ test( 'a change to the bundle that is not in a patch file is found', () => {
     assert.ok( verifyBundle( other, manifest, patchText ).includes( 'module ' + patched.id + ' is not ' + patched.file ) );
 } );
 
-test( 'rebuilt from the original bundle (LAYOUTS_UI_BUNDLE) it is the bundle in place', { skip: !process.env.LAYOUTS_UI_BUNDLE && 'LAYOUTS_UI_BUNDLE not set' }, () => {
-    assert.equal( build( manifest, process.env.LAYOUTS_UI_BUNDLE ), bundle );
+// LAYOUTS_UI_BUNDLE=<file> or LAYOUTS_UI_BUNDLE=download (manifest.json base.url; needs the network). Without it the
+// test is skipped: the normal run needs no network.
+test( 'rebuilt from the original bundle (LAYOUTS_UI_BUNDLE) it is the bundle in place', { skip: !process.env.LAYOUTS_UI_BUNDLE && 'LAYOUTS_UI_BUNDLE not set' }, async () => {
+    let from = process.env.LAYOUTS_UI_BUNDLE;
+    if ( from === 'download' ) {
+        const response = await fetch( manifest.base.url );
+        assert.ok( response.ok, manifest.base.url + ' answers' );
+        from = { text: await response.text() };
+        assert.equal( sha256( from.text ), manifest.base.sha256, 'the download is the bundle of ' + manifest.base.version );
+    }
+    assert.equal( build( manifest, from ), bundle );
 } );
