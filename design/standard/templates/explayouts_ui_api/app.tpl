@@ -595,28 +595,39 @@
     <div id="app" class="ngc" data-version="{if $app_version|ne('')}{$app_version|wash()} {/if}{$edition|wash()}"></div>
     <a id="ng-cancel-link" href="#">{'Cancel'|i18n( 'design/standard/explayouts_ui_api/app' )}</a>
     {literal}<script>
+    // Cancel of the editor: placed beside Create layout of the new layout dialog, or beside Publish layout in the
+    // editor's header. It is a link out of the editor, never a button of the dialog: the dialog submits on a click
+    // on any .action_apply inside it, and Cancel carried that class, so cancelling created the layout.
     (function(){
         var link = document.getElementById('ng-cancel-link');
         if (!link) return;
-        var returnTo = window.explayoutsReturnTo;
-        if (returnTo) link.href = returnTo;
+        // the page the editor was opened from, else the one kept for Discard (ngl_referrer), else the dashboard;
+        // not history.back(), which is the editor's own previous route
+        function destination() {
+            if (window.explayoutsReturnTo) return window.explayoutsReturnTo;
+            var kept = null;
+            try { kept = window.localStorage.getItem('ngl_referrer'); } catch (e) {}
+            if (kept) return kept;
+            var dashboard = '/explayouts_ui/dashboard';
+            return window.explayoutsInSiteaccess ? window.explayoutsInSiteaccess(dashboard) : dashboard;
+        }
+        link.href = destination();
         link.addEventListener('click', function(e){
-            if (!returnTo) {
-                e.preventDefault();
-                window.history.back();
-            }
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = destination();
         });
 
         function placeCancel() {
             if (link._placed) return;
-            var createBtn = document.querySelector('.btn-primary.action_apply, .btn-primary');
-            if (!createBtn) return;
-            var parent = createBtn.parentNode;
-            if (!parent) return;
+            var createBtn = document.querySelector('.new_layout .modal-footer .action_apply');
+            var publishBtn = createBtn ? null : document.querySelector('.ngc .actions .js-publish');
+            var anchor = createBtn || publishBtn;
+            if (!anchor || !anchor.parentNode) return;
             link._placed = true;
-            link.className = 'btn btn-primary action_apply green';
+            link.className = createBtn ? 'btn btn-default' : 'btn btn-link-white';
             link.style.cssText = 'margin-right: 8px;';
-            parent.insertBefore(link, createBtn);
+            anchor.parentNode.insertBefore(link, anchor);
         }
 
         var app = document.getElementById('app');
