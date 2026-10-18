@@ -26,6 +26,19 @@ function cancelScript() {
     return template.slice( start, end );
 }
 
+/** The script before it that decides where the editor may return to (explayoutsSafeTarget, explayoutsInSiteaccess). */
+function returnScript() {
+    const at = template.indexOf( 'Where the editor returns to' );
+    const start = template.lastIndexOf( '{literal}<script>', at ) + '{literal}<script>'.length;
+    return template.slice( start, template.indexOf( '</script>{/literal}', at ) );
+}
+function setUpEditor( returnTo ) {
+    globalThis.explayoutsServerReturnTo = '';
+    globalThis.explayoutsSiteRoot = '/admin/';
+    new Function( returnScript() )();
+    window.explayoutsReturnTo = returnTo;
+}
+
 before( () => {
     GlobalRegistrator.register( { url: 'https://example.test/admin/explayouts_ui_api/app#layout',
                                   settings: { navigation: { disableMainFrameNavigation: true } } } );
@@ -53,7 +66,7 @@ function newLayoutDialog( applied ) {
 }
 
 test( 'Cancel in the new layout dialog is no apply button and does not submit the dialog', async () => {
-    window.explayoutsReturnTo = 'https://example.test/admin/content/view/full/2';
+    setUpEditor( 'https://example.test/admin/content/view/full/2' );
     new Function( cancelScript() )();
     const applied = { count: 0 };
     newLayoutDialog( applied );
@@ -71,6 +84,7 @@ test( 'Cancel in the new layout dialog is no apply button and does not submit th
 } );
 
 test( 'without a page to return to Cancel leads to the kept referrer, not back into the editor', async () => {
+    setUpEditor( '' );
     window.localStorage.setItem( 'ngl_referrer', 'https://example.test/admin/explayouts_ui/layout_list' );
     let wentBack = false;
     const back = window.history.back;
@@ -85,7 +99,17 @@ test( 'without a page to return to Cancel leads to the kept referrer, not back i
     assert.equal( link.getAttribute( 'href' ), 'https://example.test/admin/explayouts_ui/layout_list' );
 } );
 
+test( 'a foreign return address is not followed by Cancel', async () => {
+    setUpEditor( 'javascript:alert(1)' );
+    window.localStorage.setItem( 'ngl_referrer', 'https://evil.example/' );
+    new Function( cancelScript() )();
+    newLayoutDialog( { count: 0 } );
+    await tick();
+    assert.equal( document.getElementById( 'ng-cancel-link' ).getAttribute( 'href' ), 'https://example.test/admin/explayouts_ui/dashboard' );
+} );
+
 test( 'only the new layout dialog or the editor header take Cancel, not the primary button of any dialog', async () => {
+    setUpEditor( '' );
     new Function( cancelScript() )();
     const other = document.createElement( 'div' );
     other.className = 'modal-dialog';

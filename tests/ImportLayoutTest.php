@@ -140,6 +140,54 @@ class ImportLayoutTest extends TestCase
         $this->assertSame( array( 'BEGIN', 'ROLLBACK' ), eZDB::$statements );
     }
 
+    public function testAFailedCommitIsAFailedImport()
+    {
+        eZDB::$commitAnswer = false;
+        $error = '';
+        $this->assertFalse( expLayoutsUIApplicationApiImportProbe::import( self::apiExport(), $error ) );
+        $this->assertSame( 'Import failed.', $error );
+        $this->assertSame( array( 'BEGIN', 'COMMIT' ), eZDB::$statements, 'no rollback after the commit' );
+    }
+
+    public function testAnErrorHalfwayRollsBackToo()
+    {
+        expLayoutsBlock::$returns['create'] = function () { throw new TypeError( 'Broken value' ); };
+        $error = '';
+        $this->assertFalse( expLayoutsUIApplicationApiImportProbe::import( self::apiExport(), $error ) );
+        $this->assertSame( array( 'BEGIN', 'ROLLBACK' ), eZDB::$statements );
+    }
+
+    public function testAZoneLinksASharedLayoutByItsIdentifierOnly()
+    {
+        expLayoutsLayout::$returns['fetchByIdentifier'] = function ( $identifier ) {
+            return $identifier === 'shared_header' ? new expLayoutsLayout( array( 'id' => 77 ) ) : false;
+        };
+        $layout = expLayoutsUIApplicationApiImportProbe::import( array( 'identifier' => 'x', 'name' => 'X', 'layout_type' => 'layout_1', 'zones' => array(
+            array( 'identifier' => 'header', 'linked_layout_id' => 7 ),
+            array( 'identifier' => 'footer', 'linked_layout_id' => 7, 'linked_layout_identifier' => 'shared_header' ) ) ) );
+        $this->assertInstanceOf( expLayoutsLayout::class, $layout );
+        $zones = self::storedOf( 'expLayoutsZone' );
+        $this->assertNull( $zones[0]->attribute( 'linked_layout_id' ), 'a row id alone links nothing' );
+        $this->assertSame( 77, $zones[1]->attribute( 'linked_layout_id' ) );
+    }
+
+    public function testABlockFieldOfTheWrongKindImportsNothing()
+    {
+        $error = '';
+        $this->assertFalse( expLayoutsUIApplicationApiImportProbe::import( array( 'identifier' => 'x', 'name' => 'X', 'layout_type' => 'layout_1',
+            'zones' => array( array( 'identifier' => 'main', 'blocks' => array( array( 'definition_identifier' => 'title', 'name' => array( 'x' ) ) ) ) ) ), $error ) );
+        $this->assertStringContainsString( 'name', $error );
+        $this->assertSame( array(), self::$stored );
+    }
+
+    public function testReturnToIsAPathOfThisSiteOnly()
+    {
+        foreach ( array( '/content/view/full/2', '/admin/explayouts_ui/dashboard?x=1' ) as $kept )
+            $this->assertSame( $kept, expLayoutsUIApplicationApi::safeReturnTo( $kept ) );
+        foreach ( array( 'javascript:alert(1)', 'https://evil.example/', '//evil.example/x', '/\\evil.example', "/x\nLocation: y", 'content/1', '', array( '/x' ) ) as $refused )
+            $this->assertSame( '', expLayoutsUIApplicationApi::safeReturnTo( $refused ), json_encode( $refused ) );
+    }
+
     public function testTheRuleFormsKeepOnlyKnownTypes()
     {
         $data = array( 'targets' => array( array( 'type' => 'path', 'value' => 'news' ), array( 'type' => 'evil', 'value' => 'x' ), array( 'type' => array( 'path' ) ) ),

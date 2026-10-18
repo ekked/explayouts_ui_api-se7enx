@@ -543,28 +543,37 @@
     // root); the page's own scripts use explayoutsReturnTo. Any same-site path
     // outside this siteaccess is put back inside it: the admin's Layouts tab
     // stored /content/view/full/N without /admin, and pages still open keep
-    // storing it until reloaded.
+    // storing it until reloaded. Only an http(s) address of this site is ever
+    // returned to (explayoutsSafeTarget): return_to, sessionStorage, the
+    // referrer and ngl_referrer can all be set from outside the editor.
     (function(){
         function url(u) { try { return new URL(u, window.location.href); } catch (e) { return null; } }
-        function sameSite(u) { var x = url(u); return !!x && x.origin === window.location.origin; }
+        function sameSite(u) { var x = url(u); return !!x && ( x.protocol === 'http:' || x.protocol === 'https:' ) && x.origin === window.location.origin; }
+        window.explayoutsSafeTarget = function (u) {
+            if (typeof u !== 'string' || u === '') return '';
+            var x = url(u);
+            return x && sameSite(u) ? x.href : '';
+        };
         function isEditor(u) { return /\/explayouts_ui_api\/app/.test(u); }
         var root = url(explayoutsSiteRoot || '/');
         var rootPath = root ? root.pathname.replace(/\/?$/, '/') : '/';
         function inSiteaccess(u) { var x = url(u); return !!x && sameSite(u) && (x.pathname + '/').indexOf(rootPath) === 0; }
         window.explayoutsInSiteaccess = function (u) {
             var x = url(u);
-            if (!x || !sameSite(u) || rootPath === '/' || inSiteaccess(u)) return x ? x.href : u;
+            if (!x || !sameSite(u)) return '';
+            if (rootPath === '/' || inSiteaccess(u)) return x.href;
             return window.location.origin + rootPath.replace(/\/$/, '') + x.pathname + x.search + x.hash;
         };
         var stored = null, kept = null;
         try { stored = window.sessionStorage.getItem('explayouts_return_to'); } catch (e) {}
         try { kept = window.localStorage.getItem('ngl_referrer'); } catch (e) {}
-        var explicit = explayoutsServerReturnTo || stored || null;
+        var safe = window.explayoutsSafeTarget;
+        var explicit = safe(explayoutsServerReturnTo) || safe(stored) || null;
         if (!explicit && document.referrer && sameSite(document.referrer) && !isEditor(document.referrer)) explicit = document.referrer;
         if (explicit) explicit = window.explayoutsInSiteaccess(explicit);
         window.explayoutsReturnTo = explicit || '';
         var target = explicit;
-        if (!target && kept && inSiteaccess(kept) && !isEditor(kept)) target = kept;
+        if (!target && safe(kept) && inSiteaccess(kept) && !isEditor(kept)) target = safe(kept);
         if (!target) target = root ? root.href : '/';
         try { window.localStorage.setItem('ngl_referrer', target); } catch (e) {}
         if (explicit) { try { window.sessionStorage.setItem('explayouts_return_to', explicit); } catch (e) {} }
@@ -604,10 +613,11 @@
         // the page the editor was opened from, else the one kept for Discard (ngl_referrer), else the dashboard;
         // not history.back(), which is the editor's own previous route
         function destination() {
-            if (window.explayoutsReturnTo) return window.explayoutsReturnTo;
+            var safe = window.explayoutsSafeTarget || function () { return ''; };
+            if (safe(window.explayoutsReturnTo)) return safe(window.explayoutsReturnTo);
             var kept = null;
             try { kept = window.localStorage.getItem('ngl_referrer'); } catch (e) {}
-            if (kept) return kept;
+            if (safe(kept)) return safe(kept);
             var dashboard = '/explayouts_ui/dashboard';
             return window.explayoutsInSiteaccess ? window.explayoutsInSiteaccess(dashboard) : dashboard;
         }
@@ -759,12 +769,13 @@
     </script>{/literal}
     {literal}<script>
     (function(){
-        if (!sessionStorage.getItem('explayouts_return_to') && document.referrer) {
-            sessionStorage.setItem('explayouts_return_to', document.referrer);
+        var safe = window.explayoutsSafeTarget || function () { return ''; };
+        if (!sessionStorage.getItem('explayouts_return_to') && safe(document.referrer)) {
+            sessionStorage.setItem('explayouts_return_to', safe(document.referrer));
         }
 
         function checkRedirect() {
-            var returnTo = sessionStorage.getItem('explayouts_return_to');
+            var returnTo = safe(sessionStorage.getItem('explayouts_return_to'));
             if (!returnTo) return;
             sessionStorage.removeItem('explayouts_return_to');
             setTimeout(function() { window.location.href = returnTo; }, 100);

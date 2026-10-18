@@ -2613,6 +2613,13 @@ class expLayoutsUIApplicationApi
         foreach ( expLayoutsZone::fetchByLayout( $layoutId ) as $zone )
         {
             $zoneData = self::objectToArray( $zone );
+            // the shared layout by its identifier too, which an import on another installation can resolve
+            $zoneData['linked_layout_identifier'] = null;
+            if ( (int)$zone->attribute( 'linked_layout_id' ) > 0 )
+            {
+                $linked = expLayoutsLayout::fetch( (int)$zone->attribute( 'linked_layout_id' ) );
+                $zoneData['linked_layout_identifier'] = $linked instanceof expLayoutsLayout ? (string)$linked->attribute( 'identifier' ) : null;
+            }
             $zoneData['blocks'] = array();
             foreach ( expLayoutsBlock::fetchByZone( $zone->attribute( 'id' ) ) as $block )
             {
@@ -2686,6 +2693,10 @@ class expLayoutsUIApplicationApi
     {
         if ( !is_array( $data ) )
             return array( 'Invalid import payload.' );
+        // the rules of explayouts' importer, so both imports refuse the same exports; the checks below are for an
+        // explayouts without it
+        if ( class_exists( 'expLayoutsImporter' ) && method_exists( 'expLayoutsImporter', 'validate' ) )
+            return expLayoutsImporter::validate( $data );
         if ( isset( $data['version'] ) && (int)$data['version'] !== 1 )
             return array( 'Unsupported export version.' );
         foreach ( array( 'identifier', 'name', 'layout_type' ) as $key )
@@ -2710,10 +2721,37 @@ class expLayoutsUIApplicationApi
             {
                 $definition = is_array( $blockData ) && isset( $blockData['definition_identifier'] ) ? $blockData['definition_identifier'] : null;
                 if ( !is_string( $definition ) || expLayoutsBlockHandlerFactory::getBlockInfo( $definition ) === false )
+                {
                     $problems[] = 'Unknown block type: ' . ( is_scalar( $definition ) ? $definition : '?' );
+                    continue;
+                }
+                foreach ( array( 'name', 'view_type', 'position' ) as $key )
+                {
+                    if ( isset( $blockData[$key] ) && !is_scalar( $blockData[$key] ) )
+                        $problems[] = 'Invalid block field: ' . $key;
+                }
+                if ( isset( $blockData['parameters'] ) && !is_array( $blockData['parameters'] ) )
+                    $problems[] = 'Invalid block field: parameters';
             }
         }
         return array_values( array_unique( $problems ) );
+    }
+
+    /**
+     * The return_to of the editor when it is a path on this site (/..., not //host or /\host, no scheme, no control
+     * characters); '' otherwise. The editor returns there, also with location.replace() as it loads.
+     *
+     * @param mixed $uri
+     * @return string
+     */
+    public static function safeReturnTo( $uri )
+    {
+        $uri = is_string( $uri ) ? trim( $uri ) : '';
+        if ( $uri === '' || $uri[0] !== '/' || preg_match( '/[\x00-\x20\x7F]/', $uri ) )
+            return '';
+        if ( isset( $uri[1] ) && ( $uri[1] === '/' || $uri[1] === '\\' ) )
+            return '';
+        return $uri;
     }
 
     /**
@@ -2741,13 +2779,23 @@ class expLayoutsUIApplicationApi
         {
             $layout = self::writeImportedLayout( $data );
         }
-        catch ( Exception $e )
+        catch ( Throwable $e )
         {
-            $db->rollback();
+            if ( class_exists( 'eZDebug' ) )
+                eZDebug::writeError( 'Layout import failed: ' . $e->getMessage(), __METHOD__ );
+            // a failed query may have ended the transaction already
+            if ( !method_exists( $db, 'transactionCounter' ) || $db->transactionCounter() > 0 )
+                $db->rollback();
             $error = 'Import failed.';
             return false;
         }
-        $db->commit();
+        if ( $db->commit() === false )
+        {
+            if ( class_exists( 'eZDebug' ) )
+                eZDebug::writeError( 'Layout import failed: the transaction was not committed', __METHOD__ );
+            $error = 'Import failed.';
+            return false;
+        }
         return $layout;
     }
 
@@ -2769,9 +2817,16 @@ class expLayoutsUIApplicationApi
             $zone = expLayoutsZone::create( $layoutId, $zoneIdentifier, 1 );
             if ( isset( $zoneData['position'] ) )
                 $zone->setAttribute( 'position', (int)$zoneData['position'] );
-            if ( isset( $zoneData['linked_layout_id'] ) && (int)$zoneData['linked_layout_id'] > 0 )
+            // a shared layout by its identifier only: a row id of another installation names an unrelated layout
+            $linkedLayoutId = 0;
+            if ( isset( $zoneData['linked_layout_identifier'] ) && is_scalar( $zoneData['linked_layout_identifier'] ) && (string)$zoneData['linked_layout_identifier'] !== '' )
             {
-                $zone->setAttribute( 'linked_layout_id', (int)$zoneData['linked_layout_id'] );
+                $linkedLayout = expLayoutsLayout::fetchByIdentifier( (string)$zoneData['linked_layout_identifier'], 2 );
+                $linkedLayoutId = $linkedLayout instanceof expLayoutsLayout ? (int)$linkedLayout->attribute( 'id' ) : 0;
+            }
+            if ( $linkedLayoutId > 0 )
+            {
+                $zone->setAttribute( 'linked_layout_id', $linkedLayoutId );
                 $zone->setAttribute( 'linked_zone_identifier',
                     isset( $zoneData['linked_zone_identifier'] ) && is_scalar( $zoneData['linked_zone_identifier'] ) ? (string)$zoneData['linked_zone_identifier'] : $zoneIdentifier );
             }

@@ -151,7 +151,8 @@ if ( !class_exists( 'eZDB', false ) )
         public function arrayQuery( $sql ) { self::$statements[] = $sql; return array(); }
         public function escapeString( $value ) { return addslashes( $value ); }
         public function begin() { self::$statements[] = 'BEGIN'; }
-        public function commit() { self::$statements[] = 'COMMIT'; }
+        public static $commitAnswer = true;
+        public function commit() { self::$statements[] = 'COMMIT'; return self::$commitAnswer; }
         public function rollback() { self::$statements[] = 'ROLLBACK'; }
     }
 }
