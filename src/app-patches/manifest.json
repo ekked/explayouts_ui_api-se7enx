@@ -202,6 +202,15 @@
       ]
     },
     {
+      "id": 18,
+      "name": "./extended/model | ./model",
+      "file": "modules/018-model.js",
+      "original_sha256": "aff2f16ec748d0d7fa13cda651f538762b362b2b1de70aa4812e9f786ac0be51",
+      "changes": [
+        "save_via_form keeps the state of the form it sent (Core.form_state) on the form element as nglSaved once the save succeeded, for the warning on leaving (module 23)."
+      ]
+    },
+    {
       "id": 23,
       "name": "./init",
       "file": "modules/023-init.js",
@@ -210,7 +219,8 @@
         "A missing layout: the 404 dialog leads back to the admin instead of creating an empty layout (11de65f)",
         "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "A refused change (403 with reason access_denied) is reported as not allowed, not as a session timeout (68bcdae)"
+        "A refused change (403 with reason access_denied) is reported as not allowed, not as a session timeout (68bcdae)",
+        "Leaving the editor warns only with unsaved changes: while a request other than GET runs, within a second of typing in a block's inline text (saved 500 ms after the last key), or while a form of the sidebar or of a dialog differs from what was last loaded or saved (Core.has_unsaved_changes, Core.form_state). The original warned on every leave that was not publish, discard or close."
       ]
     },
     {

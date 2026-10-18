@@ -170,6 +170,25 @@ patches, without needing the original (with `LAYOUTS_UI_BUNDLE=<original bundle>
 To change the bundle: `--extract` the module if it is not patched yet, edit its file, note the change in
 `manifest.json`, run `apply.mjs`, and raise the `?v=` of its `<script>` in `app.tpl`, so browsers fetch it again.
 
+Leaving the editor
+------------------
+
+The editor saves every change to the draft at once (sidebar fields on change and 500 ms after the last key, inline
+texts and the rich text and code editors 500 ms after the last change). Leaving the page therefore asks "There could
+be unsaved changes" only when something can still be lost (`Core.has_unsaved_changes()`, module `init`):
+
+- a request other than GET is running (a save, a move, a new block);
+- a key was typed in a block's inline text within the last second (its save has not started yet);
+- a form in the sidebar or in a dialog holds other values than when it was loaded or last saved (`save_via_form`
+  keeps the state it sent once saved, the form token does not count); that includes the hidden fields the inline
+  texts and the rich text and code editors write into, also after their save failed.
+
+Publish, discard, close and the dialog's Cancel leave without asking, as before. netgen/layouts-ui asked on every
+other leave, also right after opening a layout. Not covered: the collection type selector of the sidebar with its own
+Apply button (not a form), and a sidebar form whose save the server refused: the editor replaces that form with the
+answer and shows its error dialog.
+`tests/js/unsaved-changes.test.mjs` runs both modules from the bundle.
+
 Rich text and code editors
 --------------------------
 

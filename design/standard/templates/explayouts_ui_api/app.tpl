@@ -625,9 +625,9 @@
         link.addEventListener('click', function(e){
             e.preventDefault();
             e.stopPropagation();
-            // The app's beforeunload guard stops every navigation unless should_navigate_away is set, as its own
-            // Cancel did. In the new layout dialog nothing exists yet that could be lost; in the editor the guard
-            // stays, unsaved changes are possible there.
+            // The app's beforeunload guard warns while there are unsaved changes (Core.has_unsaved_changes) unless
+            // should_navigate_away is set, as its own Cancel did. Cancel of the new layout dialog discards what was
+            // typed there on purpose; in the editor the guard stays and warns only if something was not saved.
             if (window.Core && link.closest('.new_layout')) window.Core.should_navigate_away = true;
             window.location.href = destination();
         });
@@ -666,7 +666,7 @@
     {* The rich text and code editors (Tiptap, built from src/editors/): window.CKEDITOR and window.ace with
        the calls the app bundle makes of them. Before the bundle: it registers CKEDITOR listeners on load. *}
     <script src="{'javascript/explayouts-tiptap.js'|ezdesign('no')}" defer></script>
-    <script src="{'javascript/netgen-layouts.js'|ezdesign('no')}?v=20261018" defer></script>
+    <script src="{'javascript/netgen-layouts.js'|ezdesign('no')}?v=20261018b" defer></script>
     {* After the app bundle: it waits for the app to draw itself before it
        touches anything. *}
     <script src="{'javascript/explayouts-mobile.js'|ezdesign('no')}?v=20260929" defer></script>
