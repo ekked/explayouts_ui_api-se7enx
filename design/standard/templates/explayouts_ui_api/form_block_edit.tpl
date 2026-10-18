@@ -1,10 +1,11 @@
 <div id="aside-tabs">
     <ul class="aside-tab-control" role="tablist">
-        <li><a href="#" id="tab-content" role="tab" aria-controls="tab-content-tab">{'Content'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
-        <li class="active"><a href="#" id="tab-design" role="tab" aria-controls="tab-design-tab">{'Design'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
+        {def $content_first = and( is_set( $has_content_parameters ), $has_content_parameters )}
+        <li{if $content_first} class="active"{/if}><a href="#" id="tab-content" role="tab" aria-controls="tab-content-tab">{'Content'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
+        <li{if $content_first|not} class="active"{/if}><a href="#" id="tab-design" role="tab" aria-controls="tab-design-tab">{'Design'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
     </ul>
 
-    <div class="tab-pane" id="tab-content-tab">
+    <div class="tab-pane{if $content_first} active{/if}" id="tab-content-tab">
         <div class="sidebar-panel">
             <a class="toggle-link" role="button" data-toggle="collapse" href="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">{'Options'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a>
             <div class="collapse in" id="collapseSettings">
@@ -73,7 +74,8 @@
         {/if}
     </div>
 
-    <div class="tab-pane active" id="tab-design-tab">
+    <div class="tab-pane{if $content_first|not} active{/if}" id="tab-design-tab">
         <div data-form="{$form_url}"></div>
     </div>
 </div>
+{undef $content_first}

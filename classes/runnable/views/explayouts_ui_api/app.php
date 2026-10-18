@@ -182,6 +182,8 @@ class App extends \Exponential\Runnable\ModuleView
             $tpl->setVariable( 'form_url', $expLayoutsUrl( "/explayouts_ui_api/app/$locale/blocks/$blockId/form" ) );
             $tpl->setVariable( 'content_form_url', $expLayoutsUrl( "/explayouts_ui_api/app/$locale/blocks/$blockId/form/edit/content" ) );
             $tpl->setVariable( 'block_id', $blockId );
+            // the Content tab opens first when it has parameters of the block (as the reference's content form)
+            $tpl->setVariable( 'has_content_parameters', $block && count( \expLayoutsUIApplicationApi::blockFormParameters( $block, 'content' )['parameters'] ) > 0 );
             $tpl->setVariable( 'block', $block );
             $tpl->setVariable( 'block_name', $block ? (string)$block->attribute( 'name' ) : '' );
 
@@ -207,6 +209,11 @@ class App extends \Exponential\Runnable\ModuleView
             $tpl->setVariable( 'action_url', $expLayoutsUrl( "/explayouts_ui_api/app/api/$locale/blocks/$blockId" ) );
             $tpl->setVariable( 'ezxform_token', \ezxFormToken::getToken() );
             $tpl->setVariable( 'block_name', (string)$block->attribute( 'name' ) );
+            // the parameters of the Content tab, as the reference's content form: the block's text, links, images,
+            // video and map ([BlockDefinition_<id>] ContentParameters[] of explayouts)
+            $form = \expLayoutsUIApplicationApi::blockFormParameters( $block, 'content' );
+            $tpl->setVariable( 'parameters', $form['parameters'] );
+            $tpl->setVariable( 'parameter_values', $form['values'] );
 
             $Result = array();
             $Result['pagelayout'] = false;
@@ -227,51 +234,12 @@ class App extends \Exponential\Runnable\ModuleView
                 return $this->viewResult( isset( $Result ) ? $Result : null,  $Result );
             }
 
-            $definitionIdentifier = (string)$block->attribute( 'definition_identifier' );
-            $blockInfo = \expLayoutsBlockHandlerFactory::getBlockInfo( $definitionIdentifier );
-            $viewTypes = is_array( $blockInfo ) && isset( $blockInfo['view_types'] ) ? $blockInfo['view_types'] : array( 'default' );
-
-            $handler = \expLayoutsBlockHandlerFactory::get( $definitionIdentifier );
-            $parameters = $handler ? $handler->getParameters() : array();
-
-            // Every block should expose the standard design parameters in the right
-            // sidebar (Use vertical whitespace, CSS class/ID, Wrap in container).
-            // If the handler already defines any of these, its own definition wins.
-            $parameters = $parameters + \expLayoutsStandardDesignParameters::get();
-
-            $parameterValues = array();
-            foreach ( $parameters as $paramName => $paramDef )
-            {
-                $parameterValues[$paramName] = isset( $paramDef['default'] ) ? $paramDef['default'] : '';
-            }
-            foreach ( \expLayoutsBlockParameter::fetchByBlock( $blockId ) as $param )
-            {
-                $parameterValues[(string)$param->attribute( 'name' )] = (string)$param->attribute( 'value' );
-            }
-
-            // Drop legacy query parameters from the design form; they are handled by
-            // the Content tab query builder or block fetchItems, not by design settings.
-            // Field and value both: dropping only the value left the field in
-            // the form, empty (a gallery block showed blank Parent node ID and
-            // Limit), and the next save of the form stored the empty value over
-            // the block's own.
-            $legacyQueryParams = array( 'query_type', 'parent_node_id', 'node_id', 'limit', 'offset', 'class_filter', 'sort' );
-            foreach ( $legacyQueryParams as $legacy )
-            {
-                unset( $parameters[$legacy], $parameterValues[$legacy] );
-            }
-
-            // A parameter limited to view types (its 'view_type', comma separated)
-            // none of which the block's definition has never applies to the block:
-            // left out (the gallery handler's columns and lightbox on a logos block).
-            foreach ( $parameters as $paramName => $paramDef )
-            {
-                if ( is_array( $paramDef ) && isset( $paramDef['view_type'] ) && (string)$paramDef['view_type'] !== ''
-                     && !array_intersect( array_map( 'trim', explode( ',', (string)$paramDef['view_type'] ) ), $viewTypes ) )
-                {
-                    unset( $parameters[$paramName], $parameterValues[$paramName] );
-                }
-            }
+            // the parameters of the Design tab: all but the ones of the Content tab (blockFormParameters())
+            $form = \expLayoutsUIApplicationApi::blockFormParameters( $block, 'design' );
+            $handler = $form['handler'];
+            $viewTypes = $form['view_types'];
+            $parameters = $form['parameters'];
+            $parameterValues = $form['values'];
 
             $collectionItems = array();
             $collection = \expLayoutsCollection::fetchByBlock( $blockId );
@@ -302,7 +270,7 @@ class App extends \Exponential\Runnable\ModuleView
                 : array();
 
             $tpl->setVariable( 'view_types', $viewTypes );
-            $tpl->setVariable( 'view_type_names', is_array( $blockInfo ) && isset( $blockInfo['view_type_names'] ) && is_array( $blockInfo['view_type_names'] ) ? $blockInfo['view_type_names'] : array() );
+            $tpl->setVariable( 'view_type_names', $form['view_type_names'] );
             $tpl->setVariable( 'item_view_types', $itemViewTypes );
             $tpl->setVariable( 'parameters', $parameters );
             $tpl->setVariable( 'parameter_values', $parameterValues );

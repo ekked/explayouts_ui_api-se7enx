@@ -2579,6 +2579,78 @@ class expLayoutsUIApplicationApi
         return $normalized;
     }
 
+    /**
+     * The parameters of a block for one tab of the editor's sidebar, with their stored values: 'content' (the
+     * reference's group "content", [BlockDefinition_<id>] ContentParameters[] of explayouts) or 'design' (every
+     * other parameter, and the standard design parameters every block has). Left out are the legacy query
+     * parameters (the Content tab's query form edits them) and a parameter limited to view types none of which the
+     * definition has.
+     *
+     * @return array( 'parameters' => array, 'values' => array, 'view_types' => array, 'view_type_names' => array,
+     *                'handler' => object|false )
+     */
+    public static function blockFormParameters( $block, $group )
+    {
+        $definitionIdentifier = (string)$block->attribute( 'definition_identifier' );
+        $blockInfo = expLayoutsBlockHandlerFactory::getBlockInfo( $definitionIdentifier );
+        $viewTypes = is_array( $blockInfo ) && isset( $blockInfo['view_types'] ) ? $blockInfo['view_types'] : array( 'default' );
+
+        $handler = expLayoutsBlockHandlerFactory::get( $definitionIdentifier );
+        $parameters = is_object( $handler ) ? $handler->getParameters() : array();
+        // Every block has the standard design parameters (vertical whitespace, CSS class and ID, container); a
+        // handler's own definition of one wins.
+        $parameters = $parameters + expLayoutsStandardDesignParameters::get();
+
+        $contentParameters = is_array( $blockInfo ) && isset( $blockInfo['content_parameters'] ) && is_array( $blockInfo['content_parameters'] )
+            ? $blockInfo['content_parameters']
+            : array();
+        $legacyQueryParams = array( 'query_type', 'parent_node_id', 'node_id', 'limit', 'offset', 'class_filter', 'sort' );
+        foreach ( $parameters as $name => $definition )
+        {
+            $inContent = in_array( (string)$name, $contentParameters, true );
+            // node_id is a query parameter of the list blocks, but the content of a "Single content" block
+            if ( ( in_array( $name, $legacyQueryParams, true ) && !$inContent )
+                 || ( $group === 'content' ) !== $inContent )
+            {
+                unset( $parameters[$name] );
+                continue;
+            }
+            if ( is_array( $definition ) && isset( $definition['view_type'] ) && (string)$definition['view_type'] !== ''
+                 && !array_intersect( array_map( 'trim', explode( ',', (string)$definition['view_type'] ) ), $viewTypes ) )
+                unset( $parameters[$name] );
+        }
+
+        $values = array();
+        foreach ( $parameters as $name => $definition )
+            $values[$name] = isset( $definition['default'] ) ? $definition['default'] : '';
+        foreach ( expLayoutsBlockParameter::fetchByBlock( (int)$block->attribute( 'id' ) ) as $param )
+        {
+            $name = (string)$param->attribute( 'name' );
+            if ( isset( $parameters[$name] ) || self::isChildParameter( $parameters, $name ) )
+                $values[$name] = (string)$param->attribute( 'value' );
+        }
+
+        return array(
+            'parameters' => $parameters,
+            'values' => $values,
+            'view_types' => $viewTypes,
+            'view_type_names' => is_array( $blockInfo ) && isset( $blockInfo['view_type_names'] ) && is_array( $blockInfo['view_type_names'] ) ? $blockInfo['view_type_names'] : array(),
+            'handler' => $handler,
+        );
+    }
+
+    /** Is $name a child of one of the compound $parameters (at any depth)? */
+    protected static function isChildParameter( array $parameters, $name )
+    {
+        foreach ( $parameters as $definition )
+        {
+            if ( is_array( $definition ) && isset( $definition['children'] ) && is_array( $definition['children'] )
+                 && ( isset( $definition['children'][$name] ) || self::isChildParameter( $definition['children'], $name ) ) )
+                return true;
+        }
+        return false;
+    }
+
     public static function buildQueryParameterTree( $handler )
     {
         $definitions = ( $handler && method_exists( $handler, 'getParameters' ) ) ? $handler->getParameters() : array();

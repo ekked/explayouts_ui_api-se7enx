@@ -163,6 +163,10 @@
         <source>View in CMS</source>
         <translation>View in CMS</translation>
     </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(saved) %value</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_create</name>
@@ -1507,6 +1511,90 @@
     <message>
         <source>25:25:25:25</source>
         <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>Parent node ID</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Limit</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Class filter</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standard (with intro)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Overlay</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Card</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Card (with intro)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Line</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>List item</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>List item (with intro)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Node ID</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Navigation part (empty: the one of the page)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Component</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>List</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Grid</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Numbered list</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zig-zag</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Accordion</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Grid (first item large)</translation>
     </message>
 </context>
 </TS>

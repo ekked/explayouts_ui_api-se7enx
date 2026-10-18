@@ -17,9 +17,19 @@
            carrying that class. It belongs on the view_type / collection-type
            master selects, which drive a field re-render, not on parameters. *}
         <select id="{$input_id}" name="parameters[{$name}]">
+            {* A stored value that is none of the options (a free text from before the select) stays selected as an
+               option of its own: otherwise the next auto-submit stored the first option over it. *}
+            {def $saved_outside = and( is_set( $value ), $value|ne( '' ) )}
             {foreach $param.options as $opt_val => $opt_label}
-                <option value="{$opt_val|wash()}" {if and( is_set( $value ), eq( $opt_val, $value ) )}selected="selected"{/if}>{$opt_label|i18n( 'design/standard/explayouts_ui_api/parameters' )|wash()}</option>
+                {if and( $saved_outside, eq( concat( $opt_val, '' ), concat( $value, '' ) ) )}{set $saved_outside = false()}{/if}
             {/foreach}
+            {if $saved_outside}
+                <option value="{$value|wash()}" selected="selected" class="saved-value">{'(saved) %value'|i18n( 'design/standard/explayouts_ui_api/form_block_parameter', '', hash( '%value', $value ) )|wash()}</option>
+            {/if}
+            {foreach $param.options as $opt_val => $opt_label}
+                <option value="{$opt_val|wash()}" {if and( is_set( $value ), eq( concat( $opt_val, '' ), concat( $value, '' ) ) )}selected="selected"{/if}>{$opt_label|i18n( 'design/standard/explayouts_ui_api/parameters' )|wash()}</option>
+            {/foreach}
+            {undef $saved_outside}
         </select>
     </div>
 {elseif eq( $type, 'integer' )}

@@ -166,6 +166,10 @@
         <source>View in CMS</source>
         <translation>In CMS inspicere</translation>
     </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(servatum) %value</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_create</name>
@@ -1362,6 +1366,90 @@
     <message>
         <source>25:25:25:25</source>
         <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>Signum nodi parentis</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Terminus</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Colum generum</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Solitum</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Solitum (cum prooemio)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Superpositum</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Charta</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Charta (cum prooemio)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Linea</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Minima</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Elementum indicis</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Elementum indicis (cum prooemio)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Signum nodi</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Pars navigationis (vacua: paginae ipsius)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Pars</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Index</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Cancelli</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Index numeratus</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Flexuosum</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Plicatile</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Cancelli (primum elementum magnum)</translation>
     </message>
 </context>
 </TS>

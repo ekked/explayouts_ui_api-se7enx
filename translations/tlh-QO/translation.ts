@@ -166,6 +166,10 @@
         <source>View in CMS</source>
         <translation>De&apos; qachDaq yIlegh</translation>
     </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(pol) %value</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_create</name>
@@ -1362,6 +1366,90 @@
     <message>
         <source>25:25:25:25</source>
         <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ghu' ngu'meH vav</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>veH</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Segh mIllogh</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>motlh</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>motlh (nab wa'DIch)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Dung</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>chaw'</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>chaw' (nab wa'DIch)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>tlhegh</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>mach</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>tetlh Doch</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>tetlh Doch (nab wa'DIch)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>vav ngu'meH</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>He 'ay' (chIm: nav 'ay')</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>'ay'</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>tetlh</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>mIllogh ghom</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>tetlh mI'</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Hew'</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>tlhegh boS</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>mIllogh ghom (wa'DIch Doch tIn)</translation>
     </message>
 </context>
 </TS>

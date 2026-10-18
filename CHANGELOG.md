@@ -12,6 +12,14 @@
 - Design tab: a parameter of the type `boolean` is a checkbox (it was a text field); number fields take `min` and
   `max` from the parameter. The new parameters, options and view type names of explayouts' blocks (parity with
   netgen/layouts-standard) are translated in every catalogue.
+- **Content tab as in the reference**: the parameters of the group "content" (explayouts' `[BlockDefinition_<id>]
+  ContentParameters[]`: text, links, images, video, map) are edited in the Content tab with the block label and the
+  collection, the others in the Design tab (`expLayoutsUIApplicationApi::blockFormParameters()`); the Content tab
+  opens first when it has parameters. Without the list every parameter stays in the Design tab.
+- A select keeps a stored value that is none of its options as an option of its own, "(saved) <value>"; the next
+  auto-submit no longer replaces it with the first option.
+- Item view types and the view types of master/slave selects are named and translated; the catalogues translate
+  every parameter text of explayouts' blocks.
 
 Open: the import is still a second implementation beside explayouts' `expLayoutsImporter` (shared are the
 validation and the handling of rules).

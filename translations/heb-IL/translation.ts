@@ -165,6 +165,10 @@
         <source>View in CMS</source>
         <translation>הצגה במערכת ניהול התוכן</translation>
     </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(נשמר) %value</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_create</name>
@@ -1361,6 +1365,90 @@
     <message>
         <source>25:25:25:25</source>
         <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>מזהה צומת האב</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>מגבלה</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>מסנן מחלקות</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>רגיל</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>רגיל (עם פתיח)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>שכבת-על</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>כרטיס</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>כרטיס (עם פתיח)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>שורה</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>מיני</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>פריט רשימה</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>פריט רשימה (עם פתיח)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>מזהה צומת</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>חלק הניווט (ריק: זה של הדף)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>רכיב</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>רשימה</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>רשת</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>רשימה ממוספרת</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>זיגזג</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>אקורדיון</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>רשת (הפריט הראשון גדול)</translation>
     </message>
 </context>
 </TS>

@@ -163,6 +163,10 @@
         <source>View in CMS</source>
         <translation>Im CMS anzeigen</translation>
     </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(gespeichert) %value</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_create</name>
@@ -1507,6 +1511,90 @@
     <message>
         <source>25:25:25:25</source>
         <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>Knoten-ID des Elternknotens</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Höchstzahl</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Klassenfilter</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standard (mit Anreißer)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Überlagert</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Karte</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Karte (mit Anreißer)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Zeile</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Listeneintrag</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Listeneintrag (mit Anreißer)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Knoten-ID</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Navigationsbereich (leer: der der Seite)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Komponente</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Liste</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Raster</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Nummerierte Liste</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zickzack</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Akkordeon</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Raster (erster Eintrag groß)</translation>
     </message>
 </context>
 </TS>
