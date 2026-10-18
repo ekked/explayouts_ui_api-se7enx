@@ -666,7 +666,7 @@
     {* The rich text and code editors (Tiptap, built from src/editors/): window.CKEDITOR and window.ace with
        the calls the app bundle makes of them. Before the bundle: it registers CKEDITOR listeners on load. *}
     <script src="{'javascript/explayouts-tiptap.js'|ezdesign('no')}" defer></script>
-    <script src="{'javascript/netgen-layouts.js'|ezdesign('no')}?v=20261016" defer></script>
+    <script src="{'javascript/netgen-layouts.js'|ezdesign('no')}?v=20261018" defer></script>
     {* After the app bundle: it waits for the app to draw itself before it
        touches anything. *}
     <script src="{'javascript/explayouts-mobile.js'|ezdesign('no')}?v=20260929" defer></script>
