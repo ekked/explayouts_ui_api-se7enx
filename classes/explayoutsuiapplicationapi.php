@@ -2385,8 +2385,11 @@ class expLayoutsUIApplicationApi
                 continue;
             $type = isset( $item['type'] ) ? $item['type'] : ( isset( $item['target_type'] ) ? $item['target_type'] : '' );
             $value = isset( $item['value'] ) ? $item['value'] : ( isset( $item['target_value'] ) ? $item['target_value'] : '' );
-            if ( trim( $type ) !== '' )
-                $out[] = array( 'type' => trim( $type ), 'value' => (string)$value );
+            // only types the resolver knows: an unknown target type was stored and never (a target) or, before the
+            // resolver refused unknown conditions, always (a condition) matched
+            if ( !is_string( $type ) || !is_scalar( $value ) || !in_array( trim( $type ), self::knownTypes( 'target' ), true ) )
+                continue;
+            $out[] = array( 'type' => trim( $type ), 'value' => (string)$value );
         }
         return $out;
     }
@@ -2401,8 +2404,11 @@ class expLayoutsUIApplicationApi
                 continue;
             $type = isset( $item['type'] ) ? $item['type'] : ( isset( $item['condition_type'] ) ? $item['condition_type'] : '' );
             $value = isset( $item['value'] ) ? $item['value'] : ( isset( $item['condition_value'] ) ? $item['condition_value'] : '' );
-            if ( trim( $type ) !== '' )
-                $out[] = array( 'type' => trim( $type ), 'value' => (string)$value );
+            // only types the resolver knows: an unknown condition type was stored and never (a target) or, before the
+            // resolver refused unknown conditions, always (a condition) matched
+            if ( !is_string( $type ) || !is_scalar( $value ) || !in_array( trim( $type ), self::knownTypes( 'condition' ), true ) )
+                continue;
+            $out[] = array( 'type' => trim( $type ), 'value' => (string)$value );
         }
         return $out;
     }
@@ -2587,9 +2593,10 @@ class expLayoutsUIApplicationApi
             if ( empty( $data ) )
                 return self::response( array( 'error' => 'Missing import payload.' ), 400 );
 
-            $layout = self::importLayout( $data );
+            $error = '';
+            $layout = self::importLayout( $data, $error );
             if ( !$layout instanceof expLayoutsLayout )
-                return self::response( array( 'error' => 'Import failed.' ), 500 );
+                return self::response( array( 'error' => $error !== '' ? $error : 'Import failed.' ), $error === 'Import failed.' ? 500 : 400 );
 
             return self::response( self::exportLayout( $layout ) );
         }
@@ -2631,143 +2638,219 @@ class expLayoutsUIApplicationApi
         return $result;
     }
 
-    protected static function importLayout( $data )
-    {
-        if ( !is_array( $data )
-            || !isset( $data['identifier'] )
-            || !isset( $data['name'] )
-            || !isset( $data['layout_type'] ) )
-            return false;
+    /** Target types the resolver knows (expLayoutsResolver::TARGET_TYPES); the list for an explayouts without it */
+    const KNOWN_TARGET_TYPES = array( 'path', 'path_prefix', 'path_info_prefix', 'path_regex', 'node', 'subtree', 'route',
+                                      'module', 'module_view' );
 
-        $identifier = $data['identifier'];
+    /** Condition types the resolver knows (expLayoutsResolver::CONDITION_TYPES), likewise */
+    const KNOWN_CONDITION_TYPES = array( 'siteaccess', 'class', 'content_type', 'query_parameter', 'route_parameter', 'time' );
+
+    protected static function knownTypes( $kind )
+    {
+        if ( class_exists( 'expLayoutsResolver' ) && defined( 'expLayoutsResolver::' . strtoupper( $kind ) . '_TYPES' ) )
+            return constant( 'expLayoutsResolver::' . strtoupper( $kind ) . '_TYPES' );
+        return $kind === 'target' ? self::KNOWN_TARGET_TYPES : self::KNOWN_CONDITION_TYPES;
+    }
+
+    /**
+     * The parameters of an exported block as name => value, from either form: a list of array( 'name' => ...,
+     * 'value' => ... ) (this API's export) or a map (the export of explayouts' layout list, expLayoutsExporter).
+     *
+     * @param mixed $parameters
+     * @return array
+     */
+    public static function importParameterMap( $parameters )
+    {
+        if ( !is_array( $parameters ) )
+            return array();
+        $map = array();
+        foreach ( $parameters as $key => $parameter )
+        {
+            if ( is_array( $parameter ) && isset( $parameter['name'] ) && is_scalar( $parameter['name'] ) )
+                $map[(string)$parameter['name']] = isset( $parameter['value'] ) && is_scalar( $parameter['value'] ) ? (string)$parameter['value'] : '';
+            elseif ( is_string( $key ) && ( is_scalar( $parameter ) || $parameter === null ) )
+                $map[$key] = (string)$parameter;
+        }
+        return $map;
+    }
+
+    /**
+     * What keeps an export from being imported, before anything is written: an empty list when nothing does.
+     * Accepts this API's export (no version) and the one of explayouts' layout list ("version": 1).
+     *
+     * @param mixed $data
+     * @return string[]
+     */
+    public static function importProblems( $data )
+    {
+        if ( !is_array( $data ) )
+            return array( 'Invalid import payload.' );
+        if ( isset( $data['version'] ) && (int)$data['version'] !== 1 )
+            return array( 'Unsupported export version.' );
+        foreach ( array( 'identifier', 'name', 'layout_type' ) as $key )
+        {
+            if ( !isset( $data[$key] ) || !is_scalar( $data[$key] ) || trim( (string)$data[$key] ) === '' )
+                return array( 'Missing required field: ' . $key );
+        }
+        if ( !is_string( $data['layout_type'] ) || expLayoutsLayoutType::getTypeInfo( $data['layout_type'] ) === false )
+            return array( 'Unknown layout type: ' . $data['layout_type'] );
+        if ( isset( $data['zones'] ) && !is_array( $data['zones'] ) )
+            return array( 'Invalid zones.' );
+
+        $problems = array();
+        foreach ( isset( $data['zones'] ) ? $data['zones'] : array() as $zoneData )
+        {
+            if ( !is_array( $zoneData ) || !isset( $zoneData['identifier'] ) || !is_scalar( $zoneData['identifier'] ) )
+            {
+                $problems[] = 'Invalid zone.';
+                continue;
+            }
+            foreach ( isset( $zoneData['blocks'] ) && is_array( $zoneData['blocks'] ) ? $zoneData['blocks'] : array() as $blockData )
+            {
+                $definition = is_array( $blockData ) && isset( $blockData['definition_identifier'] ) ? $blockData['definition_identifier'] : null;
+                if ( !is_string( $definition ) || expLayoutsBlockHandlerFactory::getBlockInfo( $definition ) === false )
+                    $problems[] = 'Unknown block type: ' . ( is_scalar( $definition ) ? $definition : '?' );
+            }
+        }
+        return array_values( array_unique( $problems ) );
+    }
+
+    /**
+     * Imports an export as a new layout: always a draft with draft zones and blocks, whatever the export says; the
+     * layout type and every block definition must be ones of the settings, a view type one of its block's; rules
+     * come along disabled with the known target and condition types only, so nothing is live before an editor
+     * decides. One transaction: a failure halfway leaves nothing behind.
+     *
+     * @param mixed $data
+     * @param string &$error why nothing was imported
+     * @return expLayoutsLayout|false
+     */
+    protected static function importLayout( $data, &$error = null )
+    {
+        $problems = self::importProblems( $data );
+        if ( $problems )
+        {
+            $error = implode( ' ', $problems );
+            return false;
+        }
+
+        $db = eZDB::instance();
+        $db->begin();
+        try
+        {
+            $layout = self::writeImportedLayout( $data );
+        }
+        catch ( Exception $e )
+        {
+            $db->rollback();
+            $error = 'Import failed.';
+            return false;
+        }
+        $db->commit();
+        return $layout;
+    }
+
+    protected static function writeImportedLayout( array $data )
+    {
+        $identifier = (string)$data['identifier'];
         $existing = expLayoutsLayout::fetchByIdentifier( $identifier, 2 );
         if ( $existing instanceof expLayoutsLayout )
             $identifier .= '_import_' . time();
 
-        $layout = expLayoutsLayout::create( $identifier, $data['name'], $data['layout_type'] );
+        $layout = expLayoutsLayout::create( $identifier, (string)$data['name'], $data['layout_type'] );
+        $layout->setAttribute( 'status', 1 );
         $layout->store();
         $layoutId = (int)$layout->attribute( 'id' );
 
-        if ( isset( $data['zones'] ) && is_array( $data['zones'] ) )
+        foreach ( isset( $data['zones'] ) ? $data['zones'] : array() as $zoneData )
         {
-            foreach ( $data['zones'] as $zoneData )
+            $zoneIdentifier = (string)$zoneData['identifier'];
+            $zone = expLayoutsZone::create( $layoutId, $zoneIdentifier, 1 );
+            if ( isset( $zoneData['position'] ) )
+                $zone->setAttribute( 'position', (int)$zoneData['position'] );
+            if ( isset( $zoneData['linked_layout_id'] ) && (int)$zoneData['linked_layout_id'] > 0 )
             {
-                $zoneIdentifier = isset( $zoneData['identifier'] ) ? $zoneData['identifier'] : 'zone_' . time();
-                $zone = expLayoutsZone::create( $layoutId, $zoneIdentifier );
-                if ( isset( $zoneData['status'] ) )
-                    $zone->setAttribute( 'status', (int)$zoneData['status'] );
-                if ( isset( $zoneData['position'] ) )
-                    $zone->setAttribute( 'position', (int)$zoneData['position'] );
-                if ( isset( $zoneData['linked_layout_id'] ) )
+                $zone->setAttribute( 'linked_layout_id', (int)$zoneData['linked_layout_id'] );
+                $zone->setAttribute( 'linked_zone_identifier',
+                    isset( $zoneData['linked_zone_identifier'] ) && is_scalar( $zoneData['linked_zone_identifier'] ) ? (string)$zoneData['linked_zone_identifier'] : $zoneIdentifier );
+            }
+            $zone->store();
+            $zoneId = (int)$zone->attribute( 'id' );
+
+            foreach ( isset( $zoneData['blocks'] ) && is_array( $zoneData['blocks'] ) ? $zoneData['blocks'] : array() as $blockData )
+            {
+                $definitionIdentifier = $blockData['definition_identifier'];
+                $name = isset( $blockData['name'] ) && is_scalar( $blockData['name'] ) ? (string)$blockData['name'] : '';
+                $block = expLayoutsBlock::create( $zoneId, $layoutId, $definitionIdentifier, $name );
+                $block->setAttribute( 'status', 1 );
+                if ( isset( $blockData['position'] ) )
+                    $block->setAttribute( 'position', (int)$blockData['position'] );
+                if ( isset( $blockData['view_type'] ) && is_string( $blockData['view_type'] ) )
                 {
-                    $zone->setAttribute( 'linked_layout_id', (int)$zoneData['linked_layout_id'] );
-                    $zone->setAttribute( 'linked_zone_identifier',
-                        isset( $zoneData['linked_zone_identifier'] ) ? $zoneData['linked_zone_identifier'] : $zoneIdentifier );
+                    $info = expLayoutsBlockHandlerFactory::getBlockInfo( $definitionIdentifier );
+                    $viewTypes = is_array( $info ) && isset( $info['view_types'] ) && is_array( $info['view_types'] ) ? $info['view_types'] : array( 'default' );
+                    if ( in_array( $blockData['view_type'], $viewTypes, true ) )
+                        $block->setAttribute( 'view_type', $blockData['view_type'] );
                 }
-                $zone->store();
-                $zoneId = (int)$zone->attribute( 'id' );
+                $block->store();
+                $blockId = (int)$block->attribute( 'id' );
 
-                if ( isset( $zoneData['blocks'] ) && is_array( $zoneData['blocks'] ) )
+                foreach ( self::importParameterMap( isset( $blockData['parameters'] ) ? $blockData['parameters'] : array() ) as $paramName => $paramValue )
+                    expLayoutsBlockParameter::set( $blockId, $paramName, $paramValue );
+
+                // an empty list (this API's export) or false (explayouts') is no collection
+                if ( isset( $blockData['collection'] ) && is_array( $blockData['collection'] ) && $blockData['collection'] )
                 {
-                    foreach ( $zoneData['blocks'] as $blockData )
+                    $collectionData = $blockData['collection'];
+                    $collectionType = isset( $collectionData['collection_type'] ) && is_string( $collectionData['collection_type'] ) ? $collectionData['collection_type'] : 'manual';
+                    $collection = expLayoutsCollection::create( $blockId, $collectionType );
+                    if ( isset( $collectionData['offset_value'] ) )
+                        $collection->setAttribute( 'offset_value', (int)$collectionData['offset_value'] );
+                    if ( isset( $collectionData['limit_value'] ) )
+                        $collection->setAttribute( 'limit_value', (int)$collectionData['limit_value'] );
+                    $collection->store();
+                    $collectionId = (int)$collection->attribute( 'id' );
+
+                    foreach ( isset( $collectionData['items'] ) && is_array( $collectionData['items'] ) ? $collectionData['items'] : array() as $itemData )
                     {
-                        $definitionIdentifier = isset( $blockData['definition_identifier'] ) ? $blockData['definition_identifier'] : 'text';
-                        $name = isset( $blockData['name'] ) ? $blockData['name'] : '';
-                        $block = expLayoutsBlock::create( $zoneId, $layoutId, $definitionIdentifier, $name );
-                        if ( isset( $blockData['position'] ) )
-                            $block->setAttribute( 'position', (int)$blockData['position'] );
-                        if ( isset( $blockData['view_type'] ) )
-                            $block->setAttribute( 'view_type', $blockData['view_type'] );
-                        if ( isset( $blockData['status'] ) )
-                            $block->setAttribute( 'status', (int)$blockData['status'] );
-                        $block->store();
-                        $blockId = (int)$block->attribute( 'id' );
-
-                        if ( isset( $blockData['parameters'] ) && is_array( $blockData['parameters'] ) )
-                        {
-                            foreach ( $blockData['parameters'] as $param )
-                            {
-                                if ( isset( $param['name'] ) )
-                                    expLayoutsBlockParameter::set(
-                                        $blockId,
-                                        $param['name'],
-                                        isset( $param['value'] ) ? $param['value'] : ''
-                                    );
-                            }
-                        }
-
-                        if ( isset( $blockData['collection'] ) && is_array( $blockData['collection'] ) )
-                        {
-                            $collectionData = $blockData['collection'];
-                            $collectionType = isset( $collectionData['collection_type'] ) ? $collectionData['collection_type'] : 'manual';
-                            $collection = expLayoutsCollection::create( $blockId, $collectionType );
-                            if ( isset( $collectionData['offset_value'] ) )
-                                $collection->setAttribute( 'offset_value', (int)$collectionData['offset_value'] );
-                            if ( isset( $collectionData['limit_value'] ) )
-                                $collection->setAttribute( 'limit_value', (int)$collectionData['limit_value'] );
-                            $collection->store();
-                            $collectionId = (int)$collection->attribute( 'id' );
-
-                            if ( isset( $collectionData['items'] ) && is_array( $collectionData['items'] ) )
-                            {
-                                foreach ( $collectionData['items'] as $itemData )
-                                {
-                                    $valueId = isset( $itemData['value_id'] ) ? (int)$itemData['value_id'] : 0;
-                                    $valueType = isset( $itemData['value_type'] ) ? $itemData['value_type'] : 'ez_content';
-                                    $itemType = isset( $itemData['item_type'] ) ? $itemData['item_type'] : 'manual';
-                                    if ( $valueId > 0 )
-                                    {
-                                        $item = expLayoutsCollectionItem::create( $collectionId, $valueId, $valueType, $itemType );
-                                        if ( isset( $itemData['position'] ) )
-                                            $item->setAttribute( 'position', (int)$itemData['position'] );
-                                        $item->store();
-                                    }
-                                }
-                            }
-                        }
+                        $valueId = is_array( $itemData ) && isset( $itemData['value_id'] ) ? (int)$itemData['value_id'] : 0;
+                        if ( $valueId <= 0 )
+                            continue;
+                        $valueType = isset( $itemData['value_type'] ) && is_string( $itemData['value_type'] ) ? $itemData['value_type'] : 'ez_content';
+                        $itemType = isset( $itemData['item_type'] ) && is_string( $itemData['item_type'] ) ? $itemData['item_type'] : 'manual';
+                        $item = expLayoutsCollectionItem::create( $collectionId, $valueId, $valueType, $itemType );
+                        if ( isset( $itemData['position'] ) )
+                            $item->setAttribute( 'position', (int)$itemData['position'] );
+                        $item->store();
                     }
                 }
             }
         }
 
-        if ( isset( $data['rules'] ) && is_array( $data['rules'] ) )
+        foreach ( isset( $data['rules'] ) && is_array( $data['rules'] ) ? $data['rules'] : array() as $ruleData )
         {
-            foreach ( $data['rules'] as $ruleData )
+            if ( !is_array( $ruleData ) )
+                continue;
+            $priority = isset( $ruleData['priority'] ) ? (int)$ruleData['priority'] : null;
+            $rule = expLayoutsRule::create( $layoutId, $priority );
+            // disabled: an imported rule would otherwise take pages over as soon as the draft is published
+            $rule->setAttribute( 'enabled', 0 );
+            $rule->store();
+            $ruleId = (int)$rule->attribute( 'id' );
+
+            foreach ( isset( $ruleData['targets'] ) && is_array( $ruleData['targets'] ) ? $ruleData['targets'] : array() as $target )
             {
-                $priority = isset( $ruleData['priority'] ) ? (int)$ruleData['priority'] : null;
-                $rule = expLayoutsRule::create( $layoutId, $priority );
-                if ( isset( $ruleData['enabled'] ) )
-                    $rule->setAttribute( 'enabled', (int)$ruleData['enabled'] ? 1 : 0 );
-                $rule->store();
-                $ruleId = (int)$rule->attribute( 'id' );
-
-                if ( isset( $ruleData['targets'] ) && is_array( $ruleData['targets'] ) )
-                {
-                    foreach ( $ruleData['targets'] as $target )
-                    {
-                        $type = isset( $target['target_type'] ) ? $target['target_type'] : '';
-                        $value = isset( $target['target_value'] ) ? $target['target_value'] : '';
-                        if ( $type !== '' )
-                        {
-                            $t = expLayoutsRuleTarget::create( $ruleId, $type, $value );
-                            $t->store();
-                        }
-                    }
-                }
-
-                if ( isset( $ruleData['conditions'] ) && is_array( $ruleData['conditions'] ) )
-                {
-                    foreach ( $ruleData['conditions'] as $condition )
-                    {
-                        $type = isset( $condition['condition_type'] ) ? $condition['condition_type'] : '';
-                        $value = isset( $condition['condition_value'] ) ? $condition['condition_value'] : '';
-                        if ( $type !== '' )
-                        {
-                            $c = expLayoutsRuleCondition::create( $ruleId, $type, $value );
-                            $c->store();
-                        }
-                    }
-                }
+                $type = is_array( $target ) && isset( $target['target_type'] ) && is_string( $target['target_type'] ) ? $target['target_type'] : '';
+                $value = is_array( $target ) && isset( $target['target_value'] ) && is_scalar( $target['target_value'] ) ? (string)$target['target_value'] : '';
+                if ( in_array( $type, self::knownTypes( 'target' ), true ) )
+                    expLayoutsRuleTarget::create( $ruleId, $type, $value )->store();
+            }
+            foreach ( isset( $ruleData['conditions'] ) && is_array( $ruleData['conditions'] ) ? $ruleData['conditions'] : array() as $condition )
+            {
+                $type = is_array( $condition ) && isset( $condition['condition_type'] ) && is_string( $condition['condition_type'] ) ? $condition['condition_type'] : '';
+                $value = is_array( $condition ) && isset( $condition['condition_value'] ) && is_scalar( $condition['condition_value'] ) ? (string)$condition['condition_value'] : '';
+                if ( in_array( $type, self::knownTypes( 'condition' ), true ) )
+                    expLayoutsRuleCondition::create( $ruleId, $type, $value )->store();
             }
         }
 
