@@ -128,3 +128,25 @@ test( 'only the new layout dialog or the editor header take Cancel, not the prim
     assert.equal( link.nextElementSibling.textContent, 'Publish layout' );
     assert.ok( !link.classList.contains( 'action_apply' ) );
 } );
+
+test( 'Cancel in the new layout dialog lifts the leave guard, Cancel in the editor header keeps it', async () => {
+    setUpEditor( '' );
+    window.Core = { should_navigate_away: false };
+    new Function( cancelScript() )();
+    newLayoutDialog( { count: 0 } );
+    await tick();
+    document.getElementById( 'ng-cancel-link' ).click();
+    assert.equal( window.Core.should_navigate_away, true, 'nothing to lose in the new layout dialog' );
+
+    document.body.innerHTML = '<div id="app" class="ngc"></div><a id="ng-cancel-link" href="#">Cancel</a>';
+    window.Core = { should_navigate_away: false };
+    new Function( cancelScript() )();
+    const header = document.createElement( 'div' );
+    header.className = 'actions';
+    header.innerHTML = '<button class="btn btn-primary js-publish">Publish layout</button>';
+    document.getElementById( 'app' ).appendChild( header );
+    await tick();
+    document.getElementById( 'ng-cancel-link' ).click();
+    assert.equal( window.Core.should_navigate_away, false, 'unsaved changes are possible in the editor' );
+    delete window.Core;
+} );

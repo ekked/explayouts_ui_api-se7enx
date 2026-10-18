@@ -625,6 +625,10 @@
         link.addEventListener('click', function(e){
             e.preventDefault();
             e.stopPropagation();
+            // The app's beforeunload guard stops every navigation unless should_navigate_away is set, as its own
+            // Cancel did. In the new layout dialog nothing exists yet that could be lost; in the editor the guard
+            // stays, unsaved changes are possible there.
+            if (window.Core && link.closest('.new_layout')) window.Core.should_navigate_away = true;
             window.location.href = destination();
         });
 
