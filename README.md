@@ -144,20 +144,31 @@ Modifying requests must carry the eZ form token, either as an `X-CSRF-Token` HTT
 
 See [doc/USAGE.md](doc/USAGE.md) for exhaustive scenarios: every endpoint with request/response bodies, a complete curl session, the HTML form fragment flow, implementation notes, and the full customization guide covering the settings layer (INI cascade — everything the API exposes is defined in `explayouts.ini` and overridable without code changes; access control via module policies), the template layer (design override cascade for `app.tpl` and the form templates — the supported way to swap CSS/JS bundles) and the PHP layer (building against the JSON contract, adding block parameters via handlers, custom read-only JSON views).
 
-Changes made by hand to the app bundle
---------------------------------------
+The app bundle and its patches
+------------------------------
 
-`design/standard/javascript/netgen-layouts.js` is a built bundle whose source is not part of this package. Changes
-made to it directly have to be made again if it is ever rebuilt:
+`design/standard/javascript/netgen-layouts.js` is the built bundle of
+[netgen/layouts-ui](https://github.com/netgen-layouts/layouts-ui) **2.0.0** (commit `e61f093`, file
+`bundle/Resources/public/js/netgen-layouts.js`; the first import of this package was that file byte for byte), with
+changes for Exponential made to the built bundle. The bundle is not rebuilt from the layouts-ui sources: their build
+(Grunt, browserify, Node 14, node-sass) is not reproducible any more, and a rebuild would drop every change below.
 
-- View type select (module `lib/jquery/view_types`): the handler
-  `r(document).on("change",".view-type",function(e){i(this)})` reads
-  `r(document).on("change",".view-type",function(e){i(this),r(this).hasClass("master")||r(this).closest("form").trigger("submit")})`.
-  The select carries `js-skip-on-change`, so the form's own change handler never saved it; only the master select of
-  a master/slave pair was saved, through the change it triggers on its slave. A changed view type of any other block
-  (the gallery blocks, two columns) was lost. `tests/GalleryBlockPreviewTest.php` checks the handler.
+What differs from the original is versioned in `src/app-patches/`:
 
-After a change to the bundle, raise the `?v=` of its `<script>` in `app.tpl`, so browsers fetch it again.
+- `manifest.json`: the original (version, commit, download address, sha256 of the bundle, of each of its 157
+  modules and of the skeleton around them) and each patched module with what was changed and in which commit;
+- `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
+- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (31 of 157: the interface
+  texts, the page's jQuery 4 and jQuery UI instead of the built-in jQuery 2.2.4 / jQuery UI 1.10.4, the view type
+  select, and the others listed in the manifest).
+
+`node src/app-patches/apply.mjs` builds the bundle from them (`--check` compares, `--from=<original bundle>` builds
+from the layouts-ui file, `--diff` shows the changes against it, `--extract=<id>` copies a module out to change it;
+details in the file). `tests/js/app-patches.test.mjs` checks that the bundle is the original plus exactly these
+patches, without needing the original (with `LAYOUTS_UI_BUNDLE=<original bundle>` it also rebuilds from it).
+
+To change the bundle: `--extract` the module if it is not patched yet, edit its file, note the change in
+`manifest.json`, run `apply.mjs`, and raise the `?v=` of its `<script>` in `app.tpl`, so browsers fetch it again.
 
 Rich text and code editors
 --------------------------

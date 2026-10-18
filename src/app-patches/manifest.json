@@ -1,0 +1,464 @@
+{
+  "about": "design/standard/javascript/netgen-layouts.js = the bundle of netgen/layouts-ui 2.0.0 (base) with header.js in front and the modules listed here replaced by their files. Commits in parentheses are those of se7enxweb/explayouts_ui_api. Built and checked by apply.mjs, tested by tests/js/app-patches.test.mjs.",
+  "base": {
+    "package": "netgen/layouts-ui",
+    "version": "2.0.0",
+    "commit": "e61f093e1ee323a56768fa074e90a4e4576a0bcd",
+    "path": "bundle/Resources/public/js/netgen-layouts.js",
+    "url": "https://raw.githubusercontent.com/netgen-layouts/layouts-ui/2.0.0/bundle/Resources/public/js/netgen-layouts.js",
+    "sha256": "acc6d57a22c326d4ddf3a29f6a8b468fd6e984dfb85dee0ba5399d1f513a4906",
+    "skeleton_sha256": "726210a940f762a93a19948bdaaeddef283ef9575f59d9d9120dd30aa53f3341",
+    "modules": {
+      "1": "8a2bab8517c44af97560057e8556d50c690ff1ba091fafede0c2a2d35fade657",
+      "2": "697b3943c9dfeb07ff9a1bd378813ea484dfa1ba780e4a2bcc21fb40b5080233",
+      "3": "16c6f9828d053de34e9276a17f79aa4199aac78437aba70a7e6a2bf72b14696b",
+      "4": "1aabbe342a2dea09fe6128bd71ab80f74b453c10b38d979eb8e59a10103e3f85",
+      "5": "c59ccc8ff82aea73a8b49b3256b0971747a7fa8be3e4b44724ada26d4aea17ec",
+      "6": "dafeda1eb2905d4cabfd5f59420a6f01a4ced1283bc853e6fe469e719f690164",
+      "7": "953c8a8816bd10da4258e851d32557b8b498b3b5e91075e4f8804a00f9583472",
+      "8": "7027cd8e4387f1b6b51dbcd4dd3e0b82a432d7cd7c6a9b70d836b5dff9f7f837",
+      "9": "59369bde2971afacf3b5ba2146535a569c9b715f28a8f8537507690bc2775e32",
+      "10": "ae23b2d438214698e6f7cba9cff4c18fb8735c163fc4ed49db7046a19857f8a9",
+      "11": "8e759b722f8835615444b191a6fedd644a6a8a84d23d0414b42a6fa765266b4c",
+      "12": "4ea71fe1dcdb6c2461bbbaa482baafdbd433229e68e044c6454cece1ed687b9f",
+      "13": "8972c7b7ac49c7b55e66ab3cefb32e6f9dd957d0693067fb0965004443d9e99e",
+      "14": "40aca2bda4e2e8948b43920070851cdb86c1b80d9953367ad40953aa7a8280f3",
+      "15": "734418d1034abc48fba2834c26429b57fcd16e603ccd056bf0afab64a0ebc3fc",
+      "16": "512cb76e09bc056631b11dc8b2a612fef5750ba248b75f0a04413c7ad37288ea",
+      "17": "4e3ea4c3470c50a309309fa6d32ed33fb798d169a9f658df147e3c7b11051bae",
+      "18": "aff2f16ec748d0d7fa13cda651f538762b362b2b1de70aa4812e9f786ac0be51",
+      "19": "c34a09c8ba228d7fab70db278cd42983edb9678350e6f9ca0f47f9d06e39fe5b",
+      "20": "c7984b163c121c85f8badb843397188c30d6e9c47db373c08499f73df49e4503",
+      "21": "8596dd63d6369211f90dff2f16ecef4e4acc6d4a2862a124610b90fb8268d772",
+      "22": "f3555f58b76cba0f5348ffeca15f6b7994b954aec319b689004d8cc0780da876",
+      "23": "d1dda35578efa99e4ba78997e3e458c3629a81e57a7ff2862f030276deb91dd8",
+      "24": "ac88a2959fa117bf5949329ca833ee63afab1dd3d5391422e0e34ce26dcd233b",
+      "25": "f3e453e85e5f1f14f2b8e88dfa3b7a16b82d69ae34bbd2e945d4c5f96be6c785",
+      "26": "6465daab53f691131743ce98d9e610b8926c3e449bb17d0fd4ae573aa4e8f9b5",
+      "27": "c4a34ae8c29f090ab79b9c7d1c7ffd0ea5b75782212da62cc1787adcdc49c909",
+      "28": "d2eaf3aac0aae5a306bdd34599fa85b1792a8daef5736ea6e0fcdd49a09958c8",
+      "29": "e9ec0ebb8d71f8e4351dcf86cfb559afed4ec5d49b7023e30b12c01bc318c102",
+      "30": "210016a1466b454d8c8683fed6c000dc4f2aa652e0153e9c15a5bc502463add4",
+      "31": "2d687bb21a3049c4ef73fa1fda9e2201e351971999d8df65bf6b328cc8d4183f",
+      "32": "e2fa14573be3a9b58f1b6d949d77bedf30c25da7b794ab85e9f2621018e5abdd",
+      "33": "c222d89e6465669ba6378928775d0cf4ce83134a6e577014a2d506117a8969d7",
+      "34": "4aabbc4a267d2de3d108400ed0052f821e0211b574d3f62bb702fcca3a9b9ee6",
+      "35": "b18400c4c5ecff1feac9cf1cec0cce2e9d28b8792f019d8853799ed56ff941aa",
+      "36": "39c6a495e53b6d1481bf41ac71d1a2a441b34963cec447699ffe6c4506529d62",
+      "37": "0b1088e189d71506ff723a37d01a65bf08495d59553d94a56d51a5bf8e48f833",
+      "38": "0807fab7fe274b5ad200867ee164b90a983aa31fc8f283badb071a0608b611fc",
+      "39": "18a1ca589e9c315ff013508610d2324e97ce82b734a8419fb13ccb42b2afb4f0",
+      "40": "5c9fd24c541226ed7f6fb1a039ea3cb1358b9fab348765bd6c08001e575d1457",
+      "41": "e2d0867e7d08319a56613e22280f2c87557d9f68d90f95670baa87e5c02c726c",
+      "42": "b10a44ed4e2f7470e1818864ec16424d2ed610b9cdfbfdaf1b2ac3b782a4507f",
+      "43": "3ffe3580c6b94a351c9c775aefc6945e3628a92354ca41025d26fea974384e5a",
+      "44": "4dab7a13a8efe7f32e4af2fa9b3476e2aaea065b7a57fb2f6c9c8bd15dddd1fe",
+      "45": "8c27e363c62e89f725ca27a1b19d7e02c58f8f1352bf7d7f8abf5f0952fadb75",
+      "46": "9f4e87c0157c32a2239cab35ff4d6b8e1f13cc01e61b537705c806ca81b7beb0",
+      "47": "767ec54036101fdb4bb41dc0e91a6036ff2b3df6b600c59f9e941eb5e79af413",
+      "48": "2d53ef4610374a2123b1c4c7745c636b1db96c396461b082722e233687532cac",
+      "49": "284e6fab9c288047732ddd5ffcf1c6cebc0a1f03fedaf959bf2b03f3c22ed75a",
+      "50": "d483a4b81c1f79e7b09e1a23a29c7d1cb010f4a85e84153d1f7aabd23de943eb",
+      "51": "23edf10e20f3bae723e4b07b265131bbb6a3b2ed69f3aa7c69f3bbdfd9395ca1",
+      "52": "dc8806a6daaba4b4589d8f00fa5993c6bd8f6a7991a0f08094564bc464fefae9",
+      "53": "eb28c69de50cf644c0f80d98ff704c1fd021ca35e8849801c2ed3cbe7979b5bb",
+      "54": "1615c33b79e1b0e3748a0243b58824372a1160b53d2d830397b7828ffa21db33",
+      "55": "ba659fe30a38954954a5cdb0efdaf91841ed0ac4d7468292240125e9df456d6d",
+      "56": "3db2431cd9419505b47dd7cfdc941d8f648d03adcb5eb96b46757d77e93adc46",
+      "57": "27d20a97f972f4c28a0430a9b7815e04546bdaf724b663958ec9107aaaf74e64",
+      "58": "2c11de84023fbd71d597eb467c78dfc7424939b827e9558813841ffdca33d801",
+      "59": "ab5aba1037eb752b7d047fc466e02d60ecef10a761c4b54895403e0510ff2be3",
+      "60": "b4da26f9af4f55215f87b2d84d4381e772ada81952ae77002e5cb753246e2d6d",
+      "61": "aba5eb20ce60a7f3ed106411641adf9cd436f6f6fda01a70b333686cf8a1c455",
+      "62": "1e468e8b8c729841f1c5e126efa2654434c198ed47d6e31d5f846d1cf93a88a4",
+      "63": "8ed0b20160bd7446ef1e26545d160306e71e641916db8f6c5292b78481460e0e",
+      "64": "37cfc4c6177a2c3951dd73b62eb502eb94b0a952d44a0460d36010137f92fe9e",
+      "65": "563a980ed75f061b124b5b25b8d1b914f1a80c8efa3443b6baadf9c0996ec6ac",
+      "66": "702736812f354bf50ebcdad72f6681fc83fa76ca314523d8363452be79799efe",
+      "67": "29029e68ffbb378bec021053471388ad2e7b329f908705be3efcf88ea01474fd",
+      "68": "1303cd59b1452918e82c1546013a40ca828c9c836192e3fe413a389fdba7c21e",
+      "69": "1303cd59b1452918e82c1546013a40ca828c9c836192e3fe413a389fdba7c21e",
+      "70": "f6b676999a3a5edf92ec16d23ab1838462b454f36d625e3493389ce674d2e28c",
+      "71": "35d0eb70e7fd519e18e7a76267efd1f4f3b569b20c1701f0cd6a45820a620abf",
+      "72": "5e4c8856d93f7e514b91b326352d9edde1e67130d6a2898553a4b6a669154062",
+      "73": "44fb5eae7a73cab19c93d4758cb25c99393c703a1c9217eecbee251ac8890513",
+      "74": "f7059ff9dacce2291186a26c91471c13063cffa057b82c2582cb885e7ef4fd00",
+      "75": "ebde06a2867924acfe94e6531e7af8bb478ef8f26c68303564434f7e82559e66",
+      "76": "0e84a5760239f08548e92bfd557e0a1a18f45144cf97ca47f958f958e44292d1",
+      "77": "988772bd6a08b72b11b0ab952b9e1e4f7922e99d7b963c3ef024e640008b7fe5",
+      "78": "87da48d9ff1672109b6cd0559f204b895ab6a6b537729386036a4426b14e1a94",
+      "79": "9e5ed14faad7ad6f8772a4c95a39b7e31e56a18fc968ce2532053d479ba354aa",
+      "80": "85a27aaeacf51c01805f2a9e2eef4f5571cc479adfab085e54610ea029d4a132",
+      "81": "028adae0add09762141e1d2f60443b8fa4a3a68299c81de3ad0d810421d25bae",
+      "82": "f60306be6c8db7449995328fc76246ddddbb5a4ae6721fb09c2e321d5adc612b",
+      "83": "f60306be6c8db7449995328fc76246ddddbb5a4ae6721fb09c2e321d5adc612b",
+      "84": "eda106395b39da930d97538165b80f55eeec00b88b9625fa18f1fa3cf37464e6",
+      "85": "b557b881b0f5e416fd7ac3037cb3b3a420ccbb6c637f3f972b66afe002fbb966",
+      "86": "83eebcbf0db14c5fa1d5a0276d437bba4fe0d23095e27998737d19d5edf1e660",
+      "87": "2d7d5e8acb68fa7f4f6297d00bc91ff3766d7cba7addb7eebc20ef9c8279c526",
+      "88": "b126df1c5613bc2bdddb48a335ae37f31adaf8c904cf13cbe1ee09f2512fe411",
+      "89": "924a4c28001454790bd153122ff5179fca48ea8e775d65b7877bebad46b38699",
+      "90": "bf1c3530c7eb8d79ebfc75a1c6a03fd1590b8f3df95f825ad51944bbc7a441b0",
+      "91": "6e2b6405000bdca335de7f1c4410ea282a4666505d5fd9a4c9d47cfe9ee1e4c0",
+      "92": "01bf04e4c074b91e0e21da4da613c91d33ad03797205db789a56cc69ff73aa43",
+      "93": "cd49a595badea059fdd6c7908173fe1d13d92189ae63a021aa3db7c752515b4d",
+      "94": "c78f9ad6ada67befbcb9099cab5d48b395e086fd1100e542ebc2cd7ae79d6738",
+      "95": "384427b49c863b055ec327d0282ca94da7b32dec6a53c0ac1093e364abe62fab",
+      "96": "c584d4c1efb62c95bbd0c6bc94272a6902bb59f1c9fdd46ae70da03d6881c545",
+      "97": "0cc1d78eadf281688ee9ab5204c6ba5c1ff19d7eb030428cbd49f256327d01b8",
+      "98": "783e86efb5d00da411d74e4d573ef3068cfd9768c200e6847c8f7eb887b0c386",
+      "99": "04734e409970b1927ab7d45219cf9a039446bb9132aa34329b9a1a1350e108e5",
+      "100": "712c53e9258303b392de0e79b90801c8ce828aca3072dc3fb6ed002d3471ba08",
+      "101": "d6cfa2842919c4f962a8b3655cf7c0480267235e40d28857682fd2cff7c1091f",
+      "102": "abd6eb50f4db107fac1afd4fe8cd1cb9fabe3779ab88a5ca9ee854ea9a6ffae7",
+      "103": "c4b0613b9a47103a328c3cbc1c4b74f71e9f46ae9ecebcd42b727a117feef8f0",
+      "104": "5bb9783d503ccd94eae12f992cc4aab9e8dcff1ac15a0220029a1e33ca4dce67",
+      "105": "5d4c2dc244efcb0c079e49271f03eed7cc97f14b7c6ec1ae96708e5803dc97db",
+      "106": "bb8a23b25393902c340facf9903e19ba7349651a62af29b6d92224efe3e069e5",
+      "107": "5b96669a175186e8bde056bb41f2a2c7175625e2f2201a67e946ec5a9a1b30d7",
+      "108": "07d9ab634f67bc96142c9ca73dbc730a3b20ae4762411e4ed3a3df4b37bea38a",
+      "109": "158e9cc41814e5a5f96b03ce3d4f187c6da53d824d53a6c6a366be8870cb7e20",
+      "110": "a0076ed15f6bd870e42c7e5cfa4db6e65f8d72deda5118d9130c6d12cd72a5a8",
+      "111": "19467bfe22b4bdf7d6e7da98f65e34488319f5ca6a1c36eb5c20a2a7c09cc59a",
+      "112": "ff58a14e731503629507e9f2c60dc43e836c9dcaebcbd7c5ef67f249f4d142bb",
+      "113": "6ed7215ec87050cd798fec1c037d48d06a2f01ee4763d1bcdd1776792da43da8",
+      "114": "e5909c648ec28079f632f4e6ed3f5c4883f4852e7eda76cf67df02ee49541460",
+      "115": "56ae2054baca6677d6c4f9590493d27d3b2d47f13622d8b486249bc0d5ba8830",
+      "116": "3cc126c9806d242d9f78ccd4240bbc3d1de4894b7f670bbc2ee7acd1b0734d7a",
+      "117": "941c6ccaf530581861139e45c94626ea16f656d294e39e30fadd39b317f5d634",
+      "118": "8d56ca813bf9676c801428f2920ef08eff4685b4959f4217779cb6c070208d47",
+      "119": "1d3e1b42b2d9215514beef285288c503f1644ca26567212097054f06806d2370",
+      "120": "242e7e32309242d1614c5da73d77255e69781253c215e0cd0eea58be96d70d6e",
+      "121": "7e80eb5919a000b3fc3c2a43275cd41c350712cffc8bfafcd467fb9b71e3d49f",
+      "122": "1a5e82409557849c1723368ffb2ee8b954543d36050c5e9d8c6311f906f81f05",
+      "123": "63718144cd11a27949ef2a60aa5d8a0bb44c20394280b1026df40f54451d8929",
+      "124": "9362951a7561e6c0ebf9835dd2fbfae775d39ea004ecc08dc59dd10e5c31c4da",
+      "125": "eb80be3e219f3220f26c0a4b978c33e2ae86e75ea8bd52c5fd33b3253b44c61d",
+      "126": "0d9f80d43e9be940c2599720148d89cb83ec016928dff88dd14093985ceffb4b",
+      "127": "6adf7afe4ca43c954970a5af2a7ff6ac4637a7ad63a63745963929c7453f59cc",
+      "128": "49d352d78e763e313e956f2abea81cb7a9a057199a6cb63d9a6acc17211d7177",
+      "129": "883e927dbc0a9d1945d396a6c2dd8b4047ed130345a1016dff2a1080a4f36453",
+      "130": "3c8838d1dc524363675f08decdee8b911ad0082b2f2174ea740450c33857e58e",
+      "131": "5ebd349f0369d2718360ddf64f7277f9cd31dabf4cfa013934bc7a2fc2ba3ab5",
+      "132": "f770e5595a4ac45d669b11b530c101cfeb9d9b3783be02b6f7719597f8f1dad9",
+      "133": "094047be9d040eb8e6e89f0d20fb0cf82bcec9fc3396076da9a05397bbc2a2dd",
+      "134": "e2789281f1bb6bb0ac9d9f9c941cdf8546cf86a7c8ef2c58fd3aae4bcda5b46d",
+      "135": "b18ea5ca8d1d563358ca88efff1aca85e546a5dcb6f99b8d9452ddec12988206",
+      "136": "ea4ae4339d1f5a7b8be0e163b2afffc6b4ca7db2baf1d2f2be1803cf2c61d4f7",
+      "137": "1a6e7a86790ceb08947a3b21769dd8fd24039e019123d7d101856b41815fc7b4",
+      "138": "7a44e5981bf606238201d6650af6a1f995958539050b8c25640c33ada3db4723",
+      "139": "3cb32a70f34be9c5aa067f6f7669ef34362bcf85cd625fff3d72ba3e8d8f9a83",
+      "140": "582262f6de312d91bacb6cf8ae1e4eded62e001deee34d551b1ab626245e1f2a",
+      "141": "4b8004097d17c54328c2a5f0394327836005bf8493b1d4f59727d46e158d6e9c",
+      "142": "657ac6d698dc9da7642de1b00dd208f7a6334d7006bfc00ba77347af033591d7",
+      "143": "3ad943253ad4b8d7828215675840ca8038182936b911003a3327ec3ec2acb259",
+      "144": "d39a6396a63cf792f88c19229d7b9a03f833dcbdf589e4b661827be185d8304d",
+      "145": "ec50e73002be85b0e2e76104048670fceb86c938629284a05a9cff8bbc862571",
+      "146": "2f2e39b15feb4d8d741dd0477febb3298d4668e2b82444684289c5bad0fd59e7",
+      "147": "086f4b147b58510a9a5b548e414669dc3e45ba3232f7db39137e164485963643",
+      "148": "72457a6ec1af625ee7b66c81a71757cc2934cfe720635fa0c70e2152997dd821",
+      "149": "d7e3e9fc30b7d54822eb8794a8a204576c71e2adbdff33119f839b669781dff0",
+      "150": "e0d88a5ce0b34e245a8cc363f2e1e3e5903729a4885a81cc7a63afbe783311b8",
+      "151": "c374c9a384ebd013a6cbb8ece4df256c29bee649ac24549fc3e8fbd7ddbd6c22",
+      "152": "b1ee6d715abd8799feba66eb796143f0b175cd242ead33805456496cffb02cc1",
+      "153": "fb8b572f746daa8c059092e2a9da9c0df9f16e21080d462a49a4feb0bd1bd40e",
+      "154": "cafc77249cf09948cd45c4a91678227a49086d34675238ff5ec53835aec1a31b",
+      "155": "50324677058d966432cbc1469d63f41d8929e989b39ca039f36b371a4ca1d1a2",
+      "156": "a3c5f647c5870b63435fd9a63a4d2a8a99d65e93db8c414afb7183e70756f5bf",
+      "@netgen/content-browser-ui": "964a6f35cf2188d851d7b402110934e1acadf3f6e42367c4f1138f5d77264445"
+    }
+  },
+  "header": "header.js",
+  "header_changes": [
+    "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+    "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+  ],
+  "modules": [
+    {
+      "id": 14,
+      "name": "./environments/default | ../../environments/default | ../environments/default",
+      "file": "modules/014-environments-default.js",
+      "original_sha256": "40aca2bda4e2e8948b43920070851cdb86c1b80d9953367ad40953aa7a8280f3",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "./extended/backbone_override",
+      "file": "modules/015-extended-backbone-override.js",
+      "original_sha256": "734418d1034abc48fba2834c26429b57fcd16e603ccd056bf0afab64a0ebc3fc",
+      "changes": [
+        "Page title suffix and the HTTP method of create_new_draft (d3d3488)"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "./extended/jquery_override",
+      "file": "modules/017-extended-jquery-override.js",
+      "original_sha256": "4e3ea4c3470c50a309309fa6d32ed33fb798d169a9f658df147e3c7b11051bae",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "./init",
+      "file": "modules/023-init.js",
+      "original_sha256": "d1dda35578efa99e4ba78997e3e458c3629a81e57a7ff2862f030276deb91dd8",
+      "changes": [
+        "A missing layout: the 404 dialog leads back to the admin instead of creating an empty layout (11de65f)",
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "A refused change (403 with reason access_denied) is reported as not allowed, not as a session timeout (68bcdae)"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "./lib/jquery/view_types",
+      "file": "modules/027-lib-jquery-view-types.js",
+      "original_sha256": "c4a34ae8c29f090ab79b9c7d1c7ffd0ea5b75782212da62cc1787adcdc49c909",
+      "changes": [
+        "View type select: a change saves the form; the select carries js-skip-on-change, so only the master select of a master/slave pair was saved (6977a49)"
+      ]
+    },
+    {
+      "id": 38,
+      "name": "../models/layout",
+      "file": "modules/038-models-layout.js",
+      "original_sha256": "0807fab7fe274b5ad200867ee164b90a983aa31fc8f283badb071a0608b611fc",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "Publish and continue opens the new draft with its own blocks (e1e787f)"
+      ]
+    },
+    {
+      "id": 42,
+      "name": "./models/state",
+      "file": "modules/042-models-state.js",
+      "original_sha256": "b10a44ed4e2f7470e1818864ec16424d2ed610b9cdfbfdaf1b2ac3b782a4507f",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "./layout",
+      "file": "modules/046-layout.js",
+      "original_sha256": "9f4e87c0157c32a2239cab35ff4d6b8e1f13cc01e61b537705c806ca81b7beb0",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 54,
+      "name": "./templates",
+      "file": "modules/054-templates.js",
+      "original_sha256": "1615c33b79e1b0e3748a0243b58824372a1160b53d2d830397b7828ffa21db33",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 58,
+      "name": "./block",
+      "file": "modules/058-block.js",
+      "original_sha256": "2c11de84023fbd71d597eb467c78dfc7424939b827e9558813841ffdca33d801",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 62,
+      "name": "./inline",
+      "file": "modules/062-inline.js",
+      "original_sha256": "1e468e8b8c729841f1c5e126efa2654434c198ed47d6e31d5f846d1cf93a88a4",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 64,
+      "name": "./main",
+      "file": "modules/064-main.js",
+      "original_sha256": "37cfc4c6177a2c3951dd73b62eb502eb94b0a952d44a0460d36010137f92fe9e",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 70,
+      "name": "./bm_collection",
+      "file": "modules/070-bm-collection.js",
+      "original_sha256": "f6b676999a3a5edf92ec16d23ab1838462b454f36d625e3493389ce674d2e28c",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 71,
+      "name": "./bm_collection_item",
+      "file": "modules/071-bm-collection-item.js",
+      "original_sha256": "35d0eb70e7fd519e18e7a76267efd1f4f3b569b20c1701f0cd6a45820a620abf",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 73,
+      "name": "./bm_collection_overflown_items",
+      "file": "modules/073-bm-collection-overflown-items.js",
+      "original_sha256": "44fb5eae7a73cab19c93d4758cb25c99393c703a1c9217eecbee251ac8890513",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 77,
+      "name": "./form",
+      "file": "modules/077-form.js",
+      "original_sha256": "988772bd6a08b72b11b0ab952b9e1e4f7922e99d7b963c3ef024e640008b7fe5",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 79,
+      "name": "../views/header",
+      "file": "modules/079-views-header.js",
+      "original_sha256": "9e5ed14faad7ad6f8772a4c95a39b7e31e56a18fc968ce2532053d479ba354aa",
+      "changes": [
+        "Page title suffix and the HTTP method of create_new_draft (d3d3488)",
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 86,
+      "name": "../menues/toolbar",
+      "file": "modules/086-menues-toolbar.js",
+      "original_sha256": "83eebcbf0db14c5fa1d5a0276d437bba4fe0d23095e27998737d19d5edf1e660",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 87,
+      "name": "./views/modal | ./modal",
+      "file": "modules/087-modal.js",
+      "original_sha256": "2d7d5e8acb68fa7f4f6297d00bc91ff3766d7cba7addb7eebc20ef9c8279c526",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 91,
+      "name": "../sidebar",
+      "file": "modules/091-sidebar.js",
+      "original_sha256": "6e2b6405000bdca335de7f1c4410ea282a4666505d5fd9a4c9d47cfe9ee1e4c0",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 93,
+      "name": "./zone",
+      "file": "modules/093-zone.js",
+      "original_sha256": "cd49a595badea059fdd6c7908173fe1d13d92189ae63a021aa3db7c752515b4d",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 98,
+      "name": "bootstrap/js/collapse",
+      "file": "modules/098-bootstrap-js-collapse.js",
+      "original_sha256": "783e86efb5d00da411d74e4d573ef3068cfd9768c200e6847c8f7eb887b0c386",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 100,
+      "name": "bootstrap/js/modal",
+      "file": "modules/100-bootstrap-js-modal.js",
+      "original_sha256": "712c53e9258303b392de0e79b90801c8ce828aca3072dc3fb6ed002d3471ba08",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 103,
+      "name": "eonasdan-bootstrap-datetimepicker",
+      "file": "modules/103-eonasdan-bootstrap-datetimepicker.js",
+      "original_sha256": "c4b0613b9a47103a328c3cbc1c4b74f71e9f46ae9ecebcd42b727a117feef8f0",
+      "changes": [
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 134,
+      "name": "./core",
+      "file": "modules/134-core.js",
+      "original_sha256": "e2789281f1bb6bb0ac9d9f9c941cdf8546cf86a7c8ef2c58fd3aae4bcda5b46d",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 135,
+      "name": "jquery-ui/draggable | ./draggable",
+      "file": "modules/135-draggable.js",
+      "original_sha256": "b18ea5ca8d1d563358ca88efff1aca85e546a5dcb6f99b8d9452ddec12988206",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 136,
+      "name": "jquery-ui/droppable",
+      "file": "modules/136-jquery-ui-droppable.js",
+      "original_sha256": "ea4ae4339d1f5a7b8be0e163b2afffc6b4ca7db2baf1d2f2be1803cf2c61d4f7",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 137,
+      "name": "./mouse",
+      "file": "modules/137-mouse.js",
+      "original_sha256": "1a6e7a86790ceb08947a3b21769dd8fd24039e019123d7d101856b41815fc7b4",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 138,
+      "name": "jquery-ui/sortable",
+      "file": "modules/138-jquery-ui-sortable.js",
+      "original_sha256": "7a44e5981bf606238201d6650af6a1f995958539050b8c25640c33ada3db4723",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 139,
+      "name": "./widget",
+      "file": "modules/139-widget.js",
+      "original_sha256": "3cb32a70f34be9c5aa067f6f7669ef34362bcf85cd625fff3d72ba3e8d8f9a83",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 140,
+      "name": "jquery",
+      "file": "modules/140-jquery.js",
+      "original_sha256": "582262f6de312d91bacb6cf8ae1e4eded62e001deee34d551b1ab626245e1f2a",
+      "changes": [
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    }
+  ]
+}

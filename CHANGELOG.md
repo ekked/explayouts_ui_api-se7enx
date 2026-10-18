@@ -9,6 +9,8 @@
 - The rule endpoints keep only known target and condition types.
 - The editor returns only to a page of this site (`return_to`, the kept referrer).
 - Cancel of the new layout dialog no longer creates the layout.
+- The changes to the app bundle are versioned: `src/app-patches/` holds the modules that differ from netgen/layouts-ui
+  2.0.0, `apply.mjs` builds the bundle from them, `tests/js/app-patches.test.mjs` checks it byte for byte.
 
 Open: the import is still a second implementation beside explayouts' `expLayoutsImporter` (shared are the
 validation and the handling of rules).

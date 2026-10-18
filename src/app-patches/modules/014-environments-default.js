@@ -1,0 +1,1 @@
+function(e,t,n){e=e("../core").$;function i(e){return e.replace(/\/+/g,"/")}var r=t.exports={bm_base_path:e('meta[name="explayouts-route-prefix"]').attr("content"),bm_base_app_path:"/app/",bm_base_api_path:"/app/api/",bm_api_url:function(e){return i(r.bm_base_path+r.bm_base_api_path+e)},bm_app_url:function(e){return i(r.bm_base_path+r.bm_base_app_path+e)}}}
