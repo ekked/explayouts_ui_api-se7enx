@@ -50,7 +50,7 @@
         <label for="design_edit_view_type">{'View type'|i18n( 'design/standard/explayouts_ui_api/form_block_fields' )}</label>
         <select id="design_edit_view_type" name="view_type" class="view-type js-skip-on-change">
             {foreach $view_types as $view_type}
-                <option value="{$view_type|wash()}" {if eq( $view_type, $block.view_type )}selected="selected"{/if}>{$view_type|wash()}</option>
+                <option value="{$view_type|wash()}" {if eq( $view_type, $block.view_type )}selected="selected"{/if}>{if and( is_set( $view_type_names ), is_set( $view_type_names[$view_type] ) )}{$view_type_names[$view_type]|i18n( 'design/standard/explayouts_ui_api/parameters' )|wash()}{else}{$view_type|wash()}{/if}</option>
             {/foreach}
         </select>
     </div>

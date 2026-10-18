@@ -251,10 +251,26 @@ class App extends \Exponential\Runnable\ModuleView
 
             // Drop legacy query parameters from the design form; they are handled by
             // the Content tab query builder or block fetchItems, not by design settings.
+            // Field and value both: dropping only the value left the field in
+            // the form, empty (a gallery block showed blank Parent node ID and
+            // Limit), and the next save of the form stored the empty value over
+            // the block's own.
             $legacyQueryParams = array( 'query_type', 'parent_node_id', 'node_id', 'limit', 'offset', 'class_filter', 'sort' );
             foreach ( $legacyQueryParams as $legacy )
             {
-                unset( $parameterValues[$legacy] );
+                unset( $parameters[$legacy], $parameterValues[$legacy] );
+            }
+
+            // A parameter limited to view types (its 'view_type', comma separated)
+            // none of which the block's definition has never applies to the block:
+            // left out (the gallery handler's columns and lightbox on a logos block).
+            foreach ( $parameters as $paramName => $paramDef )
+            {
+                if ( is_array( $paramDef ) && isset( $paramDef['view_type'] ) && (string)$paramDef['view_type'] !== ''
+                     && !array_intersect( array_map( 'trim', explode( ',', (string)$paramDef['view_type'] ) ), $viewTypes ) )
+                {
+                    unset( $parameters[$paramName], $parameterValues[$paramName] );
+                }
             }
 
             $collectionItems = array();
@@ -286,6 +302,7 @@ class App extends \Exponential\Runnable\ModuleView
                 : array();
 
             $tpl->setVariable( 'view_types', $viewTypes );
+            $tpl->setVariable( 'view_type_names', is_array( $blockInfo ) && isset( $blockInfo['view_type_names'] ) && is_array( $blockInfo['view_type_names'] ) ? $blockInfo['view_type_names'] : array() );
             $tpl->setVariable( 'item_view_types', $itemViewTypes );
             $tpl->setVariable( 'parameters', $parameters );
             $tpl->setVariable( 'parameter_values', $parameterValues );
