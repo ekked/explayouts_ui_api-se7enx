@@ -78,6 +78,16 @@ along with Exponential Layouts UI API in LICENSE.md. If not, see http://www.gnu.
 
 Using Exponential Layouts UI API under the terms of the GNU GPL is free (as in freedom).
 
+Third-party code
+----------------
+
+Two parts of this extension come from Netgen Layouts and stay under its MIT License, whose notice ships with them:
+
+- `design/standard/javascript/netgen-layouts.js`, the editor's application bundle, built from `netgen/layouts-ui`
+  and patched for Exponential: notice in `design/standard/javascript/netgen-layouts-LICENSE.txt`.
+- `design/standard/media/netgen-layouts.*`, the editor's icon font, from `netgen/layouts-core`: notice in
+  `design/standard/media/netgen-layouts-LICENSE.txt`.
+
 For more information or questions please contact
 info@se7enx.com
 
