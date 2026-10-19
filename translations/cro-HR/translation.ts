@@ -157,6 +157,10 @@
         <source>eZ location</source>
         <translation>eZ lokacija</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>Postavke bloka</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -952,6 +956,14 @@
     <message>
         <source>This address cannot be used as a link.</source>
         <translation>Ova se adresa ne može koristiti kao poveznica.</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>Dodaj blok</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>Vrste blokova</translation>
     </message>
 </context>
 <context>

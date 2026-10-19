@@ -157,6 +157,10 @@
         <source>eZ location</source>
         <translation>Umístění eZ</translation>
     </message>
+    <message>
+        <source>Block settings</source>
+        <translation>Nastavení bloku</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_fields</name>
@@ -952,6 +956,14 @@
     <message>
         <source>This address cannot be used as a link.</source>
         <translation>Tuto adresu nelze použít jako odkaz.</translation>
+    </message>
+    <message>
+        <source>Add a block</source>
+        <translation>Přidat blok</translation>
+    </message>
+    <message>
+        <source>Block types</source>
+        <translation>Typy bloků</translation>
     </message>
 </context>
 <context>
