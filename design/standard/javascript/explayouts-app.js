@@ -274,16 +274,20 @@ document.addEventListener('click', function(e) {
                 html = $('<p>').text(explayoutsI18n.no_content).prop('outerHTML');
             } else {
                 html += '<table class="table table-condensed"><tbody>';
+                // Every value from the server is escaped for where it goes: text, or an attribute value (quotes too;
+                // jQuery's .html() leaves " as it is); the ids are numbers.
+                function esc(v) { return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
                 data.values.forEach(function(item){
-                    var cbId = 'exp-cb-' + item.node_id;
+                    var nodeId = parseInt(item.node_id, 10) || 0, objectId = parseInt(item.object_id, 10) || 0;
+                    var cbId = 'exp-cb-' + nodeId;
                     var inputType = state.singleSelect ? 'radio' : 'checkbox';
                     var inputName = state.singleSelect ? ' name="exp-cb-single"' : '';
                     html += '<tr>';
-                    html += '<td><input type="' + inputType + '"' + inputName + ' id="' + cbId + '" class="js-cb-select" data-node-id="' + item.node_id + '" data-object-id="' + item.object_id + '" data-name="' + $('<div>').text(item.name).html() + '" />';
-                    html += '<label for="' + cbId + '">' + $('<div>').text(item.name).html() + ' <small>(' + item.class_name + ')</small></label></td>';
+                    html += '<td><input type="' + inputType + '"' + inputName + ' id="' + cbId + '" class="js-cb-select" data-node-id="' + nodeId + '" data-object-id="' + objectId + '" data-name="' + esc(item.name) + '" />';
+                    html += '<label for="' + cbId + '">' + esc(item.name) + ' <small>(' + esc(item.class_name) + ')</small></label></td>';
                     html += '<td class="exp-cb-actions">';
                     if (item.is_container) {
-                        html += '<a href="#" class="js-cb-browse" data-node-id="' + item.node_id + '" data-name="' + $('<div>').text(item.name).html() + '">' + $('<div>').text(explayoutsI18n.open).html() + '</a>';
+                        html += '<a href="#" class="js-cb-browse" data-node-id="' + nodeId + '" data-name="' + esc(item.name) + '">' + $('<div>').text(explayoutsI18n.open).html() + '</a>';
                     }
                     html += '</td></tr>';
                 });
