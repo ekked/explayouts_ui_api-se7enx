@@ -88,6 +88,10 @@ Two parts of this extension come from Netgen Layouts and stay under its MIT Lice
 - `design/standard/media/netgen-layouts.*`, the editor's icon font, from `netgen/layouts-core`: notice in
   `design/standard/media/netgen-layouts-LICENSE.txt`.
 
+The editor's Material Icons font (`design/standard/media/MaterialIcons-Regular.*` and its copy in
+`design/standard/fonts/`) comes from Google's `google/material-design-icons` and stays under the Apache License,
+Version 2.0: notice in `design/standard/media/MaterialIcons-LICENSE.txt` and `design/standard/fonts/MaterialIcons-LICENSE.txt`.
+
 For more information or questions please contact
 info@se7enx.com
 
