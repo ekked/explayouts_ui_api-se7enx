@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Kan inhoud niet laden.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Ingesloten inhoud</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Bekijken in CMS</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(opgeslagen) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Bloktypen</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Kopniveau (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML-tag</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Link gebruiken</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Linktype</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Link</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Linksuffix</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>In nieuw venster openen</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Verticale witruimte gebruiken</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Boven</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Onder</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS-klasse</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS-ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>In container plaatsen</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Containergrootte</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Inhoud</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Label (verouderd)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (verouderd)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Stijl</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Doel</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>Video-URL of embed-src</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Breedte (px of %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Hoogte (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Automatisch afspelen</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL van ingesloten kaart</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Breedte</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Markdown-inhoud</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>Ruwe HTML</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>Afbeeldings-URL</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Alt-tekst</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>Link-URL</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Hoogte in pixels</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Marge in pixels</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Linklabel</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Bericht</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Sluitbaar</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Label</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Waarde (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Kleur</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Items (titel|inhoud per regel)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Eerste item openen</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Tabbladen (titel|inhoud per regel)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Index van actief tabblad (vanaf 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Alt-tekst van afbeelding</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Linktekst</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Miniaturen per rij/dia</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Lightbox inschakelen</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Identificatie van afbeeldingsattribuut</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Alias voor miniatuurgrootte</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Citaattekst</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Auteur</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Bron</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Uitlijning</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Aantal kolommen</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Achtergrondkleur instellen</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Achtergrondkleur</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Achtergrondafbeelding instellen</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Achtergrondafbeelding</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Paginering inschakelen</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Pagineringstype</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Maximaal aantal pagina&apos;s</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Eerste pagina via AJAX laden</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Dia&apos;s per weergave</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Automatisch afspelen (ms, 0 om uit te schakelen)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Templatenaam</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Naam tonen</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Intro tonen</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Geen link</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>Relatieve URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-mail</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Telefoonnummer</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Geen</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Middel</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Groot</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Normaal</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Smal</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Breed</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 kolommen</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 kolommen</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 kolommen</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 kolommen</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primair (geel)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Secundair (lichtgrijs)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Wit</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Zwart</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Paginering</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Meer laden</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galerij</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Slider</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Miniaturengalerij</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Rastergalerij</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Sushibar</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Volgens het kopniveau</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Kop 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Kop 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Kop 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Kop 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Kop 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Kop 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Alinea</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Divisie (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Standaardknop</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Gemarkeerde knop</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Zelfde venster</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Nieuw venster</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Dienst</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Videoadres hieronder</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>Video-ID</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Bijschrift</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Breedtegraad (-90 tot 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Lengtegraad (-180 tot 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Zoom (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Kaarttype</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Wegenkaart</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelliet</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hybride</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Terrein</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Markering tonen</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Kopniveau</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Standaard van het design</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Kenmerken (titel|tekst per regel)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Knoppen Volgende en Vorige tonen</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Paginering tonen</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Oneindige lus</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Overgang</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Schuiven</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Vervagen</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Tijd voor automatisch afspelen (seconden, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Te verplaatsen miniaturen</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Details tonen</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Details tonen bij aanwijzen</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>Node-ID van bovenliggend item</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Limiet</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Klassenfilter</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standaard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standaard (met intro)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Overlay</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Kaart</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Kaart (met intro)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Regel</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Lijstitem</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Lijstitem (met intro)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Node-ID</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Navigatiedeel (leeg: dat van de pagina)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Component</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Lijst</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Raster</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Genummerde lijst</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zigzag</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Accordeon</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Raster (eerste item groot)</translation>
     </message>
 </context>
 </TS>

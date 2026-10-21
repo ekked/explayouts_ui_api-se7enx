@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Učitavanje sadržaja nije uspjelo.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Ugrađeni sadržaj</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Prikaži u CMS-u</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(spremljeno) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Vrste blokova</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Naslov</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Razina naslova (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML oznaka</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Koristi poveznicu</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Vrsta poveznice</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Poveznica</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Sufiks poveznice</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Otvori u novom prozoru</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Koristi okomiti razmak</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Na vrhu</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Na dnu</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS klasa</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Omotaj u spremnik</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Veličina spremnika</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Sadržaj</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Oznaka (staro)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (staro)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Stil</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Cilj</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL videozapisa ili src za ugradnju</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Širina (px ili %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Visina (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Automatska reprodukcija</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL za ugradnju karte</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Širina</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Markdown sadržaj</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>Izvorni HTML</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL slike</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Zamjenski tekst</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL poveznice</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Visina u pikselima</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Margina u pikselima</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Oznaka poveznice</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Poruka</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Vrsta</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Može se zatvoriti</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Oznaka</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Vrijednost (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Boja</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Stavke (Naslov|Sadržaj po retku)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Otvori prvu stavku</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Kartice (Naslov|Sadržaj po retku)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Indeks aktivne kartice (od 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Zamjenski tekst slike</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Tekst poveznice</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Minijature po retku/slajdu</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Omogući lightbox</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Identifikator atributa slike</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Alias veličine minijature</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Tekst citata</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Autor</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Izvor</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Poravnanje</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Broj stupaca</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Postavi boju pozadine</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Boja pozadine</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Postavi sliku pozadine</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Slika pozadine</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Omogući straničenje</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Vrsta straničenja</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Najveći broj stranica</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Učitaj prvu stranicu putem AJAX-a</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Slajdova po prikazu</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Automatska reprodukcija (ms, 0 za isključivanje)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Naziv predloška</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Prikaži naziv</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Prikaži uvod</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Bez poveznice</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>Relativni URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-pošta</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Telefonski broj</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Nijedan</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Mali</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Srednji</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Veliki</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Uobičajeno</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Usko</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Široko</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 stupca</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 stupca</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 stupca</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 stupaca</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primarna (žuta)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Sekundarna (svijetlosiva)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Bijela</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Crna</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Straničnik</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Učitaj više</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galerija</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Klizač</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Galerija minijatura</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Galerija u rešetki</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Suši bar</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Prema razini naslova</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Naslov 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Naslov 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Naslov 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Naslov 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Naslov 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Naslov 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Odlomak</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Odjeljak (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Zadani gumb</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Istaknuti gumb</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Isti prozor</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Novi prozor</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Usluga</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Adresa videozapisa u nastavku</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID videozapisa</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Opis slike</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Zemljopisna širina (-90 do 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Zemljopisna dužina (-180 do 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Zumiranje (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Vrsta karte</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Plan razvoja</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelit</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hibridno</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Teren</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Prikaži oznaku</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Razina naslova</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Zadano prema dizajnu</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Značajke (Naslov|Tekst po retku)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Prikaži gumbe Dalje i Natrag</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Prikaži straničenje</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Beskonačna petlja</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Prijelaz</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Klizanje</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Zatamnjenje</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Vrijeme automatske reprodukcije (sekunde, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Broj minijatura po pomaku</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Prikaži pojedinosti</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Prikaži pojedinosti pri prelasku mišem</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID nadređenog čvora</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Ograničenje</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Filtar klasa</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standardno</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standardno (s uvodom)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Preklapanje</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Kartica</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Kartica (s uvodom)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Redak</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Stavka popisa</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Stavka popisa (s uvodom)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID čvora</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Navigacijski dio (prazno: onaj od stranice)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Komponenta</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Popis</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Rešetka</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Numerirani popis</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Cik-cak</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Harmonika</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Rešetka (prva stavka velika)</translation>
     </message>
 </context>
 </TS>

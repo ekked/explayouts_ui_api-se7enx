@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Obsah se nepodařilo načíst.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Vložený obsah</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Zobrazit v CMS</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(uloženo) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Typy bloků</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Název</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Úroveň nadpisu (1–6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>Značka HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Použít odkaz</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Typ odkazu</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Odkaz</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Přípona odkazu</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Otevřít v novém okně</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Použít svislé mezery</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Nahoře</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Dole</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>Třída CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>ID CSS</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Zabalit do kontejneru</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Velikost kontejneru</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Obsah</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Popisek (starší)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (starší)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Styl</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Cíl</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL videa nebo src pro vložení</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Šířka (px nebo %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Výška (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Autoplay</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL pro vložení mapy</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Šířka</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Obsah v Markdownu</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>Surové HTML</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL obrázku</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Alternativní text</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL odkazu</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Výška v pixelech</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Okraj v pixelech</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Popisek odkazu</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Zpráva</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Lze zavřít</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Popisek</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Hodnota (0–100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Barva</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Položky (Nadpis|Obsah na řádek)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Otevřít první položku</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Karty (Nadpis|Obsah na řádek)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Index aktivní karty (od 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Alternativní text obrázku</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Text odkazu</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Miniatury na řádek/snímek</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Povolit lightbox</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Identifikátor atributu obrázku</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Alias velikosti miniatury</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Text citace</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Autor</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Zdroj</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Zarovnání</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Počet sloupců</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Nastavit barvu pozadí</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Barva pozadí</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Nastavit obrázek pozadí</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Obrázek pozadí</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Povolit stránkování</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Typ stránkování</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Maximální počet stránek</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Načíst první stránku přes AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Snímky na zobrazení</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Automatické přehrávání (ms, 0 = vypnuto)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Název šablony</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Zobrazit název</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Zobrazit úvod</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Bez odkazu</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>Relativní URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-mail</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Telefonní číslo</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Žádný</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Malá</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Střední</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Velká</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Běžná</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Úzká</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Široká</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 sloupce</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 sloupce</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 sloupce</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 sloupců</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primární (žlutá)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Sekundární (světle šedá)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Bílá</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Černá</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Stránkovač</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Načíst další</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galerie</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Posuvník</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Galerie miniatur</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Mřížková galerie</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Sushi bar</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Podle úrovně nadpisu</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Nadpis 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Nadpis 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Nadpis 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Nadpis 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Nadpis 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Nadpis 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Odstavec</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Oddíl (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Výchozí tlačítko</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Zvýrazněné tlačítko</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Stejné okno</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Nové okno</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Služba</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Adresa videa níže</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID videa</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Titulek</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Zeměpisná šířka (-90 až 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Zeměpisná délka (-180 až 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Přiblížení (0–20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Typ mapy</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Silniční mapa</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelitní</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hybridní</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Terén</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Zobrazit značku</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Úroveň nadpisu</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Výchozí podle designu</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Funkce (Nadpis|Text na řádek)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Zobrazit tlačítka další a předchozí</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Zobrazit stránkování</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Nekonečná smyčka</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Přechod</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Posun</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Prolnutí</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Doba automatického přehrávání (sekundy, 1–12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Počet miniatur k posunu</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Zobrazit podrobnosti</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Zobrazit podrobnosti při najetí myší</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID nadřazeného uzlu</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Limit</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Filtr tříd</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standardní</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standardní (s úvodem)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Překryv</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Karta</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Karta (s úvodem)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Řádek</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Položka seznamu</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Položka seznamu (s úvodem)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID uzlu</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Část navigace (prázdné: ta ze stránky)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Komponenta</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Seznam</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Mřížka</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Číslovaný seznam</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Cik-cak</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Akordeon</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Mřížka (první položka velká)</translation>
     </message>
 </context>
 </TS>

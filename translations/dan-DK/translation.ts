@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Indholdet kunne ikke indlæses.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Indlejret indhold</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Vis i CMS</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(gemt) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Bloktyper</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Overskriftsniveau (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML-tag</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Brug link</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Linktype</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Link</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Linksuffiks</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Åbn i nyt vindue</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Brug lodret mellemrum</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Øverst</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Nederst</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS-klasse</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS-id</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Pak ind i container</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Containerstørrelse</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Indhold</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Tekst</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Etiket (forældet)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (forældet)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Stil</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Mål</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>Video-URL eller embed-src</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Bredde (px eller %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Højde (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Automatisk afspilning</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL til indlejret kort</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Bredde</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Markdown-indhold</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>Rå HTML</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>Billed-URL</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Alternativ tekst</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>Link-URL</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Højde i pixels</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Margen i pixels</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Linketiket</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Besked</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Kan lukkes</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etiket</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Værdi (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Farve</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Elementer (Titel|Indhold pr. linje)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Åbn første element</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Faner (Titel|Indhold pr. linje)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Indeks for aktiv fane (0-baseret)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Alternativ tekst til billede</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Linktekst</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Miniaturer pr. række/slide</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Aktiver lightbox</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Identifikator for billedattribut</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Størrelsesalias for miniature</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Citattekst</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Forfatter</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Kilde</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Justering</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Antal kolonner</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Angiv baggrundsfarve</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Baggrundsfarve</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Angiv baggrundsbillede</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Baggrundsbillede</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Aktiver sideinddeling</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Type af sideinddeling</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Maksimalt antal sider</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Indlæs første side via AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Slides pr. visning</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Automatisk afspilning (ms, 0 for at slå fra)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Skabelonnavn</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Vis navn</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Vis introduktion</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Intet link</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>Relativ URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-mail</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Telefonnummer</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Ingen</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Lille</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Mellem</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Stor</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Smal</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Bred</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 kolonner</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 kolonner</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 kolonner</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 kolonner</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primær (gul)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Sekundær (lysegrå)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Hvid</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Sort</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Sideskifter</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Indlæs flere</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galleri</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Slider</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Miniaturegalleri</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Gittergalleri</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Sushibar</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Fra overskriftsniveauet</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Overskrift 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Overskrift 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Overskrift 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Overskrift 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Overskrift 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Overskrift 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Afsnit</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Inddeling (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Standardknap</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Fremhævet knap</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Samme vindue</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Nyt vindue</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Tjeneste</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Videoadresse nedenfor</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>Video-id</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Billedtekst</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Breddegrad (-90 til 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Længdegrad (-180 til 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Zoom (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Korttype</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Vejkort</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satellit</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hybrid</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Terræn</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Vis markør</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Overskriftsniveau</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Designets standard</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Funktioner (Titel|Tekst pr. linje)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Vis knapperne næste og forrige</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Vis sideinddeling</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Uendelig løkke</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Overgang</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Glid</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Tone</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Tid for automatisk afspilning (sekunder, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Miniaturer, der skal flyttes</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Vis detaljer</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Vis detaljer ved hover</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>Overordnet knude-id</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Grænse</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Klassefilter</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standard (med introduktion)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Overlejring</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Kort</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Kort (med introduktion)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Linje</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Listeelement</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Listeelement (med introduktion)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Knude-id</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Navigationsdel (tom: sidens egen)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Komponent</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Liste</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Gitter</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Nummereret liste</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zigzag</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Harmonika</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Gitter (første element stort)</translation>
     </message>
 </context>
 </TS>

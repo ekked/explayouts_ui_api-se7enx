@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Impossibile caricare il contenuto.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Contenuto incorporato</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Visualizza nel CMS</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(salvato) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Tipi di blocco</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Titolo</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Livello del titolo (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>Tag HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Usa link</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Tipo di link</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Link</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Suffisso del link</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Apri in una nuova finestra</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Usa spaziatura verticale</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>In alto</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>In basso</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>Classe CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>ID CSS</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Racchiudi in un contenitore</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Dimensione del contenitore</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Contenuto</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Testo</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Etichetta (legacy)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (legacy)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Stile</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Destinazione</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL del video o src di incorporamento</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Larghezza (px o %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Altezza (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Avvia in automatico</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL di incorporamento della mappa</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Larghezza</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Contenuto Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML grezzo</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL dell&apos;immagine</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Testo alternativo</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL del link</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Altezza in pixel</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Margine in pixel</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Etichetta del link</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Messaggio</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Chiudibile</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etichetta</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Valore (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Colore</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Elementi (Titolo|Contenuto per riga)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Apri il primo elemento</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Schede (Titolo|Contenuto per riga)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Indice della scheda attiva (a partire da 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Testo alternativo dell&apos;immagine</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Testo del link</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Miniature per riga/slide</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Attiva lightbox</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Identificatore dell&apos;attributo immagine</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Alias della dimensione delle miniature</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Testo della citazione</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Autore</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Origine</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Allineamento</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Numero di colonne</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Imposta colore di sfondo</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Colore di sfondo</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Imposta immagine di sfondo</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Immagine di sfondo</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Attiva paginazione</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Tipo di paginazione</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Numero massimo di pagine</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Carica la prima pagina via AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Slide per vista</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Riproduzione automatica (ms, 0 per disattivare)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Nome template</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Mostra nome</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Mostra introduzione</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Nessun link</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL relativo</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-mail</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Numero di telefono</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Nessuno</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Piccola</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Media</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Grande</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Normale</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Stretto</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Largo</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 colonne</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 colonne</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 colonne</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 colonne</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primario (giallo)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Secondario (grigio chiaro)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Bianco</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Nero</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Paginatore</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Carica altri</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galleria</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Slider</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Galleria di miniature</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Galleria a griglia</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Sushi bar</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Dal livello del titolo</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Intestazione 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Intestazione 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Intestazione 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Intestazione 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Intestazione 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Intestazione 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Paragrafo</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Divisione (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Pulsante predefinito</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Pulsante evidenziato</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Stessa finestra</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Nuova finestra</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Servizio</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Indirizzo del video qui sotto</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID del video</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Titolo</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Latitudine (da -90 a 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Longitudine (da -180 a 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Zoom (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Tipo di mappa</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Stradale</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satellite</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Ibrida</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Rilievo</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Mostra indicatore</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Livello del titolo</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Predefinito del design</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Caratteristiche (Titolo|Testo per riga)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Mostra i pulsanti avanti e indietro</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Mostra paginazione</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Ciclo infinito</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Transizione</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Scorrimento</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Dissolvenza</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Tempo di riproduzione automatica (secondi, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Miniature da spostare</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Mostra dettagli</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Mostra dettagli al passaggio del mouse</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID del nodo padre</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Limite</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Filtro per classe</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standard (con introduzione)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Sovrapposizione</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Scheda</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Scheda (con introduzione)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Riga</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Voce di elenco</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Elemento di elenco (con introduzione)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID Nodo</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Parte di navigazione (vuoto: quella della pagina)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Componente</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Lista</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Griglia</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Elenco numerato</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zig-zag</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Fisarmonica</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Griglia (primo elemento grande)</translation>
     </message>
 </context>
 </TS>
