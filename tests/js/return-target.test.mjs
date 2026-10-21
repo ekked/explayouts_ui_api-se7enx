@@ -1,6 +1,6 @@
 /**
- * Where the layout editor returns to (the script "Where the editor returns to" in
- * design/standard/templates/explayouts_ui_api/app.tpl, node --test, happy-dom): only an http(s) address of this site,
+ * Where the layout editor returns to (the part "Where the editor returns to" of
+ * design/standard/javascript/explayouts-app-head.js, node --test, happy-dom): only an http(s) address of this site,
  * whether it comes from return_to (explayoutsServerReturnTo), sessionStorage, the referrer or ngl_referrer.
  * Anything else used to reach window.location.replace() as the editor loaded.
  *
@@ -16,16 +16,17 @@ import { fileURLToPath } from 'node:url';
 import { GlobalRegistrator } from '@happy-dom/global-registrator';
 
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
-const template = readFileSync( resolve( root, 'design/standard/templates/explayouts_ui_api/app.tpl' ), 'utf8' );
+const headScript = readFileSync( resolve( root, 'design/standard/javascript/explayouts-app-head.js' ), 'utf8' );
 
-/** The {literal}<script> that contains the marker. */
+/** The part of javascript/explayouts-app-head.js from the marker to the end of the function expression after it. */
 function script( marker ) {
-    const at = template.indexOf( marker );
-    assert.ok( at > 0, marker );
-    const start = template.lastIndexOf( '{literal}<script>', at ) + '{literal}<script>'.length;
-    return template.slice( start, template.indexOf( '</script>{/literal}', at ) );
+    const at = headScript.indexOf( marker );
+    assert.ok( at >= 0, marker );
+    const end = headScript.indexOf( '\n})();', at );
+    assert.ok( end > at, marker + ' ends' );
+    return headScript.slice( at, end + '\n})();'.length );
 }
-const returnScript = script( 'Where the editor returns to' );
+const returnScript = script( '// Where the editor returns to' );
 const run = () => new Function( returnScript )();
 
 before( () => {

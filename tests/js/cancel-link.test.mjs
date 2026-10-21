@@ -1,5 +1,5 @@
 /**
- * Cancel of the layout editor (the script after #ng-cancel-link in design/standard/templates/explayouts_ui_api/app.tpl,
+ * Cancel of the layout editor (the part "Cancel of the editor" of design/standard/javascript/explayouts-app.js,
  * node --test, happy-dom). In the new layout dialog Cancel carried the class action_apply, on which the dialog
  * submits: cancelling created the layout. Cancel is a link out of the editor and no button of the dialog.
  *
@@ -16,21 +16,28 @@ import { GlobalRegistrator } from '@happy-dom/global-registrator';
 
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
 const template = readFileSync( resolve( root, 'design/standard/templates/explayouts_ui_api/app.tpl' ), 'utf8' );
+const appScript = readFileSync( resolve( root, 'design/standard/javascript/explayouts-app.js' ), 'utf8' );
+const headScript = readFileSync( resolve( root, 'design/standard/javascript/explayouts-app-head.js' ), 'utf8' );
 
-/** The script that places and handles Cancel: the first {literal}<script> after the link. */
-function cancelScript() {
-    const at = template.indexOf( '<a id="ng-cancel-link"' );
-    assert.ok( at > 0, 'app.tpl has the Cancel link' );
-    const start = template.indexOf( '{literal}<script>', at ) + '{literal}<script>'.length;
-    const end = template.indexOf( '</script>{/literal}', start );
-    return template.slice( start, end );
+/** From the comment marker to the end of the function expression after it ("})();"). */
+function block( source, marker ) {
+    const at = source.indexOf( marker );
+    assert.ok( at >= 0, marker );
+    const end = source.indexOf( '\n})();', at );
+    assert.ok( end > at, marker + ' ends' );
+    return source.slice( at, end + '\n})();'.length );
 }
 
-/** The script before it that decides where the editor may return to (explayoutsSafeTarget, explayoutsInSiteaccess). */
+/** The part of javascript/explayouts-app.js that places and handles Cancel. */
+function cancelScript() {
+    assert.ok( template.indexOf( '<a id="ng-cancel-link"' ) > 0, 'app.tpl has the Cancel link' );
+    return block( appScript, '// Cancel of the editor' );
+}
+
+/** The part of javascript/explayouts-app-head.js that decides where the editor may return to (explayoutsSafeTarget,
+    explayoutsInSiteaccess). */
 function returnScript() {
-    const at = template.indexOf( 'Where the editor returns to' );
-    const start = template.lastIndexOf( '{literal}<script>', at ) + '{literal}<script>'.length;
-    return template.slice( start, template.indexOf( '</script>{/literal}', at ) );
+    return block( headScript, '// Where the editor returns to' );
 }
 function setUpEditor( returnTo ) {
     globalThis.explayoutsServerReturnTo = '';

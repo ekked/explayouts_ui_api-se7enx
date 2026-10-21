@@ -26,17 +26,25 @@ function explayoutsBase() { var m = document.querySelector('meta[name="explayout
 // root); the page's own scripts use explayoutsReturnTo. Any same-site path
 // outside this siteaccess is put back inside it: the admin's Layouts tab
 // stored /content/view/full/N without /admin, and pages still open keep
-// storing it until reloaded.
+// storing it until reloaded. Only an http(s) address of this site is ever
+// returned to (explayoutsSafeTarget): return_to, sessionStorage, the
+// referrer and ngl_referrer can all be set from outside the editor.
 (function(){
     function url(u) { try { return new URL(u, window.location.href); } catch (e) { return null; } }
-    function sameSite(u) { var x = url(u); return !!x && x.origin === window.location.origin; }
+    function sameSite(u) { var x = url(u); return !!x && ( x.protocol === 'http:' || x.protocol === 'https:' ) && x.origin === window.location.origin; }
+    window.explayoutsSafeTarget = function (u) {
+        if (typeof u !== 'string' || u === '') return '';
+        var x = url(u);
+        return x && sameSite(u) ? x.href : '';
+    };
     function isEditor(u) { return /\/explayouts_ui_api\/app/.test(u); }
     var root = url(explayoutsSiteRoot || '/');
     var rootPath = root ? root.pathname.replace(/\/?$/, '/') : '/';
     function inSiteaccess(u) { var x = url(u); return !!x && sameSite(u) && (x.pathname + '/').indexOf(rootPath) === 0; }
     window.explayoutsInSiteaccess = function (u) {
         var x = url(u);
-        if (!x || !sameSite(u) || rootPath === '/' || inSiteaccess(u)) return x ? x.href : u;
+        if (!x || !sameSite(u)) return '';
+        if (rootPath === '/' || inSiteaccess(u)) return x.href;
         return window.location.origin + rootPath.replace(/\/$/, '') + x.pathname + x.search + x.hash;
     };
     var stored = null, kept = null;

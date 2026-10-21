@@ -6,27 +6,43 @@
 if (!window.explayoutsAppReady) {
 window.explayoutsAppReady = true;
 
+// Cancel of the editor: placed beside Create layout of the new layout dialog, or beside Publish layout in the
+// editor's header. It is a link out of the editor, never a button of the dialog: the dialog submits on a click
+// on any .action_apply inside it, and Cancel carried that class, so cancelling created the layout.
 (function(){
     var link = document.getElementById('ng-cancel-link');
     if (!link) return;
-    var returnTo = window.explayoutsReturnTo;
-    if (returnTo) link.href = returnTo;
+    // the page the editor was opened from, else the one kept for Discard (ngl_referrer), else the dashboard;
+    // not history.back(), which is the editor's own previous route
+    function destination() {
+        var safe = window.explayoutsSafeTarget || function () { return ''; };
+        if (safe(window.explayoutsReturnTo)) return safe(window.explayoutsReturnTo);
+        var kept = null;
+        try { kept = window.localStorage.getItem('ngl_referrer'); } catch (e) {}
+        if (safe(kept)) return safe(kept);
+        var dashboard = '/explayouts_ui/dashboard';
+        return window.explayoutsInSiteaccess ? window.explayoutsInSiteaccess(dashboard) : dashboard;
+    }
+    link.href = destination();
     link.addEventListener('click', function(e){
-        if (!returnTo) {
-            e.preventDefault();
-            window.history.back();
-        }
+        e.preventDefault();
+        e.stopPropagation();
+        // The app's beforeunload guard warns while there are unsaved changes (Core.has_unsaved_changes) unless
+        // should_navigate_away is set, as its own Cancel did. Cancel of the new layout dialog discards what was
+        // typed there on purpose; in the editor the guard stays and warns only if something was not saved.
+        if (window.Core && link.closest('.new_layout')) window.Core.should_navigate_away = true;
+        window.location.href = destination();
     });
 
     function placeCancel() {
         if (link._placed) return;
-        var createBtn = document.querySelector('.btn-primary.action_apply, .btn-primary');
-        if (!createBtn) return;
-        var parent = createBtn.parentNode;
-        if (!parent) return;
+        var createBtn = document.querySelector('.new_layout .modal-footer .action_apply');
+        var publishBtn = createBtn ? null : document.querySelector('.ngc .actions .js-publish');
+        var anchor = createBtn || publishBtn;
+        if (!anchor || !anchor.parentNode) return;
         link._placed = true;
-        link.className = 'btn btn-primary action_apply green';
-        parent.insertBefore(link, createBtn);
+        link.className = createBtn ? 'btn btn-default' : 'btn btn-link-white';
+        anchor.parentNode.insertBefore(link, anchor);
     }
 
     var app = document.getElementById('app');
@@ -118,12 +134,13 @@ document.addEventListener('click', function(e) {
 })();
 
 (function(){
-    if (!sessionStorage.getItem('explayouts_return_to') && document.referrer) {
-        sessionStorage.setItem('explayouts_return_to', document.referrer);
+    var safe = window.explayoutsSafeTarget || function () { return ''; };
+    if (!sessionStorage.getItem('explayouts_return_to') && safe(document.referrer)) {
+        sessionStorage.setItem('explayouts_return_to', safe(document.referrer));
     }
 
     function checkRedirect() {
-        var returnTo = sessionStorage.getItem('explayouts_return_to');
+        var returnTo = safe(sessionStorage.getItem('explayouts_return_to'));
         if (!returnTo) return;
         sessionStorage.removeItem('explayouts_return_to');
         setTimeout(function() { window.location.href = returnTo; }, 100);
