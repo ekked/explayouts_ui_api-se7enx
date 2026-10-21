@@ -574,6 +574,13 @@ class expLayoutsUIApplicationApi
                 $definitionIdentifier,
                 isset( $_POST['name'] ) ? trim( $_POST['name'] ) : ''
             );
+            // A new block gets the first view type of its definition, as a
+            // block type of the reference does; 'default' is not among the
+            // view types of e.g. the gallery blocks, so their Design tab showed
+            // none of them selected and the header read DEFAULT.
+            $blockInfo = expLayoutsBlockHandlerFactory::getBlockInfo( $definitionIdentifier );
+            if ( is_array( $blockInfo ) && !empty( $blockInfo['view_types'] ) && is_array( $blockInfo['view_types'] ) )
+                $block->setAttribute( 'view_type', (string)reset( $blockInfo['view_types'] ) );
             $requestedPosition = isset( $_POST['parent_position'] ) ? (int)$_POST['parent_position'] : null;
             $block->setAttribute( 'position', $requestedPosition === null ? 0 : $requestedPosition );
             if ( $parentBlockId > 0 )
@@ -658,6 +665,10 @@ class expLayoutsUIApplicationApi
                 $definitionIdentifier,
                 isset( $data['name'] ) ? trim( $data['name'] ) : ''
             );
+            // the first view type of its definition, as in handleBlocks()
+            $blockInfo = expLayoutsBlockHandlerFactory::getBlockInfo( $definitionIdentifier );
+            if ( is_array( $blockInfo ) && !empty( $blockInfo['view_types'] ) && is_array( $blockInfo['view_types'] ) )
+                $block->setAttribute( 'view_type', (string)reset( $blockInfo['view_types'] ) );
             $requestedPosition = isset( $data['parent_position'] ) ? (int)$data['parent_position'] : null;
             $block->setAttribute( 'status', (int)$layout->attribute( 'status' ) );
             $block->setAttribute( 'position', $requestedPosition === null ? 0 : $requestedPosition );
@@ -837,10 +848,25 @@ class expLayoutsUIApplicationApi
             if ( in_array( $method, array( 'PUT', 'PATCH', 'POST' ) ) )
             {
                 $data = self::requestData();
+                // Only a view type of the block's definition (ViewTypes[]), or
+                // the one it already has (a block stored as 'default' sends that
+                // back with every other change). Any other value was stored as
+                // given, and the frontend templates of a gallery block include
+                // the template named by it.
+                if ( isset( $data['view_type'] ) )
+                {
+                    $requestedViewType = is_string( $data['view_type'] ) ? trim( $data['view_type'] ) : '';
+                    $viewTypeInfo = expLayoutsBlockHandlerFactory::getBlockInfo( (string)$block->attribute( 'definition_identifier' ) );
+                    $allowedViewTypes = is_array( $viewTypeInfo ) && isset( $viewTypeInfo['view_types'] ) && is_array( $viewTypeInfo['view_types'] )
+                        ? $viewTypeInfo['view_types']
+                        : array( 'default' );
+                    if ( $requestedViewType !== (string)$block->attribute( 'view_type' ) && !in_array( $requestedViewType, $allowedViewTypes, true ) )
+                        return self::response( array( 'error' => 'Unknown view type for this block.' ), 400 );
+                }
                 if ( isset( $data['name'] ) )
                     $block->setAttribute( 'name', trim( $data['name'] ) );
                 if ( isset( $data['view_type'] ) )
-                    $block->setAttribute( 'view_type', trim( $data['view_type'] ) );
+                    $block->setAttribute( 'view_type', $requestedViewType );
                 if ( isset( $data['item_view_type'] ) )
                     $block->setAttribute( 'item_view_type', trim( $data['item_view_type'] ) );
                 $requestedPosition = isset( $data['position'] ) ? (int)$data['position'] : null;
@@ -1233,6 +1259,7 @@ class expLayoutsUIApplicationApi
             $itemClass = $isGrid ? 'grid-item cols-' . $columns : 'list-item';
 
             $content .= '<div class="' . $rowClass . '">';
+            $renderedItems = 0;
             foreach ( $values['items'] as $item )
             {
                 $title = '';
@@ -1249,8 +1276,16 @@ class expLayoutsUIApplicationApi
                 {
                     if ( isset( $item['name'] ) )
                         $title = (string)$item['name'];
-                    if ( isset( $item['node_id'] ) && (int)$item['node_id'] > 0 )
+                    // A gallery item (expLayoutsGalleryBlockHandler) carries its
+                    // node under 'node' and its name as 'alt'; only name and
+                    // node_id were read, so every gallery item was skipped and a
+                    // gallery with items showed "No content".
+                    if ( isset( $item['node'] ) && $item['node'] instanceof eZContentObjectTreeNode )
+                        $itemNode = $item['node'];
+                    elseif ( isset( $item['node_id'] ) && (int)$item['node_id'] > 0 )
                         $itemNode = eZContentObjectTreeNode::fetch( (int)$item['node_id'] );
+                    if ( $title === '' && isset( $item['alt'] ) )
+                        $title = (string)$item['alt'];
                 }
 
                 if ( $title === '' && $itemNode instanceof eZContentObjectTreeNode )
@@ -1261,24 +1296,28 @@ class expLayoutsUIApplicationApi
                 $content .= '<div class="' . $itemClass . '">' .
                     self::renderItemPreview( $itemNode, $title ) .
                     '</div>';
+                $renderedItems++;
             }
             $content .= '</div>';
+
+            // Items that are no content items (the title|content pairs of tabs
+            // and accordion) give no preview row: the block's template instead.
+            if ( $renderedItems === 0 )
+                $content = self::renderBlockTemplatePreview( $prepared, $definition );
         }
-        elseif ( !empty( $values ) )
+        elseif ( !empty( $values ) && !( isset( $values['items'] ) && is_array( $values['items'] ) ) )
         {
-            foreach ( $values as $key => $value )
-            {
-                if ( is_object( $value ) )
-                    continue;
-                if ( is_array( $value ) )
-                    $value = json_encode( $value );
-                $value = (string)$value;
-                if ( $value === '' ) continue;
-                $content .= '<p class="block-value"><strong>' . htmlspecialchars( (string)$key ) . ':</strong> ' . htmlspecialchars( $value ) . '</p>';
-            }
+            // The block as the site draws it, as the reference editor shows
+            // it: its frontend template, made inert for the canvas. Else a
+            // short preview of its title, text and image. The values were
+            // dumped as "title: ... content: ... image_url: ..." before. A
+            // block with items (a list, a gallery) and none to show is empty.
+            $content .= self::renderBlockTemplatePreview( $prepared, $definition );
+            if ( $content === '' )
+                $content .= self::renderBlockShortPreview( $values );
         }
 
-        if ( $content === '' || ( trim( strip_tags( $content ) ) === '' && !$isInlineDefinition && !$isCodeDefinition ) )
+        if ( $content === '' || ( trim( strip_tags( $content, '<img>' ) ) === '' && !$isInlineDefinition && !$isCodeDefinition ) )
         {
             $content = '<p class="block-empty">No content</p>';
         }
@@ -1306,6 +1345,326 @@ class expLayoutsUIApplicationApi
             '</div>';
 
         return $header . '<div class="block-content">' . $content . '</div>';
+    }
+
+    /**
+     * The block's frontend template (design:explayouts/block/<definition>.tpl)
+     * rendered for the editor canvas, made inert by sanitizePreviewHtml().
+     * Empty when there is no template engine, no such template, the template
+     * reports errors or draws nothing visible: the caller then shows the short
+     * preview. The engine is the shared eZTemplate::factory() instance, and
+     * fetch() resets its error and warning logs and its list of fetched
+     * templates: those, and its variable 'block', are put back as they were,
+     * so that neither the errors gathered before nor this preview's own reach
+     * whoever uses the engine next.
+     */
+    protected static function renderBlockTemplatePreview( $prepared, $definition )
+    {
+        if ( !class_exists( 'eZTemplate' ) || !is_array( $prepared ) || !preg_match( '/^[a-z0-9_]+$/', (string)$definition ) )
+            return '';
+
+        $html = '';
+        $tpl = null;
+        $state = null;
+        try
+        {
+            $tpl = eZTemplate::factory();
+            $state = array(
+                'errors' => $tpl->ErrorLog,
+                'warnings' => $tpl->WarningLog,
+                'fetched' => $tpl->TemplateFetchList,
+                'had_block' => $tpl->hasVariable( 'block' ),
+            );
+            $state['block'] = $state['had_block'] ? $tpl->variable( 'block' ) : null;
+
+            $tpl->setVariable( 'block', $prepared );
+            $html = (string)$tpl->fetch( 'design:explayouts/block/' . $definition . '.tpl' );
+            if ( $tpl->hasErrors() )
+                $html = '';
+        }
+        catch ( Throwable $e )
+        {
+            $html = '';
+        }
+
+        if ( $tpl && $state !== null )
+        {
+            $tpl->ErrorLog = $state['errors'];
+            $tpl->WarningLog = $state['warnings'];
+            $tpl->TemplateFetchList = $state['fetched'];
+            if ( $state['had_block'] )
+                $tpl->setVariable( 'block', $state['block'] );
+            else
+                $tpl->unsetVariable( 'block' );
+        }
+
+        return $html === '' ? '' : self::sanitizePreviewHtml( $html );
+    }
+
+    /** Elements kept in the canvas preview; any other element is left out and its text kept. */
+    const PREVIEW_ELEMENTS = array(
+        'div', 'span', 'p', 'br', 'hr', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'b', 'i', 'u', 'small',
+        'blockquote', 'cite', 'figure', 'figcaption', 'ul', 'ol', 'li', 'dl', 'dt', 'dd', 'a', 'img', 'table', 'thead',
+        'tbody', 'tr', 'th', 'td', 'code', 'pre', 'section', 'article', 'header', 'footer', 'details', 'summary', 'label',
+    );
+
+    /** Elements left out together with their content. */
+    const PREVIEW_DROPPED = array(
+        'script', 'style', 'template', 'noscript', 'textarea', 'title', 'svg', 'math', 'xmp', 'noembed', 'noframes',
+        'plaintext', 'select', 'option', 'optgroup', 'datalist', 'head', 'base', 'link', 'meta', 'input', 'param',
+        'source', 'track', 'canvas', 'map', 'area', 'frameset', 'dialog', 'slot',
+    );
+
+    /** Elements replaced by a placeholder naming their host. */
+    const PREVIEW_EMBEDS = array( 'iframe', 'frame', 'object', 'embed', 'video', 'audio', 'picture' );
+
+    /** Classes the editor finds its own parts by. */
+    const PREVIEW_RESERVED_CLASSES = array(
+        'block-content', 'block-header', 'block-empty', 'handle', 'name', 'template_name', 'dropdown',
+        'dropdown-toggle', 'dropdown-menu', 'container-content', 'column-placeholder', 'rich-text-editor',
+        'ace-editor', 'tpl-block-info', 'list-row', 'grid-row', 'list-item', 'grid-item', 'collection-items',
+        'ngc', 'ngl-tooltip', 'xeditable',
+    );
+
+    /**
+     * Frontend markup made inert for the editor canvas, which is part of the
+     * editor's own page. The markup is parsed (HTML5 with \Dom\HTMLDocument
+     * where PHP has it, else libxml's HTML parser, or that one with
+     * $legacyParser) and the output is built anew from the tree, never
+     * serialized from it, so that no difference between the parser and the
+     * browser can bring markup back: only the elements of PREVIEW_ELEMENTS,
+     * with class (without the editor's own classes and js-*), title, href on a
+     * (http(s), /... or #...; always target="_blank" rel="noopener noreferrer"),
+     * src (http(s) or /...), alt, width and height on img, colspan and rowspan;
+     * text and attribute values escaped. Elements of PREVIEW_DROPPED go with
+     * their content, embedded frames and objects become a placeholder naming
+     * their host, any other element is left out with its text kept; comments,
+     * CDATA and processing instructions go. No form, form control, id, name,
+     * style, data-* or event handler reaches the editor's page (the editor
+     * serializes every form of its page, binds itself to data-* attributes,
+     * and a name or id could shadow its globals). Empty when nothing visible
+     * is left.
+     */
+    public static function sanitizePreviewHtml( $html, $legacyParser = false )
+    {
+        $html = (string)$html;
+        if ( trim( $html ) === '' )
+            return '';
+
+        $root = self::parsePreviewMarkup( $html, (bool)$legacyParser );
+        if ( !$root )
+            return '';
+
+        $out = self::rebuildPreviewChildren( $root, 0 );
+        if ( trim( strip_tags( $out, '<img>' ) ) === '' )
+            return '';
+
+        return '<div class="block-template-preview">' . $out . '</div>';
+    }
+
+    /** The body element of the parsed markup, or null. */
+    protected static function parsePreviewMarkup( $html, $legacyParser )
+    {
+        $previous = libxml_use_internal_errors( true );
+        $body = null;
+        try
+        {
+            if ( !$legacyParser && class_exists( '\Dom\HTMLDocument' ) )
+            {
+                $doc = \Dom\HTMLDocument::createFromString(
+                    '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' . $html . '</body></html>',
+                    LIBXML_NOERROR,
+                    'UTF-8'
+                );
+                $body = $doc->body;
+            }
+            elseif ( class_exists( 'DOMDocument' ) )
+            {
+                $doc = new DOMDocument();
+                $encoded = mb_encode_numericentity( $html, array( 0x80, 0x10FFFF, 0, 0x1FFFFF ), 'UTF-8' );
+                if ( $doc->loadHTML( '<?xml encoding="UTF-8"?><!DOCTYPE html><html><body>' . $encoded . '</body></html>',
+                                     LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING ) )
+                    $body = $doc->getElementsByTagName( 'body' )->item( 0 );
+            }
+        }
+        catch ( Throwable $e )
+        {
+            $body = null;
+        }
+        libxml_clear_errors();
+        libxml_use_internal_errors( $previous );
+
+        return $body ?: null;
+    }
+
+    protected static function previewText( $text )
+    {
+        return htmlspecialchars( (string)$text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8' );
+    }
+
+    /**
+     * An address allowed in the preview, or ''. The parser has decoded the
+     * entities already; controls and whitespace inside, a backslash (which
+     * browsers read as a slash, so /\host is another host) and every scheme
+     * but http(s) refuse it. $image: no fragment-only or protocol-relative
+     * address either.
+     */
+    public static function previewUrl( $url, $image = false )
+    {
+        $url = trim( (string)$url, " \t\n\r\f" );
+        if ( $url === '' || preg_match( '/[\x00-\x1F\x7F\\\\]/', $url ) || preg_match( '/\s/u', $url ) )
+            return '';
+        if ( preg_match( '#^https?://[^/?\#]#i', $url ) )
+            return $url;
+        if ( preg_match( '#^/(?!/)#', $url ) )
+            return $url;
+        if ( !$image && preg_match( '/^#/', $url ) )
+            return $url;
+        return '';
+    }
+
+    protected static function rebuildPreviewChildren( $node, $depth )
+    {
+        $out = '';
+        if ( $depth > 64 )
+            return $out;
+        foreach ( $node->childNodes as $child )
+        {
+            if ( $child->nodeType === XML_TEXT_NODE )
+                $out .= self::previewText( $child->nodeValue );
+            elseif ( $child->nodeType === XML_ELEMENT_NODE )
+                $out .= self::rebuildPreviewElement( $child, $depth + 1 );
+            // comments, CDATA sections and processing instructions are left out
+        }
+        return $out;
+    }
+
+    protected static function rebuildPreviewElement( $element, $depth )
+    {
+        $name = strtolower( (string)( $element->localName !== null && $element->localName !== '' ? $element->localName : $element->nodeName ) );
+        // only HTML elements: anything in the SVG or MathML namespace goes
+        $namespace = (string)$element->namespaceURI;
+        if ( $namespace !== '' && $namespace !== 'http://www.w3.org/1999/xhtml' )
+            return '';
+
+        if ( in_array( $name, self::PREVIEW_DROPPED, true ) )
+            return '';
+
+        if ( in_array( $name, self::PREVIEW_EMBEDS, true ) )
+        {
+            $source = $element->getAttribute( 'src' );
+            if ( (string)$source === '' )
+                $source = $element->getAttribute( 'data' );
+            $host = (string)parse_url( self::previewUrl( (string)$source ), PHP_URL_HOST );
+            return '<p class="block-embed">' . self::previewText(
+                ezpI18n::tr( 'design/standard/explayouts_ui_api/app', 'Embedded content' ) . ( $host !== '' ? ': ' . $host : '' )
+            ) . '</p>';
+        }
+
+        if ( !in_array( $name, self::PREVIEW_ELEMENTS, true ) )
+            return self::rebuildPreviewChildren( $element, $depth );
+
+        $attributes = array();
+
+        $classes = array_filter( preg_split( '/\s+/', (string)$element->getAttribute( 'class' ) ), function ( $class )
+        {
+            return $class !== '' && preg_match( '/^[A-Za-z0-9_-]+$/', $class ) && strpos( $class, 'js-' ) !== 0
+                && !in_array( $class, self::PREVIEW_RESERVED_CLASSES, true );
+        } );
+        if ( $classes )
+            $attributes['class'] = implode( ' ', $classes );
+        if ( (string)$element->getAttribute( 'title' ) !== '' )
+            $attributes['title'] = (string)$element->getAttribute( 'title' );
+
+        if ( $name === 'a' )
+        {
+            $href = self::previewUrl( $element->getAttribute( 'href' ) );
+            if ( $href !== '' )
+            {
+                $attributes['href'] = $href;
+                $attributes['target'] = '_blank';
+                $attributes['rel'] = 'noopener noreferrer';
+            }
+        }
+        elseif ( $name === 'img' )
+        {
+            $src = self::previewUrl( $element->getAttribute( 'src' ), true );
+            if ( $src === '' )
+                return '';
+            $attributes['src'] = $src;
+            $attributes['alt'] = (string)$element->getAttribute( 'alt' );
+            foreach ( array( 'width', 'height' ) as $dimension )
+            {
+                if ( preg_match( '/^[0-9]{1,5}$/', (string)$element->getAttribute( $dimension ) ) )
+                    $attributes[$dimension] = (string)$element->getAttribute( $dimension );
+            }
+        }
+        elseif ( $name === 'td' || $name === 'th' )
+        {
+            foreach ( array( 'colspan', 'rowspan' ) as $span )
+            {
+                if ( preg_match( '/^[0-9]{1,3}$/', (string)$element->getAttribute( $span ) ) )
+                    $attributes[$span] = (string)$element->getAttribute( $span );
+            }
+        }
+
+        $open = '<' . $name;
+        foreach ( $attributes as $attribute => $value )
+            $open .= ' ' . $attribute . '="' . self::previewText( $value ) . '"';
+        $open .= '>';
+
+        if ( in_array( $name, array( 'br', 'hr', 'img' ), true ) )
+            return $open;
+
+        return $open . self::rebuildPreviewChildren( $element, $depth ) . '</' . $name . '>';
+    }
+
+    /**
+     * A readable short preview of a block without a template preview: its
+     * title, its text shortened, its image as a thumbnail. Empty values give
+     * nothing (the caller then says "No content"), and no other value is
+     * shown: the values were dumped as "title: ... content: ..." before.
+     */
+    public static function renderBlockShortPreview( $values )
+    {
+        if ( !is_array( $values ) )
+            return '';
+
+        $pick = function ( array $keys ) use ( $values )
+        {
+            foreach ( $keys as $key )
+            {
+                if ( isset( $values[$key] ) && is_scalar( $values[$key] ) && trim( (string)$values[$key] ) !== '' )
+                    return (string)$values[$key];
+            }
+            return '';
+        };
+
+        $title = $pick( array( 'title', 'heading', 'headline', 'label', 'name', 'link_label', 'link_text' ) );
+        $text = $pick( array( 'content', 'text', 'intro', 'lead', 'message', 'quote', 'description', 'body' ) );
+        $image = $pick( array( 'image_url', 'image', 'thumbnail_url' ) );
+
+        $html = '';
+        if ( $image !== '' && preg_match( '#^(/[^/]|https?://)#i', $image ) )
+            $html .= '<div class="image"><img src="' . htmlspecialchars( $image ) . '" alt="" loading="lazy" /></div>';
+        if ( $title !== '' )
+            $html .= '<p class="block-preview-title"><strong>' . htmlspecialchars( self::shorten( strip_tags( $title ), 120 ) ) . '</strong></p>';
+        if ( $text !== '' )
+        {
+            $plain = trim( preg_replace( '/\s+/u', ' ', html_entity_decode( strip_tags( $text ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+            if ( $plain !== '' )
+                $html .= '<p class="block-preview-text">' . htmlspecialchars( self::shorten( $plain, 240 ) ) . '</p>';
+        }
+
+        return $html === '' ? '' : '<div class="block-short-preview">' . $html . '</div>';
+    }
+
+    protected static function shorten( $text, $length )
+    {
+        $text = trim( (string)$text );
+        if ( mb_strlen( $text, 'UTF-8' ) <= $length )
+            return $text;
+        return rtrim( mb_substr( $text, 0, $length - 1, 'UTF-8' ) ) . "\u{2026}";
     }
 
     /**

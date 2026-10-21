@@ -62,6 +62,10 @@
         <source>Failed to load content.</source>
         <translation>De&apos; qemlu&apos;be&apos;.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>De' Qoy'lu'pu'</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -931,6 +935,393 @@
     <message>
         <source>Block types</source>
         <translation>ngogh Segh</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Huv</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Huv patlh (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML per</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>rar lo'</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>rar Segh</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>rar</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>rar mojaq</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Qorwagh chu'Daq poSmoH</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>chen logh lo'</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Dung</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>bIng</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS Segh</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ngu'wI'</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>ngaSwI'Daq mughay'</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>ngaSwI' tInwI'</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>De'</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>ghItlh</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>per (ngo')</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (ngo')</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Ha'DIbaH mIw</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>ngoQ</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>HaSta URL pagh Hal</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>'aD (px pagh %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>'ab (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>nIteb Qoy</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>pu'jIn URL</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>'aD</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Markdown De'</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML tlhol</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>mIllogh URL</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>latlh ghItlh</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>rar URL</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>'ab pixel</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>HeH pixel</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>rar per</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>QIn</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Segh</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>SoQmoH laH</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>per</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>mI' (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>rItlh</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Doch (Huv|De' tlhegh Hoch)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>wa'DIch Doch poSmoH</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>ghIH (Huv|De' tlhegh Hoch)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>ghIH Qap (0 vo')</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>mIllogh latlh ghItlh</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>rar ghItlh</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>mIllogh mach tlhegh/SIrgh</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>wov naQ chu'</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>mIllogh DotlhHom ngu'wI'</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>mIllogh mach tInwI'</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>ja'ghach ghItlh</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>ghItlhwI'</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Hal</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>tlheghmoH</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>tut mI'</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Hong rItlh cher</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Hong rItlh</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Hong mIllogh cher</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Hong mIllogh</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>nav mI' chu'</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>nav mI' Segh</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>nav mI' law'qu'</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>wa'DIch nav AJAX lo' lI'</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>SIrgh Qorwagh Hoch</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>nIteb Qoy (ms, 0 chu'Ha')</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>ghantoH pong</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>pong cha'</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>tlhob cha'</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>rar pagh</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL Hoch</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>QIn De'</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>ghogh HablI' mI'</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>pagh</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>mach</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>motlh</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>tIn</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>motlh</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Hom</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>'aD</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>cha' tut</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>wej tut</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>loS tut</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>jav tut</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>wa'DIch (SuD wov)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>cha'DIch (qIj wov)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>chIS</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>qIj</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>nav DevwI'</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>latlh lI'</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>mIllogh Qorwagh</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>SIrgh</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>mIllogh mach Qorwagh</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>mIllogh tlhegh Qorwagh</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Sushi qal</translation>
     </message>
 </context>
 </TS>

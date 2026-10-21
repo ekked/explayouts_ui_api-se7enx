@@ -158,6 +158,21 @@ Modifying requests must carry the eZ form token, either as an `X-CSRF-Token` HTT
 
 See [doc/USAGE.md](doc/USAGE.md) for exhaustive scenarios: every endpoint with request/response bodies, a complete curl session, the HTML form fragment flow, implementation notes, and the full customization guide covering the settings layer (INI cascade — everything the API exposes is defined in `explayouts.ini` and overridable without code changes; access control via module policies), the template layer (design override cascade for `app.tpl` and the form templates — the supported way to swap CSS/JS bundles) and the PHP layer (building against the JSON contract, adding block parameters via handlers, custom read-only JSON views).
 
+Changes made by hand to the app bundle
+--------------------------------------
+
+`design/standard/javascript/netgen-layouts.js` is a built bundle whose source is not part of this package. Changes
+made to it directly have to be made again if it is ever rebuilt:
+
+- View type select (module `lib/jquery/view_types`): the handler
+  `r(document).on("change",".view-type",function(e){i(this)})` reads
+  `r(document).on("change",".view-type",function(e){i(this),r(this).hasClass("master")||r(this).closest("form").trigger("submit")})`.
+  The select carries `js-skip-on-change`, so the form's own change handler never saved it; only the master select of
+  a master/slave pair was saved, through the change it triggers on its slave. A changed view type of any other block
+  (the gallery blocks, two columns) was lost. `tests/GalleryBlockPreviewTest.php` checks the handler.
+
+After a change to the bundle, raise the `?v=` of its `<script>` in `app.tpl`, so browsers fetch it again.
+
 Rich text and code editors
 --------------------------
 

@@ -61,6 +61,10 @@
         <source>Failed to load content.</source>
         <translation>טעינת התוכן נכשלה.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>תוכן מוטמע</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -930,6 +934,393 @@
     <message>
         <source>Block types</source>
         <translation>סוגי בלוקים</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>כותרת</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>רמת כותרת (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>תגית HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>שימוש בקישור</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>סוג קישור</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>קישור</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>סיומת קישור</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>פתיחה בחלון חדש</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>שימוש ברווח אנכי</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>למעלה</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>למטה</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>מחלקת CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>מזהה CSS</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>עטיפה במכל</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>גודל המכל</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>תוכן</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>טקסט</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>תווית (ישן)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (ישן)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>סגנון</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>יעד</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>כתובת וידאו או מקור הטמעה</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>רוחב (px או %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>גובה (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>ניגון אוטומטי</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>כתובת הטמעת מפה</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>רוחב</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>תוכן Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML גולמי</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>כתובת תמונה</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>טקסט חלופי</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>כתובת קישור</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>גובה בפיקסלים</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>שוליים בפיקסלים</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>תווית קישור</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>הודעה</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>סוג</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>ניתן לסגירה</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>תווית</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>ערך (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>צבע</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>פריטים (כותרת|תוכן בכל שורה)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>פתיחת הפריט הראשון</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>לשוניות (כותרת|תוכן בכל שורה)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>לשונית פעילה (מ-0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>טקסט חלופי לתמונה</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>טקסט הקישור</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>תמונות ממוזערות לשורה/שקופית</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>הפעלת תיבת תצוגה</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>מזהה מאפיין התמונה</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>גודל התמונות הממוזערות</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>טקסט הציטוט</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>מחבר</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>מקור</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>יישור</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>מספר עמודות</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>הגדרת צבע רקע</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>צבע רקע</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>הגדרת תמונת רקע</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>תמונת רקע</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>הפעלת עימוד</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>סוג עימוד</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>מספר עמודים מרבי</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>טעינת העמוד הראשון ב-AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>שקופיות לתצוגה</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>ניגון אוטומטי (מילישניות, 0 לכיבוי)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>שם התבנית</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>הצגת שם</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>הצגת מבוא</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>ללא קישור</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>כתובת יחסית</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>דוא"ל</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>מספר טלפון</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>ללא</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>קטן</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>בינוני</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>גדול</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>רגיל</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>צר</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>רחב</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 עמודות</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 עמודות</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 עמודות</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 עמודות</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>ראשי (צהוב)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>משני (אפור בהיר)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>לבן</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>שחור</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>דפדוף</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>טעינת עוד</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>גלריה</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>מצגת</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>גלריית תמונות ממוזערות</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>גלריית רשת</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>פס גלילה</translation>
     </message>
 </context>
 </TS>

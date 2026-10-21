@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Der Inhalt konnte nicht geladen werden.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Eingebetteter Inhalt</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -928,6 +932,393 @@
     <message>
         <source>Block types</source>
         <translation>Blocktypen</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Überschriftenebene (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML-Tag</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Link verwenden</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Linktyp</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Link</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Link-Suffix</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>In neuem Fenster öffnen</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Vertikalen Leerraum verwenden</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Oben</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Unten</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS-Klasse</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS-ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>In Container einbetten</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Containergröße</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Inhalt</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Beschriftung (alt)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (alt)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Stil</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Ziel</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>Video-URL oder Embed-Quelle</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Breite (px oder %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Höhe (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Automatisch abspielen</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>Karten-Embed-URL</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Breite</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Markdown-Inhalt</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML-Code</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>Bild-URL</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Alternativtext</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>Link-URL</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Höhe in Pixeln</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Abstand in Pixeln</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Linkbeschriftung</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Meldung</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Schließbar</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Beschriftung</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Wert (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Farbe</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Einträge (Titel|Inhalt je Zeile)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Ersten Eintrag öffnen</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Reiter (Titel|Inhalt je Zeile)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Aktiver Reiter (ab 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Alternativtext des Bildes</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Linktext</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Thumbnails pro Zeile/Slide</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Lightbox aktivieren</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Bezeichner des Bildattributs</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Bildgröße der Thumbnails</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Zitattext</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Autor</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Quelle</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Ausrichtung</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Anzahl der Spalten</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Hintergrundfarbe festlegen</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Hintergrundfarbe</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Hintergrundbild festlegen</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Hintergrundbild</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Seitenblätterung aktivieren</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Art der Seitenblätterung</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Höchstzahl der Seiten</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Erste Seite per AJAX laden</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Slides pro Ansicht</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Automatisch abspielen (ms, 0 schaltet ab)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Template-Name</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Name anzeigen</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Einleitung anzeigen</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Kein Link</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>Relative URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-Mail</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Telefonnummer</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Keiner</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Mittel</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Groß</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Schmal</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Breit</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 Spalten</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 Spalten</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 Spalten</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 Spalten</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Primär (Gelb)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Sekundär (Hellgrau)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Weiß</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Schwarz</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Seitenleiste</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Mehr laden</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galerie</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Slider</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Thumbnail-Galerie</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Raster-Galerie</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Sushi-Bar</translation>
     </message>
 </context>
 </TS>
