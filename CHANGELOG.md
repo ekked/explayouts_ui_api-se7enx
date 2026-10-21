@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.28
 
 - **Imports create a draft** with draft zones and blocks; rules come along disabled with known types only; layout
   type, block definitions and view types are checked against the settings (with explayouts' importer rules when
@@ -26,6 +26,13 @@
   last second, a form of the sidebar or of a dialog that is not saved), no longer right after opening a layout.
 - An inline text in the canvas that is emptied completely is saved (it was skipped); a form without a method attribute
   is saved as POST.
+- The content browser of the layout editor escapes class and object names, quotes included; ids are read as numbers.
+- The gallery block preview, the Design tab, view type saving and the canvas preview (the block's own template,
+  rebuilt from an allowlist) are fixed.
+- Arabic, French, Ukrainian, Persian, Pashto and Kurdish (Kurmanji) translations; the ten translations of 1.3.27 and
+  the new ones carry every parameter text of the editor.
+- The accessible tabs, palette and toolbar buttons of 1.3.22 are kept in the bundle as patches of modules 17, 54 and
+  85; the safe return target and the Cancel link live in the page's script files (no inline script).
 
 Open: the import is still a second implementation beside explayouts' `expLayoutsImporter` (shared are the
 validation and the handling of rules).
