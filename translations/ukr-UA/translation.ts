@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Не вдалося завантажити вміст.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Вбудований вміст</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Переглянути в CMS</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(збережено) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Типи блоків</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Заголовок</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Рівень заголовка (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML-тег</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Використовувати посилання</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Тип посилання</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Посилання</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Суфікс посилання</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Відкривати в новому вікні</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Використовувати вертикальні відступи</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Зверху</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Знизу</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS-клас</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Обгорнути в контейнер</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Розмір контейнера</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Вміст</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Текст</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Мітка (застаріле)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (застаріле)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Стиль</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Ціль</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL відео або src для вбудовування</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Ширина (px або %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Висота (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Автовідтворення</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL для вбудовування карти</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Ширина</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Вміст Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>Чистий HTML</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL зображення</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Альтернативний текст</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL посилання</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Висота в пікселях</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Відступ у пікселях</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Мітка посилання</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Повідомлення</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Тип</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Можна закрити</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Мітка</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Значення (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Колір</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Елементи (Заголовок|Вміст в одному рядку)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Відкрити перший елемент</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Вкладки (Заголовок|Вміст в одному рядку)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Індекс активної вкладки (від 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Альтернативний текст зображення</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Текст посилання</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Мініатюр на рядок/слайд</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Увімкнути лайтбокс</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Ідентифікатор атрибута зображення</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Псевдонім розміру мініатюр</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Текст цитати</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Автор</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Джерело</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Вирівнювання</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Кількість колонок</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Задати колір фону</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Колір фону</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Задати фонове зображення</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Фонове зображення</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Увімкнути пагінацію</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Тип пагінації</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Максимальна кількість сторінок</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Завантажувати першу сторінку через AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Слайдів на екран</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Автовідтворення (мс, 0 — вимкнути)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Назва шаблону</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Показувати назву</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Показувати вступ</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Без посилання</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>Відносний URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>Ел. пошта</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Номер телефону</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Немає</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Малий</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Середній</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Великий</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Звичайний</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Вузький</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Широкий</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 колонки</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 колонки</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 колонки</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 колонок</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Основний (жовтий)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Додатковий (світло-сірий)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Білий</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Чорний</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Посторінкова навігація</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Завантажити ще</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Галерея</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Слайдер</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Галерея мініатюр</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Галерея-сітка</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Горизонтальна стрічка</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Відповідно до рівня заголовка</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Заголовок 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Заголовок 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Заголовок 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Заголовок 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Заголовок 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Заголовок 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Абзац</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Блок (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Звичайна кнопка</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Виділена кнопка</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Те саме вікно</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Нове вікно</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Сервіс</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Адреса відео нижче</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID відео</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Підпис</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Широта (від -90 до 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Довгота (від -180 до 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Масштаб (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Тип карти</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Схема</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Супутник</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Гібрид</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Рельєф</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Показувати маркер</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Рівень заголовка</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Типово для дизайну</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Можливості (Заголовок|Текст в одному рядку)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Показувати кнопки «Далі» та «Назад»</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Показувати пагінацію</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Нескінченний цикл</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Перехід</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Зсув</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Згасання</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Час автовідтворення (секунди, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Мініатюр для прокручування</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Показувати деталі</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Показувати деталі при наведенні</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID батьківського вузла</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Ліміт</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Фільтр класів</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Стандартний</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Стандартний (зі вступом)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Накладання</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Картка</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Картка (зі вступом)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Рядок</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Міні</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Елемент списку</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Елемент списку (зі вступом)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID вузла</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Розділ навігації (порожньо: розділ сторінки)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Компонент</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Список</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Сітка</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Нумерований список</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Зигзаг</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Акордеон</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Сітка (перший елемент великий)</translation>
     </message>
 </context>
 </TS>

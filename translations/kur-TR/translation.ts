@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>Barkirina naverokê bi ser neket.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>Naveroka bicihkirî</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>Dîtin di CMS de</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(tomarkirî) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>Cureyên blokan</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>Sernav</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>Asta sernavê (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>Etîketa HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>Girêdanê bi kar bîne</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>Cureya girêdanê</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Girêdan</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>Paşgira girêdanê</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>Di pencereyeke nû de veke</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>Valahiya vertîkal bi kar bîne</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>Li jor</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>Li jêr</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>Çîna CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>Têxe nav konteynerekê</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>Mezinahiya konteynerê</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>Naverok</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Nivîs</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>Etîket (kevn)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (kevn)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>Şêwe</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>Armanc</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL-ya vîdyoyê an src-ya bicihkirinê</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>Firehî (px an %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>Bilindahî (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>Lêxistina xweber</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL-ya bicihkirina nexşeyê</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>Firehî</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Naveroka Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML-ya xav</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL-ya wêneyê</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>Nivîsa alternatîf</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL-ya girêdanê</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>Bilindahî bi pîkselan</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>Kenar bi pîkselan</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>Etîketa girêdanê</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Peyam</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Cure</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>Dikare were girtin</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Etîket</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>Nirx (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>Reng</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>Hêman (Sernav|Naverok, her rêzek yek)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>Hêmana yekem veke</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>Tab (Sernav|Naverok, her rêzek yek)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>Hejmara taba çalak (ji 0 dest pê dike)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>Nivîsa alternatîf a wêneyê</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>Nivîsa girêdanê</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>Wêneyên biçûk her rêz/slayt</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>Lightboxê çalak bike</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>Nasnameya taybetmendiya wêneyê</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>Navê mezinahiya wêneyên biçûk</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>Nivîsa jêgirtinê</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Nivîskar</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Çavkanî</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>Rêzkirin</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>Hejmara stûnan</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>Rengê paşxanê diyar bike</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Rengê paşxanê</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>Wêneyê paşxanê diyar bike</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>Wêneyê paşxanê</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>Rûpelkirinê çalak bike</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>Cureya rûpelkirinê</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>Hejmara herî zêde ya rûpelan</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>Rûpela yekem bi AJAX bar bike</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>Slayt her dîtinê</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>Lêxistina xweber (ms, 0 ji bo neçalakkirinê)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>Navê şablonê</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>Navî nîşan bide</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>Pêşgotinê nîşan bide</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>Bê girêdan</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL-ya nisbî</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>E-name</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>Hejmara telefonê</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Tune</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Biçûk</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Navîn</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Mezin</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>Asayî</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>Teng</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>Fireh</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 stûn</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 stûn</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 stûn</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 stûn</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>Sereke (zer)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>Duyemîn (gewriya vekirî)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Spî</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Reş</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Rûpelger</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>Zêdetir bar bike</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>Galerî</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>Slayder</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>Galeriya wêneyên biçûk</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>Galeriya torê</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>Şerîda horizontal</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>Li gorî asta sernavê</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Sernav 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Sernav 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Sernav 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Sernav 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Sernav 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Sernav 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Paragraf</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Beş (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Bişkoka standard</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Bişkoka berçavkirî</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Heman pencere</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>Pencereya nû</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Xizmet</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Navnîşana vîdyoyê li jêr</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID-ya vîdyoyê</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Binnivîs</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Latîtûd (-90 heta 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Longîtûd (-180 heta 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Mezinkirin (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Cureya nexşeyê</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Nexşeya rêyan</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satelît</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hîbrîd</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Erdnîgarî</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Nîşankerê nîşan bide</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Asta sernavê</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Standarda dîzaynê</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Taybetmendî (Sernav|Nivîs, her rêzek yek)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Bişkokên pêş û paş nîşan bide</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Rûpelkirinê nîşan bide</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Xeleka bêdawî</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Derbasbûn</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Xijikandin</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Wendabûn</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Dema lêxistina xweber (çirke, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Wêneyên biçûk ên ku werin livandin</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Hûrguliyan nîşan bide</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Dema mişk li ser be hûrguliyan nîşan bide</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID-ya girêka dêûbav</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Sînor</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Parzûna çînan</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standard (bi pêşgotinê)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Serdanîn</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Kart</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Kart (bi pêşgotinê)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Rêz</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mînî</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>Hêmana lîsteyê</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>Hêmana lîsteyê (bi pêşgotinê)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID-ya girêkê</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Beşa navîgasyonê (vala: ya rûpelê)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Pêkhate</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Lîste</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Tor</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Lîsteya bihejmar</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zîgzag</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Akordeon</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Tor (hêmana yekem mezin)</translation>
     </message>
 </context>
 </TS>

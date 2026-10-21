@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>فشل تحميل المحتوى.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>محتوى مضمّن</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>عرض في نظام إدارة المحتوى</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(محفوظ) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>أنواع الكتل</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>العنوان</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>مستوى العنوان (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>وسم HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>استخدام رابط</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>نوع الرابط</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>الرابط</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>لاحقة الرابط</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>فتح في نافذة جديدة</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>استخدام مسافات عمودية</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>في الأعلى</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>في الأسفل</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>فئة CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>التضمين في حاوية</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>حجم الحاوية</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>المحتوى</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>النص</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>التسمية (قديم)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (قديم)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>النمط</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>الهدف</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>رابط الفيديو أو src التضمين</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>العرض (px أو %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>الارتفاع (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>تشغيل تلقائي</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>رابط تضمين الخريطة</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>العرض</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>محتوى Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML خام</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>رابط الصورة</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>النص البديل</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>عنوان URL للرابط</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>الارتفاع بالبكسل</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>الهامش بالبكسل</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>تسمية الرابط</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>الرسالة</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>النوع</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>قابل للإغلاق</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>التسمية</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>القيمة (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>اللون</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>العناصر (العنوان|المحتوى في كل سطر)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>فتح العنصر الأول</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>علامات التبويب (العنوان|المحتوى في كل سطر)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>رقم علامة التبويب النشطة (يبدأ من 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>النص البديل للصورة</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>نص الرابط</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>الصور المصغّرة في كل صف/شريحة</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>تفعيل العارض المنبثق (lightbox)</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>معرّف سمة الصورة</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>اسم حجم الصورة المصغّرة</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>نص الاقتباس</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>المؤلف</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>المصدر</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>المحاذاة</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>عدد الأعمدة</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>تعيين لون الخلفية</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>لون الخلفية</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>تعيين صورة الخلفية</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>صورة الخلفية</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>تفعيل ترقيم الصفحات</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>نوع ترقيم الصفحات</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>الحد الأقصى لعدد الصفحات</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>تحميل الصفحة الأولى عبر AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>عدد الشرائح في العرض</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>تشغيل تلقائي (ms، 0 للتعطيل)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>اسم القالب</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>عرض الاسم</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>عرض المقدمة</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>بدون رابط</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL نسبي</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>البريد الإلكتروني</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>رقم الهاتف</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>لا شيء</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>صغير</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>متوسط</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>كبير</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>عادي</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>ضيّق</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>عريض</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>عمودان</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 أعمدة</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 أعمدة</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 أعمدة</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>أساسي (أصفر)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>ثانوي (رمادي فاتح)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>أبيض</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>أسود</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>أرقام الصفحات</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>تحميل المزيد</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>معرض</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>شرائح متحركة</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>معرض الصور المصغّرة</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>معرض شبكي</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>شريط تمرير أفقي</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>حسب مستوى العنوان</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>عنوان 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>عنوان 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>عنوان 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>عنوان 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>عنوان 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>عنوان 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>فقرة</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>قسم (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>زر افتراضي</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>زر مميّز</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>النافذة نفسها</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>نافذة جديدة</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>الخدمة</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>عنوان الفيديو أدناه</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID الفيديو</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>التعليق</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>خط العرض (-90 إلى 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>خط الطول (-180 إلى 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>التكبير (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>نوع الخريطة</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>خريطة الطرق</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>قمر صناعي</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>مختلط</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>التضاريس</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>عرض العلامة</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>مستوى العنوان</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>الافتراضي في التصميم</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>الميزات (العنوان|النص في كل سطر)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>عرض زرّي التالي والسابق</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>عرض ترقيم الصفحات</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>تكرار لا نهائي</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>الانتقال</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>انزلاق</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>تلاشٍ</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>مدة التشغيل التلقائي (ثوانٍ، 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>عدد الصور المصغّرة للتحريك</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>عرض التفاصيل</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>عرض التفاصيل عند مرور المؤشر</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID العقدة الأم</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>الحد</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>تصفية حسب الفئة</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>قياسي</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>قياسي (مع المقدمة)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>تراكب</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>بطاقة</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>بطاقة (مع المقدمة)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>سطر</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>مصغّر</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>عنصر قائمة</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>عنصر قائمة (مع المقدمة)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID العقدة</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>جزء التنقل (فارغ: جزء الصفحة)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>مكوّن</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>قائمة</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>شبكة</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>قائمة مرقّمة</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>متعرّج</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>أكورديون</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>شبكة (العنصر الأول كبير)</translation>
     </message>
 </context>
 </TS>

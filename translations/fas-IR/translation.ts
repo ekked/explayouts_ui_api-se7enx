@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>بارگیری محتوا ناموفق بود.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>محتوای جاسازی‌شده</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>مشاهده در CMS</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(ذخیره‌شده) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>انواع بلوک</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>عنوان</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>سطح سرتیتر (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>تگ HTML</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>استفاده از پیوند</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>نوع پیوند</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>پیوند</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>پسوند پیوند</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>باز کردن در پنجره جدید</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>استفاده از فاصله عمودی</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>در بالا</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>در پایین</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>کلاس CSS</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>قرار دادن در کانتینر</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>اندازه کانتینر</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>محتوا</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>متن</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>برچسب (قدیمی)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (قدیمی)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>سبک</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>مقصد</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>URL ویدیو یا src جاسازی</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>عرض (px یا %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>ارتفاع (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>پخش خودکار</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>URL جاسازی نقشه</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>عرض</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>محتوای Markdown</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>HTML خام</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>URL تصویر</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>متن جایگزین</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>URL پیوند</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>ارتفاع به پیکسل</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>حاشیه به پیکسل</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>برچسب پیوند</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>پیام</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>نوع</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>قابل بستن</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>برچسب</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>مقدار (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>رنگ</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>موارد (عنوان|محتوا در هر خط)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>باز کردن مورد اول</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>زبانه‌ها (عنوان|محتوا در هر خط)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>شماره زبانه فعال (از 0)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>متن جایگزین تصویر</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>متن پیوند</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>تصاویر کوچک در هر ردیف/اسلاید</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>فعال‌سازی لایت‌باکس</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>شناسه ویژگی تصویر</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>نام مستعار اندازه تصویر کوچک</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>متن نقل‌قول</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>نویسنده</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>منبع</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>تراز</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>تعداد ستون‌ها</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>تنظیم رنگ پس‌زمینه</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>رنگ پس‌زمینه</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>تنظیم تصویر پس‌زمینه</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>تصویر پس‌زمینه</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>فعال‌سازی صفحه‌بندی</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>نوع صفحه‌بندی</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>حداکثر تعداد صفحات</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>بارگذاری صفحه اول با AJAX</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>تعداد اسلاید در هر نما</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>پخش خودکار (ms، 0 برای غیرفعال کردن)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>نام قالب</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>نمایش نام</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>نمایش مقدمه</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>بدون پیوند</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>URL نسبی</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>ایمیل</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>شماره تلفن</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>هیچ</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>کوچک</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>متوسط</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>بزرگ</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>معمولی</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>باریک</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>پهن</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 ستون</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 ستون</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 ستون</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 ستون</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>اصلی (زرد)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>ثانویه (خاکستری روشن)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>سفید</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>سیاه</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>شماره صفحات</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>بارگذاری بیشتر</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>گالری</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>اسلایدر</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>گالری تصاویر کوچک</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>گالری شبکه‌ای</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>نوار افقی</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>بر اساس سطح سرتیتر</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>سرتیتر 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>سرتیتر 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>سرتیتر 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>سرتیتر 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>سرتیتر 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>سرتیتر 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>پاراگراف</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>بخش (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>دکمه پیش‌فرض</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>دکمه برجسته</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>همان پنجره</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>پنجره جدید</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>سرویس</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>نشانی ویدیو در زیر</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>ID ویدیو</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>زیرنویس</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>عرض جغرافیایی (-90 تا 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>طول جغرافیایی (-180 تا 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>بزرگ‌نمایی (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>نوع نقشه</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>نقشه راه‌ها</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>ماهواره</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>ترکیبی</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>ناهمواری</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>نمایش نشانگر</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>سطح سرتیتر</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>پیش‌فرض طرح</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>ویژگی‌ها (عنوان|متن در هر خط)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>نمایش دکمه‌های بعدی و قبلی</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>نمایش صفحه‌بندی</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>حلقه بی‌پایان</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>گذار</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>لغزش</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>محو شدن</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>زمان پخش خودکار (ثانیه، 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>تعداد تصاویر کوچک برای جابه‌جایی</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>نمایش جزئیات</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>نمایش جزئیات هنگام قرار گرفتن نشانگر</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>ID گره والد</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>محدودیت</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>فیلتر کلاس</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>استاندارد</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>استاندارد (با مقدمه)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>روکش</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>کارت</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>کارت (با مقدمه)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>خطی</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>مینی</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>مورد فهرست</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>مورد فهرست (با مقدمه)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>ID گره</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>بخش ناوبری (خالی: بخش همین صفحه)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>مؤلفه</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>فهرست</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>شبکه</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>فهرست شماره‌دار</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>زیگزاگ</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>آکاردئون</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>شبکه (مورد اول بزرگ)</translation>
     </message>
 </context>
 </TS>

@@ -59,6 +59,10 @@
         <source>Failed to load content.</source>
         <translation>منځپانګه نه شوه راوړل کېدای.</translation>
     </message>
+    <message>
+        <source>Embedded content</source>
+        <translation>ځای پر ځای شوې منځپانګه</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_block_content</name>
@@ -162,6 +166,10 @@
     <message>
         <source>View in CMS</source>
         <translation>په CMS کې کتل</translation>
+    </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(خوندي شوی) %value</translation>
     </message>
 </context>
 <context>
@@ -928,6 +936,677 @@
     <message>
         <source>Block types</source>
         <translation>د بلاک ډولونه</translation>
+    </message>
+</context>
+<context>
+    <name>design/standard/explayouts_ui_api/parameters</name>
+    <message>
+        <source>Title</source>
+        <translation>سرلیک</translation>
+    </message>
+    <message>
+        <source>Heading level (1-6)</source>
+        <translation>د سرلیک کچه (1-6)</translation>
+    </message>
+    <message>
+        <source>HTML tag</source>
+        <translation>HTML ټګ</translation>
+    </message>
+    <message>
+        <source>Use link</source>
+        <translation>لینک وکاروئ</translation>
+    </message>
+    <message>
+        <source>Link type</source>
+        <translation>د لینک ډول</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>لینک</translation>
+    </message>
+    <message>
+        <source>Link suffix</source>
+        <translation>د لینک وروستاړی</translation>
+    </message>
+    <message>
+        <source>Open in new window</source>
+        <translation>په نوې کړکۍ کې پرانیزئ</translation>
+    </message>
+    <message>
+        <source>Use vertical whitespace</source>
+        <translation>عمودي تشه وکاروئ</translation>
+    </message>
+    <message>
+        <source>On top</source>
+        <translation>پورته</translation>
+    </message>
+    <message>
+        <source>On bottom</source>
+        <translation>لاندې</translation>
+    </message>
+    <message>
+        <source>CSS class</source>
+        <translation>CSS ټولګی</translation>
+    </message>
+    <message>
+        <source>CSS ID</source>
+        <translation>CSS ID</translation>
+    </message>
+    <message>
+        <source>Wrap in container</source>
+        <translation>په کانټینر کې ونغاړئ</translation>
+    </message>
+    <message>
+        <source>Container size</source>
+        <translation>د کانټینر اندازه</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation>منځپانګه</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>متن</translation>
+    </message>
+    <message>
+        <source>Label (legacy)</source>
+        <translation>لیبل (زوړ)</translation>
+    </message>
+    <message>
+        <source>URL (legacy)</source>
+        <translation>URL (زوړ)</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation>بڼه</translation>
+    </message>
+    <message>
+        <source>Target</source>
+        <translation>هدف</translation>
+    </message>
+    <message>
+        <source>Video URL or embed src</source>
+        <translation>د ویډیو URL یا د ځای پر ځای کولو src</translation>
+    </message>
+    <message>
+        <source>Width (px or %)</source>
+        <translation>پلنوالی (px یا %)</translation>
+    </message>
+    <message>
+        <source>Height (px)</source>
+        <translation>لوړوالی (px)</translation>
+    </message>
+    <message>
+        <source>Autoplay</source>
+        <translation>خپلکاره غږول</translation>
+    </message>
+    <message>
+        <source>Map embed URL</source>
+        <translation>د نقشې د ځای پر ځای کولو URL</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation>پلنوالی</translation>
+    </message>
+    <message>
+        <source>Markdown content</source>
+        <translation>Markdown منځپانګه</translation>
+    </message>
+    <message>
+        <source>Raw HTML</source>
+        <translation>خام HTML</translation>
+    </message>
+    <message>
+        <source>Image URL</source>
+        <translation>د انځور URL</translation>
+    </message>
+    <message>
+        <source>Alt text</source>
+        <translation>بدیل متن</translation>
+    </message>
+    <message>
+        <source>Link URL</source>
+        <translation>د لینک URL</translation>
+    </message>
+    <message>
+        <source>Height in pixels</source>
+        <translation>لوړوالی په پیکسل</translation>
+    </message>
+    <message>
+        <source>Margin in pixels</source>
+        <translation>څنډه په پیکسل</translation>
+    </message>
+    <message>
+        <source>Link label</source>
+        <translation>د لینک لیبل</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>پیغام</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>ډول</translation>
+    </message>
+    <message>
+        <source>Dismissible</source>
+        <translation>د تړلو وړ</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>لیبل</translation>
+    </message>
+    <message>
+        <source>Value (0-100)</source>
+        <translation>ارزښت (0-100)</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation>رنګ</translation>
+    </message>
+    <message>
+        <source>Items (Title|Content per line)</source>
+        <translation>توکي (سرلیک|منځپانګه په هره کرښه کې)</translation>
+    </message>
+    <message>
+        <source>Open first item</source>
+        <translation>لومړی توکی پرانیزئ</translation>
+    </message>
+    <message>
+        <source>Tabs (Title|Content per line)</source>
+        <translation>ټبونه (سرلیک|منځپانګه په هره کرښه کې)</translation>
+    </message>
+    <message>
+        <source>Active tab index (0-based)</source>
+        <translation>د فعال ټب شمېره (له 0 پیلېږي)</translation>
+    </message>
+    <message>
+        <source>Image alt text</source>
+        <translation>د انځور بدیل متن</translation>
+    </message>
+    <message>
+        <source>Link text</source>
+        <translation>د لینک متن</translation>
+    </message>
+    <message>
+        <source>Thumbnails per row/slide</source>
+        <translation>کوچني انځورونه په هر قطار/سلایډ کې</translation>
+    </message>
+    <message>
+        <source>Enable lightbox</source>
+        <translation>لایټ باکس فعال کړئ</translation>
+    </message>
+    <message>
+        <source>Image attribute identifier</source>
+        <translation>د انځور د ځانګړتیا پېژند</translation>
+    </message>
+    <message>
+        <source>Thumbnail size alias</source>
+        <translation>د کوچني انځور د اندازې نوم</translation>
+    </message>
+    <message>
+        <source>Quote text</source>
+        <translation>د نقل قول متن</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>لیکوال</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>سرچینه</translation>
+    </message>
+    <message>
+        <source>Alignment</source>
+        <translation>سمون</translation>
+    </message>
+    <message>
+        <source>Number of columns</source>
+        <translation>د ستنو شمېر</translation>
+    </message>
+    <message>
+        <source>Set background color</source>
+        <translation>د شالید رنګ وټاکئ</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>د شالید رنګ</translation>
+    </message>
+    <message>
+        <source>Set background image</source>
+        <translation>د شالید انځور وټاکئ</translation>
+    </message>
+    <message>
+        <source>Background image</source>
+        <translation>د شالید انځور</translation>
+    </message>
+    <message>
+        <source>Enable pagination</source>
+        <translation>پاڼه بندي فعاله کړئ</translation>
+    </message>
+    <message>
+        <source>Pagination type</source>
+        <translation>د پاڼه بندۍ ډول</translation>
+    </message>
+    <message>
+        <source>Maximum number of pages</source>
+        <translation>د پاڼو اعظمي شمېر</translation>
+    </message>
+    <message>
+        <source>Load first page via AJAX</source>
+        <translation>لومړۍ پاڼه د AJAX له لارې پورته کړئ</translation>
+    </message>
+    <message>
+        <source>Slides per view</source>
+        <translation>په هر لید کې سلایډونه</translation>
+    </message>
+    <message>
+        <source>Autoplay (ms, 0 to disable)</source>
+        <translation>خپلکاره غږول (ms، 0 د بندولو لپاره)</translation>
+    </message>
+    <message>
+        <source>Template name</source>
+        <translation>د کينډۍ نوم</translation>
+    </message>
+    <message>
+        <source>Show name</source>
+        <translation>نوم وښایاست</translation>
+    </message>
+    <message>
+        <source>Show intro</source>
+        <translation>سریزه وښایاست</translation>
+    </message>
+    <message>
+        <source>No link</source>
+        <translation>بې لینکه</translation>
+    </message>
+    <message>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <source>Relative URL</source>
+        <translation>نسبي URL</translation>
+    </message>
+    <message>
+        <source>E-mail</source>
+        <translation>برېښنالیک</translation>
+    </message>
+    <message>
+        <source>Phone number</source>
+        <translation>د تلیفون شمېره</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>هېڅ</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>کوچنی</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>منځنی</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>لوی</translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation>عادي</translation>
+    </message>
+    <message>
+        <source>Narrow</source>
+        <translation>تنګ</translation>
+    </message>
+    <message>
+        <source>Wide</source>
+        <translation>پراخ</translation>
+    </message>
+    <message>
+        <source>2 columns</source>
+        <translation>2 ستنې</translation>
+    </message>
+    <message>
+        <source>3 columns</source>
+        <translation>3 ستنې</translation>
+    </message>
+    <message>
+        <source>4 columns</source>
+        <translation>4 ستنې</translation>
+    </message>
+    <message>
+        <source>6 columns</source>
+        <translation>6 ستنې</translation>
+    </message>
+    <message>
+        <source>Primary (Yellow)</source>
+        <translation>لومړنی (ژېړ)</translation>
+    </message>
+    <message>
+        <source>Secondary (Light gray)</source>
+        <translation>دوهمی (روښانه خړ)</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>سپین</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>تور</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>د پاڼو شمېرې</translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation>نور پورته کړئ</translation>
+    </message>
+    <message>
+        <source>Gallery</source>
+        <translation>ګالري</translation>
+    </message>
+    <message>
+        <source>Slider</source>
+        <translation>سلایډر</translation>
+    </message>
+    <message>
+        <source>Thumb gallery</source>
+        <translation>د کوچنیو انځورونو ګالري</translation>
+    </message>
+    <message>
+        <source>Grid gallery</source>
+        <translation>جالي ګالري</translation>
+    </message>
+    <message>
+        <source>Sushi bar</source>
+        <translation>افقي پټه</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>د سرلیک د کچې له مخې</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>سرلیک 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>سرلیک 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>سرلیک 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>سرلیک 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>سرلیک 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>سرلیک 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>پراګراف</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>برخه (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>ډیفالټ تڼۍ</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>ځانګړې تڼۍ</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>همغه کړکۍ</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>نوې کړکۍ</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>خدمت</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>د ویډیو پته لاندې</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>د ویډیو ID</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>تشریح</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>جغرافیایي عرض (-90 تر 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>جغرافیایي طول (-180 تر 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>زوم (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>د نقشې ډول</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>د سړکونو نقشه</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>سپوږمکۍ</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>ګډ</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>د ځمکې بڼه</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>نښه وښایاست</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>د سرلیک کچه</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>د ډیزاین ډیفالټ</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>ځانګړتیاوې (سرلیک|متن په هره کرښه کې)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>راتلونکې او مخکنۍ تڼۍ وښایاست</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>پاڼه بندي وښایاست</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>نه ختمېدونکې لړۍ</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>لېږد</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>ښوییدل</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>ورکېدل</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>د خپلکاره غږولو وخت (ثانیې، 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>د خوځولو لپاره کوچني انځورونه</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>جزئیات وښایاست</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>د موږک په راتګ جزئیات وښایاست</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>د مور غوټې ID</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>حد</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>د ټولګي فلټر</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>معیاري</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>معیاري (له سریزې سره)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>پوښ</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>کارت</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>کارت (له سریزې سره)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>کرښه</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>مینی</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>د لړلیک توکی</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>د لړلیک توکی (له سریزې سره)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>د غوټې ID</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>د نېویګېشن برخه (تش: د پاڼې خپله)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>اجزا</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>لړلیک</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>جال</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>شمېره لرونکی لړلیک</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>زیګزاګ</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>اکارډیون</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>جال (لومړی توکی لوی)</translation>
     </message>
 </context>
 </TS>
