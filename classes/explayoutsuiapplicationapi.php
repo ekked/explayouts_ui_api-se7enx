@@ -1027,8 +1027,6 @@ class expLayoutsUIApplicationApi
             if ( $method === 'PUT' )
             {
                 $data = self::requestData();
-                if ( isset( $data['position'] ) )
-                    $item->setAttribute( 'position', (int)$data['position'] );
                 if ( isset( $data['value'] ) )
                     $item->setAttribute( 'value_id', (int)$data['value'] );
                 if ( isset( $data['value_type'] ) )
@@ -1036,6 +1034,8 @@ class expLayoutsUIApplicationApi
                 if ( isset( $data['item_type'] ) )
                     $item->setAttribute( 'item_type', trim( $data['item_type'] ) );
                 $item->store();
+                if ( isset( $data['position'] ) )
+                    self::placeCollectionItem( $collection, $item, (int)$data['position'] );
                 return self::response( self::resolveCollectionItem( $item, $collection ) );
             }
 
@@ -1065,13 +1065,15 @@ class expLayoutsUIApplicationApi
                     $valueId = isset( $itemData['value'] ) ? (int)$itemData['value'] : 0;
                     $valueType = isset( $itemData['value_type'] ) ? $itemData['value_type'] : 'ez_content';
                     $itemType = isset( $itemData['item_type'] ) ? $itemData['item_type'] : 'manual';
-                    $position = isset( $itemData['position'] ) ? (int)$itemData['position'] : 0;
+                    $position = isset( $itemData['position'] ) && $itemData['position'] !== '' ? (int)$itemData['position'] : null;
                     if ( $valueId <= 0 )
                         continue;
 
+                    // Each item goes in at its position and the items from there on move down, so items added at
+                    // one position (the editor sends all of them at the collection's offset) do not share it.
                     $newItem = expLayoutsCollectionItem::create( $collectionId, $valueId, $valueType, $itemType );
-                    $newItem->setAttribute( 'position', $position );
                     $newItem->store();
+                    self::placeCollectionItem( $collection, $newItem, $position );
                     $created[] = self::resolveCollectionItem( $newItem, $collection );
                 }
             }
@@ -1087,6 +1089,105 @@ class expLayoutsUIApplicationApi
         }
 
         return self::response( array( 'error' => 'Unsupported collection items request.' ), 405 );
+    }
+
+    /**
+     * The positions a collection's items take when one of them is put at $position: a new item (already stored, so
+     * it is in $items) or a moved one. Answers id => position for every item.
+     *
+     * A manual collection is a list: the positions are its order, 0, 1, 2 ... without gaps. The item goes in at
+     * $position (0 = first; past the end = last; null = last) and the items from there on move down one. Items that
+     * shared a position before keep their order (position, then id) and get positions of their own.
+     *
+     * In a dynamic collection a manual item is pinned to a slot of the query's results, so the positions are slots
+     * and gaps are kept. The item takes slot $position (null = the slot after the last one); a pinned item already
+     * there moves down one, and so does the run of pinned items directly behind it, up to the first free slot.
+     *
+     * Adding several items at one position one after the other, last first (what the editor's "+ Add items" sends),
+     * leaves them in the order they were chosen, in front of the items that were there.
+     *
+     * @param array $items list of array( 'id' => int, 'position' => int ), in any order
+     * @param int $itemId the item that is put at $position
+     * @param int|null $position
+     * @param bool $pinned true for a dynamic collection
+     * @return array id => position
+     */
+    public static function collectionItemPositions( array $items, $itemId, $position, $pinned )
+    {
+        $itemId = (int)$itemId;
+        $others = array();
+        foreach ( $items as $item )
+        {
+            if ( (int)$item['id'] !== $itemId )
+                $others[] = array( 'id' => (int)$item['id'], 'position' => (int)$item['position'] );
+        }
+        usort( $others, function ( $a, $b ) {
+            return $a['position'] === $b['position'] ? $a['id'] - $b['id'] : $a['position'] - $b['position'];
+        } );
+
+        $result = array();
+        if ( !$pinned )
+        {
+            $count = count( $others );
+            $at = $position === null ? $count : max( 0, min( (int)$position, $count ) );
+            array_splice( $others, $at, 0, array( array( 'id' => $itemId, 'position' => $at ) ) );
+            foreach ( $others as $index => $item )
+                $result[$item['id']] = $index;
+            return $result;
+        }
+
+        // Slots: two items in one slot (stored before this was fixed) get slots of their own, in their order.
+        $slots = array();
+        $next = 0;
+        foreach ( $others as $item )
+        {
+            $slot = max( $item['position'], $next );
+            $slots[$slot] = $item['id'];
+            $next = $slot + 1;
+        }
+        $at = $position === null ? $next : max( 0, (int)$position );
+        if ( isset( $slots[$at] ) )
+        {
+            $end = $at;
+            while ( isset( $slots[$end] ) )
+                $end++;
+            for ( $slot = $end; $slot > $at; $slot-- )
+                $slots[$slot] = $slots[$slot - 1];
+        }
+        $slots[$at] = $itemId;
+        foreach ( $slots as $slot => $id )
+            $result[$id] = $slot;
+        return $result;
+    }
+
+    /**
+     * Puts a stored item of a collection at $position (see collectionItemPositions()) and stores every item whose
+     * position changes.
+     */
+    protected static function placeCollectionItem( $collection, $item, $position )
+    {
+        $collectionId = (int)$collection->attribute( 'id' );
+        $itemId = (int)$item->attribute( 'id' );
+        $byId = array( $itemId => $item );
+        $items = array();
+        foreach ( (array)expLayoutsCollectionItem::fetchByCollection( $collectionId, true ) as $stored )
+        {
+            $id = (int)$stored->attribute( 'id' );
+            if ( $id !== $itemId )
+                $byId[$id] = $stored;
+            $items[] = array( 'id' => $id, 'position' => (int)$stored->attribute( 'position' ) );
+        }
+        $pinned = (string)$collection->attribute( 'collection_type' ) === 'dynamic';
+        foreach ( self::collectionItemPositions( $items, $itemId, $position === null ? null : (int)$position, $pinned ) as $id => $newPosition )
+        {
+            if ( !isset( $byId[$id] ) )
+                continue;
+            if ( $id === $itemId || (int)$byId[$id]->attribute( 'position' ) !== $newPosition )
+            {
+                $byId[$id]->setAttribute( 'position', $newPosition );
+                $byId[$id]->store();
+            }
+        }
     }
 
     public static function renderBlockHtml( $block, $placeholders = array() )
@@ -3488,9 +3589,9 @@ class expLayoutsUIApplicationApi
                 $item->setAttribute( 'value_type', $data['value_type'] );
             if ( isset( $data['item_type'] ) )
                 $item->setAttribute( 'item_type', $data['item_type'] );
-            if ( isset( $data['position'] ) )
-                $item->setAttribute( 'position', (int)$data['position'] );
             $item->store();
+            if ( isset( $data['position'] ) )
+                self::placeCollectionItem( $collection, $item, (int)$data['position'] );
             return self::response( self::resolveCollectionItem( $item, $collection ) );
         }
 
@@ -3498,12 +3599,10 @@ class expLayoutsUIApplicationApi
         {
             if ( $action === 'move' )
             {
+                // The items between the old and the new place move up or down one, so no two share a position.
                 $data = self::requestData();
                 if ( isset( $data['position'] ) )
-                {
-                    $item->setAttribute( 'position', (int)$data['position'] );
-                    $item->store();
-                }
+                    self::placeCollectionItem( $collection, $item, (int)$data['position'] );
                 return self::response( self::resolveCollectionItem( $item, $collection ) );
             }
         }
@@ -3540,9 +3639,12 @@ class expLayoutsUIApplicationApi
                     $item->setAttribute( 'value_id', (int)$data['value_id'] );
                 if ( isset( $data['item_type'] ) )
                     $item->setAttribute( 'item_type', $data['item_type'] );
-                if ( isset( $data['position'] ) )
-                    $item->setAttribute( 'position', (int)$data['position'] );
                 $item->store();
+                $collection = isset( $data['position'] )
+                    ? eZPersistentObject::fetchObject( expLayoutsCollection::definition(), null, array( 'id' => (int)$item->attribute( 'collection_id' ) ) )
+                    : null;
+                if ( $collection instanceof expLayoutsCollection )
+                    self::placeCollectionItem( $collection, $item, (int)$data['position'] );
                 return self::response( self::objectToArray( $item ) );
             }
             if ( $method === 'DELETE' )
@@ -3584,9 +3686,12 @@ class expLayoutsUIApplicationApi
             if ( $valueId <= 0 )
                 return self::response( array( 'error' => 'Missing value_id.' ), 400 );
             $item = expLayoutsCollectionItem::create( $collectionId, $valueId, $valueType, $itemType );
-            if ( isset( $data['position'] ) )
-                $item->setAttribute( 'position', (int)$data['position'] );
             $item->store();
+            $collection = isset( $data['position'] )
+                ? eZPersistentObject::fetchObject( expLayoutsCollection::definition(), null, array( 'id' => (int)$collectionId ) )
+                : null;
+            if ( $collection instanceof expLayoutsCollection )
+                self::placeCollectionItem( $collection, $item, (int)$data['position'] );
             return self::response( self::objectToArray( $item ), 201 );
         }
 
