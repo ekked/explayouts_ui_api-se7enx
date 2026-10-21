@@ -199,7 +199,8 @@
       "original_sha256": "4e3ea4c3470c50a309309fa6d32ed33fb798d169a9f658df147e3c7b11051bae",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "ajax_submit sends a form without a method attribute as POST (the API takes form saves as POST only; jQuery's default GET also hid the save from the warning on leaving)."
+        "ajax_submit sends a form without a method attribute as POST (the API takes form saves as POST only; jQuery's default GET also hid the save from the warning on leaving).",
+        "browser_tabs makes WAI-ARIA tabs: tablist, tab and tabpanel roles, aria-selected with a roving tabindex, one selected tab, arrow keys, Home and End (3df5f1e)"
       ]
     },
     {
@@ -267,7 +268,8 @@
       "file": "modules/054-templates.js",
       "original_sha256": "1615c33b79e1b0e3748a0243b58824372a1160b53d2d830397b7828ffa21db33",
       "changes": [
-        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "The palette's and the left toolbar's icon buttons have accessible names, type=button and aria-hidden icons; the palette's list is a named, focusable region (3df5f1e)"
       ]
     },
     {
@@ -343,6 +345,15 @@
       "changes": [
         "Page title suffix and the HTTP method of create_new_draft (d3d3488)",
         "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+      ]
+    },
+    {
+      "id": 85,
+      "name": "./menues/block_types",
+      "file": "modules/085-menues-block-types.js",
+      "original_sha256": "b557b881b0f5e416fd7ac3037cb3b3a420ccbb6c637f3f972b66afe002fbb966",
+      "changes": [
+        "The palette's button tells whether the palette is open (aria-expanded) (3df5f1e)"
       ]
     },
     {
