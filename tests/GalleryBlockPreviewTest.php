@@ -173,8 +173,10 @@ class GalleryBlockPreviewTest extends TestCase
 
     public function testTheDesignTabDropsTheFieldsOfTheQueryParametersNotOnlyTheirValues()
     {
-        $source = file_get_contents( dirname( __DIR__ ) . '/classes/runnable/views/explayouts_ui_api/app.php' );
-        $this->assertMatchesRegularExpression( '/foreach \( \$legacyQueryParams as \$legacy \)\s*\{\s*unset\( \$parameters\[\$legacy\], \$parameterValues\[\$legacy\] \);/', $source );
+        // the fields of both tabs come from expLayoutsUIApplicationApi::blockFormParameters() (ContentTabTest)
+        $source = file_get_contents( dirname( __DIR__ ) . '/classes/explayoutsuiapplicationapi.php' );
+        $this->assertStringContainsString( "if ( ( in_array( \$name, \$legacyQueryParams, true ) && !\$inContent )", $source );
+        $this->assertStringContainsString( 'unset( $parameters[$name] );', $source );
     }
 
     public function testTheViewTypeSelectIsLabelledByTheViewTypeNames()
@@ -187,8 +189,8 @@ class GalleryBlockPreviewTest extends TestCase
 
     public function testTheDesignTabLeavesOutParametersOfViewTypesTheBlockCannotHave()
     {
-        $source = file_get_contents( dirname( __DIR__ ) . '/classes/runnable/views/explayouts_ui_api/app.php' );
-        $this->assertStringContainsString( "!array_intersect( array_map( 'trim', explode( ',', (string)\$paramDef['view_type'] ) ), \$viewTypes )", $source );
+        $source = file_get_contents( dirname( __DIR__ ) . '/classes/explayoutsuiapplicationapi.php' );
+        $this->assertStringContainsString( "!array_intersect( array_map( 'trim', explode( ',', (string)\$definition['view_type'] ) ), \$viewTypes )", $source );
     }
 
     public function testAChangedViewTypeIsSaved()

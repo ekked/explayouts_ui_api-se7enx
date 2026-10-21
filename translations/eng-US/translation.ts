@@ -167,6 +167,10 @@
         <source>View in CMS</source>
         <translation>View in CMS</translation>
     </message>
+    <message>
+        <source>(saved) %value</source>
+        <translation>(saved) %value</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/form_create</name>
@@ -1319,6 +1323,290 @@
     <message>
         <source>Sushi bar</source>
         <translation>Sushi bar</translation>
+    </message>
+    <message>
+        <source>From the heading level</source>
+        <translation>From the heading level</translation>
+    </message>
+    <message>
+        <source>Heading 1</source>
+        <translation>Heading 1</translation>
+    </message>
+    <message>
+        <source>Heading 2</source>
+        <translation>Heading 2</translation>
+    </message>
+    <message>
+        <source>Heading 3</source>
+        <translation>Heading 3</translation>
+    </message>
+    <message>
+        <source>Heading 4</source>
+        <translation>Heading 4</translation>
+    </message>
+    <message>
+        <source>Heading 5</source>
+        <translation>Heading 5</translation>
+    </message>
+    <message>
+        <source>Heading 6</source>
+        <translation>Heading 6</translation>
+    </message>
+    <message>
+        <source>Paragraph</source>
+        <translation>Paragraph</translation>
+    </message>
+    <message>
+        <source>Division (div)</source>
+        <translation>Division (div)</translation>
+    </message>
+    <message>
+        <source>Default button</source>
+        <translation>Default button</translation>
+    </message>
+    <message>
+        <source>Highlighted button</source>
+        <translation>Highlighted button</translation>
+    </message>
+    <message>
+        <source>Same window</source>
+        <translation>Same window</translation>
+    </message>
+    <message>
+        <source>New window</source>
+        <translation>New window</translation>
+    </message>
+    <message>
+        <source>Service</source>
+        <translation>Service</translation>
+    </message>
+    <message>
+        <source>Video address below</source>
+        <translation>Video address below</translation>
+    </message>
+    <message>
+        <source>YouTube</source>
+        <translation>YouTube</translation>
+    </message>
+    <message>
+        <source>Vimeo</source>
+        <translation>Vimeo</translation>
+    </message>
+    <message>
+        <source>Dailymotion</source>
+        <translation>Dailymotion</translation>
+    </message>
+    <message>
+        <source>Video ID</source>
+        <translation>Video ID</translation>
+    </message>
+    <message>
+        <source>Caption</source>
+        <translation>Caption</translation>
+    </message>
+    <message>
+        <source>Latitude (-90 to 90)</source>
+        <translation>Latitude (-90 to 90)</translation>
+    </message>
+    <message>
+        <source>Longitude (-180 to 180)</source>
+        <translation>Longitude (-180 to 180)</translation>
+    </message>
+    <message>
+        <source>Zoom (0-20)</source>
+        <translation>Zoom (0-20)</translation>
+    </message>
+    <message>
+        <source>Map type</source>
+        <translation>Map type</translation>
+    </message>
+    <message>
+        <source>Roadmap</source>
+        <translation>Roadmap</translation>
+    </message>
+    <message>
+        <source>Satellite</source>
+        <translation>Satellite</translation>
+    </message>
+    <message>
+        <source>Hybrid</source>
+        <translation>Hybrid</translation>
+    </message>
+    <message>
+        <source>Terrain</source>
+        <translation>Terrain</translation>
+    </message>
+    <message>
+        <source>Show marker</source>
+        <translation>Show marker</translation>
+    </message>
+    <message>
+        <source>Heading level</source>
+        <translation>Heading level</translation>
+    </message>
+    <message>
+        <source>Default of the design</source>
+        <translation>Default of the design</translation>
+    </message>
+    <message>
+        <source>Features (Title|Text per line)</source>
+        <translation>Features (Title|Text per line)</translation>
+    </message>
+    <message>
+        <source>Show next and previous buttons</source>
+        <translation>Show next and previous buttons</translation>
+    </message>
+    <message>
+        <source>Show pagination</source>
+        <translation>Show pagination</translation>
+    </message>
+    <message>
+        <source>Infinite loop</source>
+        <translation>Infinite loop</translation>
+    </message>
+    <message>
+        <source>Transition</source>
+        <translation>Transition</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Slide</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Fade</translation>
+    </message>
+    <message>
+        <source>Autoplay time (seconds, 1-12)</source>
+        <translation>Autoplay time (seconds, 1-12)</translation>
+    </message>
+    <message>
+        <source>Thumbnails to move</source>
+        <translation>Thumbnails to move</translation>
+    </message>
+    <message>
+        <source>Show details</source>
+        <translation>Show details</translation>
+    </message>
+    <message>
+        <source>Show details on hover</source>
+        <translation>Show details on hover</translation>
+    </message>
+    <message>
+        <source>50:50</source>
+        <translation>50:50</translation>
+    </message>
+    <message>
+        <source>33:66</source>
+        <translation>33:66</translation>
+    </message>
+    <message>
+        <source>66:33</source>
+        <translation>66:33</translation>
+    </message>
+    <message>
+        <source>33:33:33</source>
+        <translation>33:33:33</translation>
+    </message>
+    <message>
+        <source>50:25:25</source>
+        <translation>50:25:25</translation>
+    </message>
+    <message>
+        <source>25:50:25</source>
+        <translation>25:50:25</translation>
+    </message>
+    <message>
+        <source>25:25:50</source>
+        <translation>25:25:50</translation>
+    </message>
+    <message>
+        <source>25:25:25:25</source>
+        <translation>25:25:25:25</translation>
+    </message>
+    <message>
+        <source>Parent node ID</source>
+        <translation>Parent node ID</translation>
+    </message>
+    <message>
+        <source>Limit</source>
+        <translation>Limit</translation>
+    </message>
+    <message>
+        <source>Class filter</source>
+        <translation>Class filter</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Standard (with intro)</source>
+        <translation>Standard (with intro)</translation>
+    </message>
+    <message>
+        <source>Overlay</source>
+        <translation>Overlay</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation>Card</translation>
+    </message>
+    <message>
+        <source>Card (with intro)</source>
+        <translation>Card (with intro)</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation>Line</translation>
+    </message>
+    <message>
+        <source>Mini</source>
+        <translation>Mini</translation>
+    </message>
+    <message>
+        <source>List item</source>
+        <translation>List item</translation>
+    </message>
+    <message>
+        <source>List item (with intro)</source>
+        <translation>List item (with intro)</translation>
+    </message>
+    <message>
+        <source>Node ID</source>
+        <translation>Node ID</translation>
+    </message>
+    <message>
+        <source>Navigation part (empty: the one of the page)</source>
+        <translation>Navigation part (empty: the one of the page)</translation>
+    </message>
+    <message>
+        <source>Component</source>
+        <translation>Component</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>List</translation>
+    </message>
+    <message>
+        <source>Grid</source>
+        <translation>Grid</translation>
+    </message>
+    <message>
+        <source>Numbered list</source>
+        <translation>Numbered list</translation>
+    </message>
+    <message>
+        <source>Zig-zag</source>
+        <translation>Zig-zag</translation>
+    </message>
+    <message>
+        <source>Accordion</source>
+        <translation>Accordion</translation>
+    </message>
+    <message>
+        <source>Grid (first item large)</source>
+        <translation>Grid (first item large)</translation>
     </message>
 </context>
 </TS>

@@ -1,12 +1,14 @@
 <div id="aside-tabs">
     {* A tab list (WAI-ARIA tabs): the bundle's browser_tabs keeps aria-selected, tabindex and the shown panel in
-       step, and moves between the tabs with the arrow keys, Home and End. *}
+       step, and moves between the tabs with the arrow keys, Home and End. Content is the active tab when the
+       block has content parameters, else Design. *}
+    {def $content_first = and( is_set( $has_content_parameters ), $has_content_parameters )}
     <ul class="aside-tab-control" role="tablist" aria-label="{'Block settings'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )|wash()}">
-        <li role="presentation" class="active"><a href="#" id="tab-content" role="tab" aria-selected="true" aria-controls="tab-content-tab">{'Content'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
-        <li role="presentation"><a href="#" id="tab-design" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-design-tab">{'Design'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
+        <li role="presentation"{if $content_first} class="active"{/if}><a href="#" id="tab-content" role="tab" aria-selected="{if $content_first}true{else}false{/if}"{if $content_first|not} tabindex="-1"{/if} aria-controls="tab-content-tab">{'Content'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
+        <li role="presentation"{if $content_first|not} class="active"{/if}><a href="#" id="tab-design" role="tab" aria-selected="{if $content_first}false{else}true{/if}"{if $content_first} tabindex="-1"{/if} aria-controls="tab-design-tab">{'Design'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a></li>
     </ul>
 
-    <div class="tab-pane active" id="tab-content-tab" role="tabpanel" aria-labelledby="tab-content">
+    <div class="tab-pane{if $content_first} active{/if}" id="tab-content-tab" role="tabpanel" aria-labelledby="tab-content">
         <div class="sidebar-panel">
             <a class="toggle-link" role="button" data-toggle="collapse" href="#collapseSettings" aria-expanded="true" aria-controls="collapseSettings">{'Options'|i18n( 'design/standard/explayouts_ui_api/form_block_edit' )}</a>
             <div class="collapse in" id="collapseSettings">
@@ -75,7 +77,8 @@
         {/if}
     </div>
 
-    <div class="tab-pane" id="tab-design-tab" role="tabpanel" aria-labelledby="tab-design">
+    <div class="tab-pane{if $content_first|not} active{/if}" id="tab-design-tab" role="tabpanel" aria-labelledby="tab-design">
         <div data-form="{$form_url}"></div>
     </div>
 </div>
+{undef $content_first}
