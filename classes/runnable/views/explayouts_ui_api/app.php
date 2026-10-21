@@ -364,7 +364,8 @@ class App extends \Exponential\Runnable\ModuleView
         $tpl->setVariable( 'cb_base_path', $expLayoutsUrl( '/explayouts_content_browser_ui' ) );
         $tpl->setVariable( 'custom_stylesheets', is_array( $customStylesheets ) ? $customStylesheets : array() );
         $tpl->setVariable( 'custom_javascripts', is_array( $customJavascripts ) ? $customJavascripts : array() );
-        $returnTo = isset( $_GET['return_to'] ) ? $_GET['return_to'] : '';
+        // a path of this site only: the editor returns there, also by location.replace() as it loads
+        $returnTo = \expLayoutsUIApplicationApi::safeReturnTo( isset( $_GET['return_to'] ) ? $_GET['return_to'] : '' );
 
         $tpl->setVariable( 'google_maps_api_key', $googleMapsApiKey );
         // app_version and edition are joined into #app[data-version], which the SPA

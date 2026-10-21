@@ -85,7 +85,8 @@ class ApplicationApiAccessTest extends TestCase
         $_POST = self::importPayload();
         expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
 
-        $this->assertSame( array( 'fetchByIdentifier' ), expLayoutsLayout::$calls );
+        // the import checks the layout type against the settings first: the request got as far as the layouts
+        $this->assertSame( array( 'getTypeInfo' ), expLayoutsLayoutType::$calls );
     }
 
     public static function changingMethods(): array

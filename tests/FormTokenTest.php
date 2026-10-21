@@ -77,7 +77,8 @@ class FormTokenTest extends TestCase
         $_POST = array( 'identifier' => 'imported', 'name' => 'Imported', 'layout_type' => '1_column', 'zones' => array() );
         expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
 
-        $this->assertSame( array( 'fetchByIdentifier' ), expLayoutsLayout::$calls );
+        // the import checks the layout type against the settings first: the request got as far as the layouts
+        $this->assertSame( array( 'getTypeInfo' ), expLayoutsLayoutType::$calls );
     }
 
     public function testAPostWithTheTokenInTheFormFieldGoesOn()
@@ -87,7 +88,8 @@ class FormTokenTest extends TestCase
                         ezxFormToken::FORM_FIELD => self::TOKEN );
         expLayoutsUIApplicationApi::handle( array( 'transfer', 'import' ) );
 
-        $this->assertSame( array( 'fetchByIdentifier' ), expLayoutsLayout::$calls );
+        // the import checks the layout type against the settings first: the request got as far as the layouts
+        $this->assertSame( array( 'getTypeInfo' ), expLayoutsLayoutType::$calls );
     }
 
     public function testAReadNeedsNoToken()

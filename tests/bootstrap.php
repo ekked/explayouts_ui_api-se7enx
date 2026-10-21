@@ -129,13 +129,15 @@ trait expLayoutsTestStandIn
     /** Any other instance method (isLinked(), ...) answers null. */
     public function __call( $name, $arguments ) { return null; }
 }
-foreach ( array( 'expLayoutsLayout', 'expLayoutsZone', 'expLayoutsLayoutType', 'expLayoutsCollection', 'expLayoutsBlock' ) as $standIn )
+foreach ( array( 'expLayoutsLayout', 'expLayoutsZone', 'expLayoutsLayoutType', 'expLayoutsCollection', 'expLayoutsBlock',
+                 'expLayoutsBlockParameter', 'expLayoutsCollectionItem', 'expLayoutsRule',
+                 'expLayoutsRuleTarget', 'expLayoutsRuleCondition' ) as $standIn )
 {
     if ( !class_exists( $standIn, false ) )
         eval( 'class ' . $standIn . ' { use expLayoutsTestStandIn; }' );
 }
 
-/** eZDB: the tables relationList() reports, and every statement the API sends. */
+/** eZDB: the tables relationList() reports, and every statement the API sends (BEGIN, COMMIT, ROLLBACK for a transaction). */
 if ( !class_exists( 'eZDB', false ) )
 {
     class eZDB
@@ -148,6 +150,10 @@ if ( !class_exists( 'eZDB', false ) )
         public function query( $sql ) { self::$statements[] = $sql; return true; }
         public function arrayQuery( $sql ) { self::$statements[] = $sql; return array(); }
         public function escapeString( $value ) { return addslashes( $value ); }
+        public function begin() { self::$statements[] = 'BEGIN'; }
+        public static $commitAnswer = true;
+        public function commit() { self::$statements[] = 'COMMIT'; return self::$commitAnswer; }
+        public function rollback() { self::$statements[] = 'ROLLBACK'; }
     }
 }
 
