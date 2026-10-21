@@ -184,7 +184,8 @@ patches, without needing the original (with `LAYOUTS_UI_BUNDLE=<original bundle>
 `LAYOUTS_UI_BUNDLE=download` fetches the original from the address in the manifest and checks its sha256 first).
 
 To change the bundle: `--extract` the module if it is not patched yet, edit its file, note the change in
-`manifest.json`, run `apply.mjs`, and raise the `?v=` of its `<script>` in `app.tpl`, so browsers fetch it again.
+`manifest.json` and run `apply.mjs`. The bundle is linked without a version query: after a deploy, a hard reload makes a
+browser fetch it again.
 
 Leaving the editor
 ------------------
@@ -257,7 +258,7 @@ npm run build     # writes design/standard/javascript/explayouts-tiptap.js
 npm test          # node --test tests/js/*.test.mjs (happy-dom)
 ```
 
-`node_modules/` is not committed. Bump the `?v=` of the bundle in `app.tpl` after a rebuild.
+`node_modules/` is not committed. The bundles are linked without a version query; a hard reload fetches a rebuilt one.
 
 Documentation
 -------------

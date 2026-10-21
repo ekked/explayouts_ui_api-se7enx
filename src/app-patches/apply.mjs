@@ -23,8 +23,8 @@
  *                                                   show what the patches change against the original
  *
  * Changing the bundle: edit the module file (--extract it first if it is not patched yet), note the change in
- * manifest.json, run apply.mjs, raise the ?v= of the script in app.tpl. tests/js/app-patches.test.mjs fails as
- * long as the bundle and the patches disagree.
+ * manifest.json, run apply.mjs (the script is linked without a version query; a hard reload fetches it again).
+ * tests/js/app-patches.test.mjs fails as long as the bundle and the patches disagree.
  *
  * @license GPL-2.0-or-later
  */
