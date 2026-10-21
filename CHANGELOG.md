@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.29
+
+- **Design tab: changing only the View type of a list is saved** also when the new view type leaves no item view
+  type to choose (`list_zigzag`, `list_accordion`, a view type of your own). The View type of a list is the master of
+  the Item view type select, and its change was saved only through the change it made to the item view type; with
+  none left, the block kept its old view type until another field of the form changed.
+- **"+ Add items" gives every new item a position of its own.** The editor sends the chosen items at the
+  collection's offset, and each was stored at exactly that position, so two items chosen together ended up at
+  position 0 next to the item already there, in the reverse order. Now each goes in at its position and the items
+  from there on move down: the new items come first, in the order chosen. Moving an item (drag in **Items**, *Set
+  position*) moves the items in between the same way. A manual collection keeps its positions 0, 1, 2 ... without
+  gaps (positions shared by items stored before are sorted out on the next change); in a dynamic collection, where
+  a manual item is pinned to a slot of the query's results, the slots are kept and only the run of pinned items
+  behind the slot taken moves down.
+
 ## 1.3.28
 
 - **Imports create a draft** with draft zones and blocks; rules come along disabled with known types only; layout
