@@ -24,9 +24,11 @@ class EditorAccessibilityTest extends TestCase
         $tpl = self::read( 'design/standard/templates/explayouts_ui_api/form_block_edit.tpl' );
         $this->assertMatchesRegularExpression( '~<ul class="aside-tab-control" role="tablist" aria-label="~', $tpl );
         $this->assertSame( 2, substr_count( $tpl, '<li role="presentation"' ) );
-        $this->assertSame( 1, substr_count( $tpl, 'class="active"><a' ), 'one tab is selected, not two' );
-        $this->assertStringContainsString( 'id="tab-content" role="tab" aria-selected="true" aria-controls="tab-content-tab"', $tpl );
-        $this->assertStringContainsString( 'id="tab-design" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-design-tab"', $tpl );
+        // one tab is selected, not two: Content when the block has content parameters, else Design
+        $this->assertStringContainsString( '<li role="presentation"{if $content_first} class="active"{/if}><a href="#" id="tab-content"', $tpl );
+        $this->assertStringContainsString( '<li role="presentation"{if $content_first|not} class="active"{/if}><a href="#" id="tab-design"', $tpl );
+        $this->assertStringContainsString( 'id="tab-content" role="tab" aria-selected="{if $content_first}true{else}false{/if}"{if $content_first|not} tabindex="-1"{/if} aria-controls="tab-content-tab"', $tpl );
+        $this->assertStringContainsString( 'id="tab-design" role="tab" aria-selected="{if $content_first}false{else}true{/if}"{if $content_first} tabindex="-1"{/if} aria-controls="tab-design-tab"', $tpl );
         $this->assertStringContainsString( 'id="tab-content-tab" role="tabpanel" aria-labelledby="tab-content"', $tpl );
         $this->assertStringContainsString( 'id="tab-design-tab" role="tabpanel" aria-labelledby="tab-design"', $tpl );
     }

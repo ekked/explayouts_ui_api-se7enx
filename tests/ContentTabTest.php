@@ -101,8 +101,8 @@ class ContentTabTest extends TestCase
         $this->assertStringContainsString( "{include uri='design:explayouts_ui_api/form_block_parameter.tpl' param_name=\$param_name", $content );
         $this->assertStringContainsString( 'name="name"', $content );
         $edit = file_get_contents( $dir . 'form_block_edit.tpl' );
-        $this->assertStringContainsString( '<li{if $content_first} class="active"{/if}><a href="#" id="tab-content"', $edit );
-        $this->assertStringContainsString( '<div class="tab-pane{if $content_first|not} active{/if}" id="tab-design-tab">', $edit );
+        $this->assertStringContainsString( '<li role="presentation"{if $content_first} class="active"{/if}><a href="#" id="tab-content"', $edit );
+        $this->assertStringContainsString( '<div class="tab-pane{if $content_first|not} active{/if}" id="tab-design-tab"', $edit );
         $view = file_get_contents( dirname( __DIR__ ) . '/classes/runnable/views/explayouts_ui_api/app.php' );
         $this->assertStringContainsString( "blockFormParameters( \$block, 'content' )", $view );
         $this->assertStringContainsString( "blockFormParameters( \$block, 'design' )", $view );
