@@ -196,10 +196,12 @@ class GalleryBlockPreviewTest extends TestCase
     public function testAChangedViewTypeIsSaved()
     {
         // The view type select carries js-skip-on-change, so the form's own change handler never saves it; only the
-        // master select of a master/slave pair was saved, through the change it triggers on its slave.
+        // master select of a master/slave pair was saved, through the change it triggers on its slave, and not at all
+        // when the new view type left no item view type to choose. The master's submit waits for that change
+        // (tests/js/view-type-save.test.mjs runs it).
         $bundle = file_get_contents( dirname( __DIR__ ) . '/design/standard/javascript/netgen-layouts.js' );
         $this->assertStringContainsString(
-            'r(document).on("change",".view-type",function(e){i(this),r(this).hasClass("master")||r(this).closest("form").trigger("submit")})',
+            'r(document).on("change",".view-type",function(e){i(this);var f=r(this).closest("form");r(this).hasClass("master")?setTimeout(function(){f.trigger("submit")},0):f.trigger("submit")})',
             $bundle
         );
     }

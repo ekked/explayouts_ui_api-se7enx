@@ -231,7 +231,8 @@
       "file": "modules/027-lib-jquery-view-types.js",
       "original_sha256": "c4a34ae8c29f090ab79b9c7d1c7ffd0ea5b75782212da62cc1787adcdc49c909",
       "changes": [
-        "View type select: a change saves the form; the select carries js-skip-on-change, so only the master select of a master/slave pair was saved (6977a49)"
+        "View type select: a change saves the form; the select carries js-skip-on-change, so only the master select of a master/slave pair was saved (6977a49)",
+        "The master select of a master/slave pair (a list's View type) is saved too when the new view type leaves no item view type to choose (list_zigzag, list_accordion, a view type of your own): the form is submitted once the item view type select has been updated; when that already saved the form, the second submit sends the same values and is skipped"
       ]
     },
     {
