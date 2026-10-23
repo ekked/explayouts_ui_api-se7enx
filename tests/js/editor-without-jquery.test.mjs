@@ -65,7 +65,7 @@ test( 'without jQuery: the page has none, and every flow does what the editor di
     assert.deepEqual( s.unknownRequests.filter( ( r ) => r !== 'GET /app/layouts/form/create' ), [] );
 
     // opening: the app's requests and what it draws
-    assert.deepEqual( s.openLayout.gets, [ P + '/config', P + '/layouts/shared', P + '/layouts/1?published=false',
+    assert.deepEqual( s.openLayout.gets, [ P + '/config', P + '/layouts/shared', P + '/layouts/1?published=false&fallback=published',
         P + '/config/layout_types', P + '/config/block_types', P + '/eng/layouts/1/blocks' ] );
     assert.deepEqual( s.openLayout.blocks, [ 'top: Welcome', 'main: News' ] );
     assert.equal( s.openLayout.types.length, 3 );

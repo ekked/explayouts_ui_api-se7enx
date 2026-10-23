@@ -316,6 +316,15 @@
       ]
     },
     {
+      "id": 45,
+      "name": "./application",
+      "file": "modules/045-application.js",
+      "original_sha256": "8c27e363c62e89f725ca27a1b19d7e02c58f8f1352bf7d7f8abf5f0952fadb75",
+      "changes": [
+        "The editor asks for the draft with fallback=published: a layout without a draft answers with its published version (200) instead of a 404 the browser logs as an error, and the editor creates the draft as it did after the 404."
+      ]
+    },
+    {
       "id": 46,
       "name": "./layout",
       "file": "modules/046-layout.js",
