@@ -10,6 +10,12 @@ function(e,t,n){
  *                                  the drag (a receive callback refusing it, the trash's dialog cancelled)
  *   instance( element )            the instance of a list, or undefined
  *
+ * Keyboard moves (module 139, ./widget, which this module tells about each list it marks the grips of): an instance's
+ * keyStart( item ), keyMove( list, index ), keyDrop() and keyCancel() run a drag without a pointer through the same
+ * callbacks in the same order, so a move by keyboard is saved exactly as one by pointer. The item itself travels
+ * (it keeps the focus of its grip), the placeholder stays hidden right behind it, the helper is made (the callers
+ * rely on it) but not shown.
+ *
  * What jQuery UI's sortable did and the editor uses is kept, down to the order of the callbacks: options appendTo,
  * axis, connectWith (a selector, resolved when a drag starts), delay, distance, cancel, handle, helper ("clone" or a
  * function ( event, item ) returning the element to carry), items ("> *"), placeholder (a class name; without one a
@@ -33,7 +39,7 @@ function(e,t,n){
  * @license GPL-2.0-or-later
  */
 "use strict";
-var m=e("./mouse"),instances=new WeakMap;
+var m=e("./mouse"),kbd=e("./widget"),instances=new WeakMap;
 
 var DEFAULTS={appendTo:"parent",axis:!1,connectWith:!1,delay:0,distance:1,cancel:m.CANCEL,handle:!1,helper:"clone",
     items:"> *",placeholder:!1,scroll:!0,scrollParent:null,tolerance:"intersect",
@@ -70,6 +76,7 @@ S._markHandles=function(){
     this._items().forEach(function(item){
         (h?Array.prototype.slice.call(item.querySelectorAll(h)):[item]).forEach(function(g){g.classList.add("ui-sortable-handle")});
     });
+    if(kbd.sortable)kbd.sortable(this);
 };
 
 S._trigger=function(name,original,ui){
@@ -353,6 +360,76 @@ S.cancel=function(){
     }
     return this;
 };
+
+/* ---- keyboard (module 139) ---- */
+
+/** Picks `item` up: start, activate and over as a pointer drag that starts over its own list. False if refused. */
+S.keyStart=function(item){
+    if(this.dragging||this.options.disabled||m.pressed())return!1;
+    var o=this.options,d;
+    d=this.drag={item:item,notes:{},floating:!1,keyboard:!0,scrollParent:null};
+    this.currentContainer=this;
+    this.containers=this._containers();
+    var appendTo=o.appendTo==="parent"?item.parentNode:m.element(o.appendTo,item);
+    var helper=typeof o.helper=="function"?m.elements(o.helper.call(this.element,m.uiEvent("sortstart",this.element,null),item))[0]:item.cloneNode(!0);
+    if(helper!==item){
+        if(!helper.isConnected)appendTo.appendChild(helper);
+        helper.style.display="none";
+    }
+    d.helper=helper;
+    d.prev=item.previousElementSibling;
+    d.parent=item.parentNode;
+    d.display=item.style.display;
+    d.placeholder=this._placeholder(item,null,null);
+    this._sizePlaceholder=null;
+    d.placeholder.style.display="none";
+    item.parentNode.insertBefore(d.placeholder,item.nextSibling);
+    this.last={item:item,prev:d.prev,parent:d.parent,placeholder:d.placeholder};
+    this.dragging=!0;
+    this._trigger("start",null,this._ui());
+    for(var i=this.containers.length-1;i>=0&&this.drag;i--)this.containers[i]._trigger("activate",null,this._ui(this));
+    if(!this.drag)return!1;
+    if(helper!==item){
+        helper.classList.add("ui-sortable-helper");
+        if(helper.parentNode!==appendTo)appendTo.appendChild(helper);
+    }
+    this.over=!0;
+    this._trigger("over",null,this._ui());
+    return!!this.drag;
+};
+
+/**
+ * Moves the item picked up to place `index` of `list` (an instance of this drag's lists; index among its items
+ * without the item), with out, change and over as a pointer moving there.
+ */
+S.keyMove=function(list,index){
+    var d=this.drag;
+    if(!d||!d.keyboard||!list)return;
+    var items=list._items().filter(function(it){return it!==d.item}),ref=items[index]||null,from=this.currentContainer;
+    if(ref)ref.parentNode.insertBefore(d.item,ref);
+    else if(items.length)items[items.length-1].parentNode.insertBefore(d.item,items[items.length-1].nextSibling);
+    else list.element.appendChild(d.item);
+    d.item.parentNode.insertBefore(d.placeholder,d.item.nextSibling);
+    if(list===from){this._trigger("change",null,this._ui());return}
+    if(from.over){
+        from.over=!1;
+        from._trigger("out",null,this._ui(this));
+        if(!this.drag)return;
+    }
+    this._trigger("change",null,this._ui());
+    if(!this.drag)return;
+    list._trigger("change",null,this._ui(this));
+    if(!this.drag)return;
+    this.currentContainer=list;
+    list.over=!0;
+    list._trigger("over",null,this._ui(this));
+};
+
+/** Drops the item where it is (update, remove, receive, ... stop as a pointer letting go). */
+S.keyDrop=function(){if(this.drag&&this.drag.keyboard)this._stop(null,!1)};
+
+/** Puts everything back (as Escape during a pointer drag). */
+S.keyCancel=function(){if(this.drag&&this.drag.keyboard)this._abort(null)};
 
 S.option=function(options){
     Object.assign(this.options,options||{});

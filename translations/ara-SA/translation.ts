@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>أنواع الكتل</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>مفتاح المسافة أو Enter يلتقطه، ومفاتيح الأسهم تنقله، والمسافة أو Enter يُفلته، وEscape يلغي. Alt مع السهم لأعلى أو لأسفل ينقله موضعًا واحدًا مباشرة.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>نقل الكتلة %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>إضافة الكتلة %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>نقل العنصر %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>تم التقاط %name. المنطقة %zone، الموضع %position من %count. استخدم مفاتيح الأسهم للنقل، والمسافة للإفلات، وEscape للإلغاء.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>تم التقاط %name. الموضع %position من %count. استخدم مفاتيح الأسهم للنقل، والمسافة للإفلات، وEscape للإلغاء.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>المنطقة %zone، الموضع %position من %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>الموضع %position من %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>تم إفلات %name في المنطقة %zone في الموضع %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>تم إفلات %name في الموضع %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>تم إلغاء النقل.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>هذه المنطقة لا تقبل %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>لا توجد منطقة تقبل %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

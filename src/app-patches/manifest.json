@@ -581,7 +581,8 @@
       "original_sha256": "b18ea5ca8d1d563358ca88efff1aca85e546a5dcb6f99b8d9452ddec12988206",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "The editor's own draggables and droppables on Pointer Events (mouse, touch, pen), plain DOM, in place of jQuery UI's draggable/droppable: what ./bm_collection_items uses (axis, clone helper, handle, zIndex, appendTo; accept, activeClass, hoverClass, tolerance; start/stop/over/out/drop), Escape cancels; activeClass/hoverClass work again (jQuery UI 1.14 had dropped them without $.uiBackCompat)"
+        "The editor's own draggables and droppables on Pointer Events (mouse, touch, pen), plain DOM, in place of jQuery UI's draggable/droppable: what ./bm_collection_items uses (axis, clone helper, handle, zIndex, appendTo; accept, activeClass, hoverClass, tolerance; start/stop/over/out/drop), Escape cancels; activeClass/hoverClass work again (jQuery UI 1.14 had dropped them without $.uiBackCompat)",
+        "Keyboard entries for module 139 (keyStart, keyTargets, keyOver, keyDrop): a manual item of a dynamic collection is moved onto another slot with the keys through the same start/activate/drop/deactivate/stop callbacks as with the pointer, so it is saved with the same $move; each draggable is handed to ./widget when its grips are marked"
       ]
     },
     {
@@ -611,7 +612,8 @@
       "original_sha256": "7a44e5981bf606238201d6650af6a1f995958539050b8c25640c33ada3db4723",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "The editor's own sortable lists on Pointer Events, plain DOM, in place of jQuery UI's sortable: what ./dnd and ./bm_collection_items use, with jQuery UI's callbacks in jQuery UI's order (checked against 1.14.2 in tests/js/dnd.test.mjs); ui holds elements and a per-drag object; cancel(list) also after the drop; Escape cancels; geometry read live; scrollParent replaces the customScrollParent patch"
+        "The editor's own sortable lists on Pointer Events, plain DOM, in place of jQuery UI's sortable: what ./dnd and ./bm_collection_items use, with jQuery UI's callbacks in jQuery UI's order (checked against 1.14.2 in tests/js/dnd.test.mjs); ui holds elements and a per-drag object; cancel(list) also after the drop; Escape cancels; geometry read live; scrollParent replaces the customScrollParent patch",
+        "Keyboard entries for module 139 (keyStart, keyMove, keyDrop, keyCancel): a drag without a pointer through the same callbacks in the same order (start, activate, over, out, change, update, remove, receive, deactivate, stop), so a keyboard move is saved exactly as a pointer move; the item itself travels and keeps the focus of its grip, placeholder and helper stay hidden; each list is handed to ./widget when its grips are marked"
       ]
     },
     {
@@ -621,7 +623,8 @@
       "original_sha256": "3cb32a70f34be9c5aa067f6f7669ef34362bcf85cd625fff3d72ba3e8d8f9a83",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "Empty: jQuery UI's widget factory is not needed any more (modules 135-138)"
+        "Empty: jQuery UI's widget factory is not needed any more (modules 135-138)",
+        "The keyboard mode of the drag and drop, in place of the empty module: the grips of blocks, block types and collection items become buttons with a name and a hint; Space/Enter picks up and drops, the arrow keys move (into the zone before or after at a zone's edge), Home/End, Alt+arrow moves one place at once, Escape or leaving the grip cancels; linked zones, zones that refuse the block type and container placeholders for container blocks are skipped as the pointer's callbacks refuse them; every step said in one polite live region through nglT(); after a drop the grip keeps the focus, also when the editor draws the block or item again; reduced motion respected"
       ]
     },
     {

@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>د بلاک ډولونه</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>سپېس یا Enter یې پورته کوي، د غشو کیلي یې خوځوي، سپېس یا Enter یې ږدي، Escape لغوه کوي. Alt د پورته یا ښکته غشي سره یې سمدستي یو ځای خوځوي.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>د %name بلاک خوځول</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>د %name بلاک زیاتول</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>د %name توکی خوځول</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name پورته شو. سیمه %zone، موقعیت %position له %count. د خوځولو لپاره د غشو کیلي، د ایښودلو لپاره سپېس او د لغوه کولو لپاره Escape وکاروئ.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name پورته شو. موقعیت %position له %count. د خوځولو لپاره د غشو کیلي، د ایښودلو لپاره سپېس او د لغوه کولو لپاره Escape وکاروئ.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>سیمه %zone، موقعیت %position له %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>موقعیت %position له %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name په %zone سیمه کې په %position موقعیت کې کېښودل شو.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name په %position موقعیت کې کېښودل شو.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>خوځول لغوه شول.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>دا سیمه %name نه مني.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>هېڅ سیمه %name نه مني.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>
