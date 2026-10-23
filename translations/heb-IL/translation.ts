@@ -1120,7 +1120,7 @@
     </message>
     <message>
         <source>Active tab index (0-based)</source>
-        <translation>לשונית פעילה (מ-0)</translation>
+        <translation>לשונית פעילה (מ־0)</translation>
     </message>
     <message>
         <source>Image alt text</source>
@@ -1196,7 +1196,7 @@
     </message>
     <message>
         <source>Load first page via AJAX</source>
-        <translation>טעינת העמוד הראשון ב-AJAX</translation>
+        <translation>טעינת העמוד הראשון ב־AJAX</translation>
     </message>
     <message>
         <source>Slides per view</source>

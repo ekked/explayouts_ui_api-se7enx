@@ -1206,7 +1206,7 @@
     </message>
     <message>
         <source>Template name</source>
-        <translation>د کينډۍ نوم</translation>
+        <translation>د کېنډۍ نوم</translation>
     </message>
     <message>
         <source>Show name</source>

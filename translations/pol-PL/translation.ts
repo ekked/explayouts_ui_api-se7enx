@@ -9,27 +9,27 @@
     </message>
     <message>
         <source>Add content to collection</source>
-        <translation>Dodaj treść do kolekcji</translation>
+        <translation>Dodać treść do kolekcji</translation>
     </message>
     <message>
         <source>Add selected</source>
-        <translation>Dodaj zaznaczone</translation>
+        <translation>Dodać zaznaczone</translation>
     </message>
     <message>
         <source>Select content</source>
-        <translation>Wybierz treść</translation>
+        <translation>Wybrać treść</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation>Wybierz</translation>
+        <translation>Wybrać</translation>
     </message>
     <message>
         <source>Select %label</source>
-        <translation>Wybierz %label</translation>
+        <translation>Wybrać %label</translation>
     </message>
     <message>
         <source>Select item</source>
-        <translation>Wybierz element</translation>
+        <translation>Wybrać element</translation>
     </message>
     <message>
         <source>Failed to add items.</source>
@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation>Anulować</translation>
     </message>
     <message>
         <source>Loading...</source>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation>Otwórz</translation>
+        <translation>Otworzyć</translation>
     </message>
     <message>
         <source>Failed to load content.</source>
@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Change</source>
-        <translation>Zmień</translation>
+        <translation>Zmienić</translation>
     </message>
     <message>
         <source>Query type</source>
@@ -115,11 +115,11 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation>Anulować</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Zastosuj</translation>
+        <translation>Zastosować</translation>
     </message>
     <message>
         <source>Items</source>
@@ -153,19 +153,19 @@
     <name>design/standard/explayouts_ui_api/form_block_parameter</name>
     <message>
         <source>Select item</source>
-        <translation>Wybierz element</translation>
+        <translation>Wybrać element</translation>
     </message>
     <message>
         <source>Browse content</source>
-        <translation>Przeglądaj treść</translation>
+        <translation>Przeglądać treść</translation>
     </message>
     <message>
         <source>Clear selection</source>
-        <translation>Wyczyść wybór</translation>
+        <translation>Wyczyścić wybór</translation>
     </message>
     <message>
         <source>View in CMS</source>
-        <translation>Wyświetl w CMS</translation>
+        <translation>Wyświetlić w CMS</translation>
     </message>
     <message>
         <source>(saved) %value</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Create layout</source>
-        <translation>Utwórz układ</translation>
+        <translation>Utworzyć układ</translation>
     </message>
 </context>
 <context>
@@ -295,11 +295,11 @@
     </message>
     <message>
         <source>There could be unsaved changes. Are you sure you want to leave?</source>
-        <translation>Mogą istnieć niezapisane zmiany. Czy na pewno chcesz wyjść?</translation>
+        <translation>Mogą istnieć niezapisane zmiany. Czy na pewno wyjść?</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Odśwież</translation>
+        <translation>Odświeżyć</translation>
     </message>
     <message>
         <source>Not allowed</source>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>You don't have permission to edit this layout.</source>
-        <translation>Nie masz uprawnień do edycji tego układu.</translation>
+        <translation>Brak uprawnień do edycji tego układu.</translation>
     </message>
     <message>
         <source>OK</source>
@@ -327,11 +327,11 @@
     </message>
     <message>
         <source>Layout you are trying to edit does not exist.</source>
-        <translation>Układ, który próbujesz edytować, nie istnieje.</translation>
+        <translation>Edytowany układ nie istnieje.</translation>
     </message>
     <message>
         <source>Back to admin</source>
-        <translation>Wróć do administracji</translation>
+        <translation>Wrócić do administracji</translation>
     </message>
     <message>
         <source>Something went wrong!</source>
@@ -343,19 +343,19 @@
     </message>
     <message>
         <source>Edit layout</source>
-        <translation>Edytuj układ</translation>
+        <translation>Edytować układ</translation>
     </message>
     <message>
         <source>Edit master of layout</source>
-        <translation>Edytuj układ nadrzędny</translation>
+        <translation>Edytować układ nadrzędny</translation>
     </message>
     <message>
         <source>Choose layout zone</source>
-        <translation>Wybierz strefę układu</translation>
+        <translation>Wybrać strefę układu</translation>
     </message>
     <message>
         <source>Link layout</source>
-        <translation>Połącz układ</translation>
+        <translation>Połączyć układ</translation>
     </message>
     <message>
         <source>What would you like to do with the draft?</source>
@@ -363,19 +363,19 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation>Odrzuć</translation>
+        <translation>Odrzucić</translation>
     </message>
     <message>
         <source>Publish layout</source>
-        <translation>Opublikuj układ</translation>
+        <translation>Opublikować układ</translation>
     </message>
     <message>
         <source>Publish and continue editing</source>
-        <translation>Opublikuj i kontynuuj edycję</translation>
+        <translation>Opublikować i kontynuować edycję</translation>
     </message>
     <message>
         <source>Save draft and close</source>
-        <translation>Zapisz wersję roboczą i zamknij</translation>
+        <translation>Zapisać wersję roboczą i zamknąć</translation>
     </message>
     <message>
         <source>Hidden in CMS</source>
@@ -383,39 +383,39 @@
     </message>
     <message>
         <source>Edit in CMS</source>
-        <translation>Edytuj w CMS</translation>
+        <translation>Edytować w CMS</translation>
     </message>
     <message>
         <source>Set position</source>
-        <translation>Ustaw pozycję</translation>
+        <translation>Ustawić pozycję</translation>
     </message>
     <message>
         <source>Override item view type</source>
-        <translation>Zastąp typ widoku elementu</translation>
+        <translation>Nadpisać typ widoku elementu</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Usuń</translation>
+        <translation>Usunąć</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Zapisz</translation>
+        <translation>Zapisać</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation>Anulować</translation>
     </message>
     <message>
         <source>Override slot view type</source>
-        <translation>Zastąp typ widoku slotu</translation>
+        <translation>Nadpisać typ widoku slotu</translation>
     </message>
     <message>
         <source>Delete %kind</source>
-        <translation>Usuń: %kind</translation>
+        <translation>Usunąć: %kind</translation>
     </message>
     <message>
         <source>Move %kind</source>
-        <translation>Przenieś: %kind</translation>
+        <translation>Przenieść: %kind</translation>
     </message>
     <message>
         <source>Loading</source>
@@ -423,11 +423,11 @@
     </message>
     <message>
         <source>+ Add items</source>
-        <translation>+ Dodaj elementy</translation>
+        <translation>+ Dodać elementy</translation>
     </message>
     <message>
         <source>Remove all manual items</source>
-        <translation>Usuń wszystkie elementy ręczne</translation>
+        <translation>Usunąć wszystkie elementy ręczne</translation>
     </message>
     <message>
         <source>An error occurred and we're not sure why.</source>
@@ -435,7 +435,7 @@
     </message>
     <message>
         <source>Please, send the error details below to developers with the description of what you were doing when the error occurred to help fix it.</source>
-        <translation>Wyślij programistom poniższe szczegóły błędu wraz z opisem, co robiono w chwili jego wystąpienia, aby pomóc go naprawić.</translation>
+        <translation>Poniższe szczegóły błędu należy wysłać programistom wraz z opisem, co robiono w chwili jego wystąpienia, aby pomóc go naprawić.</translation>
     </message>
     <message>
         <source>Error details</source>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>Apply</source>
-        <translation>Zastosuj</translation>
+        <translation>Zastosować</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -463,11 +463,11 @@
     </message>
     <message>
         <source>Edit existing</source>
-        <translation>Edytuj istniejący</translation>
+        <translation>Edytować istniejący</translation>
     </message>
     <message>
         <source>Create layout</source>
-        <translation>Utwórz układ</translation>
+        <translation>Utworzyć układ</translation>
     </message>
     <message>
         <source>Trash</source>
@@ -475,7 +475,7 @@
     </message>
     <message>
         <source>Select a block to access its properties.</source>
-        <translation>Wybierz blok, aby zobaczyć jego właściwości.</translation>
+        <translation>Należy wybrać blok, aby zobaczyć jego właściwości.</translation>
     </message>
     <message>
         <source>You can link a zone in the layout by pointing it to a zone in the shared layout. Blocks from the shared layout zone will then be displayed in the linked zone.</source>
@@ -487,31 +487,31 @@
     </message>
     <message>
         <source>Use the dropdown menu to select a shared layout you want to preview and then select a desired target zone to create a link.</source>
-        <translation>Wybierz z listy rozwijanej wspólny układ do podglądu, a następnie wybierz strefę docelową, aby utworzyć połączenie.</translation>
+        <translation>Należy wybrać z listy rozwijanej wspólny układ do podglądu, a następnie strefę docelową, aby utworzyć połączenie.</translation>
     </message>
     <message>
         <source>Unlink zone from layout_id: "%layout" and zone_id: "%zone"</source>
-        <translation>Odłącz strefę od layout_id: "%layout" i zone_id: "%zone"</translation>
+        <translation>Odłączyć strefę od layout_id: &quot;%layout&quot; i zone_id: &quot;%zone&quot;</translation>
     </message>
     <message>
         <source>Edit linked layout</source>
-        <translation>Edytuj połączony układ</translation>
+        <translation>Edytować połączony układ</translation>
     </message>
     <message>
         <source>Choose zone</source>
-        <translation>Wybierz strefę</translation>
+        <translation>Wybrać strefę</translation>
     </message>
     <message>
         <source>Link zone</source>
-        <translation>Połącz strefę</translation>
+        <translation>Połączyć strefę</translation>
     </message>
     <message>
         <source>Choose a zone you wish to link</source>
-        <translation>Wybierz strefę, którą chcesz połączyć</translation>
+        <translation>Wybrać strefę do połączenia</translation>
     </message>
     <message>
         <source>Choose one of the shared layouts and then select a target zone</source>
-        <translation>Wybierz jeden ze wspólnych układów, a następnie strefę docelową</translation>
+        <translation>Wybrać jeden ze wspólnych układów, a następnie strefę docelową</translation>
     </message>
     <message>
         <source>This zone is already linked with</source>
@@ -527,27 +527,27 @@
     </message>
     <message>
         <source>Update link</source>
-        <translation>Zaktualizuj link</translation>
+        <translation>Zaktualizować link</translation>
     </message>
     <message>
         <source>Choose different zone</source>
-        <translation>Wybierz inną strefę</translation>
+        <translation>Wybrać inną strefę</translation>
     </message>
     <message>
         <source>Unlink</source>
-        <translation>Usuń link</translation>
+        <translation>Usunąć link</translation>
     </message>
     <message>
         <source>Select zone</source>
-        <translation>Wybierz strefę</translation>
+        <translation>Wybrać strefę</translation>
     </message>
     <message>
         <source>Move block</source>
-        <translation>Przenieś blok</translation>
+        <translation>Przenieść blok</translation>
     </message>
     <message>
         <source>Delete block</source>
-        <translation>Usuń blok</translation>
+        <translation>Usunąć blok</translation>
     </message>
     <message>
         <source>Are you sure you want to delete the block? This cannot be undone.</source>
@@ -555,11 +555,11 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usuń</translation>
+        <translation>Usunąć</translation>
     </message>
     <message>
         <source>Revert block</source>
-        <translation>Przywróć blok</translation>
+        <translation>Przywrócić blok</translation>
     </message>
     <message>
         <source>Are you sure you want to revert the block to its published version? This cannot be undone.</source>
@@ -567,7 +567,7 @@
     </message>
     <message>
         <source>Revert</source>
-        <translation>Przywróć</translation>
+        <translation>Przywrócić</translation>
     </message>
     <message>
         <source>Block successfully duplicated.</source>
@@ -575,11 +575,11 @@
     </message>
     <message>
         <source>Exit</source>
-        <translation>Wyjdź</translation>
+        <translation>Wyjść</translation>
     </message>
     <message>
         <source>Remove all added items</source>
-        <translation>Usuń wszystkie dodane elementy</translation>
+        <translation>Usunąć wszystkie dodane elementy</translation>
     </message>
     <message>
         <source>Are you sure you want to remove all added items? This cannot be undone.</source>
@@ -587,7 +587,7 @@
     </message>
     <message>
         <source>Delete item</source>
-        <translation>Usuń element</translation>
+        <translation>Usunąć element</translation>
     </message>
     <message>
         <source>Are you sure you want to delete this item? This cannot be undone.</source>
@@ -639,15 +639,15 @@
     </message>
     <message>
         <source>Clear caches</source>
-        <translation>Wyczyść pamięć podręczną</translation>
+        <translation>Wyczyścić pamięć podręczną</translation>
     </message>
     <message>
         <source>Do not clear caches</source>
-        <translation>Nie czyść pamięci podręcznej</translation>
+        <translation>Nie czyścić pamięci podręcznej</translation>
     </message>
     <message>
         <source>Discard changes</source>
-        <translation>Odrzuć zmiany</translation>
+        <translation>Odrzucić zmiany</translation>
     </message>
     <message>
         <source>Are you sure you want to discard your changes to the layout draft?</source>
@@ -659,11 +659,11 @@
     </message>
     <message>
         <source>Link zone with shared layout zone</source>
-        <translation>Połącz strefę ze strefą wspólnego układu</translation>
+        <translation>Połączyć strefę ze strefą wspólnego układu</translation>
     </message>
     <message>
         <source>Unlink zone</source>
-        <translation>Odłącz strefę</translation>
+        <translation>Odłączyć strefę</translation>
     </message>
     <message>
         <source>Are you sure you want to unlink this zone?</source>
@@ -671,19 +671,19 @@
     </message>
     <message>
         <source>Go to today</source>
-        <translation>Przejdź do dzisiaj</translation>
+        <translation>Przejść do dzisiaj</translation>
     </message>
     <message>
         <source>Clear selection</source>
-        <translation>Wyczyść wybór</translation>
+        <translation>Wyczyścić wybór</translation>
     </message>
     <message>
         <source>Close the picker</source>
-        <translation>Zamknij wybór</translation>
+        <translation>Zamknąć wybór</translation>
     </message>
     <message>
         <source>Select Month</source>
-        <translation>Wybierz miesiąc</translation>
+        <translation>Wybrać miesiąc</translation>
     </message>
     <message>
         <source>Previous Month</source>
@@ -695,7 +695,7 @@
     </message>
     <message>
         <source>Select Year</source>
-        <translation>Wybierz rok</translation>
+        <translation>Wybrać rok</translation>
     </message>
     <message>
         <source>Previous Year</source>
@@ -707,7 +707,7 @@
     </message>
     <message>
         <source>Select Decade</source>
-        <translation>Wybierz dekadę</translation>
+        <translation>Wybrać dekadę</translation>
     </message>
     <message>
         <source>Previous Decade</source>
@@ -727,7 +727,7 @@
     </message>
     <message>
         <source>Pick Hour</source>
-        <translation>Wybierz godzinę</translation>
+        <translation>Wybrać godzinę</translation>
     </message>
     <message>
         <source>Increment Hour</source>
@@ -739,7 +739,7 @@
     </message>
     <message>
         <source>Pick Minute</source>
-        <translation>Wybierz minutę</translation>
+        <translation>Wybrać minutę</translation>
     </message>
     <message>
         <source>Increment Minute</source>
@@ -751,7 +751,7 @@
     </message>
     <message>
         <source>Pick Second</source>
-        <translation>Wybierz sekundę</translation>
+        <translation>Wybrać sekundę</translation>
     </message>
     <message>
         <source>Increment Second</source>
@@ -763,11 +763,11 @@
     </message>
     <message>
         <source>Toggle Period</source>
-        <translation>Przełącz AM/PM</translation>
+        <translation>Przełączyć AM/PM</translation>
     </message>
     <message>
         <source>Select Time</source>
-        <translation>Wybierz godzinę</translation>
+        <translation>Wybrać godzinę</translation>
     </message>
     <message>
         <source>Block options</source>
@@ -779,7 +779,7 @@
     </message>
     <message>
         <source>Close the properties panel</source>
-        <translation>Zamknij panel właściwości</translation>
+        <translation>Zamknąć panel właściwości</translation>
     </message>
     <message>
         <source>Rich text</source>
@@ -791,11 +791,11 @@
     </message>
     <message>
         <source>Undo</source>
-        <translation>Cofnij</translation>
+        <translation>Cofnąć</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Ponów</translation>
+        <translation>Ponowić</translation>
     </message>
     <message>
         <source>Paragraph format</source>
@@ -839,7 +839,7 @@
     </message>
     <message>
         <source>Remove formatting</source>
-        <translation>Usuń formatowanie</translation>
+        <translation>Usunąć formatowanie</translation>
     </message>
     <message>
         <source>Link</source>
@@ -847,7 +847,7 @@
     </message>
     <message>
         <source>Remove link</source>
-        <translation>Usuń link</translation>
+        <translation>Usunąć link</translation>
     </message>
     <message>
         <source>Bulleted list</source>
@@ -875,7 +875,7 @@
     </message>
     <message>
         <source>Center</source>
-        <translation>Wyśrodkuj</translation>
+        <translation>Wyśrodkować</translation>
     </message>
     <message>
         <source>Align right</source>
@@ -883,7 +883,7 @@
     </message>
     <message>
         <source>Justify</source>
-        <translation>Wyjustuj</translation>
+        <translation>Wyjustować</translation>
     </message>
     <message>
         <source>Horizontal line</source>
@@ -891,27 +891,27 @@
     </message>
     <message>
         <source>Insert table</source>
-        <translation>Wstaw tabelę</translation>
+        <translation>Wstawić tabelę</translation>
     </message>
     <message>
         <source>Insert row below</source>
-        <translation>Wstaw wiersz poniżej</translation>
+        <translation>Wstawić wiersz poniżej</translation>
     </message>
     <message>
         <source>Insert column right</source>
-        <translation>Wstaw kolumnę po prawej</translation>
+        <translation>Wstawić kolumnę po prawej</translation>
     </message>
     <message>
         <source>Delete row</source>
-        <translation>Usuń wiersz</translation>
+        <translation>Usunąć wiersz</translation>
     </message>
     <message>
         <source>Delete column</source>
-        <translation>Usuń kolumnę</translation>
+        <translation>Usunąć kolumnę</translation>
     </message>
     <message>
         <source>Delete table</source>
-        <translation>Usuń tabelę</translation>
+        <translation>Usunąć tabelę</translation>
     </message>
     <message>
         <source>URL</source>
@@ -919,7 +919,7 @@
     </message>
     <message>
         <source>Open in a new window</source>
-        <translation>Otwórz w nowym oknie</translation>
+        <translation>Otworzyć w nowym oknie</translation>
     </message>
     <message>
         <source>Code</source>
@@ -931,7 +931,7 @@
     </message>
     <message>
         <source>Add a block</source>
-        <translation>Dodaj blok</translation>
+        <translation>Dodać blok</translation>
     </message>
     <message>
         <source>Block types</source>

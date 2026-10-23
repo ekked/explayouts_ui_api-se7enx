@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Embedded content</source>
-        <translation>Naveroka bicihkirî</translation>
+        <translation>Naveroka hundirxistî</translation>
     </message>
 </context>
 <context>
@@ -1010,7 +1010,7 @@
     </message>
     <message>
         <source>Label (legacy)</source>
-        <translation>Etîket (kevn)</translation>
+        <translation>Nav (kevn)</translation>
     </message>
     <message>
         <source>URL (legacy)</source>
@@ -1026,7 +1026,7 @@
     </message>
     <message>
         <source>Video URL or embed src</source>
-        <translation>URL-ya vîdyoyê an src-ya bicihkirinê</translation>
+        <translation>URL-ya vîdyoyê an src-ya hundirxistinê</translation>
     </message>
     <message>
         <source>Width (px or %)</source>
@@ -1042,7 +1042,7 @@
     </message>
     <message>
         <source>Map embed URL</source>
-        <translation>URL-ya bicihkirina nexşeyê</translation>
+        <translation>URL-ya hundirxistina nexşeyê</translation>
     </message>
     <message>
         <source>Width</source>
@@ -1094,7 +1094,7 @@
     </message>
     <message>
         <source>Label</source>
-        <translation>Etîket</translation>
+        <translation>Nav</translation>
     </message>
     <message>
         <source>Value (0-100)</source>

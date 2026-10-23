@@ -363,7 +363,7 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation>Rejeitar</translation>
+        <translation>Descartar</translation>
     </message>
     <message>
         <source>Publish layout</source>

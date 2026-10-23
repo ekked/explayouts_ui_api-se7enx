@@ -363,7 +363,7 @@
     </message>
     <message>
         <source>Discard</source>
-        <translation>Відкинути</translation>
+        <translation>Відхилити</translation>
     </message>
     <message>
         <source>Publish layout</source>

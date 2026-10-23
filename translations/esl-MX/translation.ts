@@ -280,7 +280,7 @@
     </message>
     <message>
         <source>Yes</source>
-        <translation>Si</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
@@ -555,7 +555,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Eliminar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Revert block</source>
@@ -639,7 +639,7 @@
     </message>
     <message>
         <source>Clear caches</source>
-        <translation>Limpiar las cachés</translation>
+        <translation>Limpiar los cachés</translation>
     </message>
     <message>
         <source>Do not clear caches</source>
@@ -1130,7 +1130,7 @@
     </message>
     <message>
         <source>Thumbnails per row/slide</source>
-        <translation>Miniaturas por fila/diapositiva</translation>
+        <translation>Miniaturas por fila/miniatura</translation>
     </message>
     <message>
         <source>Enable lightbox</source>
@@ -1526,7 +1526,7 @@
     </message>
     <message>
         <source>Parent node ID</source>
-        <translation>ID del nodo padre</translation>
+        <translation>ID del nudo padre</translation>
     </message>
     <message>
         <source>Limit</source>
@@ -1574,7 +1574,7 @@
     </message>
     <message>
         <source>Node ID</source>
-        <translation>ID del nodo</translation>
+        <translation>ID del nudo</translation>
     </message>
     <message>
         <source>Navigation part (empty: the one of the page)</source>

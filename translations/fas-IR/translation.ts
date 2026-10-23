@@ -1130,7 +1130,7 @@
     </message>
     <message>
         <source>Thumbnails per row/slide</source>
-        <translation>تصاویر کوچک در هر ردیف/اسلاید</translation>
+        <translation>تصاویر بندانگشتی در هر ردیف/اسلاید</translation>
     </message>
     <message>
         <source>Enable lightbox</source>
@@ -1142,7 +1142,7 @@
     </message>
     <message>
         <source>Thumbnail size alias</source>
-        <translation>نام مستعار اندازه تصویر کوچک</translation>
+        <translation>نام مستعار اندازهٔ تصویر بندانگشتی</translation>
     </message>
     <message>
         <source>Quote text</source>
@@ -1482,7 +1482,7 @@
     </message>
     <message>
         <source>Thumbnails to move</source>
-        <translation>تعداد تصاویر کوچک برای جابه‌جایی</translation>
+        <translation>تعداد تصاویر بندانگشتی برای جابه‌جایی</translation>
     </message>
     <message>
         <source>Show details</source>
