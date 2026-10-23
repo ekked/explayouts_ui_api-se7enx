@@ -250,7 +250,3 @@
 #ngc-size-warning { display: none !important; }
 
 }
-
-/* A block being dragged by finger must not also scroll the canvas. */
-.ngc.exp-dragging { touch-action: none; }
-.ngc.exp-dragging .main-content { overflow: hidden; }

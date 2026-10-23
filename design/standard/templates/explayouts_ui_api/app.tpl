@@ -76,9 +76,10 @@
         <script src="{$javascript|wash()}" defer></script>
     {/foreach}
 
-    {* The app bundle uses the page's jQuery and jQuery UI (ezjscore's), so they
-       load first: these run before the deferred scripts below. *}
-    {ezscript( array( 'ezjsc::jquery', 'ezjsc::jqueryUI' ) )}
+    {* The app bundle uses the page's jQuery (ezjscore's), so it loads first: it
+       runs before the deferred scripts below. jQuery UI is not needed: the
+       editor's drag and drop is its own. *}
+    {ezscript( array( 'ezjsc::jquery' ) )}
     {* The rich text and code editors (Tiptap, built from src/editors/): window.CKEDITOR and window.ace with
        the calls the app bundle makes of them. Before the bundle: it registers CKEDITOR listeners on load. *}
     <script src="{'javascript/explayouts-tiptap.js'|ezdesign('no')}" defer></script>

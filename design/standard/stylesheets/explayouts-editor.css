@@ -17,6 +17,10 @@
 #ngc-size-warning { display: none !important; }
 .left-toolbar .button.js-open.active + .left-toolbar-panels .left-panel { display: block !important; }
 .add-block-btn .font-icon::before { content: "\e900"; }
+/* The grips of the drag and drop (netgen-layouts.js, modules 135-138, on Pointer Events): a finger or pen on a block's
+   header, a collection item's handle or a block type of the toolbar moves it instead of scrolling the page. Only the
+   grips: a finger anywhere else still scrolls. */
+.ui-sortable-handle, .ui-draggable-handle { touch-action: none; }
 .is-dragging [data-block] { pointer-events: none; }
 .is-dragging [data-zone] { box-shadow: inset 0 0 0 2px #4a90e2; }
 .zone { min-height: 80px; position: relative; }

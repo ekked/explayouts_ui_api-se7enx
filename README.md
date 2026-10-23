@@ -172,9 +172,10 @@ What differs from the original is versioned in `src/app-patches/`:
 - `manifest.json`: the original (version, commit, download address, sha256 of the bundle, of each of its 157
   modules and of the skeleton around them) and each patched module with what was changed and in which commit;
 - `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
-- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (32 of 157: the interface
-  texts, the page's jQuery 4 and jQuery UI instead of the built-in jQuery 2.2.4 / jQuery UI 1.10.4, the view type
-  select, and the others listed in the manifest).
+- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (36 of 157: the interface
+  texts, the page's jQuery 4 instead of the built-in jQuery 2.2.4, the editor's own drag and drop on Pointer Events in
+  place of jQuery UI (modules 135-138; 134 and 139 are empty), the view type select, and the others listed in the
+  manifest).
 
 After `npm ci` (the bundle is read with acorn, not evaluated), `node src/app-patches/apply.mjs` builds the bundle
 from them (`--check` compares, `--from=<original bundle>` builds

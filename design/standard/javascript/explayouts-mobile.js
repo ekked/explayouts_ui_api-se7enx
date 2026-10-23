@@ -1,7 +1,7 @@
 /**
  * Mobile behaviour for the layouts editor.
  *
- * explayouts-mobile.css does the arranging. Three things cannot be done in a
+ * explayouts-mobile.css does the arranging. Two things cannot be done in a
  * stylesheet, and they are all that is here:
  *
  *   1. The header's height. Everything below it is `position: fixed` with a
@@ -14,11 +14,12 @@
  *      own close button or Escape. Selecting a block deliberately does not
  *      open it - see watchSelection().
  *
- *   3. Dragging by finger. The editor sorts blocks with jQuery UI sortable,
- *      which listens for mouse events and nothing else, so on a touch screen
- *      blocks could not be moved at all. The listeners below turn a drag of
- *      the finger into the mouse events sortable is waiting for, while leaving
- *      taps and scrolling alone.
+ * Dragging by finger or pen needs nothing here any more. Up to 1.3.29 this
+ * file turned touches into the mouse events jQuery UI's sortable listened
+ * for; the editor's drag and drop is now its own and reads Pointer Events
+ * (netgen-layouts.js, modules 135-138), and its handles carry touch-action:
+ * none (explayouts-editor.css), so a finger on a handle moves the block and
+ * a finger anywhere else scrolls the page.
  *
  * Nothing here runs above the breakpoint, and everything it adds is removed
  * again when the viewport grows past it, so rotating a phone into landscape or
@@ -28,8 +29,6 @@
     'use strict';
 
     var BREAKPOINT = '(max-width: 820px)';
-    var DRAG_SLOP  = 8;          // px of finger movement before it is a drag
-    var HANDLES    = '.handle, .block-header, .ui-sortable-handle';
 
     var app     = null;
     var sidebar = null;
@@ -199,96 +198,6 @@
             closeDrawer();
     } );
 
-    // ── 3. dragging by finger ───────────────────────────────────────────────
-    //
-    // jQuery UI sortable is bound to mousedown/mousemove/mouseup. A touch
-    // screen sends none of those until a tap is over, by which time a drag is
-    // not a drag any more. So a finger held on a drag handle and moved is
-    // replayed as the mouse gestures sortable expects.
-    //
-    // The mouse down is deliberately not sent on touchstart but on the first
-    // movement past DRAG_SLOP. Sending it immediately would mean every tap on a
-    // block header began a drag that had to be cancelled, and every attempt to
-    // scroll the canvas with a finger that happened to start on a block would
-    // move the block instead of the page.
-
-    var drag = null;
-
-    function mouseFromTouch( type, touch )
-    {
-        var e = document.createEvent( 'MouseEvents' );
-        e.initMouseEvent( type, true, true, window, 1,
-                          touch.screenX, touch.screenY,
-                          touch.clientX, touch.clientY,
-                          false, false, false, false, 0, null );
-        return e;
-    }
-
-    function onTouchStart( e )
-    {
-        if ( !isMobile() || e.touches.length !== 1 )
-            return;
-
-        var target = e.target.closest ? e.target.closest( HANDLES ) : null;
-        if ( !target )
-            return;
-
-        // A control inside the handle is a button, not a grip.
-        if ( e.target.closest( 'a, button, input, select, textarea, .dropdown' ) )
-            return;
-
-        var t = e.touches[0];
-        drag = { target: e.target, x: t.clientX, y: t.clientY, started: false };
-    }
-
-    function onTouchMove( e )
-    {
-        if ( !drag || e.touches.length !== 1 )
-            return;
-
-        var t = e.touches[0];
-
-        if ( !drag.started )
-        {
-            if ( Math.abs( t.clientX - drag.x ) < DRAG_SLOP &&
-                 Math.abs( t.clientY - drag.y ) < DRAG_SLOP )
-                return;                                  // still just a touch
-
-            drag.started = true;
-            app.classList.add( 'exp-dragging' );
-            drag.target.dispatchEvent( mouseFromTouch( 'mousedown', t ) );
-        }
-
-        // Past this point the finger belongs to the block, not to the page.
-        e.preventDefault();
-        drag.target.dispatchEvent( mouseFromTouch( 'mousemove', t ) );
-    }
-
-    function endTouch( e )
-    {
-        if ( !drag )
-            return;
-
-        if ( drag.started )
-        {
-            var t = ( e.changedTouches && e.changedTouches[0] ) || { screenX: 0, screenY: 0, clientX: drag.x, clientY: drag.y };
-            drag.target.dispatchEvent( mouseFromTouch( 'mouseup', t ) );
-            app.classList.remove( 'exp-dragging' );
-        }
-        // If it never started it was a tap, and the browser's own click is on
-        // its way. Nothing to undo.
-
-        drag = null;
-    }
-
-    function bindTouch()
-    {
-        document.addEventListener( 'touchstart', onTouchStart, { passive: true } );
-        document.addEventListener( 'touchmove', onTouchMove, { passive: false } );
-        document.addEventListener( 'touchend', endTouch );
-        document.addEventListener( 'touchcancel', endTouch );
-    }
-
     // ── wiring ──────────────────────────────────────────────────────────────
 
     function applyMode()
@@ -338,8 +247,6 @@
             mql.addEventListener( 'change', applyMode );
         else if ( mql.addListener )
             mql.addListener( applyMode );
-
-        bindTouch();
     }
 
     if ( document.readyState === 'loading' )
