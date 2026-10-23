@@ -1,1 +1,106 @@
-function(e,t,n){(r=>{function a(e,t){this.$element=r(e),this.options=r.extend({},a.DEFAULTS,t),this.$trigger=r('[data-toggle="collapse"][href="#'+e.id+'"],[data-toggle="collapse"][data-target="#'+e.id+'"]'),this.transitioning=null,this.options.parent?this.$parent=this.getParent():this.addAriaAndCollapsedClass(this.$element,this.$trigger),this.options.toggle&&this.toggle()}function n(e){e=e.attr("data-target")||(e=e.attr("href"))&&e.replace(/.*(?=#[^\s]+$)/,"");return r(document).find(e)}function s(i){return this.each(function(){var e=r(this),t=e.data("bs.collapse"),n=r.extend({},a.DEFAULTS,e.data(),"object"==typeof i&&i);!t&&n.toggle&&/show|hide/.test(i)&&(n.toggle=!1),t||e.data("bs.collapse",t=new a(this,n)),"string"==typeof i&&t[i]()})}a.VERSION="3.4.1",a.TRANSITION_DURATION=350,a.DEFAULTS={toggle:!0},a.prototype.dimension=function(){return this.$element.hasClass("width")?"width":"height"},a.prototype.show=function(){if(!this.transitioning&&!this.$element.hasClass("in")){var e=this.$parent&&this.$parent.children(".panel").children(".in, .collapsing");if(!(e&&e.length&&(i=e.data("bs.collapse"))&&i.transitioning)){var t=r.Event("show.bs.collapse");if(this.$element.trigger(t),!t.isDefaultPrevented()){e&&e.length&&(s.call(e,"hide"),i||e.data("bs.collapse",null));var n=this.dimension(),t=(this.$element.removeClass("collapse").addClass("collapsing")[n](0).attr("aria-expanded",!0),this.$trigger.removeClass("collapsed").attr("aria-expanded",!0),this.transitioning=1,function(){this.$element.removeClass("collapsing").addClass("collapse in")[n](""),this.transitioning=0,this.$element.trigger("shown.bs.collapse")});if(!r.support.transition)return t.call(this);var i="scroll"+n.charAt(0).toUpperCase()+n.slice(1);this.$element.one("bsTransitionEnd",(function(f,c){return f.bind(c)})(t,this)).emulateTransitionEnd(a.TRANSITION_DURATION)[n](this.$element[0][i])}}}},a.prototype.hide=function(){if(!this.transitioning&&this.$element.hasClass("in")){var e=r.Event("hide.bs.collapse");if(this.$element.trigger(e),!e.isDefaultPrevented()){var e=this.dimension(),t=(this.$element[e](this.$element[e]())[0].offsetHeight,this.$element.addClass("collapsing").removeClass("collapse in").attr("aria-expanded",!1),this.$trigger.addClass("collapsed").attr("aria-expanded",!1),this.transitioning=1,function(){this.transitioning=0,this.$element.removeClass("collapsing").addClass("collapse").trigger("hidden.bs.collapse")});if(!r.support.transition)return t.call(this);this.$element[e](0).one("bsTransitionEnd",(function(f,c){return f.bind(c)})(t,this)).emulateTransitionEnd(a.TRANSITION_DURATION)}}},a.prototype.toggle=function(){this[this.$element.hasClass("in")?"hide":"show"]()},a.prototype.getParent=function(){return r(document).find(this.options.parent).find('[data-toggle="collapse"][data-parent="'+this.options.parent+'"]').each((function(f,c){return f.bind(c)})(function(e,t){t=r(t);this.addAriaAndCollapsedClass(n(t),t)},this)).end()},a.prototype.addAriaAndCollapsedClass=function(e,t){var n=e.hasClass("in");e.attr("aria-expanded",n),t.toggleClass("collapsed",!n).attr("aria-expanded",n)};var e=r.fn.collapse;r.fn.collapse=s,r.fn.collapse.Constructor=a,r.fn.collapse.noConflict=function(){return r.fn.collapse=e,this},r(document).on("click.bs.collapse.data-api",'[data-toggle="collapse"]',function(e){var t=r(this),e=(t.attr("data-target")||e.preventDefault(),n(t)),t=e.data("bs.collapse")?"toggle":t.data();s.call(e,t)})})(jQuery)}
+function(e,t,n){
+/*
+ * Collapsible panels of the layout editor without jQuery, in place of Bootstrap 3.4.1's collapse.js (the module
+ * keeps its id and name). Same markup and classes: a click on [data-toggle="collapse"] (href="#id" or
+ * data-target) shows or hides the element, .collapse / .collapsing / .collapse.in with the height animated over
+ * 350 ms, aria-expanded on the element and on its toggles, "collapsed" on the toggles. DOM events
+ * show.bs.collapse and hide.bs.collapse (both cancelable), shown.bs.collapse and hidden.bs.collapse are fired on the
+ * element. Accordions (data-parent) are not supported: the editor has none.
+ *
+ * The module exports function( ui ), called by ./extended/jquery_override with the helpers of
+ * bootstrap/js/transition; it returns { show( el ), hide( el ), toggle( el ) }.
+ *
+ * @copyright Copyright CJW Network and Exponential Foundation. All rights reserved.
+ * @license GPL-2.0-or-later
+ */
+t.exports = function( ui ) {
+    var TRANSITION = 350, TOGGLE = '[data-toggle="collapse"]', busy = new WeakSet(), known = new WeakSet();
+
+    function dimension( el ) {
+        return el.classList.contains( 'width' ) ? 'width' : 'height';
+    }
+
+    function toggles_of( el ) {
+        if ( !el.id ) return [];
+        var id = '#' + el.id;
+        return Array.prototype.filter.call( document.querySelectorAll( TOGGLE ), function( toggle ) {
+            return toggle.getAttribute( 'href' ) === id || toggle.getAttribute( 'data-target' ) === id;
+        } );
+    }
+
+    function set_expanded( el, expanded ) {
+        el.setAttribute( 'aria-expanded', String( expanded ) );
+        toggles_of( el ).forEach( function( toggle ) {
+            toggle.classList.toggle( 'collapsed', !expanded );
+            toggle.setAttribute( 'aria-expanded', String( expanded ) );
+        } );
+    }
+
+    function show( el ) {
+        if ( busy.has( el ) || el.classList.contains( 'in' ) ) return;
+        if ( !ui.fire( el, 'show.bs.collapse' ) ) return;
+        var dim = dimension( el );
+        el.classList.remove( 'collapse' );
+        el.classList.add( 'collapsing' );
+        el.style[ dim ] = '0px';
+        set_expanded( el, true );
+        busy.add( el );
+        ui.transition_end( el, TRANSITION, function() {
+            el.classList.remove( 'collapsing' );
+            el.classList.add( 'collapse', 'in' );
+            el.style[ dim ] = '';
+            busy.delete( el );
+            ui.fire( el, 'shown.bs.collapse' );
+        } );
+        el.style[ dim ] = el[ dim === 'width' ? 'scrollWidth' : 'scrollHeight' ] + 'px';
+    }
+
+    function hide( el ) {
+        if ( busy.has( el ) || !el.classList.contains( 'in' ) ) return;
+        if ( !ui.fire( el, 'hide.bs.collapse' ) ) return;
+        var dim = dimension( el );
+        el.style[ dim ] = getComputedStyle( el )[ dim ];
+        ui.reflow( el );
+        el.classList.add( 'collapsing' );
+        el.classList.remove( 'collapse', 'in' );
+        set_expanded( el, false );
+        busy.add( el );
+        el.style[ dim ] = '0px';
+        ui.transition_end( el, TRANSITION, function() {
+            busy.delete( el );
+            el.classList.remove( 'collapsing' );
+            el.classList.add( 'collapse' );
+            ui.fire( el, 'hidden.bs.collapse' );
+        } );
+    }
+
+    function toggle( el ) {
+        // the first time, as Bootstrap does when it sets a panel up: aria-expanded and "collapsed" from .in
+        if ( !known.has( el ) ) {
+            known.add( el );
+            set_expanded( el, el.classList.contains( 'in' ) );
+        }
+        if ( el.classList.contains( 'in' ) ) hide( el );
+        else show( el );
+    }
+
+    function targets_of( toggle ) {
+        var selector = toggle.getAttribute( 'data-target' ) || ( toggle.getAttribute( 'href' ) || '' ).replace( /.*(?=#[^\s]+$)/, '' );
+        if ( !selector ) return [];
+        try {
+            return Array.prototype.slice.call( document.querySelectorAll( selector ) );
+        } catch ( err ) {
+            return [];
+        }
+    }
+
+    document.addEventListener( 'click', function( ev ) {
+        var toggle_el = ev.target.closest && ev.target.closest( TOGGLE );
+        if ( !toggle_el ) return;
+        if ( !toggle_el.hasAttribute( 'data-target' ) ) ev.preventDefault();
+        targets_of( toggle_el ).forEach( toggle );
+    } );
+
+    return { show: show, hide: hide, toggle: toggle };
+};
+}

@@ -172,9 +172,28 @@ What differs from the original is versioned in `src/app-patches/`:
 - `manifest.json`: the original (version, commit, download address, sha256 of the bundle, of each of its 157
   modules and of the skeleton around them) and each patched module with what was changed and in which commit;
 - `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
-- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (32 of 157: the interface
+- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (45 of 157: the interface
   texts, the page's jQuery 4 and jQuery UI instead of the built-in jQuery 2.2.4 / jQuery UI 1.10.4, the view type
-  select, and the others listed in the manifest).
+  select, the plain DOM code in place of jQuery plugins, and the others listed in the manifest).
+
+Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar run
+without jQuery plugins. Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its locales
+and eonasdan-bootstrap-datetimepicker are no longer in the bundle; their modules keep their ids and hold plain DOM
+code (`Core.ui`, put together in `./extended/jquery_override`) or nothing:
+
+| `Core.ui` | instead of | |
+|---|---|---|
+| `dialog.show( el, options )`, `hide( el )`, `is_shown( el )` | `$.fn.modal` | Bootstrap 3 markup and CSS; `backdrop`, `keyboard`, `on_shown`, `on_hidden`; Tab stays in the open dialog, the focus goes back on close |
+| `collapse.show/hide/toggle( el )` | `$.fn.collapse` | clicks on `[data-toggle="collapse"]` |
+| `dropdown.toggle( toggle )`, `close_all()` | `$.fn.dropdown` | clicks and keys on `[data-toggle="dropdown"]`, opens upwards when there is no room below |
+| `xeditable`, `dependable_select`, `master_slave_selects`, `view_types`, `video_thumb_fetcher`, `bm_tooltip` ( elements ) | the jQuery plugins of the same names | called by `reinitialize_plugins` (module `init`) |
+| `show( el, ms )`, `hide( el, ms )`, `transition_end`, `find`, `elements`, `tabbables`, `fire` | jQuery's `show`/`hide`, `emulateTransitionEnd` | helpers |
+
+The DOM events `show.bs.modal`, `hidden.bs.collapse`, `shown.bs.dropdown` ... are still fired (as DOM events: listen
+with `addEventListener`, not jQuery's namespaced `.on()`). `$.fn.modal` remains as a bridge to `Core.ui.dialog` for
+scripts outside the bundle. The date field of `./views/datetime_picker` is the browser's `<input type="datetime-local">`
+(it sends the same `YYYY-MM-DDTHH:mm` in local time); the template helper `date` formats with
+`Intl.DateTimeFormat`.
 
 After `npm ci` (the bundle is read with acorn, not evaluated), `node src/app-patches/apply.mjs` builds the bundle
 from them (`--check` compares, `--from=<original bundle>` builds

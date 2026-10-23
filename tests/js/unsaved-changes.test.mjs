@@ -98,8 +98,10 @@ before( async () => {
     } );
     load( idOf( './extended/jquery_override' ) );
     assert.equal( typeof jQuery.fn.ajax_submit, 'function', 'ajax_submit from the bundle' );
-    for ( const plugin of [ 'xeditable', 'dependable_select', 'master_slave_selects', 'video_thumb_fetcher', 'view_types', 'bm_tooltip' ] ) {
-        jQuery.fn[ plugin ] = jQuery.fn[ plugin ] || function () { return this; };
+    // Core.ui as ./core_base hands it on; the helpers of ./lib/jquery/* are not part of this test
+    core.ui = jQuery.ngl_ui;
+    for ( const helper of [ 'xeditable', 'dependable_select', 'master_slave_selects', 'video_thumb_fetcher', 'view_types', 'bm_tooltip' ] ) {
+        core.ui[ helper ] = core.ui[ helper ] || function () {};
     }
 
     const listen = window.addEventListener;
