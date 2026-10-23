@@ -10,7 +10,7 @@
  * Three parts: the sortable and draggable/droppable on their own; differentially against jQuery UI 1.14.2 (ezjscore's,
  * the one the editor ran on): the same lists, the same gestures, the same callbacks in the same order with the same
  * this/item/sender, the same DOM afterwards; and the editor's own callers (./dnd, ./draggable, ./receiver,
- * ./bm_collection_items) on the paths the editor takes: a block type from the toolbar into a zone, a block moved
+ * ./bm_collection_items), on the editor's DOM layer (module jquery), on the paths the editor takes: a block type from the toolbar into a zone, a block moved
  * between zones, zones that refuse, the trash, Escape, the items of manual and dynamic collections.
  *
  * Run: npm ci && npm test (in extension/explayouts_ui_api)
@@ -34,7 +34,7 @@ const JQUERY_UI = [ process.env.JQUERY_UI_FILE, resolve( root, '../ezjscore/desi
     .find( ( f ) => f && existsSync( f ) );
 const haveJQueryUI = !!JQUERY_UI;
 
-let jQuery, mouse, sortable, dd;
+let jQuery, dom, mouse, sortable, dd;
 
 function idOf( name ) {
     for ( const m of parsed.modules.values() ) if ( name in m.deps ) return String( m.deps[ name ] );
@@ -166,6 +166,8 @@ before( async () => {
     const { jQueryFactory } = await import( 'jquery/factory' );
     jQuery = jQueryFactory( window );
     window.jQuery = globalThis.jQuery = jQuery;
+    // the editor's DOM layer (module jquery) for the callers below; jQuery 4 only for jQuery UI in the comparison
+    dom = load( idOf( 'jquery' ), { 101: load( idOf( 'bootstrap/js/transition' ) ) } );
     mouse = load( idOf( './mouse' ) );
     sortable = load( idOf( 'jquery-ui/sortable' ), { './mouse': mouse, './core': {}, './widget': {} } );
     dd = load( idOf( 'jquery-ui/draggable' ), { './mouse': mouse, './core': {}, './widget': {} } );
@@ -561,7 +563,7 @@ for ( const [ name, s ] of Object.entries( SCENARIOS ) ) {
 /** core (../core) as far as ./dnd, ./draggable and ./receiver use it; events land in `events`. */
 function editorCore( events ) {
     return {
-        $: jQuery,
+        $: dom,
         trigger: ( name ) => events.push( name ),
         state: { in_mode: () => false },
         g: { layout: { id: 7, blocks: { models: [] } } },
@@ -569,13 +571,13 @@ function editorCore( events ) {
             const model = { attrs, id: null, url: () => '/blocks', save() { events.push( 'save ' + JSON.stringify( attrs ) ); return { then() {} }; } };
             return model;
         } },
-        blocks: { create_view: ( identifier ) => ( { $el: jQuery( '<div id="new" data-block>' + identifier + '</div>' ) } ) },
+        blocks: { create_view: ( identifier ) => ( { $el: dom( '<div id="new" data-block>' + identifier + '</div>' ) } ) },
     };
 }
 
 /**
  * The editor's page: the toolbar's block types, zones main (two blocks), side (one), linked (a linked zone), the
- * trash. Views as ./zone, ./block and ./block_type have them: jQuery data _view on their elements.
+ * trash. Views as ./zone, ./block and ./block_type have them: on their elements (el.ngl_view, the layer's data _view).
  */
 function editorPage( events, { accept = () => true } = {} ) {
     document.body.innerHTML =
@@ -588,7 +590,7 @@ function editorPage( events, { accept = () => true } = {} ) {
             blocks.map( ( b ) => '<div data-view data-block id="' + b + '"><div class="block-header"><span class="name">' + b + '</span></div></div>' ).join( '' ) +
             '</div></div>' ).join( '' ) +
         '</div><div id="trash"><div data-trash></div></div>';
-    const $ = jQuery;
+    const $ = dom;
     const toolbar = document.getElementById( 'toolbar' );
     layout( { element: toolbar, left: 0, top: 50, width: 100 } );
     [ 'main', 'side', 'linked' ].forEach( ( zone, i ) => layout( { element: document.getElementById( 'body-' + zone ), left: 200, top: 50 + 150 * i, width: 400, height: 120 } ) );
@@ -623,7 +625,7 @@ function editorModules( events ) {
     const Draggable = load( idOf( './draggable' ) === '135' ? '76' : idOf( './draggable' ), { '../core': core } );
     const Receiver = load( idOf( './receiver' ), { '../core': core } );
     const dnd = load( idOf( './dnd' ), { '../core': core, './draggable': Draggable, './receiver': Receiver, 138: sortable } );
-    const view = ( el, extra ) => Object.assign( Object.create( dnd ), { $: ( sel ) => jQuery( el ).find( sel ) }, extra );
+    const view = ( el, extra ) => Object.assign( Object.create( dnd ), { $: ( sel ) => dom( el ).find( sel ) }, extra );
     return { core, dnd, view };
 }
 
@@ -649,7 +651,7 @@ test( 'editor: a block type dragged from the toolbar into a zone becomes a block
     assert.deepEqual( ids( document.getElementById( 'body-main' ) ), [ 'm1', 'new', 'm2' ] );
     assert.deepEqual( ids( toolbar ), [ 't-title', 't-text' ], 'a copy of the type stays in the toolbar' );
     assert.ok( document.getElementById( 't-title' ) !== title, 'the copy, not the type dragged' );
-    assert.equal( jQuery( '#t-title' ).data( '_view' ).model.get(), 'title', 'the copy is a block type with its view' );
+    assert.equal( dom( '#t-title' ).data( '_view' ).model.get(), 'title', 'the copy is a block type with its view' );
     const save = events.find( ( e ) => e.startsWith( 'save ' ) );
     assert.ok( save, events.join( ' | ' ) );
     assert.deepEqual( JSON.parse( save.slice( 5 ) ), { block_type: 'title', zone_identifier: 'main', layout_id: 7, parent_position: 1, parent_block_id: null } );
@@ -699,7 +701,7 @@ test( 'editor: a block dropped on the trash asks; cancelling the dialog puts it 
     assert.ok( m2.parentNode === document.querySelector( '[data-trash]' ), 'the block waits in the trash' );
     assert.ok( events.includes( 'destroy m2' ) );
     assert.ok( !events.some( ( e ) => /^(set|move) /.test( e ) ), events.join( ' | ' ) );
-    jQuery( m2 ).data( '_view' ).dialog.cancel();
+    dom( m2 ).data( '_view' ).dialog.cancel();
     assert.deepEqual( ids( document.getElementById( 'body-main' ) ), [ 'm1', 'm2' ] );
 } );
 
@@ -723,15 +725,15 @@ function collection( type, events ) {
         list.insertAdjacentHTML( 'beforeend', '<div id="c' + i + '" class="collection-item ' + ( i === 2 && type === 'dynamic' ? 'dynamic-item' : 'manual-item' ) + '">' +
             '<div class="item-panel" id="ip' + i + '"><div class="handle">=</div><span class="name">' + i + '</span></div></div>' );
         const el = document.getElementById( 'c' + i );
-        jQuery( el ).data( '_view', { model: { get: ( k ) => ( { position: 10 + i, is_dynamic: i === 2 && type === 'dynamic' }[ k ] ) },
+        dom( el ).data( '_view', { model: { get: ( k ) => ( { position: 10 + i, is_dynamic: i === 2 && type === 'dynamic' }[ k ] ) },
             $move: ( to, via ) => events.push( 'move c' + i + ' ' + to + ( via ? ' ' + via : '' ) ) } );
         document.getElementById( 'ip' + i ).__rect = [ 0, 100 + 40 * i, 200, 40 ];
     }
     layout( { element: list, left: 0, top: 100, width: 200 } );
-    const core = { $: jQuery, View: { extend: ( proto ) => proto } };
+    const core = { $: dom, View: { extend: ( proto ) => proto } };
     const Items = load( idOf( './bm_collection_items' ), { '../core': core, './bm_collection_item': {}, 135: dd, 138: sortable } );
     const model = { get: ( k ) => ( { loading: false, collection_type: type, offset: 10 }[ k ] ) };
-    const view = Object.assign( Object.create( Items ), { bm_collection_model: model, $: ( sel ) => jQuery( document.getElementById( 'block' ) ).find( sel ) } );
+    const view = Object.assign( Object.create( Items ), { bm_collection_model: model, $: ( sel ) => dom( document.getElementById( 'block' ) ).find( sel ) } );
     view.setup_dnd();
     return list;
 }
@@ -743,6 +745,18 @@ test( 'editor: an item of a manual collection dragged to another place moves to 
     await drag( document.querySelector( '#c0 .handle' ), [ [ 50, 165 ], [ 50, 205 ] ], { from: [ 50, 120 ], hold: 160 } );
     assert.deepEqual( ids( list ), [ 'c1', 'c2', 'c0', 'c3' ] );
     assert.deepEqual( events, [ 'move c0 12 move_manual' ] );
+} );
+
+test( 'editor: an item of a manual collection with an offset put back where it was is not moved', async () => {
+    const events = [];
+    const list = collection( 'manual', events );
+    // moved, then Escape: the item goes back, and the stop that follows must not move it to its own place
+    await drag( document.querySelector( '#c1 .handle' ), [ [ 50, 205 ], [ 50, 245 ] ], { from: [ 50, 160 ], hold: 160, release: false } );
+    escape();
+    pointer( 'pointerup', document.body, 50, 245 );
+    await wait();
+    assert.deepEqual( ids( list ), [ 'c0', 'c1', 'c2', 'c3' ] );
+    assert.deepEqual( events, [], 'position 11 is index 1 plus the offset 10' );
 } );
 
 test( 'editor: a manual item of a dynamic collection dropped on another slot moves there; dropped nowhere, the preview goes', async () => {

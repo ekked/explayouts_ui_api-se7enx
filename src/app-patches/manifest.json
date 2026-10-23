@@ -172,7 +172,8 @@
   "header_changes": [
     "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
     "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-    "The page's jQuery UI is no longer used: the drag and drop is the editor's own (modules 135-138)"
+    "The page's jQuery UI is no longer used: the drag and drop is the editor's own (modules 135-138)",
+    "The page's jQuery is no longer used either: module jquery is the editor's own DOM layer"
   ],
   "modules": [
     {
@@ -211,7 +212,8 @@
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "ajax_submit sends a form without a method attribute as POST (the API takes form saves as POST only; jQuery's default GET also hid the save from the warning on leaving).",
         "browser_tabs makes WAI-ARIA tabs: tablist, tab and tabpanel roles, aria-selected with a roving tabindex, one selected tab, arrow keys, Home and End (3df5f1e)",
-        "Bootstrap 3's jQuery plugins are gone: bootstrap/js/transition, dropdown, modal and collapse are plain DOM code now and are put together here as Core.ui (jQuery.ngl_ui for ./core_base). $.fn.modal stays as a bridge to Core.ui.dialog for scripts outside the bundle (explayouts-app.js) until they call Core.ui.dialog. The dropup placement moved to bootstrap/js/dropdown, xeditable to ./lib/jquery/video_thumb_fetcher, dependable_select to ./lib/jquery/master_slave_selects; the jQuery core extensions (toJSON, html/text, ajax_submit, closest_view, browser_tabs ...) stay."
+        "Bootstrap 3's jQuery plugins are gone: bootstrap/js/transition, dropdown, modal and collapse are plain DOM code now and are put together here as Core.ui (jQuery.ngl_ui for ./core_base). $.fn.modal stays as a bridge to Core.ui.dialog for scripts outside the bundle (explayouts-app.js) until they call Core.ui.dialog. The dropup placement moved to bootstrap/js/dropdown, xeditable to ./lib/jquery/video_thumb_fetcher, dependable_select to ./lib/jquery/master_slave_selects; the jQuery core extensions (toJSON, html/text, ajax_submit, closest_view, browser_tabs ...) stay.",
+        "No jQuery on the page any more: the module no longer sets window.jQuery and window.ngc_jquery, and the $.fn.modal bridge is gone (explayouts-app.js calls Core.ui.dialog). Its own collection methods (toJSON, html/text, ajax_submit, browser_tabs ...) are added to the editor's DOM layer (module jquery)."
       ]
     },
     {
@@ -229,7 +231,8 @@
       "file": "modules/021-extended-view.js",
       "original_sha256": "8596dd63d6369211f90dff2f16ecef4e4acc6d4a2862a124610b90fb8268d772",
       "changes": [
-        "A view is also found from its element without jQuery: el.ngl_view, beside the jQuery data _view (for the inline switches, .xeditable)."
+        "A view is also found from its element without jQuery: el.ngl_view, beside the jQuery data _view (for the inline switches, .xeditable).",
+        "The view is kept on its element only as el.ngl_view; the DOM layer (module jquery) reads and writes .data(\"_view\") there, so the jQuery data and the property are one."
       ]
     },
     {
@@ -361,6 +364,15 @@
       ]
     },
     {
+      "id": 63,
+      "name": "./views/blocks/load",
+      "file": "modules/063-views-blocks-load.js",
+      "original_sha256": "8ed0b20160bd7446ef1e26545d160306e71e641916db8f6c5292b78481460e0e",
+      "changes": [
+        "load_group_blocks used the page's global $ (jQuery); it uses Core.$, the editor's DOM layer."
+      ]
+    },
+    {
       "id": 64,
       "name": "./main",
       "file": "modules/064-main.js",
@@ -375,7 +387,8 @@
       "file": "modules/070-bm-collection.js",
       "original_sha256": "f6b676999a3a5edf92ec16d23ab1838462b454f36d625e3493389ce674d2e28c",
       "changes": [
-        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "The selected option of the item type is found with the CSS selector option:checked instead of jQuery's own :selected."
       ]
     },
     {
@@ -394,7 +407,8 @@
       "file": "modules/072-bm-collection-items.js",
       "original_sha256": "5e4c8856d93f7e514b91b326352d9edde1e67130d6a2898553a4b6a669154062",
       "changes": [
-        "Items of a collection sorted with the editor's own sortable, draggable and droppable (require(135), require(138)) instead of jQuery UI; a manual item of a dynamic collection dragged and not dropped on a slot (or Escape) leaves no preview copies behind"
+        "Items of a collection sorted with the editor's own sortable, draggable and droppable (require(135), require(138)) instead of jQuery UI; a manual item of a dynamic collection dragged and not dropped on a slot (or Escape) leaves no preview copies behind",
+        "An item of a manual collection put back where it was (a drop on its own place, Escape) is not moved: its position is compared with its index plus the collection's offset, as it is sent."
       ]
     },
     {
@@ -421,7 +435,8 @@
       "file": "modules/075-dnd.js",
       "original_sha256": "ebde06a2867924acfe94e6531e7af8bb478ef8f26c68303564434f7e82559e66",
       "changes": [
-        "Drag and drop through the editor's own sortable (require(138), plain DOM) instead of jQuery UI: the same lists and options (customScrollParent becomes scrollParent, the patched _mouseDrag goes), cancel(sender) instead of .sortable(\"cancel\"), the drop target and the copied/cancelled marks on ui.drag instead of the item or jQuery data, the linked-zone selector valid CSS (:not(.linked_zone)), no refreshPositions (geometry is read live)"
+        "Drag and drop through the editor's own sortable (require(138), plain DOM) instead of jQuery UI: the same lists and options (customScrollParent becomes scrollParent, the patched _mouseDrag goes), cancel(sender) instead of .sortable(\"cancel\"), the drop target and the copied/cancelled marks on ui.drag instead of the item or jQuery data, the linked-zone selector valid CSS (:not(.linked_zone)), no refreshPositions (geometry is read live)",
+        "The copy left in the toolbar when a block type is dragged out is a plain cloneNode with the block type's view (ngl_view) instead of jQuery's clone(true)."
       ]
     },
     {
@@ -430,7 +445,8 @@
       "file": "modules/076-draggable.js",
       "original_sha256": "0e84a5760239f08548e92bfd557e0a1a18f45144cf97ca47f958f958e44292d1",
       "changes": [
-        "Takes the plain ui of the editor's sortable: the item as an element (wrapped for its view), the copied mark on ui.drag"
+        "Takes the plain ui of the editor's sortable: the item as an element (wrapped for its view), the copied mark on ui.drag",
+        "The order of the blocks in a zone or container is read without jQuery's own selector :first (find the first [data-receiver], then its [data-view] children)."
       ]
     },
     {
@@ -614,7 +630,8 @@
       "file": "modules/140-jquery.js",
       "original_sha256": "582262f6de312d91bacb6cf8ae1e4eded62e001deee34d551b1ab626245e1f2a",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "jQuery is no longer used: the module is the editor's own DOM layer, the part of jQuery the bundle calls (collections, events with delegation and namespaces, data, $.ajax with its global events, $.Deferred, $.when, $.param, $.extend) on plain DOM, so that the page loads no jQuery. Backbone and the app reach it as Backbone.$ and Core.$."
       ]
     },
     {

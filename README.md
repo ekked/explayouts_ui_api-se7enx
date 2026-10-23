@@ -114,6 +114,11 @@ Sibling extensions
 Siteaccess
 - Activate the extension for the admin siteaccess — the app runs inside the authenticated admin session.
 
+Browser
+- The editor page loads no jQuery and no jQuery UI (and nothing of `ezjscore`): the app bundle brings its own DOM
+  layer, dialogs and drag and drop (see "The app bundle and its patches"). Scripts added through
+  `explayouts_ui_api.ini [App] Javascripts[]` must not expect `window.jQuery`.
+
 Installation
 ------------
 
@@ -172,10 +177,31 @@ What differs from the original is versioned in `src/app-patches/`:
 - `manifest.json`: the original (version, commit, download address, sha256 of the bundle, of each of its 157
   modules and of the skeleton around them) and each patched module with what was changed and in which commit;
 - `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
-- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (48 of 157: the interface
-  texts, the page's jQuery 4 instead of the built-in jQuery 2.2.4, the editor's own drag and drop on Pointer Events in
-  place of jQuery UI (modules 135-138; 134 and 139 are empty), the view type select, the plain DOM code in place of
-  jQuery plugins, and the others listed in the manifest).
+- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (49 of 157: the interface
+  texts, the editor's own DOM layer in place of jQuery (module 140), its own drag and drop on Pointer Events in place
+  of jQuery UI (modules 135-138; 134 and 139 are empty), the view type select, the plain DOM code in place of jQuery
+  plugins, and the others listed in the manifest).
+
+The editor runs without jQuery. Module 140 (`jquery`; until 1.3.29 the page's jQuery 4 from ezjscore, before that
+the jQuery 2.2.4 built in) is the editor's DOM layer: the part of jQuery the bundle calls, with jQuery's behaviour,
+on plain DOM. Backbone and the app's modules reach it as `Backbone.$` and `Core.$`; it is not put on the page as
+`window.jQuery` or `window.$`.
+
+| `Core.$` | |
+|---|---|
+| `$( selector \| html \| element \| array \| fn )` | collections; `$( fn )` runs when the document is ready, after the current script |
+| `each`, `map`, `get`, `toArray`, `eq`, `first`, `filter`, `index`, `find`, `closest`, `children`, `parent`, `parents`, `next`, `siblings` | traversal; a selector starting with `>` is relative, as in jQuery |
+| `addClass`, `removeClass`, `hasClass`, `attr`, `removeAttr`, `prop`, `data`, `removeData`, `css`, `height`, `val` | `data()` reads `data-*` attributes as jQuery converts them; `data( '_view' )` is the element's `ngl_view`, where every Backbone view of the app is kept (plain code: `el.ngl_view`) |
+| `html`, `text`, `append`, `after`, `replaceWith`, `remove`, `empty`, `show`, `hide`, `fadeIn`, `fadeOut` | what is taken out loses the layer's handlers and data (jQuery's cleanData); fades queue per element |
+| `on`, `off`, `trigger`, `ajaxStart`, `ajaxSend`, `ajaxSuccess`, `ajaxError`, `ajaxComplete`, `ajaxStop` | one native listener per element and type; delegation, namespaces (Backbone's `.delegateEvents<cid>`), jQuery's event object (`currentTarget`, `delegateTarget`, `originalEvent`, `which`, `return false`); `trigger()` dispatches a bubbling `CustomEvent` (the arguments as `detail`) that `addEventListener` listeners get too; `focus`, `blur`, `click` call the element's own method |
+| `serialize`, `serializeArray` | as jQuery |
+| `$.ajax`, `$.get`, `$.active` | XMLHttpRequest with jQuery's options, jqXHR (a promise with `done`, `fail`, `always`, `then`, `responseJSON` ...), headers and encodings; the global events on the document drive the progress bar, the count of running writes (the warning on leaving), and the session timeout and permission dialogs. `javascript/explayouts-app.js` sends its requests through `Core.$.ajax` for that |
+| `$.Deferred`, `$.when`, `$.param`, `$.extend`, `$.each`, `$.inArray` | as jQuery 3+ (`done` at once, `then` later) |
+
+`tests/js/editor-without-jquery.test.mjs` runs the whole page without jQuery through the main flows against a fake of
+the API, then the same flows with jQuery 4 in place of module 140 and compares every request and the document after
+each flow; that run records what the bundle calls of jQuery, and the test fails if the layer lacks any of it.
+`tests/js/dom-layer.test.mjs` tests the layer on its own, against jQuery 4 where it can.
 
 Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar run
 without jQuery plugins. Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its locales
@@ -191,8 +217,7 @@ code (`Core.ui`, put together in `./extended/jquery_override`) or nothing:
 | `show( el, ms )`, `hide( el, ms )`, `transition_end`, `find`, `elements`, `tabbables`, `fire` | jQuery's `show`/`hide`, `emulateTransitionEnd` | helpers |
 
 The DOM events `show.bs.modal`, `hidden.bs.collapse`, `shown.bs.dropdown` ... are still fired (as DOM events: listen
-with `addEventListener`, not jQuery's namespaced `.on()`). `$.fn.modal` remains as a bridge to `Core.ui.dialog` for
-scripts outside the bundle. The date field of `./views/datetime_picker` is the browser's `<input type="datetime-local">`
+with `addEventListener`). The content browser dialog of `javascript/explayouts-app.js` is a `Core.ui.dialog` too. The date field of `./views/datetime_picker` is the browser's `<input type="datetime-local">`
 (it sends the same `YYYY-MM-DDTHH:mm` in local time); the template helper `date` formats with
 `Intl.DateTimeFormat`.
 

@@ -2,15 +2,32 @@
 
 ## Unreleased
 
+- **The layout editor loads no jQuery.** The editor page (`app.tpl`) no longer loads ezjscore's jQuery 4 (nor jQuery
+  UI, see below); the app bundle's module `jquery` is now the editor's own DOM layer: exactly the part of jQuery the
+  bundle calls (collections, events with delegation and Backbone's namespaces, data, `$.ajax` with its global events,
+  `$.Deferred`, `$.when` ...) on plain DOM, with jQuery's behaviour. Backbone's views, events and requests run on it,
+  and nothing changes for the user: every flow of the editor was compared request by request and DOM by DOM with
+  jQuery 4 (`tests/js/editor-without-jquery.test.mjs`). The page loads 79 KB less script (jQuery 4 minified,
+  28 KB gzipped); the bundle grows by 47 KB (12 KB gzipped) of readable source. `window.jQuery` is no longer set:
+  scripts added through `[App] Javascripts[]` must bring their own.
+- A Backbone view is kept on its element as `el.ngl_view` only (jQuery's data `_view` is that property now);
+  `javascript/explayouts-app.js` finds the collection of "+ Add items" there, sends its requests through the app's
+  `Core.$.ajax` and shows the content browser as one of the app's dialogs (`Core.ui.dialog`) instead of a copy of
+  its own.
+- The menus of the header and of a block are opened by the app's dropdown code alone: `aria-expanded` now follows
+  (a handler of the page opened them before it and left `aria-expanded` at `false`).
+- The page no longer makes block types natively draggable (HTML5 drag and drop with a request of its own); block
+  types are dragged by the editor's drag and drop only.
+- An item of a manual collection with an offset that is put back where it was (dropped on its own place, Escape) is
+  no longer sent to the server as moved.
 - **The editor page's own scripts run without jQuery.** The content browser dialog of "+ Add items" and of the
   browse fields of a block form (`javascript/explayouts-app.js`) is plain DOM: it no longer needs jQuery or
   Bootstrap's modal plugin, and shows and hides itself as that plugin did (fade of backdrop and dialog, Escape, a
   click beside the dialog, the focus kept inside while it is open). Closing it now returns the focus to the link or
   button it was opened from. Every text of the dialog, the translated ones too, is escaped through one helper that
   also escapes quotes. A browse field tells the block form about a change with a native `change` event, which
-  listeners added with `addEventListener` now get as well. Its requests still go through the app's request
-  function while the app has one (progress bar, session timeout dialog, warning on leaving), else through `fetch`
-  with the same headers. `explayouts-app-head.js` and the Tiptap glue (`src/editors/`) did not use jQuery.
+  listeners added with `addEventListener` now get as well. Its requests go through the app's request function
+  (progress bar, session timeout dialog, warning on leaving). `explayouts-app-head.js` and the Tiptap glue (`src/editors/`) did not use jQuery.
 - **Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar
   run without jQuery plugins.** Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its
   locales and eonasdan-bootstrap-datetimepicker are no longer in the editor bundle (932 KB → 621 KB, gzipped

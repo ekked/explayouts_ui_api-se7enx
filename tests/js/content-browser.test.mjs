@@ -2,8 +2,10 @@
  * The content browser dialog of the layout editor ("+ Add items" of a collection, the browse fields of a block form;
  * the last part of design/standard/javascript/explayouts-app.js), node --test, happy-dom. The dialog runs on plain DOM;
  * until 1.3.29 it ran on jQuery and Bootstrap 3's modal. The 1.3.29 version (tests/js/fixtures/, with jQuery 4 and the
- * Bootstrap modal the bundle carried) and the current one go through the same steps, and what they do is compared:
- * the dialog's markup and state, the requests, the callbacks into the app and the events of the browse field.
+ * Bootstrap modal the bundle carried) and the current one (with the app's DOM layer and dialogs, Core.$ and
+ * Core.ui.dialog from the bundle) go through the same steps, and what they do is compared: the dialog's markup and
+ * state, the requests (jQuery's against the DOM layer's), the callbacks into the app and the events of the browse
+ * field.
  *
  * Run: npm ci && npm test (in extension/explayouts_ui_api)
  *
@@ -16,11 +18,22 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GlobalRegistrator } from '@happy-dom/global-registrator';
+import { parseBundle } from '../../src/app-patches/bundle.mjs';
 
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
 const appScript = readFileSync( resolve( root, 'design/standard/javascript/explayouts-app.js' ), 'utf8' );
 const oldDialog = readFileSync( resolve( root, 'tests/js/fixtures/content-browser-1.3.29.js' ), 'utf8' );
 const bootstrapModal = readFileSync( resolve( root, 'tests/js/fixtures/bootstrap-modal-3.4.1.js' ), 'utf8' );
+const bundle = parseBundle( readFileSync( resolve( root, 'design/standard/javascript/netgen-layouts.js' ), 'utf8' ) );
+
+/** A module of the app bundle by name, with the modules it requires by id given in `deps`. */
+function bundleModule( name, deps = {} ) {
+    let id = null;
+    for ( const m of bundle.modules.values() ) if ( name in m.deps ) id = String( m.deps[ name ] );
+    const module = { exports: {} };
+    ( 0, eval )( '(' + bundle.modules.get( id ).source + ')' ).call( module.exports, ( dep ) => deps[ dep ], module, module.exports );
+    return module.exports;
+}
 
 /** The dialog part of javascript/explayouts-app.js: from its comment to the end of the function expression. */
 function newDialog() {
@@ -40,8 +53,9 @@ const I18N = {
 };
 
 let jQuery;
+let dom;
+let ui;
 let requests;
-let fetchCalls;
 
 before( async () => {
     GlobalRegistrator.register( { url: 'https://example.test/admin/explayouts_ui_api/app#layout/1/edit',
@@ -64,13 +78,36 @@ before( async () => {
     requests = [];
     jQuery.ajaxTransport( '+*', ( options ) => ( {
         send: ( headers, complete ) => {
+            // as jQuery's XHR transport, which this stands in for
+            if ( !options.crossDomain && !headers[ 'X-Requested-With' ] ) headers[ 'X-Requested-With' ] = 'XMLHttpRequest';
             requests.push( { url: options.url, method: options.type, headers: { ...headers },
-                             contentType: options.contentType, body: options.data === undefined ? null : options.data,
+                             contentType: headers[ 'Content-Type' ] || null, body: options.data === undefined ? null : options.data,
                              answer: ( status, body ) => complete( status, status === 200 ? 'OK' : 'Error', { text: body },
                                                                    'Content-Type: application/json' ) } );
         },
         abort: () => {}
     } ) );
+
+    // The app's DOM layer and dialogs, from the bundle; its requests go to a stand-in of XMLHttpRequest that records
+    // them as jQuery's transport above does.
+    ui = bundleModule( 'bootstrap/js/transition' );
+    ui.dialog = bundleModule( 'bootstrap/js/modal' )( ui );
+    dom = bundleModule( 'jquery', { 101: ui } );
+    window.XMLHttpRequest = class {
+        open( method, url ) { this.method = method; this.url = url; this.headers = {}; }
+        setRequestHeader( name, value ) { this.headers[ name ] = value; }
+        getResponseHeader( name ) { return /^content-type$/i.test( name ) ? 'application/json' : null; }
+        getAllResponseHeaders() { return 'Content-Type: application/json'; }
+        abort() {}
+        send( body ) {
+            requests.push( { url: this.url, method: this.method, headers: { ...this.headers },
+                             contentType: this.headers[ 'Content-Type' ] || null, body: body === undefined ? null : body,
+                             answer: ( status, text ) => {
+                                 Object.assign( this, { status, statusText: status === 200 ? 'OK' : 'Error', responseText: text } );
+                                 this.onload();
+                             } } );
+        }
+    };
 
     window.explayoutsI18n = globalThis.explayoutsI18n = I18N;
     window.explayoutsBase = globalThis.explayoutsBase = () => '/admin/explayouts_ui_api';
@@ -125,11 +162,13 @@ function page( variant, options = {} ) {
     };
     const body = document.querySelector( '.collection-items .body' );
     const view = { model, el: body, $el: jQuery( body ) };
-    jQuery( body ).data( '_view', view );
-    if ( options.nativeView ) body._view = view;
+    // the app keeps a view on its element: until 1.3.29 as jQuery data, now as el.ngl_view
+    if ( variant === 'old' ) jQuery( body ).data( '_view', view );
+    else body.ngl_view = view;
 
     window.Core = {
-        $: options.noDomLayer ? undefined : jQuery,
+        $: variant === 'old' ? jQuery : dom,
+        ui: variant === 'old' ? undefined : ui,
         g: { config: { get: ( key ) => ( key === 'csrf_token' ? 'csrf-123' : undefined ) } }
     };
     window.alert = ( text ) => seen.alerts.push( text );
@@ -170,7 +209,8 @@ function snapshot() {
     const m = modal();
     if ( !m ) return null;
     return {
-        html: m.querySelector( '.modal-content' ).innerHTML,
+        // Core.ui.dialog gives the title an id for aria-labelledby (the dialog's name)
+        html: m.querySelector( '.modal-content' ).innerHTML.replace( / id="ngl-dialog-title-\d+"/, '' ),
         search: m.querySelector( '.exp-cb-search input' ).value,
         classes: m.className,
         display: m.style.display,
@@ -431,60 +471,11 @@ test( 'Closing the dialog gives the focus back to where it was', async () => {
     }
 } );
 
-test( 'Without the app\'s DOM layer the dialog sends the same requests with fetch', async () => {
-    // The 1.3.29 requests, as reference
-    const reference = await differential( async ( p, record ) => {
-        click( document.querySelector( '.add-items' ) );
-        record( 'get', takeRequests() );
-        await answer( 200, VALUES );
-        await settle();
-        modal().querySelectorAll( '.js-cb-select' )[ 0 ].checked = true;
-        click( modal().querySelector( '.exp-cb-apply' ) );
-        record( 'post', takeRequests() );
-        await answer( 200, {} );
-        await settle();
-    } );
-    const expected = Object.fromEntries( reference.new.log );
-
-    const calls = [];
-    const realFetch = window.fetch;
-    window.fetch = ( url, init ) => {
-        calls.push( { url, method: init.method, headers: init.headers, body: init.body === undefined ? null : init.body,
-                      credentials: init.credentials } );
-        const json = calls.length === 1 ? VALUES : {};
-        return Promise.resolve( new Response( JSON.stringify( json ), { status: 200, headers: { 'Content-Type': 'application/json' } } ) );
-    };
-    const p = page( 'new', { noDomLayer: true, nativeView: true } );
-    try {
-        click( document.querySelector( '.add-items' ) );
-        await wait( 10 );
-        await settle();
-        assert.equal( modal().querySelectorAll( '.js-cb-select' ).length, 3 );
-        modal().querySelectorAll( '.js-cb-select' )[ 0 ].checked = true;
-        click( modal().querySelector( '.exp-cb-apply' ) );
-        await wait( 10 );
-        await settle();
-        assert.equal( p.seen.fetchResults, 1 );
-    } finally {
-        p.close();
-        window.fetch = realFetch;
-    }
-    assert.equal( calls.length, 2 );
-    for ( const [ call, ref ] of [ [ calls[ 0 ], expected.get[ 0 ] ], [ calls[ 1 ], expected.post[ 0 ] ] ] ) {
-        assert.equal( call.url, ref.url );
-        assert.equal( call.method, ref.method );
-        assert.equal( call.body, ref.body );
-        assert.equal( call.credentials, 'same-origin' );
-        for ( const name of [ 'Accept', 'Content-Type', 'X-CSRF-Token' ] )
-            assert.equal( call.headers[ name ], ref.headers[ name ], name );
-        // jQuery's XHR transport (stood in for here) adds it to every request of the same site
-        assert.equal( call.headers[ 'X-Requested-With' ], 'XMLHttpRequest' );
-    }
-} );
-
 test( 'The dialog code does not use jQuery or Bootstrap JS', () => {
     const code = newDialog().replace( /\/\/.*$/gm, '' );
-    assert.doesNotMatch( code, /jQuery|\.modal\(|\$\(\s*['"<]/ );
-    // the only call through the app's DOM layer: the Backbone view the app keeps on an element, and its requests
-    assert.equal( ( code.match( /\$\(/g ) || [] ).length, 1 );
+    assert.doesNotMatch( code, /jQuery|\.modal\(|\$\(/ );
+    // through the app: its requests (Core.$.ajax) and its dialogs (Core.ui.dialog); the view an element has, as el.ngl_view
+    assert.deepEqual( code.match( /Core\.[\w$]+(\.\w+)?/g ).filter( ( x, i, all ) => all.indexOf( x ) === i ).sort(),
+                      [ 'Core.$.ajax', 'Core.g', 'Core.g.config', 'Core.ui.dialog' ] );
+    assert.match( code, /el\.ngl_view/ );
 } );

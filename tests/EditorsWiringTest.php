@@ -38,6 +38,22 @@ class EditorsWiringTest extends TestCase
         $this->assertStringContainsString( "<link rel=\"stylesheet\" href=\"{'stylesheets/explayouts-tiptap.css'|ezdesign('no')}\">", $tpl );
     }
 
+    /** The editor runs without jQuery: the page loads neither jQuery nor jQuery UI (ezjscore's ezjsc::jquery, ezjsc::jqueryUI). */
+    public function testThePageLoadsNoJQuery()
+    {
+        $tpl = self::read( 'design/standard/templates/explayouts_ui_api/app.tpl' );
+        $this->assertStringNotContainsString( 'ezscript(', $tpl );
+        $this->assertStringNotContainsString( 'ezjsc::', $tpl );
+        $this->assertDoesNotMatchRegularExpression( '~<script[^>]+jquery~i', $tpl );
+        // every script of the page is one of the editor's own (or one configured in [App] Javascripts)
+        preg_match_all( '~<script[^>]*\ssrc="([^"]+)"~', $tpl, $m );
+        $this->assertSame( array( "{'javascript/explayouts-app-head.js'|ezdesign('no')}", 'https://maps.googleapis.com/maps/api/js?key={$google_maps_api_key|urlencode()}&loading=async&callback=initMap',
+                                  '{$javascript|wash()}', "{'javascript/explayouts-tiptap.js'|ezdesign('no')}", "{'javascript/netgen-layouts.js'|ezdesign('no')}",
+                                  "{'javascript/explayouts-mobile.js'|ezdesign('no')}", "{'javascript/explayouts-app.js'|ezdesign('no')}" ), $m[1] );
+        $bundle = self::read( 'design/standard/javascript/netgen-layouts.js' );
+        $this->assertStringNotContainsString( 't.exports=window.jQuery', $bundle, 'module jquery is the DOM layer' );
+    }
+
     public function testNothingLoadsTheOldEditors()
     {
         foreach ( array( 'design/standard/templates/explayouts_ui_api/app.tpl', 'design/standard/javascript/explayouts-mobile.js' ) as $path )

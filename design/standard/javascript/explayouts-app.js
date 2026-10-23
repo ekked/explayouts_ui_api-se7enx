@@ -1,8 +1,9 @@
 /* The layout editor's page (explayouts_ui_api/app.tpl), second part: a blocking script after the cancel link and the
    tags of the deferred bundles, where the inline scripts of app.tpl stood until 1.3.22, so it runs before the app
-   bundle as they did. It reads the globals javascript/explayouts-app-head.js set. In order: the Cancel link, the
-   header dropdowns, dragging block types into a zone, the form token and the return after publish/discard on every
-   write request, and the content browser dialog of collections and browse fields. */
+   bundle as they did. It reads the globals javascript/explayouts-app-head.js set. In order: the Cancel link, the form
+   token and the return after publish/discard on every write request, and the content browser dialog of collections
+   and browse fields. The dropdown menus and dragging block types into a zone are the app's own (Core.ui.dropdown,
+   its drag and drop). */
 if (!window.explayoutsAppReady) {
 window.explayoutsAppReady = true;
 
@@ -50,87 +51,6 @@ window.explayoutsAppReady = true;
         new MutationObserver(function(){ placeCancel(); }).observe(app, { childList: true, subtree: true });
     }
     setTimeout(placeCancel, 1000);
-})();
-
-document.addEventListener('click', function(e) {
-    var toggle = e.target.closest('.dropdown-toggle');
-    if (toggle) {
-        e.preventDefault();
-        e.stopPropagation();
-        var dropdown = toggle.closest('.dropdown');
-        if (dropdown) {
-            var wasOpen = dropdown.classList.contains('open');
-            document.querySelectorAll('.app-header .dropdown.open').forEach(function(d) { d.classList.remove('open'); });
-            if (!wasOpen) dropdown.classList.add('open');
-        }
-        return;
-    }
-    var openDropdown = document.querySelector('.app-header .dropdown.open');
-    if (openDropdown && !openDropdown.contains(e.target)) {
-        openDropdown.classList.remove('open');
-    }
-}, true);
-
-(function(){
-    function definitionFromClass(el) {
-        var m = el.className.match(/icn-([a-zA-Z0-9_-]+)/);
-        return m ? m[1] : '';
-    }
-    function initButtons(root) {
-        root.querySelectorAll('.add-block-btn').forEach(function(btn){
-            if (btn.draggable) return;
-            btn.draggable = true;
-            btn.dataset.definition = definitionFromClass(btn);
-        });
-    }
-    var app = document.getElementById('app');
-    if (app) {
-        new MutationObserver(function(mutations){
-            mutations.forEach(function(mutation){
-                if (mutation.type !== 'childList') return;
-                mutation.addedNodes.forEach(function(node){
-                    if (node.nodeType === 1) initButtons(node);
-                });
-            });
-        }).observe(app, { childList: true, subtree: true });
-    }
-    initButtons(document);
-
-    document.addEventListener('dragstart', function(e){
-        var btn = e.target.closest('.add-block-btn');
-        if (!btn) return;
-        document.body.classList.add('is-dragging');
-        e.dataTransfer.setData('text/plain', btn.dataset.definition);
-        e.dataTransfer.setData('definition', btn.dataset.definition);
-    }, true);
-
-    document.addEventListener('dragend', function(e){
-        document.body.classList.remove('is-dragging');
-    }, true);
-
-    document.addEventListener('dragover', function(e){
-        if (e.target.closest('[data-zone]')) e.preventDefault();
-    }, true);
-
-    document.addEventListener('drop', function(e){
-        var zone = e.target.closest('[data-zone]');
-        if (!zone) return;
-        e.preventDefault();
-        var definition = e.dataTransfer.getData('definition') || e.dataTransfer.getData('text/plain');
-        if (!definition) return;
-        var layoutId = (window.location.hash.match(/#layout\/(\d+)/) || [])[1];
-        var zoneIdentifier = zone.getAttribute('data-zone');
-        if (!layoutId || !zoneIdentifier) return;
-        var body = new URLSearchParams();
-        body.append('layout_id', layoutId);
-        body.append('zone_identifier', zoneIdentifier);
-        body.append('definition_identifier', definition);
-        var tokenMeta = document.querySelector('meta[name="ezxform-token"]');
-        if (tokenMeta) body.append('ezxform_token', tokenMeta.content);
-        fetch(explayoutsBase() + '/app/api/eng/blocks', { method: 'POST', body: body, credentials: 'same-origin' }).then(function(r){
-            if (r.ok) window.location.reload();
-        });
-    }, true);
 })();
 
 (function(){
@@ -230,8 +150,8 @@ document.addEventListener('click', function(e) {
 })();
 
 // The content browser dialog of collections ("+ Add items") and of browse fields. Plain DOM: no jQuery and no
-// Bootstrap JS. The dialog shows and hides itself as Bootstrap 3's modal did (classes modal-open, in, the backdrop,
-// Escape, a click beside the dialog, focus kept inside), so the stylesheets apply as before.
+// Bootstrap JS. It is one of the app's dialogs (Core.ui.dialog): shown and hidden as Bootstrap 3's modal did (classes
+// modal-open, in, the backdrop, Escape, a click beside the dialog), the focus kept inside and given back on closing.
 (function(){
     var initInterval = setInterval(function(){
         var Core = window.Core;
@@ -245,34 +165,17 @@ document.addEventListener('click', function(e) {
     // Text for HTML, as text or as an attribute value (quotes too); every text of the dialog goes in through it.
     function esc(v) { return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
 
-    // The Backbone view of an element of the app. The app keeps it in its DOM layer's data store
-    // ($el.data('_view'), module ./extended/backbone_override), which only that layer can read; an app that keeps it
-    // on the element itself (el._view) needs no DOM layer here.
+    // The Backbone view of an element of the app: the app keeps it on the element (el.ngl_view).
     function viewOf(el) {
-        var $ = Core.$;
-        if (el && el._view) return el._view;
-        if (!el || typeof $ !== 'function') return null;
-        try { return $(el).data('_view') || null; } catch (e) { return null; }
+        return el && el.ngl_view || null;
     }
 
-    // Requests go through the app's own request function while it has one (Core.$.ajax): its progress bar, its
-    // dialogs for a lost session or a missing permission and its count of running writes (the warning on leaving
-    // the editor) see them, as before. Without it, fetch with the headers that function sent.
+    // Requests go through the app's own request function (Core.$.ajax, its DOM layer): its progress bar, its dialogs
+    // for a lost session or a missing permission and its count of running writes (the warning on leaving the
+    // editor) see them.
     function request(o) {
-        var $ = Core.$;
-        if ($ && typeof $.ajax === 'function') {
-            return new Promise(function(resolve, reject){
-                $.ajax(o).then(function(data){ resolve(data); }, function(xhr){ reject(xhr); });
-            });
-        }
-        var headers = { 'Accept': o.dataType === 'json' ? 'application/json, text/javascript, */*; q=0.01' : '*/*',
-                        'X-Requested-With': 'XMLHttpRequest' };
-        if (o.contentType) headers['Content-Type'] = o.contentType;
-        // An empty token is left out, so that the form token of the page goes in (the fetch wrapper above)
-        Object.keys(o.headers || {}).forEach(function(name){ if (o.headers[name]) headers[name] = o.headers[name]; });
-        return fetch(o.url, { method: o.method || 'GET', headers: headers, body: o.data, credentials: 'same-origin' }).then(function(r){
-            if (!r.ok) throw r;
-            return o.dataType === 'json' ? r.json() : r.text();
+        return new Promise(function(resolve, reject){
+            Core.$.ajax(o).then(function(data){ resolve(data); }, function(xhr){ reject(xhr); });
         });
     }
 
@@ -336,133 +239,10 @@ document.addEventListener('click', function(e) {
         modal.addEventListener('change', function(e){
             if (e.target.closest('.exp-cb-search input')) state.search = e.target.value;
         });
-        dialogBehaviour();
     }
 
-    // Showing and hiding, as Bootstrap 3.4's modal: the backdrop fades in (150 ms), then the dialog (300 ms) and
-    // it takes the focus; Escape and a click beside the dialog close it; the focus does not leave it while it is
-    // open. On closing, the focus goes back to where it was before the dialog opened.
-    var TRANSITION = 300, BACKDROP_TRANSITION = 150;
-    var shown = false, step = 0, backdrop = null, opener = null, bodyPad = null, bodyOverflowing = false, scrollbarWidth = 0;
-    var ignoreBackdropClick = false, pressInDialog = false;
-
-    function afterTransition(el, ms, fn) {
-        var done = false, timer;
-        function finish(e) {
-            if (done || (e && e.target !== el)) return;
-            done = true;
-            clearTimeout(timer);
-            el.removeEventListener('transitionend', finish);
-            fn();
-        }
-        el.addEventListener('transitionend', finish);
-        timer = setTimeout(finish, ms);
-    }
-
-    function onEscape(e) { if (e.which === 27 || e.keyCode === 27) hideModal(); }
-    function onResize() { adjustDialog(); }
-    function enforceFocus(e) {
-        if (document !== e.target && modal !== e.target && !modal.contains(e.target)) modal.focus();
-    }
-
-    function dialogBehaviour() {
-        var dialog = find('.modal-dialog');
-        // A press that starts in the dialog and ends beside it is no click beside it
-        dialog.addEventListener('mousedown', function(){ if (shown) pressInDialog = true; });
-        modal.addEventListener('mouseup', function(e){
-            if (pressInDialog && e.target === modal) ignoreBackdropClick = true;
-            pressInDialog = false;
-        });
-        modal.addEventListener('click', function(e){
-            if (!shown || !backdrop) return;
-            if (ignoreBackdropClick) { ignoreBackdropClick = false; return; }
-            if (e.target === e.currentTarget) hideModal();
-        });
-    }
-
-    function measureScrollbar() {
-        var probe = document.createElement('div');
-        probe.className = 'modal-scrollbar-measure';
-        document.body.appendChild(probe);
-        var width = probe.offsetWidth - probe.clientWidth;
-        document.body.removeChild(probe);
-        return width;
-    }
-
-    function adjustDialog() {
-        var modalOverflowing = modal.scrollHeight > document.documentElement.clientHeight;
-        modal.style.paddingLeft = !bodyOverflowing && modalOverflowing ? scrollbarWidth + 'px' : '';
-        modal.style.paddingRight = bodyOverflowing && !modalOverflowing ? scrollbarWidth + 'px' : '';
-    }
-
-    function showModal() {
-        if (shown) return;
-        shown = true;
-        var current = ++step;
-        opener = document.activeElement;
-        bodyOverflowing = document.body.clientWidth < window.innerWidth;
-        scrollbarWidth = measureScrollbar();
-        if (bodyPad === null) bodyPad = document.body.style.paddingRight || '';
-        if (bodyOverflowing) {
-            var pad = parseInt(window.getComputedStyle(document.body).paddingRight || 0, 10) || 0;
-            document.body.style.paddingRight = (pad + scrollbarWidth) + 'px';
-        }
-        document.body.classList.add('modal-open');
-        modal.addEventListener('keydown', onEscape);
-        window.addEventListener('resize', onResize);
-
-        if (backdrop) backdrop.remove();
-        backdrop = document.createElement('div');
-        backdrop.className = 'modal-backdrop fade';
-        document.body.appendChild(backdrop);
-        void backdrop.offsetWidth;
-        backdrop.classList.add('in');
-        afterTransition(backdrop, BACKDROP_TRANSITION, function(){
-            if (current !== step) return;
-            modal.style.display = 'block';
-            modal.scrollTop = 0;
-            adjustDialog();
-            void modal.offsetWidth;
-            modal.classList.add('in');
-            document.removeEventListener('focusin', enforceFocus);
-            document.addEventListener('focusin', enforceFocus);
-            afterTransition(find('.modal-dialog'), TRANSITION, function(){
-                if (current === step) modal.focus();
-            });
-        });
-    }
-
-    function hideModal() {
-        if (!shown) return;
-        shown = false;
-        var current = ++step;
-        modal.removeEventListener('keydown', onEscape);
-        window.removeEventListener('resize', onResize);
-        document.removeEventListener('focusin', enforceFocus);
-        modal.classList.remove('in');
-        afterTransition(modal, TRANSITION, function(){
-            if (current !== step) return;
-            modal.style.display = 'none';
-            var gone = backdrop;
-            if (gone) gone.classList.remove('in');
-            function done() {
-                if (gone) gone.remove();
-                if (backdrop === gone) backdrop = null;
-                if (current !== step) return;
-                document.body.classList.remove('modal-open');
-                modal.style.paddingLeft = '';
-                modal.style.paddingRight = '';
-                document.body.style.paddingRight = bodyPad || '';
-                bodyPad = null;
-                var active = document.activeElement;
-                if (opener && opener !== document.body && document.contains(opener) && (!active || active === document.body || modal.contains(active))) {
-                    try { opener.focus(); } catch (e) {}
-                }
-                opener = null;
-            }
-            if (gone) afterTransition(gone, BACKDROP_TRANSITION, done); else done();
-        });
-    }
+    function showModal() { Core.ui.dialog.show(modal); }
+    function hideModal() { Core.ui.dialog.hide(modal); }
 
     function renderBreadcrumbs() {
         var html = '';

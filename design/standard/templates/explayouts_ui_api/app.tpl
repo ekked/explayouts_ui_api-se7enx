@@ -76,10 +76,7 @@
         <script src="{$javascript|wash()}" defer></script>
     {/foreach}
 
-    {* The app bundle uses the page's jQuery (ezjscore's), so it loads first: it
-       runs before the deferred scripts below. jQuery UI is not needed: the
-       editor's drag and drop is its own. *}
-    {ezscript( array( 'ezjsc::jquery' ) )}
+    {* No jQuery and no jQuery UI: the app bundle brings its own DOM layer and drag and drop. *}
     {* The rich text and code editors (Tiptap, built from src/editors/): window.CKEDITOR and window.ace with
        the calls the app bundle makes of them. Before the bundle: it registers CKEDITOR listeners on load. *}
     <script src="{'javascript/explayouts-tiptap.js'|ezdesign('no')}" defer></script>
@@ -87,8 +84,8 @@
     {* After the app bundle: it waits for the app to draw itself before it
        touches anything. *}
     <script src="{'javascript/explayouts-mobile.js'|ezdesign('no')}" defer></script>
-    {* Blocking, after the tags of the deferred bundles, so it runs before them: the Cancel link, the header
-       dropdowns, dragging block types, the form token on writes and the content browser dialog. *}
+    {* Blocking, after the tags of the deferred bundles, so it runs before them: the Cancel link, the form token on
+       writes and the content browser dialog. *}
     <script src="{'javascript/explayouts-app.js'|ezdesign('no')}"></script>
 </body>
 </html>
