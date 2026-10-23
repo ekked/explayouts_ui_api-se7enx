@@ -172,9 +172,10 @@ What differs from the original is versioned in `src/app-patches/`:
 - `manifest.json`: the original (version, commit, download address, sha256 of the bundle, of each of its 157
   modules and of the skeleton around them) and each patched module with what was changed and in which commit;
 - `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
-- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (45 of 157: the interface
-  texts, the page's jQuery 4 and jQuery UI instead of the built-in jQuery 2.2.4 / jQuery UI 1.10.4, the view type
-  select, the plain DOM code in place of jQuery plugins, and the others listed in the manifest).
+- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (48 of 157: the interface
+  texts, the page's jQuery 4 instead of the built-in jQuery 2.2.4, the editor's own drag and drop on Pointer Events in
+  place of jQuery UI (modules 135-138; 134 and 139 are empty), the view type select, the plain DOM code in place of
+  jQuery plugins, and the others listed in the manifest).
 
 Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar run
 without jQuery plugins. Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its locales

@@ -171,7 +171,8 @@
   "header": "header.js",
   "header_changes": [
     "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
-    "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+    "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+    "The page's jQuery UI is no longer used: the drag and drop is the editor's own (modules 135-138)"
   ],
   "modules": [
     {
@@ -388,6 +389,15 @@
       ]
     },
     {
+      "id": 72,
+      "name": "./bm_collection_items",
+      "file": "modules/072-bm-collection-items.js",
+      "original_sha256": "5e4c8856d93f7e514b91b326352d9edde1e67130d6a2898553a4b6a669154062",
+      "changes": [
+        "Items of a collection sorted with the editor's own sortable, draggable and droppable (require(135), require(138)) instead of jQuery UI; a manual item of a dynamic collection dragged and not dropped on a slot (or Escape) leaves no preview copies behind"
+      ]
+    },
+    {
       "id": 73,
       "name": "./bm_collection_overflown_items",
       "file": "modules/073-bm-collection-overflown-items.js",
@@ -403,6 +413,24 @@
       "original_sha256": "f7059ff9dacce2291186a26c91471c13063cffa057b82c2582cb885e7ef4fd00",
       "changes": [
         "The date and time field is the browser's own (input type=datetime-local) instead of eonasdan-bootstrap-datetimepicker: the hidden .datetime-formatted gets the same value as before (YYYY-MM-DDTHH:mm, local time), a value there is shown in local time as before, the clear button and date-entered stay. Not expui's Exp.datepicker: it fills separate year/month/day/hour/minute fields, the field here is one value."
+      ]
+    },
+    {
+      "id": 75,
+      "name": "../dnd | ./dnd",
+      "file": "modules/075-dnd.js",
+      "original_sha256": "ebde06a2867924acfe94e6531e7af8bb478ef8f26c68303564434f7e82559e66",
+      "changes": [
+        "Drag and drop through the editor's own sortable (require(138), plain DOM) instead of jQuery UI: the same lists and options (customScrollParent becomes scrollParent, the patched _mouseDrag goes), cancel(sender) instead of .sortable(\"cancel\"), the drop target and the copied/cancelled marks on ui.drag instead of the item or jQuery data, the linked-zone selector valid CSS (:not(.linked_zone)), no refreshPositions (geometry is read live)"
+      ]
+    },
+    {
+      "id": 76,
+      "name": "./draggable",
+      "file": "modules/076-draggable.js",
+      "original_sha256": "0e84a5760239f08548e92bfd557e0a1a18f45144cf97ca47f958f958e44292d1",
+      "changes": [
+        "Takes the plain ui of the editor's sortable: the item as an element (wrapped for its view), the copied mark on ui.drag"
       ]
     },
     {
@@ -526,7 +554,8 @@
       "file": "modules/134-core.js",
       "original_sha256": "e2789281f1bb6bb0ac9d9f9c941cdf8546cf86a7c8ef2c58fd3aae4bcda5b46d",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "Empty: jQuery UI's core is not needed any more, the drag and drop is the editor's own (modules 135-138); jQuery UI is no longer loaded"
       ]
     },
     {
@@ -535,7 +564,8 @@
       "file": "modules/135-draggable.js",
       "original_sha256": "b18ea5ca8d1d563358ca88efff1aca85e546a5dcb6f99b8d9452ddec12988206",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "The editor's own draggables and droppables on Pointer Events (mouse, touch, pen), plain DOM, in place of jQuery UI's draggable/droppable: what ./bm_collection_items uses (axis, clone helper, handle, zIndex, appendTo; accept, activeClass, hoverClass, tolerance; start/stop/over/out/drop), Escape cancels; activeClass/hoverClass work again (jQuery UI 1.14 had dropped them without $.uiBackCompat)"
       ]
     },
     {
@@ -544,7 +574,8 @@
       "file": "modules/136-jquery-ui-droppable.js",
       "original_sha256": "ea4ae4339d1f5a7b8be0e163b2afffc6b4ca7db2baf1d2f2be1803cf2c61d4f7",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "Hands out droppable() of ./draggable (module 135) in place of jQuery UI's droppable"
       ]
     },
     {
@@ -553,7 +584,8 @@
       "file": "modules/137-mouse.js",
       "original_sha256": "1a6e7a86790ceb08947a3b21769dd8fd24039e019123d7d101856b41815fc7b4",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "The gesture of the editor's drag and drop in place of jQuery UI's mouse widget: Pointer Events for mouse, touch and pen with jQuery UI's delay/distance, one press at a time (innermost list first), Escape and pointercancel cancel, no text selection or native drag on a mouse press, the click ending a drag swallowed (never a keyboard click); auto-scroll near the scroll parent's edge while the pointer stays there, as in admin4's sub items drag"
       ]
     },
     {
@@ -562,7 +594,8 @@
       "file": "modules/138-jquery-ui-sortable.js",
       "original_sha256": "7a44e5981bf606238201d6650af6a1f995958539050b8c25640c33ada3db4723",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "The editor's own sortable lists on Pointer Events, plain DOM, in place of jQuery UI's sortable: what ./dnd and ./bm_collection_items use, with jQuery UI's callbacks in jQuery UI's order (checked against 1.14.2 in tests/js/dnd.test.mjs); ui holds elements and a per-drag object; cancel(list) also after the drop; Escape cancels; geometry read live; scrollParent replaces the customScrollParent patch"
       ]
     },
     {
@@ -571,7 +604,8 @@
       "file": "modules/139-widget.js",
       "original_sha256": "3cb32a70f34be9c5aa067f6f7669ef34362bcf85cd625fff3d72ba3e8d8f9a83",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "Empty: jQuery UI's widget factory is not needed any more (modules 135-138)"
       ]
     },
     {

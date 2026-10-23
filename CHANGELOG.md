@@ -25,6 +25,16 @@
   value as before (`YYYY-MM-DDTHH:mm`, local time). The date in the draft dialog is formatted with
   `Intl.DateTimeFormat`: the same text as before in English, German, French and Italian, in other languages the
   browser's conventions.
+- **Drag and drop without jQuery UI, by mouse, finger and pen.** Moving blocks in and between zones, block types
+  from the toolbar into a zone, blocks onto the trash and the items of a collection now run on the editor's own drag
+  and drop (Pointer Events), and the page no longer loads jQuery UI. What is dragged where, and what is saved, is as
+  before: zones of a shared layout and zones that do not take a block type still refuse it, the trash still asks.
+  New: **Escape** cancels a drag and puts everything back; touch and pen work on every screen size (until now only
+  below 820px, through a bridge in `explayouts-mobile.js` that is gone); a finger on a grip (a block's header, an
+  item's handle, a block type) moves it, a finger anywhere else scrolls the page; the canvas keeps scrolling while
+  the pointer stays near its edge. In a dynamic collection the slots light up again while an item is dragged (the
+  classes `sorting` and `highlight`, which jQuery UI 1.14 no longer set), and an item dropped on no slot leaves no
+  preview behind.
 
 ## 1.3.29
 
