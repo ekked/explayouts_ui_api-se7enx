@@ -175,6 +175,15 @@
   ],
   "modules": [
     {
+      "id": 12,
+      "name": "./core_base | ../core_base",
+      "file": "modules/012-core-base.js",
+      "original_sha256": "4ea71fe1dcdb6c2461bbbaa482baafdbd433229e68e044c6454cece1ed687b9f",
+      "changes": [
+        "Core.ui: the plain DOM helpers, dialog, collapse and dropdown that ./extended/jquery_override builds from bootstrap/js/transition, modal, collapse and dropdown (handed on as jQuery.ngl_ui); ./lib/jquery/* add their helpers to it."
+      ]
+    },
+    {
       "id": 14,
       "name": "./environments/default | ../../environments/default | ../environments/default",
       "file": "modules/014-environments-default.js",
@@ -200,7 +209,8 @@
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "ajax_submit sends a form without a method attribute as POST (the API takes form saves as POST only; jQuery's default GET also hid the save from the warning on leaving).",
-        "browser_tabs makes WAI-ARIA tabs: tablist, tab and tabpanel roles, aria-selected with a roving tabindex, one selected tab, arrow keys, Home and End (3df5f1e)"
+        "browser_tabs makes WAI-ARIA tabs: tablist, tab and tabpanel roles, aria-selected with a roving tabindex, one selected tab, arrow keys, Home and End (3df5f1e)",
+        "Bootstrap 3's jQuery plugins are gone: bootstrap/js/transition, dropdown, modal and collapse are plain DOM code now and are put together here as Core.ui (jQuery.ngl_ui for ./core_base). $.fn.modal stays as a bridge to Core.ui.dialog for scripts outside the bundle (explayouts-app.js) until they call Core.ui.dialog. The dropup placement moved to bootstrap/js/dropdown, xeditable to ./lib/jquery/video_thumb_fetcher, dependable_select to ./lib/jquery/master_slave_selects; the jQuery core extensions (toJSON, html/text, ajax_submit, closest_view, browser_tabs ...) stay."
       ]
     },
     {
@@ -213,6 +223,24 @@
       ]
     },
     {
+      "id": 21,
+      "name": "./extended/view | ../extended/view",
+      "file": "modules/021-extended-view.js",
+      "original_sha256": "8596dd63d6369211f90dff2f16ecef4e4acc6d4a2862a124610b90fb8268d772",
+      "changes": [
+        "A view is also found from its element without jQuery: el.ngl_view, beside the jQuery data _view (for the inline switches, .xeditable)."
+      ]
+    },
+    {
+      "id": 22,
+      "name": "./helpers",
+      "file": "modules/022-helpers.js",
+      "original_sha256": "f3555f58b76cba0f5348ffeca15f6b7994b954aec319b689004d8cc0780da876",
+      "changes": [
+        "The template helper date formats through the module moment, now Intl.DateTimeFormat instead of Moment.js (same output for en, en-US, en-GB, de, de-DE, de-AT, fr, it; other locales follow the browser's CLDR conventions)."
+      ]
+    },
+    {
       "id": 23,
       "name": "./init",
       "file": "modules/023-init.js",
@@ -222,7 +250,35 @@
         "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "A refused change (403 with reason access_denied) is reported as not allowed, not as a session timeout (68bcdae)",
-        "Leaving the editor warns only with unsaved changes: while a request other than GET runs, within a second of typing in a block's inline text (saved 500 ms after the last key), or while a form of the sidebar or of a dialog differs from what was last loaded or saved (Core.has_unsaved_changes, Core.form_state). The original warned on every leave that was not publish, discard or close."
+        "Leaving the editor warns only with unsaved changes: while a request other than GET runs, within a second of typing in a block's inline text (saved 500 ms after the last key), or while a form of the sidebar or of a dialog differs from what was last loaded or saved (Core.has_unsaved_changes, Core.form_state). The original warned on every leave that was not publish, discard or close.",
+        "reinitialize_plugins calls the plain helpers on Core.ui (xeditable, dependable_select, master_slave_selects, video_thumb_fetcher, view_types, bm_tooltip) with the view's elements instead of the jQuery plugins."
+      ]
+    },
+    {
+      "id": 24,
+      "name": "./lib/jquery/bm_tooltip",
+      "file": "modules/024-lib-jquery-bm-tooltip.js",
+      "original_sha256": "ac88a2959fa117bf5949329ca833ee63afab1dd3d5391422e0e34ce26dcd233b",
+      "changes": [
+        "bm_tooltip is a plain function, Core.ui.bm_tooltip( elements ), instead of the jQuery plugin $.fn.bm_tooltip."
+      ]
+    },
+    {
+      "id": 25,
+      "name": "./lib/jquery/master_slave_selects",
+      "file": "modules/025-lib-jquery-master-slave-selects.js",
+      "original_sha256": "f3e453e85e5f1f14f2b8e88dfa3b7a16b82d69ae34bbd2e945d4c5f96be6c785",
+      "changes": [
+        "master_slave_selects and dependable_select (from ./extended/jquery_override) are plain functions on Core.ui with native change handlers; the option chosen in the slave select gets a native change event (bubbling, as jQuery's trigger did); show/hide with Core.ui.show/hide."
+      ]
+    },
+    {
+      "id": 26,
+      "name": "./lib/jquery/video_thumb_fetcher",
+      "file": "modules/026-lib-jquery-video-thumb-fetcher.js",
+      "original_sha256": "6465daab53f691131743ce98d9e610b8926c3e449bb17d0fd4ae573aa4e8f9b5",
+      "changes": [
+        "video_thumb_fetcher is a plain function, Core.ui.video_thumb_fetcher( elements ), the Vimeo thumbnail fetched with fetch(); the inline switches .xeditable (Core.ui.xeditable and their click handlers, from ./extended/jquery_override) are here, without jQuery."
       ]
     },
     {
@@ -232,7 +288,8 @@
       "original_sha256": "c4a34ae8c29f090ab79b9c7d1c7ffd0ea5b75782212da62cc1787adcdc49c909",
       "changes": [
         "View type select: a change saves the form; the select carries js-skip-on-change, so only the master select of a master/slave pair was saved (6977a49)",
-        "The master select of a master/slave pair (a list's View type) is saved too when the new view type leaves no item view type to choose (list_zigzag, list_accordion, a view type of your own): the form is submitted once the item view type select has been updated; when that already saved the form, the second submit sends the same values and is skipped"
+        "The master select of a master/slave pair (a list's View type) is saved too when the new view type leaves no item view type to choose (list_zigzag, list_accordion, a view type of your own): the form is submitted once the item view type select has been updated; when that already saved the form, the second submit sends the same values and is skipped",
+        "view_types is a plain function, Core.ui.view_types( elements ), with a native change handler; the form is submitted with a native submit event (the form view handles it; nothing is ever sent the browser's way)."
       ]
     },
     {
@@ -264,13 +321,23 @@
       ]
     },
     {
+      "id": 52,
+      "name": "./router",
+      "file": "modules/052-router.js",
+      "original_sha256": "dc8806a6daaba4b4589d8f00fa5993c6bd8f6a7991a0f08094564bc464fefae9",
+      "changes": [
+        "Before a route, every open dialog is closed through Core.ui.dialog instead of Bootstrap's $.fn.modal."
+      ]
+    },
+    {
       "id": 54,
       "name": "./templates",
       "file": "modules/054-templates.js",
       "original_sha256": "1615c33b79e1b0e3748a0243b58824372a1160b53d2d830397b7828ffa21db33",
       "changes": [
         "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
-        "The palette's and the left toolbar's icon buttons have accessible names, type=button and aria-hidden icons; the palette's list is a named, focusable region (3df5f1e)"
+        "The palette's and the left toolbar's icon buttons have accessible names, type=button and aria-hidden icons; the palette's list is a named, focusable region (3df5f1e)",
+        "The dropdown toggles say they are closed (aria-expanded=false) until opened; they said true."
       ]
     },
     {
@@ -330,6 +397,15 @@
       ]
     },
     {
+      "id": 74,
+      "name": "./views/datetime_picker",
+      "file": "modules/074-views-datetime-picker.js",
+      "original_sha256": "f7059ff9dacce2291186a26c91471c13063cffa057b82c2582cb885e7ef4fd00",
+      "changes": [
+        "The date and time field is the browser's own (input type=datetime-local) instead of eonasdan-bootstrap-datetimepicker: the hidden .datetime-formatted gets the same value as before (YYYY-MM-DDTHH:mm, local time), a value there is shown in local time as before, the clear button and date-entered stay. Not expui's Exp.datepicker: it fills separate year/month/day/hour/minute fields, the field here is one value."
+      ]
+    },
+    {
       "id": 77,
       "name": "./form",
       "file": "modules/077-form.js",
@@ -345,7 +421,8 @@
       "original_sha256": "9e5ed14faad7ad6f8772a4c95a39b7e31e56a18fc968ce2532053d479ba354aa",
       "changes": [
         "Page title suffix and the HTTP method of create_new_draft (d3d3488)",
-        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "Moment.js is no longer required (the header did not use it)."
       ]
     },
     {
@@ -372,7 +449,8 @@
       "file": "modules/087-modal.js",
       "original_sha256": "2d7d5e8acb68fa7f4f6297d00bc91ff3766d7cba7addb7eebc20ef9c8279c526",
       "changes": [
-        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)"
+        "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
+        "Opens and closes through Core.ui.dialog instead of Bootstrap's $.fn.modal; what hidden.bs.modal did (before_close, remove, close) is its on_hidden callback."
       ]
     },
     {
@@ -399,7 +477,17 @@
       "file": "modules/098-bootstrap-js-collapse.js",
       "original_sha256": "783e86efb5d00da411d74e4d573ef3068cfd9768c200e6847c8f7eb887b0c386",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "Plain DOM code instead of Bootstrap 3.4.1's collapse.js: same markup, classes, transition and aria-expanded; DOM events show/shown/hide/hidden.bs.collapse."
+      ]
+    },
+    {
+      "id": 99,
+      "name": "bootstrap/js/dropdown",
+      "file": "modules/099-bootstrap-js-dropdown.js",
+      "original_sha256": "04734e409970b1927ab7d45219cf9a039446bb9132aa34329b9a1a1350e108e5",
+      "changes": [
+        "Plain DOM code instead of Bootstrap 3.4.1's dropdown.js: same markup, classes and keys, aria-expanded kept right; the dropup placement of ./extended/jquery_override; DOM events show/shown/hide/hidden.bs.dropdown."
       ]
     },
     {
@@ -408,7 +496,17 @@
       "file": "modules/100-bootstrap-js-modal.js",
       "original_sha256": "712c53e9258303b392de0e79b90801c8ce828aca3072dc3fb6ed002d3471ba08",
       "changes": [
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "Plain DOM code instead of Bootstrap 3.4.1's modal.js: same markup, classes, backdrop, body class, scrollbar padding, Escape and backdrop click; in addition role=dialog, aria-modal, aria-hidden, Tab kept in the open dialog and the focus given back on close; on_shown/on_hidden callbacks and DOM events show/shown/hide/hidden.bs.modal."
+      ]
+    },
+    {
+      "id": 101,
+      "name": "bootstrap/js/transition",
+      "file": "modules/101-bootstrap-js-transition.js",
+      "original_sha256": "d6cfa2842919c4f962a8b3655cf7c0480267235e40d28857682fd2cff7c1091f",
+      "changes": [
+        "Plain DOM helpers (Core.ui) instead of Bootstrap 3.4.1's transition.js: transition end with a time limit, jQuery-like show/hide with a duration, visibility, tabbable elements, events."
       ]
     },
     {
@@ -418,7 +516,8 @@
       "original_sha256": "c4b0613b9a47103a328c3cbc1c4b74f71e9f46ae9ecebcd42b727a117feef8f0",
       "changes": [
         "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
-        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+        "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
+        "eonasdan-bootstrap-datetimepicker is no longer part of the bundle (./views/datetime_picker uses input type=datetime-local); the module is empty."
       ]
     },
     {
@@ -482,6 +581,24 @@
       "original_sha256": "582262f6de312d91bacb6cf8ae1e4eded62e001deee34d551b1ab626245e1f2a",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)"
+      ]
+    },
+    {
+      "id": 141,
+      "name": "moment/min/locales.min",
+      "file": "modules/141-moment-min-locales-min.js",
+      "original_sha256": "4b8004097d17c54328c2a5f0394327836005bf8493b1d4f59727d46e158d6e9c",
+      "changes": [
+        "Moment.js's locales are no longer part of the bundle; the module is empty."
+      ]
+    },
+    {
+      "id": 142,
+      "name": "moment | ../moment",
+      "file": "modules/142-moment.js",
+      "original_sha256": "657ac6d698dc9da7642de1b00dd208f7a6334d7006bfc00ba77347af033591d7",
+      "changes": [
+        "Moment.js is no longer part of the bundle: a small date formatter on Intl.DateTimeFormat (format, parse) for the template helper date."
       ]
     }
   ]

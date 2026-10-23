@@ -5,6 +5,9 @@ The application bundle of the Netgen Layouts editor, built from netgen/layouts-u
 https://github.com/netgen-layouts/layouts-ui), and patched for Exponential:
 it uses the page's jQuery and jQuery UI (ezjscore), translates its texts through
 nglT(), and its rich text and code editors are provided by explayouts-tiptap.js.
+Bootstrap's JavaScript, Moment.js and eonasdan-bootstrap-datetimepicker are no
+longer part of it; dialogs, panels, menus and dates are plain DOM code of this
+extension.
 Netgen Layouts UI is licensed under the MIT License, reproduced below. The rest
 of this extension is licensed under the GNU General Public License v2.0 (or any
 later version), see LICENSE.md.

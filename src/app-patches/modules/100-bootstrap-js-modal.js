@@ -1,1 +1,234 @@
-function(e,t,n){(a=>{function s(e,t){this.options=t,this.$body=a(document.body),this.$element=a(e),this.$dialog=this.$element.find(".modal-dialog"),this.$backdrop=null,this.isShown=null,this.originalBodyPad=null,this.scrollbarWidth=0,this.ignoreBackdropClick=!1,this.fixedContent=".navbar-fixed-top, .navbar-fixed-bottom",this.options.remote&&this.$element.find(".modal-content").load(this.options.remote,(function(f,c){return f.bind(c)})(function(){this.$element.trigger("loaded.bs.modal")},this))}function o(i,r){return this.each(function(){var e=a(this),t=e.data("bs.modal"),n=a.extend({},s.DEFAULTS,e.data(),"object"==typeof i&&i);t||e.data("bs.modal",t=new s(this,n)),"string"==typeof i?t[i](r):n.show&&t.show(r)})}s.VERSION="3.4.1",s.TRANSITION_DURATION=300,s.BACKDROP_TRANSITION_DURATION=150,s.DEFAULTS={backdrop:!0,keyboard:!0,show:!0},s.prototype.toggle=function(e){return this.isShown?this.hide():this.show(e)},s.prototype.show=function(n){var i=this,e=a.Event("show.bs.modal",{relatedTarget:n});this.$element.trigger(e),this.isShown||e.isDefaultPrevented()||(this.isShown=!0,this.checkScrollbar(),this.setScrollbar(),this.$body.addClass("modal-open"),this.escape(),this.resize(),this.$element.on("click.dismiss.bs.modal",'[data-dismiss="modal"]',(function(f,c){return f.bind(c)})(this.hide,this)),this.$dialog.on("mousedown.dismiss.bs.modal",function(){i.$element.one("mouseup.dismiss.bs.modal",function(e){a(e.target).is(i.$element)&&(i.ignoreBackdropClick=!0)})}),this.backdrop(function(){var e=a.support.transition&&i.$element.hasClass("fade"),t=(i.$element.parent().length||i.$element.appendTo(i.$body),i.$element.show().scrollTop(0),i.adjustDialog(),e&&i.$element[0].offsetWidth,i.$element.addClass("in"),i.enforceFocus(),a.Event("shown.bs.modal",{relatedTarget:n}));e?i.$dialog.one("bsTransitionEnd",function(){i.$element.trigger("focus").trigger(t)}).emulateTransitionEnd(s.TRANSITION_DURATION):i.$element.trigger("focus").trigger(t)}))},s.prototype.hide=function(e){e&&e.preventDefault(),e=a.Event("hide.bs.modal"),this.$element.trigger(e),this.isShown&&!e.isDefaultPrevented()&&(this.isShown=!1,this.escape(),this.resize(),a(document).off("focusin.bs.modal"),this.$element.removeClass("in").off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"),this.$dialog.off("mousedown.dismiss.bs.modal"),a.support.transition&&this.$element.hasClass("fade")?this.$element.one("bsTransitionEnd",(function(f,c){return f.bind(c)})(this.hideModal,this)).emulateTransitionEnd(s.TRANSITION_DURATION):this.hideModal())},s.prototype.enforceFocus=function(){a(document).off("focusin.bs.modal").on("focusin.bs.modal",(function(f,c){return f.bind(c)})(function(e){document===e.target||this.$element[0]===e.target||this.$element.has(e.target).length||this.$element.trigger("focus")},this))},s.prototype.escape=function(){this.isShown&&this.options.keyboard?this.$element.on("keydown.dismiss.bs.modal",(function(f,c){return f.bind(c)})(function(e){27==e.which&&this.hide()},this)):this.isShown||this.$element.off("keydown.dismiss.bs.modal")},s.prototype.resize=function(){this.isShown?a(window).on("resize.bs.modal",(function(f,c){return f.bind(c)})(this.handleUpdate,this)):a(window).off("resize.bs.modal")},s.prototype.hideModal=function(){var e=this;this.$element.hide(),this.backdrop(function(){e.$body.removeClass("modal-open"),e.resetAdjustments(),e.resetScrollbar(),e.$element.trigger("hidden.bs.modal")})},s.prototype.removeBackdrop=function(){this.$backdrop&&this.$backdrop.remove(),this.$backdrop=null},s.prototype.backdrop=function(e){var t,n=this,i=this.$element.hasClass("fade")?"fade":"";this.isShown&&this.options.backdrop?(t=a.support.transition&&i,this.$backdrop=a(document.createElement("div")).addClass("modal-backdrop "+i).appendTo(this.$body),this.$element.on("click.dismiss.bs.modal",(function(f,c){return f.bind(c)})(function(e){this.ignoreBackdropClick?this.ignoreBackdropClick=!1:e.target===e.currentTarget&&("static"==this.options.backdrop?this.$element[0].focus():this.hide())},this)),t&&this.$backdrop[0].offsetWidth,this.$backdrop.addClass("in"),e&&(t?this.$backdrop.one("bsTransitionEnd",e).emulateTransitionEnd(s.BACKDROP_TRANSITION_DURATION):e())):!this.isShown&&this.$backdrop?(this.$backdrop.removeClass("in"),i=function(){n.removeBackdrop(),e&&e()},a.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one("bsTransitionEnd",i).emulateTransitionEnd(s.BACKDROP_TRANSITION_DURATION):i()):e&&e()},s.prototype.handleUpdate=function(){this.adjustDialog()},s.prototype.adjustDialog=function(){var e=this.$element[0].scrollHeight>document.documentElement.clientHeight;this.$element.css({paddingLeft:!this.bodyIsOverflowing&&e?this.scrollbarWidth:"",paddingRight:this.bodyIsOverflowing&&!e?this.scrollbarWidth:""})},s.prototype.resetAdjustments=function(){this.$element.css({paddingLeft:"",paddingRight:""})},s.prototype.checkScrollbar=function(){var e,t=window.innerWidth;t||(t=(e=document.documentElement.getBoundingClientRect()).right-Math.abs(e.left)),this.bodyIsOverflowing=document.body.clientWidth<t,this.scrollbarWidth=this.measureScrollbar()},s.prototype.setScrollbar=function(){var e=parseInt(this.$body.css("padding-right")||0,10),r=(this.originalBodyPad=document.body.style.paddingRight||"",this.scrollbarWidth);this.bodyIsOverflowing&&(this.$body.css("padding-right",e+r),a(this.fixedContent).each(function(e,t){var n=t.style.paddingRight,i=a(t).css("padding-right");a(t).data("padding-right",n).css("padding-right",parseFloat(i)+r+"px")}))},s.prototype.resetScrollbar=function(){this.$body.css("padding-right",this.originalBodyPad),a(this.fixedContent).each(function(e,t){var n=a(t).data("padding-right");a(t).removeData("padding-right"),t.style.paddingRight=n||""})},s.prototype.measureScrollbar=function(){var e=document.createElement("div"),t=(e.className="modal-scrollbar-measure",this.$body.append(e),e.offsetWidth-e.clientWidth);return this.$body[0].removeChild(e),t};var e=a.fn.modal;a.fn.modal=o,a.fn.modal.Constructor=s,a.fn.modal.noConflict=function(){return a.fn.modal=e,this},a(document).on("click.bs.modal.data-api",'[data-toggle="modal"]',function(e){var t=a(this),n=t.attr("href"),i=t.attr("data-target")||n&&n.replace(/.*(?=#[^\s]+$)/,""),r=a(document).find(i),i=r.data("bs.modal")?"toggle":a.extend({remote:!/#/.test(n)&&n},r.data(),t.data());t.is("a")&&e.preventDefault(),r.one("show.bs.modal",function(e){e.isDefaultPrevented()||r.one("hidden.bs.modal",function(){t.is(":visible")&&t.trigger("focus")})}),o.call(r,i,this)})})(jQuery)}
+function(e,t,n){
+/*
+ * The dialogs of the layout editor without jQuery, in place of Bootstrap 3.4.1's modal.js (the module keeps its id
+ * and name). Same markup and classes as Bootstrap's (the CSS stays): .modal shown with display block and .in, a
+ * .modal-backdrop, modal-open on the body, the scrollbar padding; Escape closes unless keyboard is false, a click on
+ * the backdrop closes unless backdrop is "static", a [data-dismiss="modal"] inside closes. On top of Bootstrap's:
+ * role="dialog" and aria-modal while open, aria-hidden while closed, Tab and Shift+Tab stay in the open dialog, and
+ * on close the focus goes back to where it was. Instead of the jQuery events, options.on_shown and
+ * options.on_hidden are called; DOM events show.bs.modal (cancelable), shown.bs.modal, hide.bs.modal (cancelable)
+ * and hidden.bs.modal are fired on the element as well.
+ *
+ * The module exports function( ui ), called by ./extended/jquery_override with the helpers of
+ * bootstrap/js/transition; it returns { show( el, options ), hide( el ), is_shown( el ) }.
+ *
+ * @copyright Copyright CJW Network and Exponential Foundation. All rights reserved.
+ * @license GPL-2.0-or-later
+ */
+t.exports = function( ui ) {
+    var TRANSITION = 300, BACKDROP_TRANSITION = 150, FIXED_CONTENT = '.navbar-fixed-top, .navbar-fixed-bottom',
+        states = new WeakMap(), open = [];
+
+    function top() {
+        return open.length ? open[ open.length - 1 ] : null;
+    }
+
+    function measure_scrollbar() {
+        var probe = document.createElement( 'div' ), width;
+        probe.className = 'modal-scrollbar-measure';
+        document.body.appendChild( probe );
+        width = probe.offsetWidth - probe.clientWidth;
+        document.body.removeChild( probe );
+        return width;
+    }
+
+    function set_scrollbar( s ) {
+        var width = window.innerWidth, rect;
+        if ( !width ) {
+            rect = document.documentElement.getBoundingClientRect();
+            width = rect.right - Math.abs( rect.left );
+        }
+        s.body_overflowing = document.body.clientWidth < width;
+        s.scrollbar_width = measure_scrollbar();
+        s.body_padding = document.body.style.paddingRight || '';
+        if ( !s.body_overflowing ) return;
+        var padding = parseInt( getComputedStyle( document.body ).paddingRight || 0, 10 ) || 0;
+        document.body.style.paddingRight = ( padding + s.scrollbar_width ) + 'px';
+        s.fixed = Array.prototype.map.call( document.querySelectorAll( FIXED_CONTENT ), function( el ) {
+            var kept = el.style.paddingRight;
+            el.style.paddingRight = ( ( parseFloat( getComputedStyle( el ).paddingRight ) || 0 ) + s.scrollbar_width ) + 'px';
+            return [ el, kept ];
+        } );
+    }
+
+    function reset_scrollbar( s ) {
+        document.body.style.paddingRight = s.body_padding;
+        ( s.fixed || [] ).forEach( function( pair ) {
+            pair[ 0 ].style.paddingRight = pair[ 1 ] || '';
+        } );
+        s.fixed = null;
+    }
+
+    function adjust( el, s ) {
+        var overflowing = el.scrollHeight > document.documentElement.clientHeight;
+        el.style.paddingLeft = !s.body_overflowing && overflowing ? s.scrollbar_width + 'px' : '';
+        el.style.paddingRight = s.body_overflowing && !overflowing ? s.scrollbar_width + 'px' : '';
+    }
+
+    function backdrop( el, s, done ) {
+        var fade = el.classList.contains( 'fade' );
+        if ( s.shown && s.options.backdrop ) {
+            s.backdrop = document.createElement( 'div' );
+            s.backdrop.className = 'modal-backdrop' + ( fade ? ' fade' : '' );
+            document.body.appendChild( s.backdrop );
+            if ( fade ) ui.reflow( s.backdrop );
+            s.backdrop.classList.add( 'in' );
+            if ( fade ) ui.transition_end( s.backdrop, BACKDROP_TRANSITION, done );
+            else done();
+        } else if ( !s.shown && s.backdrop ) {
+            var remove = function() {
+                if ( s.backdrop && s.backdrop.parentNode ) s.backdrop.parentNode.removeChild( s.backdrop );
+                s.backdrop = null;
+                done();
+            };
+            s.backdrop.classList.remove( 'in' );
+            if ( fade ) ui.transition_end( s.backdrop, BACKDROP_TRANSITION, remove );
+            else remove();
+        } else {
+            done();
+        }
+    }
+
+    // the focus stays in the dialog on top: Bootstrap's enforceFocus, and Tab wraps around
+    document.addEventListener( 'focusin', function( ev ) {
+        var el = top();
+        if ( el && ev.target !== document && ev.target !== el && !el.contains( ev.target ) ) el.focus();
+    } );
+
+    function on_keydown( ev ) {
+        var el = ev.currentTarget, s = states.get( el );
+        if ( !s || !s.shown ) return;
+        if ( ( ev.key === 'Escape' || ev.keyCode === 27 ) && s.options.keyboard ) {
+            hide( el );
+            return;
+        }
+        if ( ( ev.key !== 'Tab' && ev.keyCode !== 9 ) || el !== top() ) return;
+        var tabbables = ui.tabbables( el ), first = tabbables[ 0 ], last = tabbables[ tabbables.length - 1 ],
+            active = document.activeElement;
+        if ( !tabbables.length ) {
+            ev.preventDefault();
+            el.focus();
+        } else if ( ev.shiftKey && ( active === first || active === el || !el.contains( active ) ) ) {
+            ev.preventDefault();
+            last.focus();
+        } else if ( !ev.shiftKey && ( active === last || !el.contains( active ) ) ) {
+            ev.preventDefault();
+            first.focus();
+        }
+    }
+
+    function on_click( ev ) {
+        var el = ev.currentTarget, s = states.get( el ), dismiss;
+        if ( !s || !s.shown ) return;
+        dismiss = ev.target.closest && ev.target.closest( '[data-dismiss="modal"]' );
+        if ( dismiss && el.contains( dismiss ) ) {
+            ev.preventDefault();
+            hide( el );
+            return;
+        }
+        if ( !s.options.backdrop ) return;
+        if ( s.ignore_backdrop_click ) {
+            s.ignore_backdrop_click = false;
+        } else if ( ev.target === el ) {
+            if ( s.options.backdrop === 'static' ) el.focus();
+            else hide( el );
+        }
+    }
+
+    // a press in the dialog let go over the backdrop is no click on the backdrop
+    function on_mousedown( ev ) {
+        var el = ev.currentTarget, s = states.get( el ), dialog = el.querySelector( '.modal-dialog' );
+        if ( !s || !dialog || !dialog.contains( ev.target ) ) return;
+        el.addEventListener( 'mouseup', function up( up_ev ) {
+            el.removeEventListener( 'mouseup', up );
+            if ( up_ev.target === el ) s.ignore_backdrop_click = true;
+        } );
+    }
+
+    function show( el, options ) {
+        var s = states.get( el );
+        if ( !s ) states.set( el, s = {} );
+        if ( s.shown ) return;
+        if ( !ui.fire( el, 'show.bs.modal' ) ) return;
+        s.options = Object.assign( { backdrop: true, keyboard: true }, options || {} );
+        s.shown = true;
+        s.ignore_backdrop_click = false;
+        s.return_focus = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
+        set_scrollbar( s );
+        document.body.classList.add( 'modal-open' );
+        el.addEventListener( 'keydown', on_keydown );
+        el.addEventListener( 'click', on_click );
+        el.addEventListener( 'mousedown', on_mousedown );
+        s.on_resize = function() {
+            adjust( el, s );
+        };
+        window.addEventListener( 'resize', s.on_resize );
+        open.push( el );
+        backdrop( el, s, function() {
+            var fade = el.classList.contains( 'fade' ), dialog = el.querySelector( '.modal-dialog' ), title;
+            if ( !el.parentNode ) document.body.appendChild( el );
+            if ( !el.hasAttribute( 'role' ) ) el.setAttribute( 'role', 'dialog' );
+            if ( !el.hasAttribute( 'aria-labelledby' ) && !el.hasAttribute( 'aria-label' ) && ( title = el.querySelector( '.modal-title' ) ) ) {
+                if ( !title.id ) title.id = 'ngl-dialog-title-' + ( ++show.count );
+                el.setAttribute( 'aria-labelledby', title.id );
+            }
+            el.setAttribute( 'aria-modal', 'true' );
+            el.removeAttribute( 'aria-hidden' );
+            el.style.display = 'block';
+            el.scrollTop = 0;
+            adjust( el, s );
+            if ( fade ) ui.reflow( el );
+            el.classList.add( 'in' );
+            var shown = function() {
+                if ( !s.shown ) return;
+                el.focus();
+                ui.fire( el, 'shown.bs.modal' );
+                if ( s.options.on_shown ) s.options.on_shown();
+            };
+            if ( fade && dialog ) ui.transition_end( dialog, TRANSITION, shown );
+            else shown();
+        } );
+    }
+    show.count = 0;
+
+    function hide( el ) {
+        var s = states.get( el );
+        if ( !s || !s.shown ) return;
+        if ( !ui.fire( el, 'hide.bs.modal' ) ) return;
+        s.shown = false;
+        el.removeEventListener( 'keydown', on_keydown );
+        el.removeEventListener( 'click', on_click );
+        el.removeEventListener( 'mousedown', on_mousedown );
+        window.removeEventListener( 'resize', s.on_resize );
+        open.splice( open.indexOf( el ), 1 );
+        el.classList.remove( 'in' );
+        var hidden = function() {
+            el.style.display = 'none';
+            el.setAttribute( 'aria-hidden', 'true' );
+            el.removeAttribute( 'aria-modal' );
+            backdrop( el, s, function() {
+                var next = top(), back = s.return_focus;
+                if ( !next ) document.body.classList.remove( 'modal-open' );
+                el.style.paddingLeft = el.style.paddingRight = '';
+                reset_scrollbar( s );
+                ui.fire( el, 'hidden.bs.modal' );
+                if ( s.options.on_hidden ) s.options.on_hidden();
+                // back to where the focus was, unless that is gone or outside the dialog still open
+                if ( back && back.isConnected && ( !next || next.contains( back ) ) && typeof back.focus === 'function' ) back.focus();
+                else if ( next ) next.focus();
+            } );
+        };
+        if ( el.classList.contains( 'fade' ) ) ui.transition_end( el, TRANSITION, hidden );
+        else hidden();
+    }
+
+    return {
+        show: show,
+        hide: hide,
+        is_shown: function( el ) {
+            var s = states.get( el );
+            return !!( s && s.shown );
+        }
+    };
+};
+}

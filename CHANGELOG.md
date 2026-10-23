@@ -11,6 +11,20 @@
   listeners added with `addEventListener` now get as well. Its requests still go through the app's request
   function while the app has one (progress bar, session timeout dialog, warning on leaving), else through `fetch`
   with the same headers. `explayouts-app-head.js` and the Tiptap glue (`src/editors/`) did not use jQuery.
+- **Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar
+  run without jQuery plugins.** Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its
+  locales and eonasdan-bootstrap-datetimepicker are no longer in the editor bundle (932 KB → 621 KB, gzipped
+  254 KB → 175 KB); small DOM code of this package takes their place (`Core.ui`, see README) with the same markup,
+  classes, transitions and keys, so the stylesheets apply as before.
+- Dialogs say what they are (`role="dialog"`, `aria-modal`, named by their title, `aria-hidden` when closed), Tab and
+  Shift+Tab stay inside an open dialog, and on closing the focus goes back to where it was.
+- The Options, Items and Advanced panels of the sidebar fold and unfold on a click again: under jQuery 4 Bootstrap's
+  collapse stopped with an error on the first click.
+- Dropdown menus: the toggles say they are closed (`aria-expanded="false"`) until opened.
+- The date and time field of a block form is the browser's own (`<input type="datetime-local">`); it sends the same
+  value as before (`YYYY-MM-DDTHH:mm`, local time). The date in the draft dialog is formatted with
+  `Intl.DateTimeFormat`: the same text as before in English, German, French and Italian, in other languages the
+  browser's conventions.
 
 ## 1.3.29
 

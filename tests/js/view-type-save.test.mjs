@@ -27,6 +27,7 @@ const parsed = parseBundle( readFileSync( resolve( root, 'design/standard/javasc
 
 let jQuery;
 let Form;
+let core;
 let saves;
 
 function idOf( name ) {
@@ -52,7 +53,8 @@ before( async () => {
     const { jQueryFactory } = await import( 'jquery/factory' );
     jQuery = jQueryFactory( window );
     window.jQuery = globalThis.jQuery = jQuery;
-    const core = { $: jQuery, View: { extend: ( proto ) => proto } };
+    // Core.ui: the helpers of bootstrap/js/transition, which ./lib/jquery/* add to
+    core = { $: jQuery, View: { extend: ( proto ) => proto }, ui: load( idOf( 'bootstrap/js/transition' ), {} ) };
     load( idOf( './lib/jquery/master_slave_selects' ), { '../../core': core } );
     load( idOf( './lib/jquery/view_types' ), { '../../core': core } );
     Form = load( idOf( './form' ), { '../core': core, underscore: { debounce: ( fn ) => fn } } );
@@ -86,11 +88,14 @@ beforeEach( () => {
     } );
     // events: { "submit form": "$submit", change: "$submit", ... } of the form view
     jQuery( '.layouts-form' ).on( 'submit', 'form', ( e ) => view.$submit( e ) ).on( 'change', ( e ) => view.$submit( e ) );
-    jQuery( '.master-slave-selects .master' ).master_slave_selects();
+    core.ui.master_slave_selects( document.querySelectorAll( '.master-slave-selects .master' ) );
 } );
 
+/** As the user does: a new value, then the browser's change event. */
 function choose( id, value ) {
-    jQuery( '#' + id ).val( value ).trigger( 'change' );
+    const select = document.getElementById( id );
+    select.value = value;
+    select.dispatchEvent( new Event( 'change', { bubbles: true } ) );
 }
 
 test( 'a plain view type select saves its change', async () => {

@@ -1,0 +1,1 @@
+function(e,t,n){var i=e("./core_namespace"),r=e("./extended/utils"),a=e("./extended/jquery_override"),s=e("underscore"),o=e("./extended/backbone_override");o.$=a,o.LocalStorage=e("backbone.localstorage").LocalStorage,s.extend(i,{utils:r,_:s,$:a,ui:a.ngl_ui,Backbone:o,g:{},default_context:function(){}},o.Events),t.exports=i}
