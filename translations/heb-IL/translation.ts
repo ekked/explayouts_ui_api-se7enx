@@ -939,6 +939,58 @@
         <source>Block types</source>
         <translation>סוגי בלוקים</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>רווח או Enter מרימים, מקשי החצים מזיזים, רווח או Enter משחררים, Escape מבטל. Alt עם חץ למעלה או למטה מזיז מקום אחד מיד.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>הזזת הבלוק %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>הוספת הבלוק %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>הזזת הפריט %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name הורם. אזור %zone, מיקום %position מתוך %count. מקשי החצים להזזה, רווח לשחרור, Escape לביטול.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name הורם. מיקום %position מתוך %count. מקשי החצים להזזה, רווח לשחרור, Escape לביטול.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>אזור %zone, מיקום %position מתוך %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>מיקום %position מתוך %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name שוחרר באזור %zone במיקום %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name שוחרר במיקום %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>ההזזה בוטלה.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>אזור זה אינו מקבל את %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>אף אזור אינו מקבל את %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

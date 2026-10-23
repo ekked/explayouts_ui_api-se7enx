@@ -174,7 +174,7 @@ What differs from the original is versioned in `src/app-patches/`:
 - `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
 - `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (48 of 157: the interface
   texts, the page's jQuery 4 instead of the built-in jQuery 2.2.4, the editor's own drag and drop on Pointer Events in
-  place of jQuery UI (modules 135-138; 134 and 139 are empty), the view type select, the plain DOM code in place of
+  place of jQuery UI (modules 135-138; 134 is empty) and its keyboard mode (module 139), the view type select, the plain DOM code in place of
   jQuery plugins, and the others listed in the manifest).
 
 Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar run
@@ -206,6 +206,34 @@ patches, without needing the original (with `LAYOUTS_UI_BUNDLE=<original bundle>
 To change the bundle: `--extract` the module if it is not patched yet, edit its file, note the change in
 `manifest.json` and run `apply.mjs`. The bundle is linked without a version query: after a deploy, a hard reload makes a
 browser fetch it again.
+
+Moving with the keyboard
+------------------------
+
+Everything the pointer moves can be moved with the keyboard as well (module 139, on the sortable lists and
+draggables of modules 135 and 138). The grips are buttons: the handle in a block's header ("Move block ..."), a block
+type of the toolbar ("Add block ..."), a collection item's handle ("Move item ...", manual items, and in a dynamic
+collection the items pinned to a slot); a hint tells screen readers the keys.
+
+| Key | |
+|---|---|
+| Space, Enter | pick up; picked up: drop where it is |
+| Arrow up, Arrow down | one place up or down; at the first or last place of a zone into the zone before or after it |
+| Home, End | the first or last place in the zone (in the collection) |
+| Escape | puts everything back; so does leaving the grip (Tab, a click elsewhere) |
+| Alt+Arrow up, Alt+Arrow down | (not picked up) one place at once, saved at once |
+
+What is picked up moves itself (outlined) and keeps the focus. Zones the pointer cannot drop into are skipped and
+said: linked zones, zones that do not take the block type or are inherited, a container block's placeholders for a
+container block. A block type picked up from the toolbar starts at the first place of the first zone that takes it;
+dropped, it becomes a new block there, and Escape returns it to the toolbar (and the focus to the toolbar's button).
+Each step is said in one polite live region ("Zone Main, position 2 of 3."), with the texts of `spa_strings.tpl`.
+After a drop the grip of the block or item keeps the focus, also when the editor draws it again. The page scrolls to
+follow, smoothly unless the browser asks for reduced motion. *Set position* in an item's menu stays as it was.
+
+A keyboard move runs through the same callbacks as a pointer drag (`keyStart`, `keyMove`, `keyDrop`, `keyCancel` of a
+sortable list; `keyStart`, `keyOver`, `keyDrop` of a draggable), so it is saved with the same requests.
+`tests/js/keyboard-move.test.mjs` makes each move both ways and compares the calls.
 
 Leaving the editor
 ------------------

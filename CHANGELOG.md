@@ -35,6 +35,14 @@
   the pointer stays near its edge. In a dynamic collection the slots light up again while an item is dragged (the
   classes `sorting` and `highlight`, which jQuery UI 1.14 no longer set), and an item dropped on no slot leaves no
   preview behind.
+- **Blocks, block types and collection items move with the keyboard.** Their grips are buttons now (a block's
+  handle, a block type of the toolbar, an item's handle): Space or Enter picks up, the arrow keys move one place (at
+  a zone's edge into the zone before or after it), Home and End go to the first and last place, Space or Enter
+  drops, Escape or leaving the grip puts everything back; Alt with the up or down arrow moves one place at once.
+  Linked zones and zones that do not take the block are skipped, as with the pointer. A block type goes from the
+  toolbar into the first zone that takes it and becomes a new block where it is dropped. Each step is said by screen
+  readers in one polite live region, translated in every language of the package; after a drop the grip keeps the
+  focus. A keyboard move is saved exactly as one made with the pointer.
 
 ## 1.3.29
 

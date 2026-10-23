@@ -940,6 +940,58 @@
         <source>Block types</source>
         <translation>ngogh Segh</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Space pagh Enter: yIwoH. naQ leQmey: yIvIHmoH. Space pagh Enter: yIlan. Escape: yIqIl. Alt naQ leQ: wa&apos; Daq yIvIHmoH.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>ngogh %name yIvIHmoH</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>ngogh %name yIchel</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Doch %name yIvIHmoH</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name woHlu&apos;ta&apos;. mIch %zone, Daq %position/%count. naQ leQmey yIlo&apos; vIHmoHmeH, Space yIlo&apos; lanmeH, Escape yIlo&apos; qIlmeH.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name woHlu&apos;ta&apos;. Daq %position/%count. naQ leQmey yIlo&apos; vIHmoHmeH, Space yIlo&apos; lanmeH, Escape yIlo&apos; qIlmeH.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>mIch %zone, Daq %position/%count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Daq %position/%count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name lanlu&apos;ta&apos; mIch %zone Daq %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name lanlu&apos;ta&apos; Daq %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>vIHmoHghach qIllu&apos;ta&apos;.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>%name lajQo&apos; mIchvam.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>%name lajbe&apos; pagh mIch.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

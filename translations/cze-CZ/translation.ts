@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Typy bloků</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Mezerník nebo Enter jej zvedne, šipky jej posunou, Mezerník nebo Enter jej pustí, Escape zruší. Alt se šipkou nahoru nebo dolů jej posune hned o jedno místo.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Přesunout blok %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Přidat blok %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Přesunout položku %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name zvednuto. Zóna %zone, pozice %position z %count. Šipkami přesunete, mezerníkem pustíte, klávesou Escape zrušíte.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name zvednuto. Pozice %position z %count. Šipkami přesunete, mezerníkem pustíte, klávesou Escape zrušíte.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Zóna %zone, pozice %position z %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Pozice %position z %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name puštěno do zóny %zone na pozici %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name puštěno na pozici %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Přesun zrušen.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Tato zóna nepřijímá %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Žádná zóna nepřijímá %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

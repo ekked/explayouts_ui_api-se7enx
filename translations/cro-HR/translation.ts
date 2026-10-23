@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Vrste blokova</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Razmaknica ili Enter podiže, strelice pomiču, Razmaknica ili Enter spušta, Escape odustaje. Alt sa strelicom gore ili dolje odmah pomiče za jedno mjesto.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Premjesti blok %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Dodaj blok %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Premjesti stavku %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name podignuto. Zona %zone, položaj %position od %count. Strelicama pomičete, razmaknicom spuštate, tipkom Escape odustajete.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name podignuto. Položaj %position od %count. Strelicama pomičete, razmaknicom spuštate, tipkom Escape odustajete.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Zona %zone, položaj %position od %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Položaj %position od %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name spušteno u zonu %zone na položaj %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name spušteno na položaj %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Premještanje otkazano.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Ova zona ne prihvaća %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Nijedna zona ne prihvaća %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Bloktypen</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Spatie of Enter pakt het op, de pijltoetsen verplaatsen het, Spatie of Enter zet het neer, Escape annuleert. Alt met pijl omhoog of omlaag verplaatst het meteen één plaats.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Blok %name verplaatsen</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Blok %name toevoegen</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Item %name verplaatsen</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name opgepakt. Zone %zone, positie %position van %count. Gebruik de pijltoetsen om te verplaatsen, Spatie om neer te zetten, Escape om te annuleren.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name opgepakt. Positie %position van %count. Gebruik de pijltoetsen om te verplaatsen, Spatie om neer te zetten, Escape om te annuleren.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Zone %zone, positie %position van %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Positie %position van %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name neergezet in zone %zone op positie %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name neergezet op positie %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Verplaatsen geannuleerd.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Deze zone accepteert %name niet.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Geen enkele zone accepteert %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

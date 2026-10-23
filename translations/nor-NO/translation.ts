@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Blokktyper</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Mellomrom eller Enter plukker det opp, piltastene flytter det, Mellomrom eller Enter slipper det, Escape avbryter. Alt med pil opp eller ned flytter det én plass med en gang.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Flytt blokken %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Legg til blokken %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Flytt elementet %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name plukket opp. Sone %zone, posisjon %position av %count. Bruk piltastene for å flytte, Mellomrom for å slippe, Escape for å avbryte.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name plukket opp. Posisjon %position av %count. Bruk piltastene for å flytte, Mellomrom for å slippe, Escape for å avbryte.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Sone %zone, posisjon %position av %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Posisjon %position av %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name sluppet i sone %zone på posisjon %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name sluppet på posisjon %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Flytting avbrutt.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Denne sonen godtar ikke %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Ingen sone godtar %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

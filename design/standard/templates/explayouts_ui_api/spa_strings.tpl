@@ -164,7 +164,20 @@
     "Code", "Code"|i18n( 'design/standard/explayouts_ui_api/spa' ),
     "This address cannot be used as a link.", "This address cannot be used as a link."|i18n( 'design/standard/explayouts_ui_api/spa' ),
     "Add a block", "Add a block"|i18n( 'design/standard/explayouts_ui_api/spa' ),
-    "Block types", "Block types"|i18n( 'design/standard/explayouts_ui_api/spa' )
+    "Block types", "Block types"|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.", "Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Move block %name", "Move block %name"|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Add block %name", "Add block %name"|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Move item %name", "Move item %name"|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.", "Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.", "Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Zone %zone, position %position of %count.", "Zone %zone, position %position of %count."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Position %position of %count.", "Position %position of %count."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Dropped %name in zone %zone at position %position.", "Dropped %name in zone %zone at position %position."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Dropped %name at position %position.", "Dropped %name at position %position."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Move cancelled.", "Move cancelled."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "This zone does not accept %name.", "This zone does not accept %name."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "No zone accepts %name.", "No zone accepts %name."|i18n( 'design/standard/explayouts_ui_api/spa' )
 )}
 <script type="application/json" id="explayouts-spa-i18n">{json_encode( $explayouts_spa_i18n )|explode( '<' )|implode( '\u003c' )|explode( '>' )|implode( '\u003e' )}</script>
 {undef $explayouts_spa_i18n}

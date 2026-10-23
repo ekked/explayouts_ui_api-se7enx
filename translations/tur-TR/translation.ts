@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Blok türleri</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Boşluk veya Enter onu alır, ok tuşları taşır, Boşluk veya Enter bırakır, Escape iptal eder. Alt ile yukarı veya aşağı ok onu hemen bir sıra taşır.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>%name bloğunu taşı</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>%name bloğunu ekle</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>%name öğesini taşı</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name alındı. Bölge %zone, konum %position / %count. Taşımak için ok tuşlarını, bırakmak için Boşluk tuşunu, iptal etmek için Escape tuşunu kullanın.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name alındı. Konum %position / %count. Taşımak için ok tuşlarını, bırakmak için Boşluk tuşunu, iptal etmek için Escape tuşunu kullanın.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Bölge %zone, konum %position / %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Konum %position / %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name, %zone bölgesinde %position konumuna bırakıldı.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name, %position konumuna bırakıldı.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Taşıma iptal edildi.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Bu bölge %name kabul etmiyor.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Hiçbir bölge %name kabul etmiyor.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

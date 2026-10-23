@@ -20,11 +20,17 @@ function(e,t,n){
  * editor's styles of a collection being sorted rely on them, as they did with the 1.10 the editor was built with).
  * Geometry is read when needed, not cached. Escape or a cancelled pointer ends a drag without a drop.
  *
+ * Keyboard moves (module 139, ./widget, told about each draggable when its grips are marked): a draggable's
+ * keyStart(), keyTargets(), keyOver( droppable element ) and keyDrop( droppable element or null ) run a drag without a
+ * pointer through the same callbacks (start, activate, drop on the droppable chosen, deactivate, stop), so a move by
+ * keyboard is saved exactly as one by pointer. The droppable chosen gets the hover classes without over/out (the
+ * caller's over callback previews the new order by hiding items, the focused one among them).
+ *
  * @copyright Copyright CJW Network and Exponential Foundation. All rights reserved.
  * @license GPL-2.0-or-later
  */
 "use strict";
-var m=e("./mouse"),draggables=new WeakMap,droppables=new WeakMap,drops=[],current=null;
+var m=e("./mouse"),kbd=e("./widget"),draggables=new WeakMap,droppables=new WeakMap,drops=[],current=null;
 
 function addClasses(el,c){if(c)c.split(/\s+/).forEach(function(x){x&&el.classList.add(x)})}
 function removeClasses(el,c){if(c)c.split(/\s+/).forEach(function(x){x&&el.classList.remove(x)})}
@@ -123,6 +129,7 @@ var G=Draggable.prototype;
 G._markHandles=function(){
     var h=this.options.handle;
     (h?Array.prototype.slice.call(this.element.querySelectorAll(h)):[this.element]).forEach(function(g){g.classList.add("ui-draggable-handle")});
+    if(kbd.draggable)kbd.draggable(this);
 };
 
 G._trigger=function(name,original){
@@ -218,6 +225,59 @@ G._clear=function(){
     }
     this.helper=null;
     if(current===this)current=null;
+};
+
+/* ---- keyboard (module 139) ---- */
+
+/** Picks the draggable up: start, then activate on the droppables in play. False if refused. */
+G.keyStart=function(){
+    if(this.helper||this.options.disabled||m.pressed())return!1;
+    var o=this.options,el=this.element,helper=o.helper==="clone"?el.cloneNode(!0):el;
+    if(helper!==el){
+        helper.removeAttribute("id");
+        helper.style.display="none";
+        if(!helper.isConnected)(o.appendTo==="parent"?el.parentNode:m.element(o.appendTo,el)).appendChild(helper);
+    }
+    this.helper=helper;
+    helper.classList.add("ui-draggable-dragging");
+    current=this;
+    this.keyboard=!0;
+    this.position=this.originalPosition=this.positionAbs={left:0,top:0};
+    if(o.zIndex&&helper!==el)helper.style.zIndex=o.zIndex;
+    if(!this._trigger("start",null)){this._clear();return!1}
+    this.active=inPlay(this);
+    this.active.forEach(function(d){d.isover=!1;d._activate(null,this)},this);
+    return!0;
+};
+
+/** The elements of the droppables in play, in document order. */
+G.keyTargets=function(){
+    return(this.active||[]).map(function(d){return d.element}).sort(function(a,b){return a.compareDocumentPosition(b)&4?-1:1});
+};
+
+/** Shows `target` (a droppable element in play) as the one the item would be dropped on. */
+G.keyOver=function(target){
+    (this.active||[]).forEach(function(d){
+        var on=d.element===target;
+        d.element.classList.toggle("ui-droppable-hover",on);
+        (on?addClasses:removeClasses)(d.element,d.options.hoverClass);
+    });
+};
+
+/** Drops on `target` (null: nowhere, as Escape), then deactivate and stop. */
+G.keyDrop=function(target){
+    if(!this.helper||!this.keyboard)return;
+    var active=this.active||[];
+    this.active=null;
+    this.keyboard=!1;
+    active.forEach(function(d){
+        if(target&&d.element===target)d._drop(null,this);
+        else{d.element.classList.remove("ui-droppable-hover");removeClasses(d.element,d.options.hoverClass)}
+        d.isover=!1;
+        d.rect=null;
+        d._deactivate(null,this);
+    },this);
+    if(this._trigger("stop",null))this._clear();
 };
 
 function make(Type,map){
