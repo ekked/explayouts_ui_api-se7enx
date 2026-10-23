@@ -978,7 +978,7 @@
         <translation>%name an Position %position abgelegt.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Verschieben abgebrochen.</translation>
     </message>
     <message>

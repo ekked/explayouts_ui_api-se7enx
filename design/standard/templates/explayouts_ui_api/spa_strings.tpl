@@ -175,7 +175,7 @@
     "Position %position of %count.", "Position %position of %count."|i18n( 'design/standard/explayouts_ui_api/spa' ),
     "Dropped %name in zone %zone at position %position.", "Dropped %name in zone %zone at position %position."|i18n( 'design/standard/explayouts_ui_api/spa' ),
     "Dropped %name at position %position.", "Dropped %name at position %position."|i18n( 'design/standard/explayouts_ui_api/spa' ),
-    "Move cancelled.", "Move cancelled."|i18n( 'design/standard/explayouts_ui_api/spa' ),
+    "Move canceled.", "Move canceled."|i18n( 'design/standard/explayouts_ui_api/spa' ),
     "This zone does not accept %name.", "This zone does not accept %name."|i18n( 'design/standard/explayouts_ui_api/spa' ),
     "No zone accepts %name.", "No zone accepts %name."|i18n( 'design/standard/explayouts_ui_api/spa' )
 )}

@@ -978,7 +978,7 @@
         <translation>%name در موقعیت %position رها شد.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>جابه‌جایی لغو شد.</translation>
     </message>
     <message>

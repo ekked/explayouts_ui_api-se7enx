@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Aina za bloku</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Space au Enter huichukua, vitufe vya mishale huisogeza, Space au Enter huiweka, Escape hughairi. Alt pamoja na mshale wa juu au wa chini huisogeza nafasi moja mara moja.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Sogeza bloku %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Ongeza bloku %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Sogeza kipengee %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name imechukuliwa. Kanda %zone, nafasi %position kati ya %count. Tumia vitufe vya mishale kusogeza, Space kuweka, Escape kughairi.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name imechukuliwa. Nafasi %position kati ya %count. Tumia vitufe vya mishale kusogeza, Space kuweka, Escape kughairi.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Kanda %zone, nafasi %position kati ya %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Nafasi %position kati ya %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name imewekwa katika kanda %zone kwenye nafasi %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name imewekwa kwenye nafasi %position.</translation>
+    </message>
+    <message>
+        <source>Move canceled.</source>
+        <translation>Usogezaji umeghairiwa.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Kanda hii haikubali %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Hakuna kanda inayokubali %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

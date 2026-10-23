@@ -203,7 +203,7 @@ function moveTo(list,index){
     var g=grab;
     moving++;
     try{g.inst.keyMove(list,index)}finally{moving--}
-    if(!g.inst.drag){endGrab();say(T("Move cancelled."));return!1}
+    if(!g.inst.drag){endGrab();say(T("Move canceled."));return!1}
     focusGrip(g.grip);
     reveal(g.item);
     return!0;
@@ -394,7 +394,7 @@ function cancel(stay){
         if(g.type==="draggable")g.inst.keyDrop(null);
         else g.inst.keyCancel();
     }finally{moving--}
-    say(T("Move cancelled."));
+    say(T("Move canceled."));
     if(stay)return;
     if(g.toolbar){
         // the toolbar closed when the block type was picked up: back to its button

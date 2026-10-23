@@ -978,7 +978,7 @@
         <translation>%name sluppet på posisjon %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Flytting avbrutt.</translation>
     </message>
     <message>

@@ -978,8 +978,8 @@
         <translation>Dropped %name at position %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
-        <translation>Move cancelled.</translation>
+        <source>Move canceled.</source>
+        <translation>Move canceled.</translation>
     </message>
     <message>
         <source>This zone does not accept %name.</source>

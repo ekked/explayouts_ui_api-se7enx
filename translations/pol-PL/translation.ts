@@ -978,7 +978,7 @@
         <translation>Upuszczono %name na pozycji %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Przenoszenie anulowane.</translation>
     </message>
     <message>

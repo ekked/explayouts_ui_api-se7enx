@@ -978,7 +978,7 @@
         <translation>%name soltado en la posición %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Movimiento cancelado.</translation>
     </message>
     <message>

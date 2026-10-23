@@ -981,7 +981,7 @@
         <translation>%name lanlu&apos;ta&apos; Daq %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>vIHmoHghach qIllu&apos;ta&apos;.</translation>
     </message>
     <message>

@@ -978,7 +978,7 @@
         <translation>تم إفلات %name في الموضع %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>تم إلغاء النقل.</translation>
     </message>
     <message>

@@ -978,7 +978,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -65,6 +65,11 @@
   toolbar into the first zone that takes it and becomes a new block where it is dropped. Each step is said by screen
   readers in one polite live region, translated in every language of the package; after a drop the grip keeps the
   focus, until you click, type or tab anywhere else. A keyboard move is saved exactly as one made with the pointer.
+  A move put back with Escape is announced as "Move canceled." (American English, as the rest of the interface).
+- **Swahili (Kenya)** (`swa-KE`): a new translation of the whole editor, the texts of the keyboard moves included.
+- Translations that contradicted their language guide were corrected (wrong meanings, glossary breaches, forms of
+  address, typos and English left in the text) in esl-ES, esl-MX, fas-IR, heb-IL, kur-TR, pol-PL, por-BR, pus-AF
+  and ukr-UA.
 
 ## 1.3.29
 

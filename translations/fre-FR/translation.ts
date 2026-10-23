@@ -978,7 +978,7 @@
         <translation>%name déposé à la position %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Déplacement annulé.</translation>
     </message>
     <message>

@@ -978,7 +978,7 @@
         <translation>%name, %position konumuna bırakıldı.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Taşıma iptal edildi.</translation>
     </message>
     <message>

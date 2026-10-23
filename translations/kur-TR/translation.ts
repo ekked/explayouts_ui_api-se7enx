@@ -978,7 +978,7 @@
         <translation>%name li cihê %position hate danîn.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Kişandin hate betalkirin.</translation>
     </message>
     <message>

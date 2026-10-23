@@ -981,7 +981,7 @@
         <translation>%name positione %position depositum.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Motio abrogata.</translation>
     </message>
     <message>

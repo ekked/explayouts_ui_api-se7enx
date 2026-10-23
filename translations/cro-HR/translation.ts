@@ -978,7 +978,7 @@
         <translation>%name spušteno na položaj %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Premještanje otkazano.</translation>
     </message>
     <message>

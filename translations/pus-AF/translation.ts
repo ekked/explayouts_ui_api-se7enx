@@ -978,7 +978,7 @@
         <translation>%name په %position موقعیت کې کېښودل شو.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>خوځول لغوه شول.</translation>
     </message>
     <message>

@@ -978,7 +978,7 @@
         <translation>%name släpptes på position %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Flytten avbröts.</translation>
     </message>
     <message>

@@ -424,7 +424,7 @@ test( 'Escape and leaving the grip put the block back, nothing saved; Escape kee
     press( 'Escape' );
     assert.deepEqual( body( 'main' ), [ 'm1', 'm2' ] );
     assert.deepEqual( body( 'side' ), [ 's1' ] );
-    assert.equal( live(), 'Move cancelled.' );
+    assert.equal( live(), 'Move canceled.' );
     assert.equal( document.activeElement, grip( 'm1' ) );
     assert.deepEqual( events, [ 'sortable:start', 'sortable:end' ] );
 
@@ -432,7 +432,7 @@ test( 'Escape and leaving the grip put the block back, nothing saved; Escape kee
     grip( 's1' ).focus();   // Tab, a click elsewhere
     assert.deepEqual( body( 'main' ), [ 'm1', 'm2' ] );
     assert.deepEqual( body( 'side' ), [ 's1' ] );
-    assert.equal( live(), 'Move cancelled.' );
+    assert.equal( live(), 'Move canceled.' );
     assert.equal( document.activeElement, grip( 's1' ), 'the focus stays where it went' );
     assert.deepEqual( saves( events ), [] );
     assert.deepEqual( found( '.exp-kbd-grabbed, .ui-sortable-helper, .ui-sortable-placeholder, [aria-pressed]' ), [] );
@@ -650,7 +650,7 @@ test( 'a manual item of a dynamic collection: another slot chosen with the keys,
     assert.deepEqual( events, [] );
     assert.deepEqual( found( '.cloned-manual, .sorting-hidden, .sorting, .highlight, .start-item, .ui-draggable-dragging', list ), [] );
     assert.equal( document.activeElement, handle( 1 ) );
-    assert.equal( live(), 'Move cancelled.' );
+    assert.equal( live(), 'Move canceled.' );
 } );
 
 // ---- texts -------------------------------------------------------------------------------------------------------

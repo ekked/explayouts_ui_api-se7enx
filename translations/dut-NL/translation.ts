@@ -978,7 +978,7 @@
         <translation>%name neergezet op positie %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Verplaatsen geannuleerd.</translation>
     </message>
     <message>

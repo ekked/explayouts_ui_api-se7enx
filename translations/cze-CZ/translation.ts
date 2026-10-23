@@ -978,7 +978,7 @@
         <translation>%name puštěno na pozici %position.</translation>
     </message>
     <message>
-        <source>Move cancelled.</source>
+        <source>Move canceled.</source>
         <translation>Přesun zrušen.</translation>
     </message>
     <message>
