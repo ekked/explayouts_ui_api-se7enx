@@ -29,8 +29,9 @@ import { parseBundle } from '../../src/app-patches/bundle.mjs';
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
 const parsed = parseBundle( readFileSync( resolve( root, 'design/standard/javascript/netgen-layouts.js' ), 'utf8' ) );
 // jQuery UI as the page had it (ezjscore), for the differential tests; skipped where it is not at hand.
-const JQUERY_UI = [ process.env.JQUERY_UI_FILE, resolve( root, '../ezjscore/design/standard/javascript/jquery-ui-1.14.2.js' ),
-    '/Users/ekke/Sites/exponential/extension/ezjscore/design/standard/javascript/jquery-ui-1.14.2.js' ].find( ( f ) => f && existsSync( f ) );
+// (the package's sibling in extension/, or JQUERY_UI_FILE=<path> for a checkout elsewhere).
+const JQUERY_UI = [ process.env.JQUERY_UI_FILE, resolve( root, '../ezjscore/design/standard/javascript/jquery-ui-1.14.2.js' ) ]
+    .find( ( f ) => f && existsSync( f ) );
 const haveJQueryUI = !!JQUERY_UI;
 
 let jQuery, mouse, sortable, dd;
