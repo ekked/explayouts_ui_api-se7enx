@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.30
 
 - **The layout editor loads no jQuery.** The editor page (`app.tpl`) no longer loads ezjscore's jQuery 4 (nor jQuery
   UI, see below); the app bundle's module `jquery` is now the editor's own DOM layer: exactly the part of jQuery the
