@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- **The editor page's own scripts run without jQuery.** The content browser dialog of "+ Add items" and of the
+  browse fields of a block form (`javascript/explayouts-app.js`) is plain DOM: it no longer needs jQuery or
+  Bootstrap's modal plugin, and shows and hides itself as that plugin did (fade of backdrop and dialog, Escape, a
+  click beside the dialog, the focus kept inside while it is open). Closing it now returns the focus to the link or
+  button it was opened from. Every text of the dialog, the translated ones too, is escaped through one helper that
+  also escapes quotes. A browse field tells the block form about a change with a native `change` event, which
+  listeners added with `addEventListener` now get as well. Its requests still go through the app's request
+  function while the app has one (progress bar, session timeout dialog, warning on leaving), else through `fetch`
+  with the same headers. `explayouts-app-head.js` and the Tiptap glue (`src/editors/`) did not use jQuery.
+
 ## 1.3.29
 
 - **Design tab: changing only the View type of a list is saved** also when the new view type leaves no item view
