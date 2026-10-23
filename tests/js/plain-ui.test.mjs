@@ -329,6 +329,22 @@ test( 'dropdown: keys on the toggle and in the menu', () => {
     ui.dropdown.close_all();
 } );
 
+test( 'dropdown: Escape with the focus elsewhere closes the open menu and leaves the focus where it is', () => {
+    dropdownMarkup();
+    $id( 'tg' ).click();
+    assert.ok( $id( 'dd' ).classList.contains( 'open' ) );
+    // the click that opened the menu also selected the block, whose editor then took the focus
+    $id( 'else' ).setAttribute( 'tabindex', '-1' );
+    $id( 'else' ).focus();
+    const ev = key( $id( 'else' ), 'Escape', 27 );
+    assert.ok( !$id( 'dd' ).classList.contains( 'open' ), 'closed' );
+    assert.equal( $id( 'tg' ).getAttribute( 'aria-expanded' ), 'false' );
+    assert.equal( document.activeElement, $id( 'else' ), 'the focus stays' );
+    assert.ok( !ev.defaultPrevented, 'the key goes on to its other listeners' );
+    key( $id( 'else' ), 'Escape', 27 );
+    assert.ok( !$id( 'dd' ).classList.contains( 'open' ), 'nothing open: nothing happens' );
+} );
+
 test( 'dropdown: a menu with no room below opens upwards (dropup), and loses it on close', () => {
     dropdownMarkup();
     $id( 'menu' ).getBoundingClientRect = () => ( { top: 700, height: 200, left: 0, width: 100, right: 100, bottom: 900 } );

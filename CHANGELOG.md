@@ -39,7 +39,9 @@
   Shift+Tab stay inside an open dialog, and on closing the focus goes back to where it was.
 - The Options, Items and Advanced panels of the sidebar fold and unfold on a click again: under jQuery 4 Bootstrap's
   collapse stopped with an error on the first click.
-- Dropdown menus: the toggles say they are closed (`aria-expanded="false"`) until opened.
+- Dropdown menus: the toggles say they are closed (`aria-expanded="false"`) until opened. Escape closes an open
+  menu also when the focus has moved on (a block's menu opened with the mouse selects the block, and its rich text
+  editor takes the focus).
 - The date and time field of a block form is the browser's own (`<input type="datetime-local">`); it sends the same
   value as before (`YYYY-MM-DDTHH:mm`, local time). The date in the draft dialog is formatted with
   `Intl.DateTimeFormat`: the same text as before in English, German, French and Italian, in other languages the

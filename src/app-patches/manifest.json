@@ -531,7 +531,8 @@
       "file": "modules/099-bootstrap-js-dropdown.js",
       "original_sha256": "04734e409970b1927ab7d45219cf9a039446bb9132aa34329b9a1a1350e108e5",
       "changes": [
-        "Plain DOM code instead of Bootstrap 3.4.1's dropdown.js: same markup, classes and keys, aria-expanded kept right; the dropup placement of ./extended/jquery_override; DOM events show/shown/hide/hidden.bs.dropdown."
+        "Plain DOM code instead of Bootstrap 3.4.1's dropdown.js: same markup, classes and keys, aria-expanded kept right; the dropup placement of ./extended/jquery_override; DOM events show/shown/hide/hidden.bs.dropdown.",
+        "Escape with the focus outside the toggle and the menu (the click that opened the menu also selected its block, and the block's rich text editor took the focus) still closes an open menu; the focus stays and the key goes on to its other listeners"
       ]
     },
     {

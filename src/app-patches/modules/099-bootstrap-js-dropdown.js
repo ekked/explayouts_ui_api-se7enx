@@ -4,7 +4,8 @@ function(e,t,n){
  * keeps its id and name). Same markup and classes: a click on [data-toggle="dropdown"] opens its parent (.open)
  * and closes every other menu, a click anywhere else closes them (not one in a text field of an open menu, nor one
  * in a .dropdown form); on the toggle Space, Up and Down open the menu, Escape closes it and gives the focus back
- * to the toggle, Up and Down move through the items. aria-expanded follows. A .dropdown opens upwards (dropup)
+ * to the toggle (Escape with the focus elsewhere closes an open menu too and leaves the focus), Up and Down move
+ * through the items. aria-expanded follows. A .dropdown opens upwards (dropup)
  * when its menu does not fit below the toggle but fits above, or fits better (from ./extended/jquery_override,
  * where this hung on Bootstrap's shown.bs.dropdown). DOM events show.bs.dropdown and hide.bs.dropdown (both
  * cancelable), shown.bs.dropdown and hidden.bs.dropdown are fired on the parent, detail.relatedTarget the toggle.
@@ -139,7 +140,13 @@ t.exports = function( ui ) {
 
     document.addEventListener( 'keydown', function( ev ) {
         var el = ev.target.closest && ( ev.target.closest( TOGGLE ) || ev.target.closest( '.dropdown-menu' ) );
-        if ( el ) keydown( ev, el );
+        if ( el ) {
+            keydown( ev, el );
+            return;
+        }
+        // Escape with the focus elsewhere (a block opened by the same click took it, e.g. its rich text editor)
+        // still closes an open menu; the focus stays where it is and the key goes on to its other listeners
+        if ( ( ev.which || ev.keyCode ) === 27 && document.querySelector( '.open > .dropdown-menu' ) ) close_all();
     } );
 
     return { toggle: toggle, close_all: function() {
