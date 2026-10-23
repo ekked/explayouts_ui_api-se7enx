@@ -731,11 +731,11 @@
     </message>
     <message>
         <source>Increment Hour</source>
-        <translation>Zwiększ godzinę</translation>
+        <translation>Zwiększyć godzinę</translation>
     </message>
     <message>
         <source>Decrement Hour</source>
-        <translation>Zmniejsz godzinę</translation>
+        <translation>Zmniejszyć godzinę</translation>
     </message>
     <message>
         <source>Pick Minute</source>
@@ -743,11 +743,11 @@
     </message>
     <message>
         <source>Increment Minute</source>
-        <translation>Zwiększ minutę</translation>
+        <translation>Zwiększyć minutę</translation>
     </message>
     <message>
         <source>Decrement Minute</source>
-        <translation>Zmniejsz minutę</translation>
+        <translation>Zmniejszyć minutę</translation>
     </message>
     <message>
         <source>Pick Second</source>
@@ -755,11 +755,11 @@
     </message>
     <message>
         <source>Increment Second</source>
-        <translation>Zwiększ sekundę</translation>
+        <translation>Zwiększyć sekundę</translation>
     </message>
     <message>
         <source>Decrement Second</source>
-        <translation>Zmniejsz sekundę</translation>
+        <translation>Zmniejszyć sekundę</translation>
     </message>
     <message>
         <source>Toggle Period</source>
@@ -859,11 +859,11 @@
     </message>
     <message>
         <source>Decrease indent</source>
-        <translation>Zmniejsz wcięcie</translation>
+        <translation>Zmniejszyć wcięcie</translation>
     </message>
     <message>
         <source>Increase indent</source>
-        <translation>Zwiększ wcięcie</translation>
+        <translation>Zwiększyć wcięcie</translation>
     </message>
     <message>
         <source>Block quote</source>
@@ -943,15 +943,15 @@
     </message>
     <message>
         <source>Move block %name</source>
-        <translation>Przenieś blok %name</translation>
+        <translation>Przenieść blok %name</translation>
     </message>
     <message>
         <source>Add block %name</source>
-        <translation>Dodaj blok %name</translation>
+        <translation>Dodać blok %name</translation>
     </message>
     <message>
         <source>Move item %name</source>
-        <translation>Przenieś element %name</translation>
+        <translation>Przenieść element %name</translation>
     </message>
     <message>
         <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
