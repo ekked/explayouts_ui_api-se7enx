@@ -509,10 +509,20 @@
     cursor: pointer;
     color: #fff;
     display: block;
+    /* a <button>: as wide as the panel, without the button look of the browser */
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    font-family: inherit;
+    border-radius: 0;
 }
 #aside-tabs .add-items:hover {
     background: rgba(255, 255, 255, 0.05);
     text-decoration: none;
+}
+#aside-tabs .add-items:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }
 
 /* Value type select wrapper inside collection items */

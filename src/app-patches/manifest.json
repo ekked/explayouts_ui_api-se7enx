@@ -341,7 +341,8 @@
       "changes": [
         "Interface texts through nglT()/nglTh(), translated from window.explayoutsSpaI18n (d4a02cf)",
         "The palette's and the left toolbar's icon buttons have accessible names, type=button and aria-hidden icons; the palette's list is a named, focusable region (3df5f1e)",
-        "The dropdown toggles say they are closed (aria-expanded=false) until opened; they said true."
+        "The dropdown toggles say they are closed (aria-expanded=false) until opened; they said true.",
+        "\"+ Add items\" is a <button type=\"button\"> instead of a <div>: it takes the focus, Enter and Space open the content browser, and the focus can go back to it."
       ]
     },
     {

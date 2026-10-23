@@ -185,15 +185,19 @@ export async function addCollectionItems( page ) {
     const items = () => [ ...document.querySelectorAll( '.collection-items .bm-items .collection-item' ) ].map( ( i ) => i.textContent.replace( /\s+/g, ' ' ).trim() );
     const listed = items();
     const from = page.requests.length;
-    click( document.querySelector( '.collection-items .add-items' ) );
+    const add = document.querySelector( '.collection-items .add-items' );
+    const trigger = [ add.tagName, add.getAttribute( 'type' ), add.tabIndex ];
+    click( add );
     await page.settle();
     const dialog = document.getElementById( 'exp-content-browser-modal' );
     const rows = [ ...dialog.querySelectorAll( '.exp-cb-list .js-cb-select' ) ].map( ( i ) => i.getAttribute( 'data-name' ) );
     dialog.querySelector( '.js-cb-select[data-node-id="70"]' ).checked = true;
     click( dialog.querySelector( '.exp-cb-apply' ) );
     await page.settle();
+    const focused = document.activeElement;
     return { listed, rows, saved: writes( page, from ), loaded: gets( page, from ), items: items(),
-             dialog: [ dialog.className, dialog.style.display, document.body.classList.contains( 'modal-open' ) ] };
+             dialog: [ dialog.className, dialog.style.display, document.body.classList.contains( 'modal-open' ) ],
+             trigger, focus: !!( focused && focused.matches && focused.matches( '.collection-items .add-items' ) ) };
 }
 
 /** Deletes the list block from its menu: the dropdown opens, the dialog asks, Delete deletes. */

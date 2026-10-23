@@ -115,6 +115,9 @@ test( 'without jQuery: the page has none, and every flow does what the editor di
     assert.deepEqual( items.loaded, [ P + '/content_browser?parent_node_id=2&search=&offset=0&limit=50', P + '/eng/blocks/20/collections/default/result' ] );
     assert.match( items.items[ 0 ], /Third article/ );
     assert.deepEqual( items.dialog, [ 'modal fade', 'none', false ], 'the dialog closed' );
+    // "+ Add items" is a button (focusable, Enter and Space press it), and the focus is back on it after the dialog
+    assert.deepEqual( items.trigger, [ 'BUTTON', 'button', 0 ] );
+    assert.equal( items.focus, true, 'the focus went back to "+ Add items"' );
 
     // delete from the block's menu: the menu opens (aria-expanded follows), the dialog asks
     assert.deepEqual( s.deleteBlock.menu, [ true, 'true' ] );

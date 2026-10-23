@@ -232,6 +232,10 @@ window.explayoutsAppReady = true;
                 load();
             }
         });
+        modal.addEventListener('hidden.bs.modal', function(){
+            if (!focusAddItemsOnClose) return;
+            setTimeout(function(){ if (!Core.ui.dialog.is_shown(modal)) focusAddItems(); }, 0);
+        });
         modal.addEventListener('keydown', function(e){
             if (!e.target.closest('.exp-cb-search input')) return;
             if (e.keyCode === 13) { e.preventDefault(); state.search = e.target.value; load(); }
@@ -243,6 +247,18 @@ window.explayoutsAppReady = true;
 
     function showModal() { Core.ui.dialog.show(modal); }
     function hideModal() { Core.ui.dialog.hide(modal); }
+
+    // Opened from "+ Add items": the focus goes back to that button when the dialog closes. The collection may have
+    // drawn itself again meanwhile (loading, the added items), so the button of the collection in place is taken
+    // when the one that opened the dialog is gone.
+    var focusAddItemsOnClose = false;
+    function focusAddItems() {
+        var active = document.activeElement;
+        // still on the closed dialog (hidden, so lost in a browser) counts as lost too
+        if (active && active !== document.body && active.isConnected && !(modal && modal.contains(active))) return;
+        var button = document.querySelector('.collection-items .add-items');
+        if (button && typeof button.focus === 'function') button.focus();
+    }
 
     function renderBreadcrumbs() {
         var html = '';
@@ -298,6 +314,7 @@ window.explayoutsAppReady = true;
     }
 
     function openModal(view) {
+        focusAddItemsOnClose = true;
         pendingView = view;
         state.singleSelect = false;
         state.callback = null;
@@ -305,6 +322,7 @@ window.explayoutsAppReady = true;
     }
 
     function openSingleSelectModal(callback, options) {
+        focusAddItemsOnClose = false;
         options = options || {};
         pendingView = null;
         state.singleSelect = true;
@@ -354,7 +372,12 @@ window.explayoutsAppReady = true;
             headers: { 'X-CSRF-Token': Core.g && Core.g.config ? Core.g.config.get('csrf_token') : '' }
         }).then(function(){
             hideModal();
-            if (model.fetch_results) model.fetch_results();
+            var fetched = model.fetch_results ? model.fetch_results() : null;
+            if (fetched && typeof fetched.then === 'function') {
+                fetched.then(function(){
+                    if (focusAddItemsOnClose && !Core.ui.dialog.is_shown(modal)) focusAddItems();
+                });
+            }
         }, function(){
             hideModal();
             alert(explayoutsI18n.add_failed);
@@ -370,6 +393,8 @@ window.explayoutsAppReady = true;
         if (!view || !view.model) return;
         e.preventDefault();
         e.stopImmediatePropagation();
+        // a mouse click does not focus a button in every browser: the dialog gives the focus back to what had it
+        if (typeof target.focus === 'function' && document.activeElement !== target) target.focus();
         openModal(view);
     }, true);
 

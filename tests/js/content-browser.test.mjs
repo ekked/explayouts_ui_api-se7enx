@@ -249,7 +249,10 @@ async function differential( steps, options ) {
         }
         records[ variant ] = { log, seen: p.seen };
     }
-    assert.deepEqual( records.new.log, records.old.log );
+    // Where the focus is, is compared by the tests of the new version: since 1.3.31 "+ Add items" takes it and gets
+    // it back when the dialog closes, which 1.3.29 did not do.
+    const withoutFocus = ( log ) => JSON.parse( JSON.stringify( log, ( k, v ) => ( k === 'focus' ? undefined : v ) ) );
+    assert.deepEqual( withoutFocus( records.new.log ), withoutFocus( records.old.log ) );
     return records;
 }
 
@@ -301,6 +304,7 @@ test( '+ Add items: open, browse, breadcrumb, search, select and add send the sa
     const shown = now.log.find( ( [ label ] ) => label === 'shown' )[ 1 ];
     assert.equal( shown.display, 'block' );
     assert.equal( shown.focus, 'dialog' );
+    assert.equal( now.log.find( ( [ label ] ) => label === 'closed' )[ 1 ].focus, 'add-items', 'the focus is back on + Add items' );
     assert.match( shown.classes, /\bin\b/ );
     assert.deepEqual( shown.backdrops, [ 'modal-backdrop fade in' ] );
     // markup and quotes of the server's values stay text
@@ -494,6 +498,39 @@ test( 'Closing the dialog gives the focus back to where it was', async () => {
         assert.equal( document.activeElement, trigger );
         assert.equal( document.body.classList.contains( 'modal-open' ), false );
         assert.equal( document.querySelectorAll( '.modal-backdrop' ).length, 0 );
+    } finally {
+        p.close();
+    }
+} );
+
+test( 'Closed, the dialog of "+ Add items" gives the focus back to it, or to the button drawn in its place', async () => {
+    const p = page( 'new' );
+    // booleans and names only: a failed comparison of happy-dom elements formats the whole document
+    const focused = () => ( document.activeElement === modal() ? 'dialog' : document.activeElement && document.activeElement.className );
+    try {
+        // a mouse click that did not focus the button (as in some browsers): the focus still comes back to it
+        document.body.focus();
+        click( document.querySelector( '.add-items' ) );
+        takeRequests();
+        await answer( 200, VALUES );
+        await settle();
+        assert.equal( focused(), 'dialog' );
+        key( modal(), 27 );
+        await settle();
+        assert.equal( document.activeElement === document.querySelector( '.add-items' ), true, focused() );
+
+        // the collection drew itself again while the dialog was open: the new button gets the focus
+        click( document.querySelector( '.add-items' ) );
+        takeRequests();
+        await answer( 200, VALUES );
+        await settle();
+        const old = document.querySelector( '.add-items' );
+        old.replaceWith( old.cloneNode( true ) );
+        key( modal(), 27 );
+        await settle();
+        await wait( 10 );
+        assert.equal( document.querySelector( '.add-items' ) !== old, true );
+        assert.equal( document.activeElement === document.querySelector( '.add-items' ), true, focused() );
     } finally {
         p.close();
     }
