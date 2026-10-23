@@ -87,7 +87,7 @@ function fakeXhr( page ) {
                     this.readyState = 4;
                     this._fire( 'readystatechange' ); this._fire( 'load' ); this._fire( 'loadend' );
                 } finally {
-                    page.open--;
+                    page.open--; page.ended++;
                 }
             }, 0 );
         }
@@ -110,7 +110,7 @@ export async function openEditor( options ) {
                                   settings: { navigation: { disableMainFrameNavigation: true },
                                               disableJavaScriptFileLoading: true, disableCSSFileLoading: true } } );
     const page = {
-        requests: [], open: 0, errors: [],
+        requests: [], open: 0, ended: 0, errors: [],
         record( method, url, headers, body ) {
             const parsed = new URL( url, window.location.href );
             const text = body == null ? '' : typeof body === 'string' ? body : body instanceof URLSearchParams ? body.toString() : String( body );
@@ -121,13 +121,16 @@ export async function openEditor( options ) {
             return request;
         },
         async answer( request ) { return normalise( await options.api( request ) ); },
-        /** Waits until the app has no request open and its timers (up to `ms` each) have run. */
+        /** Waits until the app has no request open and its timers (up to `ms` each) have run. A request that started or
+            ended during the wait may have set timers of its own (a dialog that closes after a save), so then it waits
+            again: on a busy machine the timers of the app no longer race the end of the wait. */
         async settle( ms = 600 ) {
             for ( let i = 0; i < 50; i++ ) {
                 await new Promise( ( done ) => setTimeout( done, 0 ) );
                 if ( page.open === 0 ) {
+                    const started = page.requests.length, ended = page.ended;
                     await new Promise( ( done ) => setTimeout( done, ms ) );
-                    if ( page.open === 0 ) return;
+                    if ( page.open === 0 && page.requests.length === started && page.ended === ended ) return;
                 }
             }
             throw new Error( 'requests still open: ' + page.open );
@@ -146,7 +149,7 @@ export async function openEditor( options ) {
             await new Promise( ( done ) => setTimeout( done, 0 ) );
             const answer = await page.answer( request );
             return new Response( answer.status === 204 ? null : answer.text, { status: answer.status, headers: { 'Content-Type': answer.contentType } } );
-        } finally { page.open--; }
+        } finally { page.open--; page.ended++; }
     };
     // happy-dom turns an element into a string as its outerHTML, a browser as "[object HTMLFormElement]": jQuery( [ form ] )
     // then parsed that string into a copy of the form.

@@ -41,6 +41,9 @@ function load( name, standIns = {} ) {
 }
 
 const wait = ( ms ) => new Promise( ( done ) => setTimeout( done, ms ) );
+// Past every transition (a backdrop of 150 ms and then the dialog of 300 ms), with room for a busy machine whose timers
+// run late: half a second left a dialog still fading in under load.
+const PAST_TRANSITIONS = 1000;
 const click = ( el ) => el.dispatchEvent( new MouseEvent( 'click', { bubbles: true, cancelable: true, button: 0 } ) );
 const key = ( el, name, code, extra ) => {
     const ev = new KeyboardEvent( 'keydown', Object.assign( { key: name, keyCode: code, which: code, bubbles: true, cancelable: true }, extra ) );
@@ -108,7 +111,7 @@ test( 'dialog: opens as Bootstrap 3 did, with backdrop, body class and the focus
     assert.equal( document.body.className, 'modal-open' );
     assert.deepEqual( [ ...document.querySelectorAll( '.modal-backdrop' ) ].map( ( b ) => b.className ), [ 'modal-backdrop fade in' ] );
     assert.ok( !m.classList.contains( 'in' ), 'the dialog fades in after the backdrop' );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     assert.ok( m.classList.contains( 'in' ) );
     assert.equal( m.style.display, 'block' );
     assert.equal( document.activeElement, m );
@@ -120,17 +123,17 @@ test( 'dialog: opens as Bootstrap 3 did, with backdrop, body class and the focus
     assert.equal( m.getAttribute( 'aria-labelledby' ), 'mt' );
     assert.ok( ui.dialog.is_shown( m ) );
     ui.dialog.hide( m );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
 } );
 
 test( 'dialog: Escape closes; then hidden, backdrop gone, focus back on the opener', async () => {
     const m = dialogMarkup();
     let hidden = 0;
     ui.dialog.show( m, { on_hidden: () => hidden++ } );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     key( $id( 'field' ), 'Escape', 27 );
     assert.ok( !m.classList.contains( 'in' ) );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     assert.equal( m.style.display, 'none' );
     assert.equal( m.getAttribute( 'aria-hidden' ), 'true' );
     assert.equal( document.querySelectorAll( '.modal-backdrop' ).length, 0 );
@@ -143,14 +146,14 @@ test( 'dialog: Escape closes; then hidden, backdrop gone, focus back on the open
 test( 'dialog: keyboard false and backdrop static keep it open; data-dismiss closes', async () => {
     const m = dialogMarkup();
     ui.dialog.show( m, { keyboard: false, backdrop: 'static' } );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     key( $id( 'field' ), 'Escape', 27 );
     click( m );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     assert.ok( ui.dialog.is_shown( m ) && m.classList.contains( 'in' ) );
     assert.equal( document.activeElement, m, 'a click on the static backdrop focuses the dialog' );
     click( $id( 'cancel' ) );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     assert.ok( !ui.dialog.is_shown( m ) );
     assert.equal( m.style.display, 'none' );
 } );
@@ -158,20 +161,20 @@ test( 'dialog: keyboard false and backdrop static keep it open; data-dismiss clo
 test( 'dialog: a click on the backdrop closes, a press started in the dialog does not', async () => {
     const m = dialogMarkup();
     ui.dialog.show( m );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     $id( 'field' ).dispatchEvent( new MouseEvent( 'mousedown', { bubbles: true } ) );
     m.dispatchEvent( new MouseEvent( 'mouseup', { bubbles: true } ) );
     click( m );
     assert.ok( ui.dialog.is_shown( m ) );
     click( m );
     assert.ok( !ui.dialog.is_shown( m ) );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
 } );
 
 test( 'dialog: the focus stays inside (focusin and Tab); added: Tab wraps around', async () => {
     const m = dialogMarkup();
     ui.dialog.show( m );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     $id( 'outside' ).focus();
     assert.equal( document.activeElement, m, 'focus outside comes back, as Bootstrap did' );
     $id( 'apply' ).focus();
@@ -180,7 +183,7 @@ test( 'dialog: the focus stays inside (focusin and Tab); added: Tab wraps around
     key( $id( 'field' ), 'Tab', 9, { shiftKey: true } );
     assert.equal( document.activeElement, $id( 'apply' ) );
     ui.dialog.hide( m );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
 } );
 
 test( 'dialog: hide of a closed dialog does nothing; a prevented show does not open', async () => {
@@ -199,7 +202,7 @@ test( 'dialog: shown again while it still fades out, it stays open: one backdrop
     const m = dialogMarkup();
     let hidden = 0;
     ui.dialog.show( m, { on_hidden: () => hidden++ } );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     $id( 'field' ).focus();
     click( $id( 'cancel' ) );
     await wait( 100 );   // the dialog fades out for 300 ms
@@ -216,7 +219,7 @@ test( 'dialog: shown again while it still fades out, it stays open: one backdrop
     assert.equal( hidden, 0, 'the close turned round is no close' );
     assert.deepEqual( events, [ 'show.bs.modal m', 'shown.bs.modal m', 'hide.bs.modal m', 'show.bs.modal m', 'shown.bs.modal m' ] );
     ui.dialog.hide( m );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     assert.equal( m.style.display, 'none' );
     assert.equal( document.querySelectorAll( '.modal-backdrop' ).length, 0 );
     assert.equal( document.body.className, '' );
@@ -233,7 +236,7 @@ test( 'dialog: closed while it still fades in, it stays closed: not shown later,
     ui.dialog.hide( m );
     await wait( 200 );
     assert.notEqual( m.style.display, 'block', 'the dialog does not come up after it was closed' );
-    await wait( 500 );
+    await wait( PAST_TRANSITIONS );
     assert.ok( !ui.dialog.is_shown( m ) );
     assert.equal( m.style.display, 'none' );
     assert.ok( !m.classList.contains( 'in' ) );
