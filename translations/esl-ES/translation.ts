@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Tipos de bloque</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Espacio o Intro lo toma, las flechas lo mueven, Espacio o Intro lo suelta, Escape cancela. Alt con la flecha arriba o abajo lo mueve una posición de inmediato.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Mover el bloque %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Añadir el bloque %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Mover el elemento %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name tomado. Zona %zone, posición %position de %count. Usa las flechas para mover, Espacio para soltar, Escape para cancelar.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name tomado. Posición %position de %count. Usa las flechas para mover, Espacio para soltar, Escape para cancelar.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Zona %zone, posición %position de %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Posición %position de %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name soltado en la zona %zone en la posición %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name soltado en la posición %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Movimiento cancelado.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Esta zona no acepta %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Ninguna zona acepta %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

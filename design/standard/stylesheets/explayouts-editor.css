@@ -17,8 +17,17 @@
 #ngc-size-warning { display: none !important; }
 .left-toolbar .button.js-open.active + .left-toolbar-panels .left-panel { display: block !important; }
 .add-block-btn .font-icon::before { content: "\e900"; }
-.is-dragging [data-block] { pointer-events: none; }
-.is-dragging [data-zone] { box-shadow: inset 0 0 0 2px #4a90e2; }
+/* The grips of the drag and drop (netgen-layouts.js, modules 135-138, on Pointer Events): a finger or pen on a block's
+   header, a collection item's handle or a block type of the toolbar moves it instead of scrolling the page. Only the
+   grips: a finger anywhere else still scrolls. */
+.ui-sortable-handle, .ui-draggable-handle { touch-action: none; }
+/* Moving with the keyboard (module 139): the grips are buttons with a visible focus; what is picked up is outlined
+   where it would be dropped; the live region and the hint are for screen readers only. */
+.exp-kbd-grip:focus-visible { outline: 2px solid var(--exp-le-accent); outline-offset: 2px; }
+.left-panel .add-block-btn.exp-kbd-grip:focus-visible { outline-color: var(--exp-le-focus); }
+.exp-kbd-grabbed { outline: 2px dashed var(--exp-le-accent); outline-offset: 2px; }
+[data-receiver] .add-block-btn.exp-kbd-grabbed { background: var(--exp-le-accent); color: var(--exp-le-on-accent); }
+.exp-kbd-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .zone { min-height: 80px; position: relative; }
 .zone::before { content: attr(data-zone); display: block; color: var(--exp-le-on-dark-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; pointer-events: none; }
 .zone-body { min-height: 60px; }

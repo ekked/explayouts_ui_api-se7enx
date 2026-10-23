@@ -6,6 +6,8 @@
 - `extension/explayouts` — value objects, `explayouts_*` tables, `explayouts.ini` block/layout type definitions
 - `extension/explayouts_core` — service classes the API handlers call
 - `extension/ezformtoken` — CSRF token validation for modifying requests
+- No jQuery or jQuery UI: the editor page loads neither (the app bundle has its own DOM layer and drag and drop), so
+  `ezjscore` is not needed for it
 
 ## 1. Put the extension in place
 

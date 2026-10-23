@@ -7,8 +7,8 @@
  * triggered when the new view type leaves no item view type to choose (list_zigzag, list_accordion, a view type of
  * your own), so the block kept its old view type until another field changed.
  *
- * The modules run from the bundle itself, with jQuery 4 (as on the page); the form view's $submit, should_skip and
- * params_has_changed are its own, bound to the form as its events are.
+ * The modules run from the bundle itself, on its DOM layer (module jquery, as on the page); the form view's $submit,
+ * should_skip and params_has_changed are its own, bound to the form as its events are.
  *
  * Run: npm ci && npm test (in extension/explayouts_ui_api)
  *
@@ -25,8 +25,9 @@ import { parseBundle } from '../../src/app-patches/bundle.mjs';
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
 const parsed = parseBundle( readFileSync( resolve( root, 'design/standard/javascript/netgen-layouts.js' ), 'utf8' ) );
 
-let jQuery;
+let dom;
 let Form;
+let core;
 let saves;
 
 function idOf( name ) {
@@ -49,10 +50,10 @@ const wait = ( ms ) => new Promise( ( done ) => setTimeout( done, ms ) );
 
 before( async () => {
     GlobalRegistrator.register( { url: 'https://example.test/exponential_admin/explayouts_ui_api/app#layout/1/edit' } );
-    const { jQueryFactory } = await import( 'jquery/factory' );
-    jQuery = jQueryFactory( window );
-    window.jQuery = globalThis.jQuery = jQuery;
-    const core = { $: jQuery, View: { extend: ( proto ) => proto } };
+    // Core.ui: the helpers of bootstrap/js/transition, which ./lib/jquery/* add to; Core.$: the app's DOM layer
+    const ui = load( idOf( 'bootstrap/js/transition' ), {} );
+    dom = load( idOf( 'jquery' ), { 101: ui } );
+    core = { $: dom, View: { extend: ( proto ) => proto }, ui };
     load( idOf( './lib/jquery/master_slave_selects' ), { '../../core': core } );
     load( idOf( './lib/jquery/view_types' ), { '../../core': core } );
     Form = load( idOf( './form' ), { '../core': core, underscore: { debounce: ( fn ) => fn } } );
@@ -77,20 +78,23 @@ beforeEach( () => {
         '<div class="row-input"><select id="cols" name="columns" class="view-type js-skip-on-change"><option value="2" selected>2</option><option value="3">3</option></select></div>' +
         '</form></div>';
     saves = [];
-    const form = jQuery( 'form' );
+    const form = dom( 'form' );
     const view = Object.assign( Object.create( Form ), {
         $: ( selector ) => form.find( selector ),
         is_query_form: false,
         form_id: 'design_edit',
-        model: { save_via_form: () => saves.push( jQuery( 'form' ).serialize() ) }
+        model: { save_via_form: () => saves.push( dom( 'form' ).serialize() ) }
     } );
     // events: { "submit form": "$submit", change: "$submit", ... } of the form view
-    jQuery( '.layouts-form' ).on( 'submit', 'form', ( e ) => view.$submit( e ) ).on( 'change', ( e ) => view.$submit( e ) );
-    jQuery( '.master-slave-selects .master' ).master_slave_selects();
+    dom( '.layouts-form' ).on( 'submit', 'form', ( e ) => view.$submit( e ) ).on( 'change', ( e ) => view.$submit( e ) );
+    core.ui.master_slave_selects( document.querySelectorAll( '.master-slave-selects .master' ) );
 } );
 
+/** As the user does: a new value, then the browser's change event. */
 function choose( id, value ) {
-    jQuery( '#' + id ).val( value ).trigger( 'change' );
+    const select = document.getElementById( id );
+    select.value = value;
+    select.dispatchEvent( new Event( 'change', { bubbles: true } ) );
 }
 
 test( 'a plain view type select saves its change', async () => {
@@ -112,5 +116,5 @@ test( 'the master select saves its change when the new view type leaves no item 
     await wait( 20 );
     assert.equal( saves.length, 1, 'the change is saved without another edit' );
     assert.match( saves[ 0 ], /(^|&)view_type=list_zigzag/ );
-    assert.equal( jQuery( '#ivt option:not(.hidden)' ).length, 0, 'no item view type left to choose' );
+    assert.equal( dom( '#ivt option:not(.hidden)' ).length, 0, 'no item view type left to choose' );
 } );

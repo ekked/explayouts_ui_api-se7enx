@@ -200,8 +200,10 @@ class GalleryBlockPreviewTest extends TestCase
         // when the new view type left no item view type to choose. The master's submit waits for that change
         // (tests/js/view-type-save.test.mjs runs it).
         $bundle = file_get_contents( dirname( __DIR__ ) . '/design/standard/javascript/netgen-layouts.js' );
+        // Plain DOM since the editor runs without jQuery (./lib/jquery/view_types): a submit event the form view handles,
+        // never a native submit
         $this->assertStringContainsString(
-            'r(document).on("change",".view-type",function(e){i(this);var f=r(this).closest("form");r(this).hasClass("master")?setTimeout(function(){f.trigger("submit")},0):f.trigger("submit")})',
+            'function s(e){e&&e.dispatchEvent(new Event("submit",{bubbles:!0,cancelable:!0}))}document.addEventListener("change",function(e){var t=e.target.closest&&e.target.closest(".view-type"),f;t&&(i(t),f=t.closest("form"),t.classList.contains("master")?setTimeout(function(){s(f)},0):s(f))})',
             $bundle
         );
     }

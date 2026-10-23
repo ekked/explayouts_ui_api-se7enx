@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Bloktyper</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Mellemrum eller Enter samler det op, piletasterne flytter det, Mellemrum eller Enter slipper det, Escape annullerer. Alt med pil op eller ned flytter det én plads med det samme.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Flyt blokken %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Tilføj blokken %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Flyt elementet %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name samlet op. Zone %zone, position %position af %count. Brug piletasterne til at flytte, Mellemrum til at slippe, Escape til at annullere.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name samlet op. Position %position af %count. Brug piletasterne til at flytte, Mellemrum til at slippe, Escape til at annullere.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Zone %zone, position %position af %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Position %position af %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name sluppet i zone %zone på position %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name sluppet på position %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Flytning annulleret.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Denne zone accepterer ikke %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Ingen zone accepterer %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

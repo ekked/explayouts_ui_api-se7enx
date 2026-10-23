@@ -3,11 +3,31 @@ netgen-layouts.js
 The application bundle of the Netgen Layouts editor, built from netgen/layouts-ui
 2.0.0 (bundle/Resources/public/js/netgen-layouts.js,
 https://github.com/netgen-layouts/layouts-ui), and patched for Exponential:
-it uses the page's jQuery and jQuery UI (ezjscore), translates its texts through
-nglT(), and its rich text and code editors are provided by explayouts-tiptap.js.
-Netgen Layouts UI is licensed under the MIT License, reproduced below. The rest
-of this extension is licensed under the GNU General Public License v2.0 (or any
-later version), see LICENSE.md.
+it translates its texts through nglT(), and its rich text and code editors are
+provided by explayouts-tiptap.js. It uses no jQuery: jQuery, jQuery UI,
+Bootstrap's JavaScript, Moment.js and eonasdan-bootstrap-datetimepicker are no
+longer part of it, nor loaded by the page; the DOM layer that stands in for
+jQuery, the drag and drop, dialogs, panels, menus and dates are code of this
+extension (src/app-patches/modules/).
+Netgen Layouts UI is licensed under the MIT License, reproduced below. The
+patched modules are licensed, as the rest of this extension, under the GNU
+General Public License v2.0 (or any later version), see LICENSE.md.
+
+Third-party code the bundle still contains, as netgen/layouts-ui built it, each
+under the MIT License (text below) unless noted:
+
+- Backbone.js 1.6.1, Copyright (c) 2010-2024 Jeremy Ashkenas, DocumentCloud
+- Backbone.localStorage, Copyright (c) 2010 Jerome Gravel-Niquet
+- Underscore.js 1.13.7, Copyright (c) 2009-2024 Jeremy Ashkenas, Julian
+  Gonggrijp, and DocumentCloud and Investigative Reporters & Editors
+- Handlebars 4.0.14, Copyright (C) 2011-2017 by Yehuda Katz
+- NProgress 0.2.0, Copyright (c) 2013-2014 Rico Sta. Cruz
+- striptags, Copyright (c) 2014 Eric Norris
+- @netgen/content-browser-ui, Copyright (c) Netgen, with React and React DOM,
+  Copyright (c) Facebook, Inc. and its affiliates
+- source-map (used by the Handlebars compiler), Copyright (c) 2009-2011,
+  Mozilla Foundation and contributors, under the BSD 3-Clause License (text at
+  the end of this file)
 
 -----------------------------------------------------------
 
@@ -30,3 +50,35 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+-----------------------------------------------------------
+
+source-map: BSD 3-Clause License
+
+Copyright (c) 2009-2011, Mozilla Foundation and contributors
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the names of the Mozilla Foundation nor the names of project
+  contributors may be used to endorse or promote products derived from this
+  software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

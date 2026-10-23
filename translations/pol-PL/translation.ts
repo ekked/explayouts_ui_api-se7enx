@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Typy bloków</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Spacja lub Enter podnosi, strzałki przesuwają, Spacja lub Enter upuszcza, Escape anuluje. Alt ze strzałką w górę lub w dół przesuwa od razu o jedno miejsce.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Przenieś blok %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Dodaj blok %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Przenieś element %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>Podniesiono %name. Strefa %zone, pozycja %position z %count. Użyj strzałek, aby przesunąć, Spacji, aby upuścić, Escape, aby anulować.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>Podniesiono %name. Pozycja %position z %count. Użyj strzałek, aby przesunąć, Spacji, aby upuścić, Escape, aby anulować.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Strefa %zone, pozycja %position z %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Pozycja %position z %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>Upuszczono %name w strefie %zone na pozycji %position.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>Upuszczono %name na pozycji %position.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Przenoszenie anulowane.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Ta strefa nie przyjmuje %name.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Żadna strefa nie przyjmuje %name.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

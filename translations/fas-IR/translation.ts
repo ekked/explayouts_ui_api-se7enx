@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>انواع بلوک</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>فاصله یا Enter آن را برمی‌دارد، کلیدهای جهت‌نما جابه‌جایش می‌کنند، فاصله یا Enter رهایش می‌کند، Escape لغو می‌کند. Alt با جهت‌نمای بالا یا پایین آن را بی‌درنگ یک جا جابه‌جا می‌کند.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>جابه‌جایی بلوک %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>افزودن بلوک %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>جابه‌جایی مورد %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name برداشته شد. ناحیهٔ %zone، موقعیت %position از %count. برای جابه‌جایی از کلیدهای جهت‌نما، برای رها کردن از فاصله و برای لغو از Escape استفاده کنید.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name برداشته شد. موقعیت %position از %count. برای جابه‌جایی از کلیدهای جهت‌نما، برای رها کردن از فاصله و برای لغو از Escape استفاده کنید.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>ناحیهٔ %zone، موقعیت %position از %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>موقعیت %position از %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name در ناحیهٔ %zone در موقعیت %position رها شد.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name در موقعیت %position رها شد.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>جابه‌جایی لغو شد.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>این ناحیه %name را نمی‌پذیرد.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>هیچ ناحیه‌ای %name را نمی‌پذیرد.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

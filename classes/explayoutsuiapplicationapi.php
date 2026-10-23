@@ -1252,7 +1252,7 @@ class expLayoutsUIApplicationApi
                     '<div class="template_name">' . htmlspecialchars( $viewType ) . '</div>' .
                     '<div class="name">' . htmlspecialchars( $name ) . '</div>' .
                     '<div class="dropdown">' .
-                        '<button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">' .
+                        '<button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
                             '<i class="material-icons">more_horiz</i>' .
                         '</button>' .
                         '<ul class="dropdown-menu dropdown-menu-right">' .
@@ -1432,7 +1432,7 @@ class expLayoutsUIApplicationApi
                 '<div class="template_name">' . $viewTypeName . '</div>' .
                 '<div class="name">' . htmlspecialchars( $name ) . '</div>' .
                 '<div class="dropdown">' .
-                    '<button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">' .
+                    '<button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
                         '<i class="material-icons">more_horiz</i>' .
                     '</button>' .
                     '<ul class="dropdown-menu dropdown-menu-right">' .

@@ -6,7 +6,8 @@
  * warned on every leave that was not publish, discard or close, also right after opening a layout.
  *
  * The modules involved (init, extended/model, extended/jquery_override for ajax_submit, the inline text of blocks) run
- * from the bundle itself, with jQuery 4 (as on the page) and stand-ins for the rest of the app.
+ * from the bundle itself, on the bundle's own DOM layer (module jquery, as on the page; until 1.3.29 the page's jQuery 4)
+ * and stand-ins for the rest of the app.
  *
  * Run: npm ci && npm test (in extension/explayouts_ui_api)
  *
@@ -49,7 +50,7 @@ function loader( standIns ) {
         const module = { exports: {} };
         cache.set( id, module );
         const fn = ( 0, eval )( '(' + m.source + ')' );
-        fn.call( module.exports, ( name ) => ( name in standIns ? standIns[ name ] : load( String( m.deps[ name ] ) ) ), module, module.exports );
+        fn.call( module.exports, ( name ) => ( name in standIns ? standIns[ name ] : load( String( name in m.deps ? m.deps[ name ] : name ) ) ), module, module.exports );
         return module.exports;
     };
     return load;
@@ -63,18 +64,26 @@ const idOf = ( name ) => {
 before( async () => {
     GlobalRegistrator.register( { url: 'https://example.test/exponential_admin/explayouts_ui_api/app#layout/1/edit',
                                   settings: { navigation: { disableMainFrameNavigation: true } } } );
-    const { jQueryFactory } = await import( 'jquery/factory' );
-    jQuery = jQueryFactory( window );
-    window.jQuery = globalThis.jQuery = jQuery;
     globalThis.nglT = window.nglT = ( s ) => s;
     globalThis.nglTh = window.nglTh = ( s ) => s;
 
     // Requests answer only when the test says so.
+    // complete( status, statusText, { text }, headers ), the shape of jQuery's transports.
     requests = [];
-    jQuery.ajaxTransport( '+*', () => ( {
-        send: ( headers, complete ) => { requests.push( complete ); },
-        abort: () => {}
-    } ) );
+    window.XMLHttpRequest = class {
+        open( method, url ) { this.method = method; this.url = url; }
+        setRequestHeader() {}
+        getResponseHeader( name ) { return /^content-type$/i.test( name ) ? this.type : null; }
+        getAllResponseHeaders() { return ''; }
+        abort() {}
+        send() {
+            requests.push( ( status, statusText, body, headers ) => {
+                Object.assign( this, { status, statusText, responseText: body.text, type: ( /Content-Type: (.*)/.exec( headers ) || [] )[ 1 ] } );
+                if ( this.onload ) this.onload();
+            } );
+        }
+    };
+    jQuery = loader( {} )( idOf( 'jquery' ) );
 
     const events = {};
     const core = {
@@ -94,12 +103,14 @@ before( async () => {
         './views/blocks/load': {}, './models/blocks/helper': {}, './router': Stand, './models/config': Stand,
         './models/state': Stand, './models/local_config': Stand, nprogress: { start() {}, done() {} },
         '@netgen/content-browser-ui': { InputBrowse: class {}, MultipleBrowse: class {} },
-        backbone: { Model: { extend: ( proto ) => proto }, $: jQuery }, './utils': {}
+        backbone: { Model: { extend: ( proto ) => proto }, $: jQuery }, './utils': {}, jquery: jQuery
     } );
     load( idOf( './extended/jquery_override' ) );
     assert.equal( typeof jQuery.fn.ajax_submit, 'function', 'ajax_submit from the bundle' );
-    for ( const plugin of [ 'xeditable', 'dependable_select', 'master_slave_selects', 'video_thumb_fetcher', 'view_types', 'bm_tooltip' ] ) {
-        jQuery.fn[ plugin ] = jQuery.fn[ plugin ] || function () { return this; };
+    // Core.ui as ./core_base hands it on; the helpers of ./lib/jquery/* are not part of this test
+    core.ui = jQuery.ngl_ui;
+    for ( const helper of [ 'xeditable', 'dependable_select', 'master_slave_selects', 'video_thumb_fetcher', 'view_types', 'bm_tooltip' ] ) {
+        core.ui[ helper ] = core.ui[ helper ] || function () {};
     }
 
     const listen = window.addEventListener;
@@ -317,7 +328,7 @@ test( 'an aborted write no longer counts', async () => {
 
 test( 'a form without a method attribute is saved as POST and counts as a write', async () => {
     let method;
-    jQuery( document ).one( 'ajaxSend', ( e, xhr, settings ) => { method = settings.type; } );
+    document.addEventListener( 'ajaxSend', ( e ) => { method = e.detail[ 1 ].type; }, { once: true } );
     const el = render( '<div class="sidebar"><form action="/api/blocks/1"><input name="block_update[title]" value="A"></form></div>' );
     const form = el.querySelector( 'form' );
     form.querySelector( 'input' ).value = 'B';

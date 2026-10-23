@@ -3,7 +3,8 @@
  * The content browser dialog of javascript/explayouts-app.js builds its list as an HTML string. Every value of the
  * content_browser answer goes in through esc() (text and attribute values, quotes included) or as a number: a class
  * or object name with markup or a quote stays text. Until 1.3.24 the class name went in as it was, and data-name got
- * $('<div>').text( ... ).html(), which leaves " alone.
+ * $('<div>').text( ... ).html(), which leaves " alone. Since the dialog runs without jQuery, esc() is the one helper
+ * for every text of it (the translated texts too); it stands before the list code, which listCode() takes in.
  *
  * @license GPL-2.0-or-later
  */
@@ -35,6 +36,8 @@ class ContentBrowserEscapingTest extends TestCase
         preg_match_all( '~\+\s*(item\.[a-z_]+)\s*\+~', $code, $raw );
         $this->assertSame( array(), $raw[1], 'item values concatenated as they are' );
         $this->assertStringNotContainsString( '.text(item.', $code, 'jQuery .text().html() does not escape quotes' );
+        $this->assertStringNotContainsString( "$('<div>')", self::script(), 'escaping through jQuery leaves quotes alone' );
+        $this->assertStringNotContainsString( "$('<p>')", self::script(), 'escaping through jQuery leaves quotes alone' );
         foreach ( array( 'esc(item.name)', 'esc(item.class_name)', 'parseInt(item.node_id, 10)', 'parseInt(item.object_id, 10)' ) as $use )
             $this->assertStringContainsString( $use, $code );
     }

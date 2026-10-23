@@ -940,6 +940,58 @@
         <source>Block types</source>
         <translation>Genera segmentorum</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Spatium vel Enter tollit, sagittae movent, Spatium vel Enter deponit, Escape abrogat. Alt cum sagitta sursum vel deorsum statim uno loco movet.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Segmentum %name movere</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Segmentum %name addere</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Rem %name movere</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name sublatum. Zona %zone, positio %position ex %count. Sagittis move, Spatio depone, Escape abroga.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name sublatum. Positio %position ex %count. Sagittis move, Spatio depone, Escape abroga.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Zona %zone, positio %position ex %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Positio %position ex %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name in zona %zone positione %position depositum.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name positione %position depositum.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Motio abrogata.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Haec zona %name non accipit.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Nulla zona %name accipit.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>

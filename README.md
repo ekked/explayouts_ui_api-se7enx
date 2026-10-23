@@ -84,7 +84,9 @@ Third-party code
 Two parts of this extension come from Netgen Layouts and stay under its MIT License, whose notice ships with them:
 
 - `design/standard/javascript/netgen-layouts.js`, the editor's application bundle, built from `netgen/layouts-ui`
-  and patched for Exponential: notice in `design/standard/javascript/netgen-layouts-LICENSE.txt`.
+  and patched for Exponential: notice in `design/standard/javascript/netgen-layouts-LICENSE.txt`, which also names
+  the libraries the bundle still contains (Backbone, Underscore, Handlebars, NProgress, striptags, the content
+  browser with React: MIT; source-map: BSD 3-Clause) with their notices.
 - `design/standard/media/netgen-layouts.*`, the editor's icon font, from `netgen/layouts-core`: notice in
   `design/standard/media/netgen-layouts-LICENSE.txt`.
 
@@ -113,6 +115,11 @@ Sibling extensions
 
 Siteaccess
 - Activate the extension for the admin siteaccess — the app runs inside the authenticated admin session.
+
+Browser
+- The editor page loads no jQuery and no jQuery UI (and nothing of `ezjscore`): the app bundle brings its own DOM
+  layer, dialogs and drag and drop (see "The app bundle and its patches"). Scripts added through
+  `explayouts_ui_api.ini [App] Javascripts[]` must not expect `window.jQuery`.
 
 Installation
 ------------
@@ -172,9 +179,49 @@ What differs from the original is versioned in `src/app-patches/`:
 - `manifest.json`: the original (version, commit, download address, sha256 of the bundle, of each of its 157
   modules and of the skeleton around them) and each patched module with what was changed and in which commit;
 - `header.js`: what stands in front of the bundle (`nglT()`/`nglTh()` for the interface texts);
-- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (32 of 157: the interface
-  texts, the page's jQuery 4 and jQuery UI instead of the built-in jQuery 2.2.4 / jQuery UI 1.10.4, the view type
-  select, and the others listed in the manifest).
+- `modules/NNN-name.js`: browserify module NNN's function exactly as the bundle carries it (49 of 157: the interface
+  texts, the editor's own DOM layer in place of jQuery (module 140), its own drag and drop on Pointer Events in place
+  of jQuery UI (modules 135-138; 134 is empty) and its keyboard mode (module 139), the view type select, the plain DOM
+  code in place of jQuery plugins, and the others listed in the manifest).
+
+The editor runs without jQuery. Module 140 (`jquery`; until 1.3.29 the page's jQuery 4 from ezjscore, before that
+the jQuery 2.2.4 built in) is the editor's DOM layer: the part of jQuery the bundle calls, with jQuery's behaviour,
+on plain DOM. Backbone and the app's modules reach it as `Backbone.$` and `Core.$`; it is not put on the page as
+`window.jQuery` or `window.$`.
+
+| `Core.$` | |
+|---|---|
+| `$( selector \| html \| element \| array \| fn )` | collections; `$( fn )` runs when the document is ready, after the current script |
+| `each`, `map`, `get`, `toArray`, `eq`, `first`, `filter`, `index`, `find`, `closest`, `children`, `parent`, `parents`, `next`, `siblings` | traversal; a selector starting with `>` is relative, as in jQuery |
+| `addClass`, `removeClass`, `hasClass`, `attr`, `removeAttr`, `prop`, `data`, `removeData`, `css`, `height`, `val` | `data()` reads `data-*` attributes as jQuery converts them; `data( '_view' )` is the element's `ngl_view`, where every Backbone view of the app is kept (plain code: `el.ngl_view`) |
+| `html`, `text`, `append`, `after`, `replaceWith`, `remove`, `empty`, `show`, `hide`, `fadeIn`, `fadeOut` | what is taken out loses the layer's handlers and data (jQuery's cleanData); the scripts of HTML put in run once when they reach the document, as with jQuery; fades queue per element |
+| `on`, `off`, `trigger`, `ajaxStart`, `ajaxSend`, `ajaxSuccess`, `ajaxError`, `ajaxComplete`, `ajaxStop` | one native listener per element and type; delegation, namespaces (Backbone's `.delegateEvents<cid>`), jQuery's event object (`currentTarget`, `delegateTarget`, `originalEvent`, `which`, `return false`); `trigger()` dispatches a bubbling `CustomEvent` (the arguments as `detail`) that `addEventListener` listeners get too; `focus`, `blur`, `click` call the element's own method |
+| `serialize`, `serializeArray` | as jQuery |
+| `$.ajax`, `$.get`, `$.active` | XMLHttpRequest with jQuery's options, jqXHR (a promise with `done`, `fail`, `always`, `then`, `responseJSON` ...), headers and encodings; the global events on the document drive the progress bar, the count of running writes (the warning on leaving), and the session timeout and permission dialogs. `javascript/explayouts-app.js` sends its requests through `Core.$.ajax` for that |
+| `$.Deferred`, `$.when`, `$.param`, `$.extend`, `$.each`, `$.inArray` | as jQuery 3+ (`done` at once, `then` later) |
+
+`tests/js/editor-without-jquery.test.mjs` runs the whole page without jQuery through the main flows against a fake of
+the API, then the same flows with jQuery 4 in place of module 140 and compares every request and the document after
+each flow; that run records what the bundle calls of jQuery, and the test fails if the layer lacks any of it.
+`tests/js/dom-layer.test.mjs` tests the layer on its own, against jQuery 4 where it can.
+
+Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar run
+without jQuery plugins. Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its locales
+and eonasdan-bootstrap-datetimepicker are no longer in the bundle; their modules keep their ids and hold plain DOM
+code (`Core.ui`, put together in `./extended/jquery_override`) or nothing:
+
+| `Core.ui` | instead of | |
+|---|---|---|
+| `dialog.show( el, options )`, `hide( el )`, `is_shown( el )` | `$.fn.modal` | Bootstrap 3 markup and CSS; `backdrop`, `keyboard`, `on_shown`, `on_hidden`; Tab stays in the open dialog, the focus goes back on close; shown again while it fades out (or closed while it fades in) it turns round where it stands |
+| `collapse.show/hide/toggle( el )` | `$.fn.collapse` | clicks on `[data-toggle="collapse"]` |
+| `dropdown.toggle( toggle )`, `close_all()` | `$.fn.dropdown` | clicks and keys on `[data-toggle="dropdown"]`, opens upwards when there is no room below |
+| `xeditable`, `dependable_select`, `master_slave_selects`, `view_types`, `video_thumb_fetcher`, `bm_tooltip` ( elements ) | the jQuery plugins of the same names | called by `reinitialize_plugins` (module `init`) |
+| `show( el, ms )`, `hide( el, ms )`, `transition_end`, `find`, `elements`, `tabbables`, `fire` | jQuery's `show`/`hide`, `emulateTransitionEnd` | helpers |
+
+The DOM events `show.bs.modal`, `hidden.bs.collapse`, `shown.bs.dropdown` ... are still fired (as DOM events: listen
+with `addEventListener`). The content browser dialog of `javascript/explayouts-app.js` is a `Core.ui.dialog` too. The date field of `./views/datetime_picker` is the browser's `<input type="datetime-local">`
+(it sends the same `YYYY-MM-DDTHH:mm` in local time); the template helper `date` formats with
+`Intl.DateTimeFormat`.
 
 After `npm ci` (the bundle is read with acorn, not evaluated), `node src/app-patches/apply.mjs` builds the bundle
 from them (`--check` compares, `--from=<original bundle>` builds
@@ -186,6 +233,35 @@ patches, without needing the original (with `LAYOUTS_UI_BUNDLE=<original bundle>
 To change the bundle: `--extract` the module if it is not patched yet, edit its file, note the change in
 `manifest.json` and run `apply.mjs`. The bundle is linked without a version query: after a deploy, a hard reload makes a
 browser fetch it again.
+
+Moving with the keyboard
+------------------------
+
+Everything the pointer moves can be moved with the keyboard as well (module 139, on the sortable lists and
+draggables of modules 135 and 138). The grips are buttons: the handle in a block's header ("Move block ..."), a block
+type of the toolbar ("Add block ..."), a collection item's handle ("Move item ...", manual items, and in a dynamic
+collection the items pinned to a slot); a hint tells screen readers the keys.
+
+| Key | |
+|---|---|
+| Space, Enter | pick up; picked up: drop where it is |
+| Arrow up, Arrow down | one place up or down; at the first or last place of a zone into the zone before or after it |
+| Home, End | the first or last place in the zone (in the collection) |
+| Escape | puts everything back; so does leaving the grip (Tab, a click elsewhere) |
+| Alt+Arrow up, Alt+Arrow down | (not picked up) one place at once, saved at once |
+
+What is picked up moves itself (outlined) and keeps the focus. Zones the pointer cannot drop into are skipped and
+said: linked zones, zones that do not take the block type or are inherited, a container block's placeholders for a
+container block. A block type picked up from the toolbar starts at the first place of the first zone that takes it;
+dropped, it becomes a new block there, and Escape returns it to the toolbar (and the focus to the toolbar's button).
+Each step is said in one polite live region ("Zone Main, position 2 of 3."), with the texts of `spa_strings.tpl`.
+After a drop the grip of the block or item keeps the focus, also when the editor draws it again, for a few seconds and
+only until the user presses, types or focuses anywhere else. The page scrolls to
+follow, smoothly unless the browser asks for reduced motion. *Set position* in an item's menu stays as it was.
+
+A keyboard move runs through the same callbacks as a pointer drag (`keyStart`, `keyMove`, `keyDrop`, `keyCancel` of a
+sortable list; `keyStart`, `keyOver`, `keyDrop` of a draggable), so it is saved with the same requests.
+`tests/js/keyboard-move.test.mjs` makes each move both ways and compares the calls.
 
 Leaving the editor
 ------------------

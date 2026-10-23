@@ -1,5 +1,71 @@
 # Changelog
 
+## Unreleased
+
+- **The layout editor loads no jQuery.** The editor page (`app.tpl`) no longer loads ezjscore's jQuery 4 (nor jQuery
+  UI, see below); the app bundle's module `jquery` is now the editor's own DOM layer: exactly the part of jQuery the
+  bundle calls (collections, events with delegation and Backbone's namespaces, data, `$.ajax` with its global events,
+  `$.Deferred`, `$.when` ...) on plain DOM, with jQuery's behaviour. Backbone's views, events and requests run on it,
+  and nothing changes for the user: every flow of the editor was compared request by request and DOM by DOM with
+  jQuery 4 (`tests/js/editor-without-jquery.test.mjs`). With the libraries gone from the bundle (below) the editor
+  loads 529 KB less script, 143 KB gzipped: the bundle went from 932 KB to 737 KB (gzipped 253 KB to 206 KB), and
+  jQuery 4 (79 KB) and jQuery UI (255 KB, minified) are no longer loaded. `window.jQuery` is no longer set: scripts
+  added through `[App] Javascripts[]` must bring their own.
+- A Backbone view is kept on its element as `el.ngl_view` only (jQuery's data `_view` is that property now);
+  `javascript/explayouts-app.js` finds the collection of "+ Add items" there, sends its requests through the app's
+  `Core.$.ajax` and shows the content browser as one of the app's dialogs (`Core.ui.dialog`) instead of a copy of
+  its own.
+- The menus of the header and of a block are opened by the app's dropdown code alone: `aria-expanded` now follows
+  (a handler of the page opened them before it and left `aria-expanded` at `false`).
+- The page no longer makes block types natively draggable (HTML5 drag and drop with a request of its own); block
+  types are dragged by the editor's drag and drop only.
+- An item of a manual collection with an offset that is put back where it was (dropped on its own place, Escape) is
+  no longer sent to the server as moved.
+- **The editor page's own scripts run without jQuery.** The content browser dialog of "+ Add items" and of the
+  browse fields of a block form (`javascript/explayouts-app.js`) is plain DOM: it no longer needs jQuery or
+  Bootstrap's modal plugin, and shows and hides itself as that plugin did (fade of backdrop and dialog, Escape, a
+  click beside the dialog, the focus kept inside while it is open). Closing it now returns the focus to the link or
+  button it was opened from. Every text of the dialog, the translated ones too, is escaped through one helper that
+  also escapes quotes. A browse field tells the block form about a change with a native `change` event, which
+  listeners added with `addEventListener` now get as well. Its requests go through the app's request function
+  (progress bar, session timeout dialog, warning on leaving). `explayouts-app-head.js` and the Tiptap glue (`src/editors/`) did not use jQuery.
+- **Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar
+  run without jQuery plugins.** Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its
+  locales and eonasdan-bootstrap-datetimepicker are no longer in the editor bundle; small DOM code of this package
+  takes their place (`Core.ui`, see README) with the same markup, classes, transitions and keys, so the stylesheets
+  apply as before. A dialog opened again while it is still closing (Cancel, then "+ Add items" at once) simply stays
+  open, with one backdrop.
+- Dialogs say what they are (`role="dialog"`, `aria-modal`, named by their title, `aria-hidden` when closed), Tab and
+  Shift+Tab stay inside an open dialog, and on closing the focus goes back to where it was.
+- The Options, Items and Advanced panels of the sidebar fold and unfold on a click again: under jQuery 4 Bootstrap's
+  collapse stopped with an error on the first click.
+- Dropdown menus: the toggles say they are closed (`aria-expanded="false"`) until opened. Escape closes an open
+  menu also when the focus has moved on (a block's menu opened with the mouse selects the block, and its rich text
+  editor takes the focus).
+- The date and time field of a block form is the browser's own (`<input type="datetime-local">`); it sends the same
+  value as before (`YYYY-MM-DDTHH:mm`, local time). The date in the draft dialog is formatted with
+  `Intl.DateTimeFormat`: the same text as before in English, German, French and Italian, in other languages the
+  browser's conventions.
+- **Drag and drop without jQuery UI, by mouse, finger and pen.** Moving blocks in and between zones, block types
+  from the toolbar into a zone, blocks onto the trash and the items of a collection now run on the editor's own drag
+  and drop (Pointer Events), and the page no longer loads jQuery UI. What is dragged where, and what is saved, is as
+  before: zones of a shared layout and zones that do not take a block type still refuse it, the trash still asks.
+  New: **Escape** cancels a drag and puts everything back; touch and pen work on every screen size (until now only
+  below 820px, through a bridge in `explayouts-mobile.js` that is gone); a finger on a grip (a block's header, an
+  item's handle, a block type) moves it, also after the block was drawn anew, a finger anywhere else scrolls the
+  page; the canvas keeps scrolling while the pointer stays near its edge, and the block being dragged moves along
+  with what scrolls by. In a dynamic collection the slots light up again while an item is dragged (the
+  classes `sorting` and `highlight`, which jQuery UI 1.14 no longer set), and an item dropped on no slot leaves no
+  preview behind.
+- **Blocks, block types and collection items move with the keyboard.** Their grips are buttons now (a block's
+  handle, a block type of the toolbar, an item's handle): Space or Enter picks up, the arrow keys move one place (at
+  a zone's edge into the zone before or after it), Home and End go to the first and last place, Space or Enter
+  drops, Escape or leaving the grip puts everything back; Alt with the up or down arrow moves one place at once.
+  Linked zones and zones that do not take the block are skipped, as with the pointer. A block type goes from the
+  toolbar into the first zone that takes it and becomes a new block where it is dropped. Each step is said by screen
+  readers in one polite live region, translated in every language of the package; after a drop the grip keeps the
+  focus, until you click, type or tab anywhere else. A keyboard move is saved exactly as one made with the pointer.
+
 ## 1.3.29
 
 - **Design tab: changing only the View type of a list is saved** also when the new view type leaves no item view

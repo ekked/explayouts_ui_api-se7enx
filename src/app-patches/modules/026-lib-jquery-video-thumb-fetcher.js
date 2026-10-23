@@ -1,0 +1,9 @@
+function(e,t,n){
+// Core.ui.video_thumb_fetcher( elements ) (was the jQuery plugin $.fn.video_thumb_fetcher), and the inline
+// switches of the sidebar, .xeditable (Core.ui.xeditable( elements ), was $.fn.xeditable of
+// ./extended/jquery_override with its click handlers)
+var i=e("../../core"),u=i.ui,o=new WeakMap;
+u.video_thumb_fetcher=function(e){u.elements(e).forEach(function(e){var t=e.getAttribute("data-video-id"),n=e.getAttribute("data-service"),r=e.querySelector("img.js-video-thumb");r&&("youtube"===n?r.setAttribute("src","https://img.youtube.com/vi/"+t+"/maxresdefault.jpg?"+ +new Date):"dailymotion"===n?r.setAttribute("src","https://www.dailymotion.com/thumbnail/video/"+t+"?"+ +new Date):"vimeo"===n&&fetch("https://vimeo.com/api/v2/video/"+t+".json").then(function(e){return e.ok?e.json():null}).then(function(e){e&&e[0]&&r.setAttribute("src",e[0].thumbnail_large)}).catch(function(){}))})};
+function a(e){var t=e.closest("[data-view]");return t?t.ngl_view:void 0}
+u.xeditable=function(e){u.elements(e).forEach(function(e){var t=e.querySelector(".form");e.setAttribute("data-input",""),t&&!o.has(t)&&(o.set(t,t.innerHTML),t.innerHTML="")})};
+document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest(".xeditable .js-edit, .xeditable .js-cancel, .xeditable .js-apply"),n,r,s;if(t){e.preventDefault(),n=t.closest(".xeditable"),r=a(t);if(t.classList.contains("js-edit")){s=n.querySelector(".form");n.querySelectorAll(".current").forEach(function(e){u.hide(e)}),r&&r.el.classList.add("xeditable-active"),s&&o.has(s)&&(s.innerHTML=o.get(s)),r&&r.trigger_with_global("plugins:reinitialize")}else t.classList.contains("js-cancel")?(r&&r.el.classList.remove("xeditable-active"),n.querySelectorAll(".form").forEach(function(e){e.innerHTML=""}),n.querySelectorAll(".current").forEach(function(e){u.show(e)})):(r&&r.el.classList.remove("xeditable-active"),r&&r.trigger("xeditable:apply:"+n.getAttribute("data-xeditable-name")))}})}

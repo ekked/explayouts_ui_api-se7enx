@@ -937,6 +937,58 @@
         <source>Block types</source>
         <translation>Cureyên blokan</translation>
     </message>
+    <message>
+        <source>Space or Enter picks it up, the arrow keys move it, Space or Enter drops it, Escape cancels. Alt with the up or down arrow moves it by one place at once.</source>
+        <translation>Valahî an Enter wê hildide, bişkokên tîran wê dikişînin, Valahî an Enter wê datîne, Escape betal dike. Alt bi tîra jor an jêr wê yekser cihekî dikişîne.</translation>
+    </message>
+    <message>
+        <source>Move block %name</source>
+        <translation>Kişandina bloka %name</translation>
+    </message>
+    <message>
+        <source>Add block %name</source>
+        <translation>Lêzêdekirina bloka %name</translation>
+    </message>
+    <message>
+        <source>Move item %name</source>
+        <translation>Kişandina hêmana %name</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Zone %zone, position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name hate hildan. Herêm %zone, cih %position ji %count. Ji bo kişandinê bişkokên tîran, ji bo danînê Valahî, ji bo betalkirinê Escape bi kar bînin.</translation>
+    </message>
+    <message>
+        <source>Picked up %name. Position %position of %count. Use the arrow keys to move, Space to drop, Escape to cancel.</source>
+        <translation>%name hate hildan. Cih %position ji %count. Ji bo kişandinê bişkokên tîran, ji bo danînê Valahî, ji bo betalkirinê Escape bi kar bînin.</translation>
+    </message>
+    <message>
+        <source>Zone %zone, position %position of %count.</source>
+        <translation>Herêm %zone, cih %position ji %count.</translation>
+    </message>
+    <message>
+        <source>Position %position of %count.</source>
+        <translation>Cih %position ji %count.</translation>
+    </message>
+    <message>
+        <source>Dropped %name in zone %zone at position %position.</source>
+        <translation>%name li herêma %zone li cihê %position hate danîn.</translation>
+    </message>
+    <message>
+        <source>Dropped %name at position %position.</source>
+        <translation>%name li cihê %position hate danîn.</translation>
+    </message>
+    <message>
+        <source>Move cancelled.</source>
+        <translation>Kişandin hate betalkirin.</translation>
+    </message>
+    <message>
+        <source>This zone does not accept %name.</source>
+        <translation>Ev herêm %name qebûl nake.</translation>
+    </message>
+    <message>
+        <source>No zone accepts %name.</source>
+        <translation>Tu herêm %name qebûl nake.</translation>
+    </message>
 </context>
 <context>
     <name>design/standard/explayouts_ui_api/parameters</name>
