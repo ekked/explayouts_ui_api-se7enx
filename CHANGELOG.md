@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.3.31
+
+- **"+ Add items" is a button.** The trigger of the content browser in a collection of the sidebar was a `<div>`: it
+  could not be reached with Tab, and Enter and Space did nothing. It is a `<button type="button">` now, styled as
+  before with a visible focus ring. The dialog gives the focus back to it when it closes, also when the collection
+  was drawn again meanwhile (after items were added).
+- **Opening a layout without a draft no longer logs a failed request.** The editor asks for the draft with
+  `fallback=published`; a layout without a draft answers with its published version instead of a 404, and the
+  editor creates the draft as before. `GET layouts/<id>?published=false` without the parameter still answers 404
+  when there is no draft.
+- Polish buttons and menu items use the infinitive, as the administration of Exponential does.
+
 ## 1.3.30
 
 - **The layout editor loads no jQuery.** The editor page (`app.tpl`) no longer loads ezjscore's jQuery 4 (nor jQuery
