@@ -355,6 +355,34 @@ test( 'Cancel, Escape and a click beside the dialog close it; a click inside doe
     } );
 } );
 
+test( 'Cancel and at once + Add items again: the dialog is open, with one backdrop', async () => {
+    const p = page( 'new' );
+    try {
+        click( document.querySelector( '.add-items' ) );
+        takeRequests();
+        await answer( 200, VALUES );
+        await settle();
+        click( modal().querySelector( '.exp-cb-cancel' ) );
+        await wait( 60 );
+        click( document.querySelector( '.add-items' ) );
+        takeRequests();
+        await answer( 200, VALUES );
+        await settle();
+        const now = snapshot();
+        assert.equal( now.display, 'block' );
+        assert.deepEqual( now.backdrops, [ 'modal-backdrop fade in' ] );
+        assert.ok( now.bodyOpen );
+        assert.equal( modal().hasAttribute( 'aria-hidden' ), false );
+        assert.ok( / in\b/.test( now.classes ), now.classes );
+        click( modal().querySelector( '.exp-cb-cancel' ) );
+        await settle();
+        assert.equal( modal().style.display, 'none' );
+        assert.equal( document.querySelectorAll( '.modal-backdrop' ).length, 0 );
+    } finally {
+        p.close();
+    }
+} );
+
 test( 'Adding nothing closes the dialog without a request; a failed add says so', async () => {
     const { new: now } = await differential( async ( p, record ) => {
         click( document.querySelector( '.add-items' ) );

@@ -9,6 +9,11 @@ function(e,t,n){
  * options.on_hidden are called; DOM events show.bs.modal (cancelable), shown.bs.modal, hide.bs.modal (cancelable)
  * and hidden.bs.modal are fired on the element as well.
  *
+ * A dialog shown again while it is still fading out (Cancel, then opened again at once) or closed while it is still
+ * fading in is turned round where it stands: the transition under way is dropped, so nothing of it lands later (no
+ * second backdrop, no display none or aria-hidden on a dialog that is open, no "shown" for one that is closed). A
+ * close turned round this way fires no hidden.bs.modal and no on_hidden: the dialog never got closed.
+ *
  * The module exports function( ui ), called by ./extended/jquery_override with the helpers of
  * bootstrap/js/transition; it returns { show( el, options ), hide( el ), is_shown( el ) }.
  *
@@ -65,6 +70,18 @@ t.exports = function( ui ) {
         el.style.paddingRight = s.body_overflowing && !overflowing ? s.scrollbar_width + 'px' : '';
     }
 
+    /** Calls done after the transition of `on` (ui.transition_end), unless drop_pending( s ) comes first. */
+    function after( s, on, duration, done ) {
+        s.pending.push( ui.transition_end( on, duration, done ) );
+    }
+
+    function drop_pending( s ) {
+        ( s.pending || [] ).forEach( function( cancel ) {
+            cancel();
+        } );
+        s.pending = [];
+    }
+
     function backdrop( el, s, done ) {
         var fade = el.classList.contains( 'fade' );
         if ( s.shown && s.options.backdrop ) {
@@ -73,7 +90,7 @@ t.exports = function( ui ) {
             document.body.appendChild( s.backdrop );
             if ( fade ) ui.reflow( s.backdrop );
             s.backdrop.classList.add( 'in' );
-            if ( fade ) ui.transition_end( s.backdrop, BACKDROP_TRANSITION, done );
+            if ( fade ) after( s, s.backdrop, BACKDROP_TRANSITION, done );
             else done();
         } else if ( !s.shown && s.backdrop ) {
             var remove = function() {
@@ -82,7 +99,7 @@ t.exports = function( ui ) {
                 done();
             };
             s.backdrop.classList.remove( 'in' );
-            if ( fade ) ui.transition_end( s.backdrop, BACKDROP_TRANSITION, remove );
+            if ( fade ) after( s, s.backdrop, BACKDROP_TRANSITION, remove );
             else remove();
         } else {
             done();
@@ -146,14 +163,26 @@ t.exports = function( ui ) {
     }
 
     function show( el, options ) {
-        var s = states.get( el );
-        if ( !s ) states.set( el, s = {} );
+        var s = states.get( el ), active = document.activeElement, closing;
+        if ( !s ) states.set( el, s = { pending: [] } );
         if ( s.shown ) return;
         if ( !ui.fire( el, 'show.bs.modal' ) ) return;
+        closing = s.closing;
+        if ( closing ) {
+            // still fading out: that close is dropped, its backdrop goes, the page is as before it was shown
+            drop_pending( s );
+            s.closing = false;
+            if ( s.backdrop && s.backdrop.parentNode ) s.backdrop.parentNode.removeChild( s.backdrop );
+            s.backdrop = null;
+            reset_scrollbar( s );
+        }
         s.options = Object.assign( { backdrop: true, keyboard: true }, options || {} );
         s.shown = true;
         s.ignore_backdrop_click = false;
-        s.return_focus = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
+        // reopened while fading out, the focus still in it: it goes back where it came from before
+        if ( !( closing && ( !active || active === document.body || el.contains( active ) ) ) ) {
+            s.return_focus = active && active !== document.body ? active : null;
+        }
         set_scrollbar( s );
         document.body.classList.add( 'modal-open' );
         el.addEventListener( 'keydown', on_keydown );
@@ -185,7 +214,7 @@ t.exports = function( ui ) {
                 ui.fire( el, 'shown.bs.modal' );
                 if ( s.options.on_shown ) s.options.on_shown();
             };
-            if ( fade && dialog ) ui.transition_end( dialog, TRANSITION, shown );
+            if ( fade && dialog ) after( s, dialog, TRANSITION, shown );
             else shown();
         } );
     }
@@ -195,7 +224,10 @@ t.exports = function( ui ) {
         var s = states.get( el );
         if ( !s || !s.shown ) return;
         if ( !ui.fire( el, 'hide.bs.modal' ) ) return;
+        // still fading in: what was left of showing it is dropped
+        drop_pending( s );
         s.shown = false;
+        s.closing = true;
         el.removeEventListener( 'keydown', on_keydown );
         el.removeEventListener( 'click', on_click );
         el.removeEventListener( 'mousedown', on_mousedown );
@@ -208,6 +240,7 @@ t.exports = function( ui ) {
             el.removeAttribute( 'aria-modal' );
             backdrop( el, s, function() {
                 var next = top(), back = s.return_focus;
+                s.closing = false;
                 if ( !next ) document.body.classList.remove( 'modal-open' );
                 el.style.paddingLeft = el.style.paddingRight = '';
                 reset_scrollbar( s );
@@ -218,7 +251,7 @@ t.exports = function( ui ) {
                 else if ( next ) next.focus();
             } );
         };
-        if ( el.classList.contains( 'fade' ) ) ui.transition_end( el, TRANSITION, hidden );
+        if ( el.classList.contains( 'fade' ) ) after( s, el, TRANSITION, hidden );
         else hidden();
     }
 

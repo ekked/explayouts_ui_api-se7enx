@@ -7,9 +7,10 @@
   bundle calls (collections, events with delegation and Backbone's namespaces, data, `$.ajax` with its global events,
   `$.Deferred`, `$.when` ...) on plain DOM, with jQuery's behaviour. Backbone's views, events and requests run on it,
   and nothing changes for the user: every flow of the editor was compared request by request and DOM by DOM with
-  jQuery 4 (`tests/js/editor-without-jquery.test.mjs`). The page loads 79 KB less script (jQuery 4 minified,
-  28 KB gzipped); the bundle grows by 47 KB (12 KB gzipped) of readable source. `window.jQuery` is no longer set:
-  scripts added through `[App] Javascripts[]` must bring their own.
+  jQuery 4 (`tests/js/editor-without-jquery.test.mjs`). With the libraries gone from the bundle (below) the editor
+  loads 529 KB less script, 143 KB gzipped: the bundle went from 932 KB to 737 KB (gzipped 253 KB to 206 KB), and
+  jQuery 4 (79 KB) and jQuery UI (255 KB, minified) are no longer loaded. `window.jQuery` is no longer set: scripts
+  added through `[App] Javascripts[]` must bring their own.
 - A Backbone view is kept on its element as `el.ngl_view` only (jQuery's data `_view` is that property now);
   `javascript/explayouts-app.js` finds the collection of "+ Add items" there, sends its requests through the app's
   `Core.$.ajax` and shows the content browser as one of the app's dialogs (`Core.ui.dialog`) instead of a copy of
@@ -30,9 +31,10 @@
   (progress bar, session timeout dialog, warning on leaving). `explayouts-app-head.js` and the Tiptap glue (`src/editors/`) did not use jQuery.
 - **Dialogs, collapsible panels, dropdown menus, tooltips, the date field and the inline switches of the sidebar
   run without jQuery plugins.** Bootstrap 3's JavaScript (modal, collapse, dropdown, transition), Moment.js with its
-  locales and eonasdan-bootstrap-datetimepicker are no longer in the editor bundle (932 KB → 621 KB, gzipped
-  254 KB → 175 KB); small DOM code of this package takes their place (`Core.ui`, see README) with the same markup,
-  classes, transitions and keys, so the stylesheets apply as before.
+  locales and eonasdan-bootstrap-datetimepicker are no longer in the editor bundle; small DOM code of this package
+  takes their place (`Core.ui`, see README) with the same markup, classes, transitions and keys, so the stylesheets
+  apply as before. A dialog opened again while it is still closing (Cancel, then "+ Add items" at once) simply stays
+  open, with one backdrop.
 - Dialogs say what they are (`role="dialog"`, `aria-modal`, named by their title, `aria-hidden` when closed), Tab and
   Shift+Tab stay inside an open dialog, and on closing the focus goes back to where it was.
 - The Options, Items and Advanced panels of the sidebar fold and unfold on a click again: under jQuery 4 Bootstrap's
@@ -48,8 +50,9 @@
   before: zones of a shared layout and zones that do not take a block type still refuse it, the trash still asks.
   New: **Escape** cancels a drag and puts everything back; touch and pen work on every screen size (until now only
   below 820px, through a bridge in `explayouts-mobile.js` that is gone); a finger on a grip (a block's header, an
-  item's handle, a block type) moves it, a finger anywhere else scrolls the page; the canvas keeps scrolling while
-  the pointer stays near its edge. In a dynamic collection the slots light up again while an item is dragged (the
+  item's handle, a block type) moves it, also after the block was drawn anew, a finger anywhere else scrolls the
+  page; the canvas keeps scrolling while the pointer stays near its edge, and the block being dragged moves along
+  with what scrolls by. In a dynamic collection the slots light up again while an item is dragged (the
   classes `sorting` and `highlight`, which jQuery UI 1.14 no longer set), and an item dropped on no slot leaves no
   preview behind.
 - **Blocks, block types and collection items move with the keyboard.** Their grips are buttons now (a block's
@@ -59,7 +62,7 @@
   Linked zones and zones that do not take the block are skipped, as with the pointer. A block type goes from the
   toolbar into the first zone that takes it and becomes a new block where it is dropped. Each step is said by screen
   readers in one polite live region, translated in every language of the package; after a drop the grip keeps the
-  focus. A keyboard move is saved exactly as one made with the pointer.
+  focus, until you click, type or tab anywhere else. A keyboard move is saved exactly as one made with the pointer.
 
 ## 1.3.29
 

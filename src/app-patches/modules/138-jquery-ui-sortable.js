@@ -55,7 +55,16 @@ function Sortable(el,options){
     el.classList.add("ui-sortable");
     m.bind(el,this);
     this._markHandles();
-    if(typeof MutationObserver=="function")new MutationObserver(this._markHandles.bind(this)).observe(el,{childList:!0});
+    // Items added, and items drawn again (a block's header, a collection item's handle are new elements then): their
+    // grips are marked again, once per batch of changes, so that touch-action: none and the keyboard grip stay.
+    if(typeof MutationObserver=="function"){
+        var self=this,queued=!1;
+        new MutationObserver(function(records){
+            if(queued||!records.some(function(r){return Array.prototype.some.call(r.addedNodes,function(n){return n.nodeType===1})}))return;
+            queued=!0;
+            Promise.resolve().then(function(){queued=!1;if(el.isConnected)self._markHandles()});
+        }).observe(el,{childList:!0,subtree:!0});
+    }
 }
 
 var S=Sortable.prototype;
@@ -177,12 +186,16 @@ S._scroller=function(){return this.drag?this.drag.scrollParent:void 0};
 /** Where the pointer is now, as jQuery UI's positionAbs + click offset (the helper's margin box + where it was taken). */
 S._pointer=function(){var d=this.drag;return{x:d.pos.left+d.click.x,y:d.pos.top+d.click.y}};
 
-S._drag=function(ev){
+/**
+ * The pointer moved to `ev` (clientX, clientY), or ./mouse scrolled by `scrolled` px (down > 0) with the pointer
+ * held still: the content moved under it, which is a move of the pointer the other way.
+ */
+S._drag=function(ev,scrolled){
     var o=this.options,d=this.drag;
     if(!d)return;
     d.pos={left:ev.clientX-d.click.x,top:ev.clientY-d.click.y};
     m.place(d.helper,d.pos.left,d.pos.top,o.axis);
-    var dy=d.pos.top-d.lastPos.top,dx=d.pos.left-d.lastPos.left;
+    var dy=d.pos.top-d.lastPos.top||scrolled||0,dx=d.pos.left-d.lastPos.left;
     d.vertical=dy!==0&&(dy>0?"down":"up");
     d.horizontal=dx!==0&&(dx>0?"right":"left");
     // Rearrange within the list the placeholder is in (jQuery UI's _mouseDrag).
@@ -307,11 +320,20 @@ S._stop=function(ev,cancelled){
         if(c.over){c.over=!1;later.push(function(){c._trigger("out",ev,self._ui(self))})}
     });
     this.dragging=!1;
-    this._trigger("beforeStop",ev,this._ui());
-    this._clear(d);
-    for(i=0;i<later.length;i++)later[i]();
-    this._trigger("stop",ev,this._ui());
-    this.drag=null;
+    try{
+        this._trigger("beforeStop",ev,this._ui());
+        this._clear(d);
+        for(i=0;i<later.length;i++)later[i]();
+        this._trigger("stop",ev,this._ui());
+    }finally{this._end(d)}
+};
+
+/** The drag `d` is over also when a callback threw: nothing of it stays behind, the next drag can start. */
+S._end=function(d){
+    this.dragging=!1;
+    if(d.helper)this._clear(d);
+    (this.containers||[]).forEach(function(c){c.over=!1});
+    if(this.drag===d)this.drag=null;
 };
 
 /** Escape, a cancelled pointer or cancel() during the drag: everything back, then out, deactivate and stop. */
@@ -319,20 +341,23 @@ S._abort=function(ev){
     var d=this.drag,self=this;
     if(!d)return;
     this.dragging=!1;
-    this._restore(d.item,d.prev,d.parent);
-    d.item.style.display=d.display;
+    if(d.parent){
+        this._restore(d.item,d.prev,d.parent);
+        d.item.style.display=d.display;
+    }
     this._clear(d);
-    this.containers.slice().reverse().forEach(function(c){
-        c._trigger("deactivate",ev,self._ui(self));
-        if(c.over){c.over=!1;c._trigger("out",ev,self._ui(self))}
-    });
-    this._trigger("stop",ev,this._ui());
-    this.drag=null;
+    try{
+        this.containers.slice().reverse().forEach(function(c){
+            c._trigger("deactivate",ev,self._ui(self));
+            if(c.over){c.over=!1;c._trigger("out",ev,self._ui(self))}
+        });
+        this._trigger("stop",ev,this._ui());
+    }finally{this._end(d)}
 };
 
 S._clear=function(d){
-    if(d.placeholder.parentNode)d.placeholder.parentNode.removeChild(d.placeholder);
-    if(d.helper!==d.item&&d.helper.parentNode)d.helper.parentNode.removeChild(d.helper);
+    if(d.placeholder&&d.placeholder.parentNode)d.placeholder.parentNode.removeChild(d.placeholder);
+    if(d.helper&&d.helper!==d.item&&d.helper.parentNode)d.helper.parentNode.removeChild(d.helper);
     d.helper=null;
     this._sizePlaceholder=null;
 };

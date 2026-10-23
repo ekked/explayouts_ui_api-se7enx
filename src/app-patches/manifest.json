@@ -212,7 +212,7 @@
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "ajax_submit sends a form without a method attribute as POST (the API takes form saves as POST only; jQuery's default GET also hid the save from the warning on leaving).",
         "browser_tabs makes WAI-ARIA tabs: tablist, tab and tabpanel roles, aria-selected with a roving tabindex, one selected tab, arrow keys, Home and End (3df5f1e)",
-        "Bootstrap 3's jQuery plugins are gone: bootstrap/js/transition, dropdown, modal and collapse are plain DOM code now and are put together here as Core.ui (jQuery.ngl_ui for ./core_base). $.fn.modal stays as a bridge to Core.ui.dialog for scripts outside the bundle (explayouts-app.js) until they call Core.ui.dialog. The dropup placement moved to bootstrap/js/dropdown, xeditable to ./lib/jquery/video_thumb_fetcher, dependable_select to ./lib/jquery/master_slave_selects; the jQuery core extensions (toJSON, html/text, ajax_submit, closest_view, browser_tabs ...) stay.",
+        "Bootstrap 3's jQuery plugins are gone: bootstrap/js/transition, dropdown, modal and collapse are plain DOM code now and are put together here as Core.ui (jQuery.ngl_ui for ./core_base). The dropup placement moved to bootstrap/js/dropdown, xeditable to ./lib/jquery/video_thumb_fetcher, dependable_select to ./lib/jquery/master_slave_selects; the jQuery core extensions (toJSON, html/text, ajax_submit, closest_view, browser_tabs ...) stay.",
         "No jQuery on the page any more: the module no longer sets window.jQuery and window.ngc_jquery, and the $.fn.modal bridge is gone (explayouts-app.js calls Core.ui.dialog). Its own collection methods (toJSON, html/text, ajax_submit, browser_tabs ...) are added to the editor's DOM layer (module jquery)."
       ]
     },
@@ -541,7 +541,8 @@
       "original_sha256": "712c53e9258303b392de0e79b90801c8ce828aca3072dc3fb6ed002d3471ba08",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "Plain DOM code instead of Bootstrap 3.4.1's modal.js: same markup, classes, backdrop, body class, scrollbar padding, Escape and backdrop click; in addition role=dialog, aria-modal, aria-hidden, Tab kept in the open dialog and the focus given back on close; on_shown/on_hidden callbacks and DOM events show/shown/hide/hidden.bs.modal."
+        "Plain DOM code instead of Bootstrap 3.4.1's modal.js: same markup, classes, backdrop, body class, scrollbar padding, Escape and backdrop click; in addition role=dialog, aria-modal, aria-hidden, Tab kept in the open dialog and the focus given back on close; on_shown/on_hidden callbacks and DOM events show/shown/hide/hidden.bs.modal.",
+        "A dialog shown again while it still fades out, or closed while it still fades in, is turned round where it stands: the transition under way is dropped, so no second backdrop appears and no display none, aria-hidden or focus move of the old close lands on the dialog open again (the content browser's Cancel followed at once by Add items)."
       ]
     },
     {
@@ -582,7 +583,8 @@
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "The editor's own draggables and droppables on Pointer Events (mouse, touch, pen), plain DOM, in place of jQuery UI's draggable/droppable: what ./bm_collection_items uses (axis, clone helper, handle, zIndex, appendTo; accept, activeClass, hoverClass, tolerance; start/stop/over/out/drop), Escape cancels; activeClass/hoverClass work again (jQuery UI 1.14 had dropped them without $.uiBackCompat)",
-        "Keyboard entries for module 139 (keyStart, keyTargets, keyOver, keyDrop): a manual item of a dynamic collection is moved onto another slot with the keys through the same start/activate/drop/deactivate/stop callbacks as with the pointer, so it is saved with the same $move; each draggable is handed to ./widget when its grips are marked"
+        "Keyboard entries for module 139 (keyStart, keyTargets, keyOver, keyDrop): a manual item of a dynamic collection is moved onto another slot with the keys through the same start/activate/drop/deactivate/stop callbacks as with the pointer, so it is saved with the same $move; each draggable is handed to ./widget when its grips are marked",
+        "A handle drawn again inside a draggable gets its classes again (touch-action: none hangs on them); a drop or stop callback that throws leaves no droppable marked and no helper behind, so the next drag works."
       ]
     },
     {
@@ -602,7 +604,8 @@
       "original_sha256": "1a6e7a86790ceb08947a3b21769dd8fd24039e019123d7d101856b41815fc7b4",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "The gesture of the editor's drag and drop in place of jQuery UI's mouse widget: Pointer Events for mouse, touch and pen with jQuery UI's delay/distance, one press at a time (innermost list first), Escape and pointercancel cancel, no text selection or native drag on a mouse press, the click ending a drag swallowed (never a keyboard click); auto-scroll near the scroll parent's edge while the pointer stays there, as in admin4's sub items drag"
+        "The gesture of the editor's drag and drop in place of jQuery UI's mouse widget: Pointer Events for mouse, touch and pen with jQuery UI's delay/distance, one press at a time (innermost list first), Escape and pointercancel cancel, no text selection or native drag on a mouse press, the click ending a drag swallowed (never a keyboard click); auto-scroll near the scroll parent's edge while the pointer stays there, as in admin4's sub items drag",
+        "Auto-scroll with the pointer held still moves the placeholder along: the scrolled distance counts as a move of the pointer. A start callback that throws ends the drag as cancelled (everything put back, the press released) and the error goes on, instead of leaving the press set and the drag and drop dead until the page is loaded again."
       ]
     },
     {
@@ -613,7 +616,8 @@
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "The editor's own sortable lists on Pointer Events, plain DOM, in place of jQuery UI's sortable: what ./dnd and ./bm_collection_items use, with jQuery UI's callbacks in jQuery UI's order (checked against 1.14.2 in tests/js/dnd.test.mjs); ui holds elements and a per-drag object; cancel(list) also after the drop; Escape cancels; geometry read live; scrollParent replaces the customScrollParent patch",
-        "Keyboard entries for module 139 (keyStart, keyMove, keyDrop, keyCancel): a drag without a pointer through the same callbacks in the same order (start, activate, over, out, change, update, remove, receive, deactivate, stop), so a keyboard move is saved exactly as a pointer move; the item itself travels and keeps the focus of its grip, placeholder and helper stay hidden; each list is handed to ./widget when its grips are marked"
+        "Keyboard entries for module 139 (keyStart, keyMove, keyDrop, keyCancel): a drag without a pointer through the same callbacks in the same order (start, activate, over, out, change, update, remove, receive, deactivate, stop), so a keyboard move is saved exactly as a pointer move; the item itself travels and keeps the focus of its grip, placeholder and helper stay hidden; each list is handed to ./widget when its grips are marked",
+        "The grips of items drawn again (a block's header, a collection item's handle) are marked again: the list watches its whole subtree, batched once per change, so touch-action: none and the keyboard grip are not lost after a block is rendered anew; a callback throwing during the drop or its cancelling still ends the drag (helper and placeholder removed, the list free for the next drag)."
       ]
     },
     {
@@ -624,7 +628,8 @@
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
         "Empty: jQuery UI's widget factory is not needed any more (modules 135-138)",
-        "The keyboard mode of the drag and drop, in place of the empty module: the grips of blocks, block types and collection items become buttons with a name and a hint; Space/Enter picks up and drops, the arrow keys move (into the zone before or after at a zone's edge), Home/End, Alt+arrow moves one place at once, Escape or leaving the grip cancels; linked zones, zones that refuse the block type and container placeholders for container blocks are skipped as the pointer's callbacks refuse them; every step said in one polite live region through nglT(); after a drop the grip keeps the focus, also when the editor draws the block or item again; reduced motion respected"
+        "The keyboard mode of the drag and drop, in place of the empty module: the grips of blocks, block types and collection items become buttons with a name and a hint; Space/Enter picks up and drops, the arrow keys move (into the zone before or after at a zone's edge), Home/End, Alt+arrow moves one place at once, Escape or leaving the grip cancels; linked zones, zones that refuse the block type and container placeholders for container blocks are skipped as the pointer's callbacks refuse them; every step said in one polite live region through nglT(); after a drop the grip keeps the focus, also when the editor draws the block or item again; reduced motion respected",
+        "The list watcher moved to module 138, which hands each list here whenever it marks its grips again. Keeping the focus on a dropped item's grip stops as soon as the user presses, types or focuses anywhere else, instead of pulling the focus back for up to five seconds; a callback throwing while an item is picked up leaves nothing picked up."
       ]
     },
     {
@@ -634,7 +639,8 @@
       "original_sha256": "582262f6de312d91bacb6cf8ae1e4eded62e001deee34d551b1ab626245e1f2a",
       "changes": [
         "Runs on the page's jQuery 4 and jQuery UI 1.14 (ezjscore) instead of the jQuery 2.2.4 and jQuery UI 1.10.4 built in; explayouts names for page tags and globals (8273a03)",
-        "jQuery is no longer used: the module is the editor's own DOM layer, the part of jQuery the bundle calls (collections, events with delegation and namespaces, data, $.ajax with its global events, $.Deferred, $.when, $.param, $.extend) on plain DOM, so that the page loads no jQuery. Backbone and the app reach it as Backbone.$ and Core.$."
+        "jQuery is no longer used: the module is the editor's own DOM layer, the part of jQuery the bundle calls (collections, events with delegation and namespaces, data, $.ajax with its global events, $.Deferred, $.when, $.param, $.extend) on plain DOM, so that the page loads no jQuery. Backbone and the app reach it as Backbone.$ and Core.$.",
+        "Scripts in HTML handed to append, after and replaceWith (strings, or nodes parsed by the layer) run when they reach the document, once, as with jQuery; until now only html() ran them."
       ]
     },
     {

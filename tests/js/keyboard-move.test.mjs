@@ -4,7 +4,8 @@
  * patches in src/app-patches/modules/).
  *
  * The modules run from the bundle itself, with the editor's callers (./dnd, ./draggable, ./receiver,
- * ./bm_collection_items) on a page as the editor draws it. Each move is also made with the pointer on the same page
+ * ./bm_collection_items) on a page as the editor draws it, on the editor's own DOM layer (module jquery) as on the
+ * page. Each move is also made with the pointer on the same page
  * (the geometry mock of dnd.test.mjs), and both must end in the same calls of the models, in the same order: a move
  * by keyboard is saved exactly as one by pointer.
  *
@@ -24,7 +25,7 @@ import { parseBundle } from '../../src/app-patches/bundle.mjs';
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
 const parsed = parseBundle( readFileSync( resolve( root, 'design/standard/javascript/netgen-layouts.js' ), 'utf8' ) );
 
-let jQuery, mouse, kbd, sortable, dd;
+let dom, mouse, kbd, sortable, dd;
 
 function idOf( name ) {
     for ( const m of parsed.modules.values() ) if ( name in m.deps ) return String( m.deps[ name ] );
@@ -141,22 +142,10 @@ before( async () => {
     for ( const [ prop, key ] of [ [ 'offsetWidth', 'width' ], [ 'offsetHeight', 'height' ] ] ) {
         Object.defineProperty( window.HTMLElement.prototype, prop, { configurable: true, get() { return boxOf( this )[ key ]; } } );
     }
-    // A browser's querySelectorAll throws on jQuery's own selectors (":first"), and jQuery then reads them itself.
-    for ( const proto of [ window.Element.prototype, window.Document.prototype, window.DocumentFragment.prototype ] ) {
-        for ( const name of [ 'querySelectorAll', 'querySelector', 'matches' ] ) {
-            const original = proto[ name ];
-            if ( !original ) continue;
-            proto[ name ] = function ( selector, ...rest ) {
-                if ( /:(first|last|eq|even|odd|gt|lt)\b/.test( selector ) ) throw new window.DOMException( 'not a valid selector', 'SyntaxError' );
-                return original.call( this, selector, ...rest );
-            };
-        }
-    }
     // nglT / nglTh as the bundle's header defines them
     ( 0, eval )( readFileSync( resolve( root, 'src/app-patches/header.js' ), 'utf8' ) );
-    const { jQueryFactory } = await import( 'jquery/factory' );
-    jQuery = jQueryFactory( window );
-    window.jQuery = globalThis.jQuery = jQuery;
+    // the editor's DOM layer (module jquery), as Core.$ on the page
+    dom = load( idOf( 'jquery' ), { 101: load( idOf( 'bootstrap/js/transition' ) ) } );
     mouse = load( idOf( './mouse' ) );
     kbd = load( idOf( './widget' ) );
     sortable = load( idOf( 'jquery-ui/sortable' ), { './mouse': mouse, './core': {}, './widget': kbd } );
@@ -179,7 +168,7 @@ beforeEach( () => {
 
 function editorCore( events ) {
     return {
-        $: jQuery,
+        $: dom,
         trigger: ( name ) => events.push( name ),
         state: { in_mode: () => false },
         g: { layout: { id: 7, blocks: { models: [] } } },
@@ -188,7 +177,7 @@ function editorCore( events ) {
             return model;
         } },
         blocks: { create_view: ( identifier, model ) => {
-            const $el = jQuery( '<div id="new" data-view data-block><div class="block-header"><div class="handle">=</div><div class="name">' + identifier + '</div></div></div>' );
+            const $el = dom( '<div id="new" data-view data-block><div class="block-header"><div class="handle">=</div><div class="name">' + identifier + '</div></div></div>' );
             const view = { $el, model };
             $el.data( '_view', view );
             $el[ 0 ].ngl_view = view;
@@ -197,10 +186,9 @@ function editorCore( events ) {
     };
 }
 
-/** Sets the view of `el` as module 21 does: jQuery data _view and the element's ngl_view. */
+/** Sets the view of `el` as module 21 does: the layer's data _view, which is the element's ngl_view. */
 function view( el, v ) {
-    jQuery( el ).data( '_view', v );
-    el.ngl_view = v;
+    dom( el ).data( '_view', v );
     return v;
 }
 
@@ -245,7 +233,7 @@ function editor( events, { accept = () => true } = {} ) {
     const Draggable = load( idOf( './draggable' ) === '135' ? '76' : idOf( './draggable' ), { '../core': core } );
     const Receiver = load( idOf( './receiver' ), { '../core': core } );
     const dnd = load( idOf( './dnd' ), { '../core': core, './draggable': Draggable, './receiver': Receiver, 138: sortable } );
-    const v = ( el, extra ) => Object.assign( Object.create( dnd ), { $: ( sel ) => jQuery( el ).find( sel ) }, extra );
+    const v = ( el, extra ) => Object.assign( Object.create( dnd ), { $: ( sel ) => dom( el ).find( sel ) }, extra );
     v( document.querySelector( '.left-panel' ) ).setup_dnd_for_blocks();
     for ( const zone of document.querySelectorAll( '[data-zone]' ) ) {
         const z = v( zone, { is_zone: true } );
@@ -343,6 +331,46 @@ test( 'a block moved into the next zone at the edge of its own; saved as the poi
     assert.equal( document.activeElement, grip( 'm1' ) );
 } );
 
+test( 'after a drop the grip keeps the focus while the block is drawn again, until the user goes elsewhere', async () => {
+    editor( [] );
+    grip( 'm1' ).focus();
+    press( ' ', 'ArrowDown', ' ' );
+    const redraw = ( id ) => {
+        // as ./block's render(): the block's content replaced, the focused handle with it
+        document.getElementById( id ).innerHTML = '<div class="block-header"><div class="handle">=</div><div class="name">' + id + '</div></div>';
+    };
+    redraw( 'm1' );
+    await wait();
+    assert.ok( document.activeElement === grip( 'm1' ), 'the new grip has the focus' );
+
+    // a click on the page beside it (nothing there to focus): the focus is the body's, and stays there
+    const main = document.querySelector( '.main-content' );
+    main.dispatchEvent( new PointerEvent( 'pointerdown', { bubbles: true, cancelable: true, pointerId: 99, pointerType: 'mouse', button: 0, buttons: 1 } ) );
+    document.activeElement.blur();
+    main.dispatchEvent( new PointerEvent( 'pointerup', { bubbles: true, cancelable: true, pointerId: 99, pointerType: 'mouse', button: 0, buttons: 0 } ) );
+    redraw( 'm1' );
+    await wait();
+    assert.ok( document.activeElement === document.body, 'the focus is not pulled back to the grip' );
+
+    // the same after a key pressed elsewhere, and after the focus went to something else
+    for ( const leave of [
+        () => document.body.dispatchEvent( new KeyboardEvent( 'keydown', { key: 'x', bubbles: true, cancelable: true } ) ),
+        () => { grip( 's1' ).focus(); }
+    ] ) {
+        grip( 'm1' ).focus();
+        press( 'Alt+ArrowUp' );
+        redraw( 'm1' );
+        await wait();
+        assert.ok( document.activeElement === grip( 'm1' ) );
+        leave();
+        if ( document.activeElement === grip( 'm1' ) ) grip( 'm1' ).blur();
+        const focused = document.activeElement;
+        redraw( 'm1' );
+        await wait();
+        assert.ok( document.activeElement === focused, 'the focus stays where the user put it' );
+    }
+} );
+
 test( 'linked zones and zones that refuse are skipped, and said; up from a zone\'s top goes to the end of the one before', async () => {
     const events = [];
     editor( events, { accept: ( zone ) => zone !== 'side' } );
@@ -436,7 +464,7 @@ test( 'a container block\'s placeholder takes a block, not another container blo
     layout( { element: document.getElementById( 'ph-left' ), left: 220, top: 140, width: 300, height: 30 } );
     const core = editorCore( events );
     const dnd = load( idOf( './dnd' ), { '../core': core, './draggable': load( '76', { '../core': core } ), './receiver': load( idOf( './receiver' ), { '../core': core } ), 138: sortable } );
-    Object.assign( Object.create( dnd ), { $: ( sel ) => jQuery( k ).find( sel ) } ).setup_dnd_for_containers_and_zones();
+    Object.assign( Object.create( dnd ), { $: ( sel ) => dom( k ).find( sel ) } ).setup_dnd_for_containers_and_zones();
     await wait();
 
     grip( 'm1' ).focus();
@@ -543,10 +571,10 @@ function collection( type, events ) {
         document.getElementById( 'ip' + i ).__rect = [ 0, 100 + 40 * i, 200, 40 ];
     }
     layout( { element: list, left: 0, top: 100, width: 200 } );
-    const core = { $: jQuery, View: { extend: ( proto ) => proto } };
+    const core = { $: dom, View: { extend: ( proto ) => proto } };
     const Items = load( idOf( './bm_collection_items' ), { '../core': core, './bm_collection_item': {}, 135: dd, 138: sortable } );
     const model = { get: ( k ) => ( { loading: false, collection_type: type, offset: 10 }[ k ] ) };
-    const v = Object.assign( Object.create( Items ), { bm_collection_model: model, $: ( sel ) => jQuery( document.getElementById( 'block' ) ).find( sel ) } );
+    const v = Object.assign( Object.create( Items ), { bm_collection_model: model, $: ( sel ) => dom( document.getElementById( 'block' ) ).find( sel ) } );
     v.setup_dnd();
     return list;
 }

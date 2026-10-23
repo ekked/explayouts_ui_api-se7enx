@@ -29,7 +29,7 @@ function(e,t,n){
  * @license GPL-2.0-or-later
  */
 "use strict";
-var infos=new WeakMap,listOf=new WeakMap,observed=new WeakSet,grab=null,moving=0,live=null,lastSaid="",HINT="exp-kbd-move-hint";
+var infos=new WeakMap,listOf=new WeakMap,grab=null,moving=0,live=null,lastSaid="",HINT="exp-kbd-move-hint";
 
 function T(s,p){
     if(typeof window.nglT=="function")return window.nglT(s,p);
@@ -127,22 +127,15 @@ function markSortable(inst){
     });
 }
 
-/** Called by module 138 whenever it marks a list's grips. The trash and the zone map are not moved from. */
+/**
+ * Called by module 138 whenever it marks a list's grips, also after a block or item was drawn again (its header and
+ * handle are new elements then). The trash and the zone map are not moved from.
+ */
 function sortable(inst){
     var el=inst.element;
     if(el.matches("[data-trash], [data-zone-receiver]"))return;
     listOf.set(el,inst);
     markSortable(inst);
-    // a block drawn again has a new header: its grip is prepared again
-    if(!observed.has(el)&&typeof MutationObserver=="function"){
-        observed.add(el);
-        var queued=!1;
-        new MutationObserver(function(){
-            if(queued)return;
-            queued=!0;
-            Promise.resolve().then(function(){queued=!1;if(el.isConnected)markSortable(inst)});
-        }).observe(el,{childList:!0,subtree:!0});
-    }
 }
 
 /** Called by module 135 when it marks a draggable's grips (a manual item of a dynamic collection). */
@@ -248,7 +241,12 @@ function begin(grip,info,quiet){
     while(item&&!(inst=listOf.get(item.parentElement)))item=item.parentElement;
     if(!item||!inst.element.isConnected)return!1;
     moving++;
-    try{ok=inst.keyStart(item)}finally{moving--}
+    try{ok=inst.keyStart(item)}
+    catch(err){
+        // a callback threw: nothing stays picked up (as with the pointer), and the error goes on
+        try{inst.keyCancel()}catch(again){if(window.console)console.error(again)}
+        throw err;
+    }finally{moving--}
     if(!ok)return!1;
     grab={type:"sortable",inst:inst,item:item,grip:grip,model:modelOf(item),name:nameOf(item),
         toolbar:item.matches(".add-block-btn"),collection:item.matches(".collection-item")};
@@ -274,8 +272,14 @@ function begin(grip,info,quiet){
 }
 
 function beginDraggable(grip,info,quiet){
-    var inst=info.inst,item=inst.element.closest(".collection-item");
-    if(!item||!inst.keyStart())return!1;
+    var inst=info.inst,item=inst.element.closest(".collection-item"),ok;
+    if(!item)return!1;
+    try{ok=inst.keyStart()}
+    catch(err){
+        try{inst.keyDrop(null)}catch(again){if(window.console)console.error(again)}
+        throw err;
+    }
+    if(!ok)return!1;
     var slots=inst.keyTargets(),at=Math.max(0,slots.indexOf(item));
     grab={type:"draggable",inst:inst,item:item,grip:grip,model:modelOf(item),name:nameOf(item),collection:!0,slots:slots,at:at};
     item.classList.add("exp-kbd-grabbed");
@@ -313,24 +317,42 @@ function gripFor(el){
 
 /**
  * After a drop: the grip of what was moved keeps the focus, also when the editor draws it again (the element found
- * again by `find`), as long as the focus has not gone anywhere else, for a few seconds.
+ * again by `find`), for a few seconds, and only until the user goes elsewhere: a press or a key outside the grip, or
+ * the focus on anything else, ends it.
  */
+var stopKeeping=null;
 function keepFocus(el,find){
-    var until=Date.now()+5000,obs;
+    if(stopKeeping)stopKeeping();
+    var obs=null,timer=0,grip=null;
     function lost(){var a=document.activeElement;return!a||a===document.body||!a.isConnected}
     function now(){
         if(!el||!el.isConnected)el=find();
         var g=gripFor(el);
+        if(g)grip=g;
         if(g&&g.isConnected&&document.activeElement!==g){focusGrip(g);reveal(el)}
+    }
+    function elsewhere(ev){
+        var t=ev.target;
+        if(!(t&&t.nodeType===1&&grip&&grip.contains(t)))stop();
+    }
+    function stop(){
+        if(stopKeeping!==stop)return;
+        stopKeeping=null;
+        if(obs)obs.disconnect();
+        clearTimeout(timer);
+        document.removeEventListener("pointerdown",elsewhere,!0);
+        document.removeEventListener("keydown",elsewhere,!0);
+        document.removeEventListener("focusin",elsewhere,!0);
     }
     now();
     if(typeof MutationObserver!="function")return;
-    obs=new MutationObserver(function(){
-        if(Date.now()>until)return obs.disconnect();
-        if(lost())now();
-    });
+    stopKeeping=stop;
+    obs=new MutationObserver(function(){if(lost())now()});
     obs.observe(document.body,{childList:!0,subtree:!0});
-    setTimeout(function(){obs.disconnect()},5000);
+    timer=setTimeout(stop,5000);
+    document.addEventListener("pointerdown",elsewhere,!0);
+    document.addEventListener("keydown",elsewhere,!0);
+    document.addEventListener("focusin",elsewhere,!0);
 }
 
 function finder(model,selector){

@@ -28,11 +28,12 @@ import { parseBundle } from '../../src/app-patches/bundle.mjs';
 
 const root = resolve( dirname( fileURLToPath( import.meta.url ) ), '../..' );
 const parsed = parseBundle( readFileSync( resolve( root, 'design/standard/javascript/netgen-layouts.js' ), 'utf8' ) );
-// jQuery UI as the page had it (ezjscore), for the differential tests; skipped where it is not at hand.
-// (the package's sibling in extension/, or JQUERY_UI_FILE=<path> for a checkout elsewhere).
-const JQUERY_UI = [ process.env.JQUERY_UI_FILE, resolve( root, '../ezjscore/design/standard/javascript/jquery-ui-1.14.2.js' ) ]
-    .find( ( f ) => f && existsSync( f ) );
+// jQuery UI as the page had it (ezjscore), for the differential tests: the package's sibling in extension/, or
+// JQUERY_UI_FILE=<path> for a checkout elsewhere. Where it is not at hand they are skipped, with CI set they fail.
+const JQUERY_UI_PLACES = [ process.env.JQUERY_UI_FILE, resolve( root, '../ezjscore/design/standard/javascript/jquery-ui-1.14.2.js' ) ].filter( Boolean );
+const JQUERY_UI = JQUERY_UI_PLACES.find( ( f ) => existsSync( f ) );
 const haveJQueryUI = !!JQUERY_UI;
+const NO_JQUERY_UI = 'jQuery UI 1.14.2 not found (looked at ' + JQUERY_UI_PLACES.join( ', ' ) + '); set JQUERY_UI_FILE to compare';
 
 let jQuery, dom, mouse, sortable, dd;
 
@@ -362,6 +363,99 @@ test( 'touch and pen drag like the mouse; the press is not prevented (taps stay 
     assert.ok( document.querySelector( '#a4 .grip' ).classList.contains( 'ui-sortable-handle' ) );
 } );
 
+test( 'an item drawn again keeps its grip: the class (touch-action) comes back, a finger on the new grip drags it', async () => {
+    const { L1, L2 } = twoLists();
+    sortable.sortable( [ L1, L2 ], { connectWith: '.list', tolerance: 'pointer', handle: '.grip' } );
+    // as ./block's render(): the block's content replaced, its header a new element
+    document.getElementById( 'a1' ).innerHTML = '<span class="grip">a1 drawn again</span>';
+    await wait();
+    const grip = document.querySelector( '#a1 .grip' );
+    assert.ok( grip.classList.contains( 'ui-sortable-handle' ), 'the new grip carries the class touch-action hangs on' );
+    await drag( grip, [ [ 150, 130 ], [ 400, 130 ], [ 400, 145 ] ], { pointerType: 'touch' } );
+    assert.deepEqual( ids( L2 ), [ 'b1', 'a1', 'b2' ] );
+
+    // a draggable's handle drawn again inside it (a collection item's panel)
+    slots();
+    dd.draggable( document.getElementById( 'p0' ), { handle: '.handle' } );
+    document.getElementById( 'p0' ).innerHTML = '<span class="handle">=</span> drawn again';
+    await wait();
+    assert.ok( document.querySelector( '#p0 .handle' ).classList.contains( 'ui-draggable-handle' ) );
+} );
+
+test( 'auto-scroll with the pointer held still moves the placeholder along with what scrolls under it', async () => {
+    const n = 20;
+    document.body.innerHTML = '<div id="S"><div id="L">' + Array.from( { length: n }, ( x, i ) => '<div id="a' + i + '" data-test-item>a' + i + '</div>' ).join( '' ) + '</div></div>';
+    const scroller = document.getElementById( 'S' ), L = document.getElementById( 'L' );
+    scroller.__rect = [ 0, 100, 200, 200 ];   // shows y 100-300 of the list, which is 800 high
+    let top = 0;
+    Object.defineProperty( scroller, 'scrollTop', { configurable: true, get: () => top, set: ( v ) => { top = Math.max( 0, Math.min( 600, v ) ); } } );
+    layout( { element: L, left: 0, top: 100, width: 200, scroller } );
+    sortable.sortable( L, { scrollParent: scroller, placeholder: 'no-placeholder' } );
+    const place = () => [ ...L.children ].findIndex( ( c ) => c.classList.contains( 'ui-sortable-placeholder' ) );
+    // a0 taken and moved down to 5px above the scroller's bottom, then held there
+    await drag( document.getElementById( 'a0' ), [ [ 100, 200 ], [ 100, 295 ] ], { release: false } );
+    const scrolled = top, placed = place();
+    await wait( 150 );
+    assert.ok( top > scrolled + 40, 'it scrolled on: ' + scrolled + ' -> ' + top );
+    assert.ok( place() > placed, 'the placeholder followed what scrolled under the pointer: from ' + placed + ' to ' + place() );
+    pointer( 'pointerup', document.body, 100, 295 );
+    await wait();
+    assert.ok( [ ...L.children ].findIndex( ( c ) => c.id === 'a0' ) > placed );
+} );
+
+test( 'a callback that throws ends the drag cleanly: the error is reported, the next drag works', async () => {
+    const errors = [];
+    const onError = ( ev ) => { errors.push( ev.error && ev.error.message ); ev.preventDefault(); };
+    const consoleError = console.error;
+    window.addEventListener( 'error', onError );
+    console.error = () => {};
+    try {
+        const { L1 } = twoLists();
+        let fail = true;
+        const trace = [];
+        sortable.sortable( L1, { placeholder: 'no-placeholder', start() { trace.push( 'start' ); if ( fail ) { fail = false; throw new Error( 'start failed' ); } },
+            stop() { trace.push( 'stop' ); } } );
+        await drag( document.getElementById( 'a1' ), [ [ 100, 130 ], [ 100, 175 ] ] );
+        assert.deepEqual( errors, [ 'start failed' ], 'the error is not swallowed' );
+        assert.deepEqual( ids( L1 ), [ 'a1', 'a2', 'a3' ], 'all put back' );
+        assert.deepEqual( found( '.ui-sortable-helper, .ui-sortable-placeholder' ), [] );
+        assert.equal( mouse.pressed(), null, 'no press left behind' );
+        await drag( document.getElementById( 'a1' ), [ [ 100, 130 ], [ 100, 175 ] ] );
+        assert.deepEqual( ids( L1 ), [ 'a2', 'a3', 'a1' ], 'the next drag works' );
+
+        // a sortable's update throwing during the drop
+        errors.length = 0;
+        const { L1: L } = twoLists();
+        fail = true;
+        const updates = [];
+        sortable.sortable( L, { update( e, ui ) { updates.push( ui.item.id ); if ( fail ) { fail = false; throw new Error( 'update failed' ); } } } );
+        await drag( document.getElementById( 'a1' ), [ [ 100, 130 ], [ 100, 175 ] ] );
+        assert.deepEqual( errors, [ 'update failed' ] );
+        assert.deepEqual( ids( L ), [ 'a2', 'a1', 'a3' ] );
+        assert.deepEqual( found( '.ui-sortable-helper, .ui-sortable-placeholder' ), [] );
+        await drag( document.getElementById( 'a3' ), [ [ 100, 170 ], [ 100, 110 ] ] );
+        assert.deepEqual( ids( L ), [ 'a3', 'a2', 'a1' ], 'the next drag works' );
+        assert.deepEqual( updates, [ 'a1', 'a3' ] );
+
+        // a draggable's drop throwing: no droppable stays marked, no helper stays, the next drag works
+        errors.length = 0;
+        const list = slots();
+        const drops = [];
+        fail = true;
+        dd.draggable( document.getElementById( 'p0' ), { axis: 'y', helper: 'clone', handle: '.handle' } );
+        dd.droppable( list.querySelectorAll( '.slot' ), { activeClass: 'sorting', hoverClass: 'highlight',
+            drop() { drops.push( this.id ); if ( fail ) { fail = false; throw new Error( 'drop failed' ); } } } );
+        await drag( document.querySelector( '#p0 .handle' ), [ [ 50, 205 ] ], { from: [ 50, 120 ] } );
+        assert.deepEqual( errors, [ 'drop failed' ] );
+        assert.deepEqual( found( '.sorting, .highlight, .ui-droppable-active, .ui-droppable-hover, .ui-draggable-dragging' ), [] );
+        await drag( document.querySelector( '#p0 .handle' ), [ [ 50, 245 ] ], { from: [ 50, 120 ] } );
+        assert.deepEqual( drops, [ 's2', 's3' ], 'the next drag drops' );
+    } finally {
+        window.removeEventListener( 'error', onError );
+        console.error = consoleError;
+    }
+} );
+
 test( 'only the handle starts a drag; a press inside a nested list is that list\'s', async () => {
     const { L1 } = twoLists();
     const a2 = document.getElementById( 'a2' );
@@ -530,7 +624,8 @@ const SCENARIOS = {
 };
 
 for ( const [ name, s ] of Object.entries( SCENARIOS ) ) {
-    test( 'as jQuery UI 1.14.2: ' + name, { skip: !haveJQueryUI && 'jQuery UI not at ' + JQUERY_UI }, async () => {
+    test( 'as jQuery UI 1.14.2: ' + name, { skip: !haveJQueryUI && !process.env.CI && NO_JQUERY_UI }, async () => {
+        assert.ok( haveJQueryUI, NO_JQUERY_UI + ' (CI is set: no skipping)' );
         const run = async ( own ) => {
             const { L1, L2 } = twoLists( { sized: true } );
             const trace = [];

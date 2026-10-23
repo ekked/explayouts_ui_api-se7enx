@@ -123,6 +123,15 @@ function Draggable(el,options){
     el.classList.add("ui-draggable");
     m.bind(el,this);
     this._markHandles();
+    // a handle drawn again inside the draggable is marked again (touch-action: none, the keyboard grip)
+    if(typeof MutationObserver=="function"){
+        var self=this,queued=!1;
+        new MutationObserver(function(records){
+            if(queued||!records.some(function(r){return Array.prototype.some.call(r.addedNodes,function(n){return n.nodeType===1})}))return;
+            queued=!0;
+            Promise.resolve().then(function(){queued=!1;if(el.isConnected)self._markHandles()});
+        }).observe(el,{childList:!0,subtree:!0});
+    }
 }
 var G=Draggable.prototype;
 
@@ -205,16 +214,27 @@ G._move=function(ev,silent){
 
 G._stop=function(ev,cancelled){
     if(!this.helper)return;
-    var active=this.active||[];
+    var active=this.active||[],keep=!1;
     this.active=null;
-    active.forEach(function(d){
-        if(!cancelled&&m.isVisible(d.element)&&d.intersects(this,ev))d._drop(ev,this);
-        else if(d.isover){d.element.classList.remove("ui-droppable-hover");removeClasses(d.element,d.options.hoverClass)}
-        d.isover=!1;
-        d.rect=null;
-        d._deactivate(ev,this);
-    },this);
-    if(this._trigger("stop",ev))this._clear();
+    try{
+        active.forEach(function(d){
+            if(!cancelled&&m.isVisible(d.element)&&d.intersects(this,ev))d._drop(ev,this);
+            else if(d.isover){d.element.classList.remove("ui-droppable-hover");removeClasses(d.element,d.options.hoverClass)}
+            d.isover=!1;
+            d.rect=null;
+            d._deactivate(ev,this);
+        },this);
+        keep=!this._trigger("stop",ev);
+    }finally{
+        // also when a callback threw: no droppable stays marked, and the next drag can start
+        active.forEach(function(d){
+            d.element.classList.remove("ui-droppable-active","ui-droppable-hover");
+            removeClasses(d.element,d.options.activeClass);removeClasses(d.element,d.options.hoverClass);
+            d.isover=!1;
+            d.rect=null;
+        });
+        if(!keep)this._clear();
+    }
 };
 
 G._clear=function(){

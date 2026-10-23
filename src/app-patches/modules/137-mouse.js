@@ -85,10 +85,11 @@ function scrollFrame(){
     else if(y>bottom-EDGE)dy=Math.ceil((y-bottom+EDGE)/EDGE*STEP);
     if(!dy)return;
     if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)dy=dy>0?8:-8;
-    if(el){var before=el.scrollTop;el.scrollTop=before+dy;if(el.scrollTop===before)return}
+    if(el){var before=el.scrollTop;el.scrollTop=before+dy;dy=el.scrollTop-before;if(!dy)return}
     else window.scrollBy(0,dy);
     if(w._scrolled)w._scrolled();
-    w._drag(p.last);
+    // the pointer stays where it is: what moved is the content, by dy
+    w._drag(p.last,dy);
 }
 
 /**
@@ -129,7 +130,16 @@ function onMove(ev){
     p.last={clientX:ev.clientX,clientY:ev.clientY};
     if(p.started){ev.preventDefault();p.widget._drag(ev);return}
     if(!p.delayMet||Math.max(Math.abs(ev.clientX-p.down.clientX),Math.abs(ev.clientY-p.down.clientY))<p.widget.options.distance)return;
-    p.started=p.widget._start(p.down,ev)!==!1;
+    try{p.started=p.widget._start(p.down,ev)!==!1}
+    catch(err){
+        // A callback threw (start, activate): the drag ends as cancelled, so that nothing stays half done and the
+        // next press works, and the error goes on.
+        if(press===p){
+            p.started=!0;
+            try{finish(ev,!0)}catch(again){if(window.console)console.error(again)}
+        }
+        throw err;
+    }
     if(!p.started)return finish(ev,!1);
     ev.preventDefault();
     p.widget._drag(ev);
@@ -163,7 +173,7 @@ function finish(ev,cancelled){
     if(p.frame)window.cancelAnimationFrame(p.frame);
     if(p.started){
         swallowClick=!0;
-        p.widget._stop(ev,cancelled);
+        p.widget._stop(ev,cancelled);   // the press is over before: a callback throwing here leaves no press behind
     }
 }
 

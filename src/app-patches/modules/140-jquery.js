@@ -28,6 +28,10 @@ function(e,t,n){
  * keeps an element's Backbone view, so plain code finds a view as el.ngl_view. remove(), empty(), replaceWith(),
  * html() and text() drop the layer's handlers and data of what they take out, as jQuery's cleanData.
  *
+ * Scripts: as with jQuery, the scripts in HTML put in by html(), append(), after() or replaceWith() run when they reach
+ * the document, each once (nodes parsed by $( html ) too: they run when inserted); scripts moved around do not run
+ * again.
+ *
  * Requests: $.ajax on XMLHttpRequest with jQuery's options (url, type/method, data, processData, contentType,
  * dataType, headers, context, beforeSend, success, error, complete, global) and its jqXHR (a promise: done, fail,
  * always, then, catch; readyState, status, statusText, responseText, responseJSON, getResponseHeader, abort); the
@@ -40,7 +44,7 @@ function(e,t,n){
  * @license GPL-2.0-or-later
  */
 var ui = e( 101 ), slice = Array.prototype.slice, store = new WeakMap(), events_of = new WeakMap(),
-    trigger_args = new WeakMap(), queues = new WeakMap();
+    trigger_args = new WeakMap(), queues = new WeakMap(), unrun = new WeakSet();
 
 function $( selector, context ) {
     return new Init( selector, context );
@@ -87,10 +91,16 @@ function is_plain( o ) {
     return !proto || proto === Object.prototype;
 }
 
-/** HTML to nodes, as jQuery.parseHTML: the top level nodes, text included; scripts are not run. */
+/**
+ * HTML to nodes, as jQuery.parseHTML: the top level nodes, text included. Its scripts are not run here; they run when
+ * the layer puts them into the document (append, after, replaceWith, html), once, as jQuery's domManip runs them.
+ */
 function parse( html ) {
     var template = document.createElement( 'template' );
     template.innerHTML = String( html ).trim();
+    slice.call( template.content.querySelectorAll( 'script' ) ).forEach( function( script ) {
+        unrun.add( script );
+    } );
     return slice.call( template.content.childNodes ).map( function( node ) {
         return document.adoptNode( node );
     } );
@@ -475,25 +485,46 @@ function nodes( value ) {
 function insert( targets, value, place ) {
     var list = nodes( value ), last = targets.length - 1;
     if ( !list.length ) return targets;
-    return targets.each( function( i ) {
+    targets.each( function( i ) {
         var fragment = document.createDocumentFragment();
         list.forEach( function( node ) {
             fragment.appendChild( i === last ? node : node.cloneNode( true ) );
         } );
         place( this, fragment );
     } );
+    run_inserted( list );
+    return targets;
 }
 
-/** Scripts in HTML put in by html() run, as with jQuery: the browser runs a new script element. */
+/**
+ * Runs a script element put in as HTML (the browser does not run those) as jQuery's DOMEval does: a new copy of it in
+ * the head, taken out again once it ran (one with src stays to load); the element itself stays where it is.
+ */
+function run_script( old ) {
+    if ( old.type && !/^(?:(?:text|application)\/(?:java|ecma)script|module)$/i.test( old.type ) ) return;
+    var script = document.createElement( 'script' );
+    slice.call( old.attributes ).forEach( function( a ) {
+        script.setAttribute( a.name, a.value );
+    } );
+    script.text = old.text;
+    ( document.head || document.documentElement ).appendChild( script );
+    if ( !script.src && script.parentNode ) script.parentNode.removeChild( script );
+}
+
+/** Scripts in HTML put in by html() run, as with jQuery. */
 function run_scripts( el ) {
-    slice.call( el.querySelectorAll( 'script' ) ).forEach( function( old ) {
-        if ( old.type && !/^(?:(?:text|application)\/(?:java|ecma)script|module)$/i.test( old.type ) ) return;
-        var script = document.createElement( 'script' );
-        slice.call( old.attributes ).forEach( function( a ) {
-            script.setAttribute( a.name, a.value );
+    slice.call( el.querySelectorAll( 'script' ) ).forEach( run_script );
+}
+
+/** The scripts of the layer's parsed HTML among `list` that are now in the document run, each once. */
+function run_inserted( list ) {
+    list.forEach( function( node ) {
+        if ( node.nodeType !== 1 ) return;
+        ( node.nodeName === 'SCRIPT' ? [ node ] : slice.call( node.querySelectorAll( 'script' ) ) ).forEach( function( script ) {
+            if ( !unrun.has( script ) || !script.isConnected ) return;
+            unrun.delete( script );
+            run_script( script );
         } );
-        script.text = old.text;
-        old.parentNode.replaceChild( script, old );
     } );
 }
 
@@ -538,6 +569,7 @@ extend( fn, {
                 fragment.appendChild( i === 0 ? node : node.cloneNode( true ) );
             } );
             el.parentNode.replaceChild( fragment, el );
+            if ( i === 0 ) run_inserted( list );
         } );
     },
     remove: function() {

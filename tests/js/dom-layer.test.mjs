@@ -32,7 +32,8 @@ let $, jQuery, xhrs;
 const wait = ( ms = 0 ) => new Promise( ( done ) => setTimeout( done, ms ) );
 
 before( async () => {
-    GlobalRegistrator.register( { url: 'https://example.test/admin/explayouts_ui_api/app' } );
+    // scripts run (the layer runs the scripts of HTML it puts in, as jQuery does); only the test's own code runs
+    GlobalRegistrator.register( { url: 'https://example.test/admin/explayouts_ui_api/app', settings: { enableJavaScriptEvaluation: true, suppressInsecureJavaScriptEnvironmentWarning: true } } );
     window.Element.prototype.toString = function () { return '[object ' + this.constructor.name + ']'; };
     // as in support/editor-page.mjs: happy-dom's selectedIndex of a select in a form put in by innerHTML is -1 although
     // an option is selected; jQuery's val() reads it, a browser answers the index
@@ -178,6 +179,26 @@ test( 'html, append, after, replaceWith, empty: what is taken out loses its hand
     assert.equal( document.getElementById( 'p' ).innerHTML, '&lt;b&gt;' );
     $( '#p' ).empty();
     assert.equal( document.getElementById( 'p' ).childNodes.length, 0 );
+} );
+
+test( 'scripts in HTML put in by html, append, after and replaceWith run once, as with jQuery', () => {
+    const runs = [];
+    for ( const q of [ jQuery, $ ] ) {
+        window.ran = [];
+        document.body.innerHTML = '<div id="r"><p id="p"><span id="s">s</span><span id="t">t</span></p></div><div id="out"></div>';
+        q( '#p' ).append( '<i><script>ran.push( "append" )</script></i>' );
+        q( '#s' ).after( '<script>ran.push( "after" )</script>' );
+        const parsed = q( '<b><script>ran.push( "parsed" )</script></b>' );
+        window.ran.push( 'not before it is in' );
+        q( '#p' ).append( parsed );
+        q( '#out' ).append( parsed );   // moved: not again
+        q( '#t' ).replaceWith( '<u><script>ran.push( "replaceWith" )</script></u>' );
+        q( '#out' ).html( '<script>ran.push( "html" )</script>' );
+        q( '#out' ).append( '<script type="text/template">ran.push( "template" )</script>' );
+        runs.push( window.ran );
+    }
+    assert.deepEqual( runs[ 0 ], [ 'append', 'after', 'not before it is in', 'parsed', 'replaceWith', 'html' ], 'jQuery' );
+    assert.deepEqual( runs[ 1 ], runs[ 0 ] );
 } );
 
 test( 'events: delegation in jQuery\'s order, currentTarget, return false, namespaces, focus by focusin', () => {

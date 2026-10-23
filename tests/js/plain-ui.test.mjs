@@ -195,6 +195,55 @@ test( 'dialog: hide of a closed dialog does nothing; a prevented show does not o
     assert.equal( document.body.className, '' );
 } );
 
+test( 'dialog: shown again while it still fades out, it stays open: one backdrop, no aria-hidden, the focus inside', async () => {
+    const m = dialogMarkup();
+    let hidden = 0;
+    ui.dialog.show( m, { on_hidden: () => hidden++ } );
+    await wait( 500 );
+    $id( 'field' ).focus();
+    click( $id( 'cancel' ) );
+    await wait( 100 );   // the dialog fades out for 300 ms
+    ui.dialog.show( m, { on_hidden: () => hidden++ } );
+    await wait( 800 );   // past every transition of the first close
+    assert.ok( ui.dialog.is_shown( m ) );
+    assert.equal( m.style.display, 'block' );
+    assert.ok( m.classList.contains( 'in' ) );
+    assert.equal( m.hasAttribute( 'aria-hidden' ), false );
+    assert.equal( m.getAttribute( 'aria-modal' ), 'true' );
+    assert.deepEqual( [ ...document.querySelectorAll( '.modal-backdrop' ) ].map( ( b ) => b.className ), [ 'modal-backdrop fade in' ] );
+    assert.equal( document.body.className, 'modal-open' );
+    assert.ok( m.contains( document.activeElement ) || document.activeElement === m, 'the focus is in the dialog' );
+    assert.equal( hidden, 0, 'the close turned round is no close' );
+    assert.deepEqual( events, [ 'show.bs.modal m', 'shown.bs.modal m', 'hide.bs.modal m', 'show.bs.modal m', 'shown.bs.modal m' ] );
+    ui.dialog.hide( m );
+    await wait( 500 );
+    assert.equal( m.style.display, 'none' );
+    assert.equal( document.querySelectorAll( '.modal-backdrop' ).length, 0 );
+    assert.equal( document.body.className, '' );
+    assert.equal( document.body.style.paddingRight, '' );
+    assert.equal( hidden, 1 );
+    assert.equal( document.activeElement, $id( 'opener' ), 'the focus goes back to the opener of the first show' );
+} );
+
+test( 'dialog: closed while it still fades in, it stays closed: not shown later, no backdrop left', async () => {
+    const m = dialogMarkup();
+    let shown = 0, hidden = 0;
+    ui.dialog.show( m, { on_shown: () => shown++, on_hidden: () => hidden++ } );
+    await wait( 50 );    // the backdrop fades in for 150 ms, then the dialog
+    ui.dialog.hide( m );
+    await wait( 200 );
+    assert.notEqual( m.style.display, 'block', 'the dialog does not come up after it was closed' );
+    await wait( 500 );
+    assert.ok( !ui.dialog.is_shown( m ) );
+    assert.equal( m.style.display, 'none' );
+    assert.ok( !m.classList.contains( 'in' ) );
+    assert.equal( m.getAttribute( 'aria-hidden' ), 'true' );
+    assert.equal( document.querySelectorAll( '.modal-backdrop' ).length, 0 );
+    assert.equal( document.body.className, '' );
+    assert.deepEqual( [ shown, hidden ], [ 0, 1 ] );
+    assert.equal( document.activeElement, $id( 'opener' ) );
+} );
+
 // ---------------------------------------------------------------- collapse
 
 test( 'collapse: the sidebar panels hide and show as with Bootstrap, aria-expanded on toggle and panel', async () => {

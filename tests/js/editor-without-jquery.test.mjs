@@ -2,7 +2,8 @@
  * The whole layout editor without jQuery: app.tpl's scripts (tests/js/support/editor-page.mjs) against a fake of the
  * API (support/fake-api.mjs), driven through the main flows (support/editor-flows.mjs): open a layout, select and edit
  * a block in the sidebar and in place, move it to another zone, drag a block type from the toolbar into a zone, add
- * items to a collection through the content browser dialog, delete a block from its menu, cancel Discard, publish.
+ * items to a collection through the content browser dialog, delete a block from its menu, move a block with the
+ * keyboard, cancel Discard, publish.
  *
  * The same flows then run once more with the page's jQuery 4 in place of the bundle's DOM layer (module jquery, as
  * until 1.3.29): every request, every observation and the whole document after each flow must be the same. That run
@@ -121,6 +122,17 @@ test( 'without jQuery: the page has none, and every flow does what the editor di
     assert.deepEqual( s.deleteBlock.saved, [ { request: 'DELETE ' + P + '/eng/blocks/20', body: '', token: 'api-token' } ] );
     assert.deepEqual( s.deleteBlock.blocks, [ 'top: ', 'main: , Greeting' ] );
     assert.equal( s.deleteBlock.open, false );
+
+    // the title block moved one place up with the keyboard: said at each step, saved as a move with the pointer is
+    const kbd = s.moveBlockByKeyboard;
+    assert.deepEqual( kbd.name, [ 'button', 'Move block Greeting', 0 ] );
+    assert.deepEqual( kbd.picked, [ 'Picked up Greeting. Zone main, position 2 of 2. Use the arrow keys to move, Space to drop, Escape to cancel.', 'true' ] );
+    assert.deepEqual( kbd.moved, [ 'Zone main, position 1 of 2.', [ 'top: ', 'main: Greeting, ' ] ] );
+    assert.equal( kbd.dropped, 'Dropped Greeting in zone main at position 1.' );
+    assert.deepEqual( kbd.saved, [ { request: 'POST ' + P + '/eng/blocks/10/move/zone',
+        body: { zone_identifier: 'main', parent_position: 0, layout_id: 1 }, token: 'api-token' } ] );
+    assert.deepEqual( kbd.blocks, [ 'top: ', 'main: Greeting, ' ] );
+    assert.deepEqual( [ kbd.focus, kbd.pressed ], [ 'title', 0 ], 'the grip of the block moved keeps the focus' );
 
     assert.deepEqual( s.discardCancelled, { asked: 'Discard changes', saved: [], modals: 0 } );
 

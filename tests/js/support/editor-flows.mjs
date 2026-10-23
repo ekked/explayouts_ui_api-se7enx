@@ -10,7 +10,7 @@ import { click } from './editor-page.mjs';
 
 /** The flows, in the order they run on one page (each starts where the one before left off). */
 export const FLOWS = [ 'openLayout', 'editBlock', 'inlineEdit', 'moveBlock', 'addBlockFromToolbar', 'addCollectionItems',
-                       'deleteBlock', 'discardCancelled', 'publish' ];
+                       'deleteBlock', 'moveBlockByKeyboard', 'discardCancelled', 'publish' ];
 
 const wait = ( ms = 0 ) => new Promise( ( done ) => setTimeout( done, ms ) );
 
@@ -211,6 +211,26 @@ export async function deleteBlock( page ) {
     await page.settle();
     return { menu, asked, saved: writes( page, from ), blocks: blockIds(), modals: document.querySelectorAll( '.js-ngc-wrapper .modal' ).length,
              open: document.body.classList.contains( 'modal-open' ) };
+}
+
+/** Moves the title block one place up with the keyboard: its grip, Space, ArrowUp, Space. */
+export async function moveBlockByKeyboard( page ) {
+    const from = page.requests.length;
+    const press = ( key ) => ( document.activeElement || document.body ).dispatchEvent( new KeyboardEvent( 'keydown', { key, bubbles: true, cancelable: true } ) );
+    const live = () => ( document.querySelector( '.exp-kbd-sr[aria-live]' ) || {} ).textContent;
+    const grip = document.querySelector( '[data-type="title"] > .block-header .exp-kbd-grip' );
+    const name = [ grip.getAttribute( 'role' ), grip.getAttribute( 'aria-label' ), grip.tabIndex ];
+    grip.focus();
+    press( ' ' );
+    const picked = [ live(), grip.getAttribute( 'aria-pressed' ) ];
+    press( 'ArrowUp' );
+    const moved = [ live(), blockIds() ];
+    press( ' ' );
+    await page.settle();
+    const focused = document.activeElement;
+    return { name, picked, moved, dropped: live(), saved: writes( page, from ), blocks: blockIds(),
+             focus: focused && focused.matches( '.exp-kbd-grip' ) && focused.closest( '[data-block]' ).getAttribute( 'data-type' ),
+             pressed: document.querySelectorAll( '[aria-pressed]' ).length };
 }
 
 /** Discard asks first; cancelled, nothing is sent. */

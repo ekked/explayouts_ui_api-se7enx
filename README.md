@@ -84,7 +84,9 @@ Third-party code
 Two parts of this extension come from Netgen Layouts and stay under its MIT License, whose notice ships with them:
 
 - `design/standard/javascript/netgen-layouts.js`, the editor's application bundle, built from `netgen/layouts-ui`
-  and patched for Exponential: notice in `design/standard/javascript/netgen-layouts-LICENSE.txt`.
+  and patched for Exponential: notice in `design/standard/javascript/netgen-layouts-LICENSE.txt`, which also names
+  the libraries the bundle still contains (Backbone, Underscore, Handlebars, NProgress, striptags, the content
+  browser with React: MIT; source-map: BSD 3-Clause) with their notices.
 - `design/standard/media/netgen-layouts.*`, the editor's icon font, from `netgen/layouts-core`: notice in
   `design/standard/media/netgen-layouts-LICENSE.txt`.
 
@@ -192,7 +194,7 @@ on plain DOM. Backbone and the app's modules reach it as `Backbone.$` and `Core.
 | `$( selector \| html \| element \| array \| fn )` | collections; `$( fn )` runs when the document is ready, after the current script |
 | `each`, `map`, `get`, `toArray`, `eq`, `first`, `filter`, `index`, `find`, `closest`, `children`, `parent`, `parents`, `next`, `siblings` | traversal; a selector starting with `>` is relative, as in jQuery |
 | `addClass`, `removeClass`, `hasClass`, `attr`, `removeAttr`, `prop`, `data`, `removeData`, `css`, `height`, `val` | `data()` reads `data-*` attributes as jQuery converts them; `data( '_view' )` is the element's `ngl_view`, where every Backbone view of the app is kept (plain code: `el.ngl_view`) |
-| `html`, `text`, `append`, `after`, `replaceWith`, `remove`, `empty`, `show`, `hide`, `fadeIn`, `fadeOut` | what is taken out loses the layer's handlers and data (jQuery's cleanData); fades queue per element |
+| `html`, `text`, `append`, `after`, `replaceWith`, `remove`, `empty`, `show`, `hide`, `fadeIn`, `fadeOut` | what is taken out loses the layer's handlers and data (jQuery's cleanData); the scripts of HTML put in run once when they reach the document, as with jQuery; fades queue per element |
 | `on`, `off`, `trigger`, `ajaxStart`, `ajaxSend`, `ajaxSuccess`, `ajaxError`, `ajaxComplete`, `ajaxStop` | one native listener per element and type; delegation, namespaces (Backbone's `.delegateEvents<cid>`), jQuery's event object (`currentTarget`, `delegateTarget`, `originalEvent`, `which`, `return false`); `trigger()` dispatches a bubbling `CustomEvent` (the arguments as `detail`) that `addEventListener` listeners get too; `focus`, `blur`, `click` call the element's own method |
 | `serialize`, `serializeArray` | as jQuery |
 | `$.ajax`, `$.get`, `$.active` | XMLHttpRequest with jQuery's options, jqXHR (a promise with `done`, `fail`, `always`, `then`, `responseJSON` ...), headers and encodings; the global events on the document drive the progress bar, the count of running writes (the warning on leaving), and the session timeout and permission dialogs. `javascript/explayouts-app.js` sends its requests through `Core.$.ajax` for that |
@@ -210,7 +212,7 @@ code (`Core.ui`, put together in `./extended/jquery_override`) or nothing:
 
 | `Core.ui` | instead of | |
 |---|---|---|
-| `dialog.show( el, options )`, `hide( el )`, `is_shown( el )` | `$.fn.modal` | Bootstrap 3 markup and CSS; `backdrop`, `keyboard`, `on_shown`, `on_hidden`; Tab stays in the open dialog, the focus goes back on close |
+| `dialog.show( el, options )`, `hide( el )`, `is_shown( el )` | `$.fn.modal` | Bootstrap 3 markup and CSS; `backdrop`, `keyboard`, `on_shown`, `on_hidden`; Tab stays in the open dialog, the focus goes back on close; shown again while it fades out (or closed while it fades in) it turns round where it stands |
 | `collapse.show/hide/toggle( el )` | `$.fn.collapse` | clicks on `[data-toggle="collapse"]` |
 | `dropdown.toggle( toggle )`, `close_all()` | `$.fn.dropdown` | clicks and keys on `[data-toggle="dropdown"]`, opens upwards when there is no room below |
 | `xeditable`, `dependable_select`, `master_slave_selects`, `view_types`, `video_thumb_fetcher`, `bm_tooltip` ( elements ) | the jQuery plugins of the same names | called by `reinitialize_plugins` (module `init`) |
@@ -253,7 +255,8 @@ said: linked zones, zones that do not take the block type or are inherited, a co
 container block. A block type picked up from the toolbar starts at the first place of the first zone that takes it;
 dropped, it becomes a new block there, and Escape returns it to the toolbar (and the focus to the toolbar's button).
 Each step is said in one polite live region ("Zone Main, position 2 of 3."), with the texts of `spa_strings.tpl`.
-After a drop the grip of the block or item keeps the focus, also when the editor draws it again. The page scrolls to
+After a drop the grip of the block or item keeps the focus, also when the editor draws it again, for a few seconds and
+only until the user presses, types or focuses anywhere else. The page scrolls to
 follow, smoothly unless the browser asks for reduced motion. *Set position* in an item's menu stays as it was.
 
 A keyboard move runs through the same callbacks as a pointer drag (`keyStart`, `keyMove`, `keyDrop`, `keyCancel` of a
